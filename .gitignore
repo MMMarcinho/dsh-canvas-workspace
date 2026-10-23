@@ -1,0 +1,11 @@
+node_modules/
+.research/
+site/
+artifacts/
+*.tgz
+.env*
+!.env.example
+.DS_Store
+
+# Isolated host profiles and private preview launch URLs
+.host-test/

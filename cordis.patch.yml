@@ -1,0 +1,4 @@
+# Additive browser panel. No host replacement, no model credentials.
+- insert:
+    - id: canvas-workspace
+      name: dsh-canvas-workspace
