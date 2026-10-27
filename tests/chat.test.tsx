@@ -192,6 +192,178 @@ test("single-session spatial chat streams, stops, persists, and restores", async
   );
 });
 
+test("new canvas sessions use a real workspace session and restore each canvas without leaving the panel", async () => {
+  if (root) await act(async () => root!.unmount());
+  localStorage.clear();
+  const old = {
+    version: 1,
+    sessionId: "old-session",
+    viewport: { x: 233, y: -44, zoom: 1.4 },
+    replies: [
+      {
+        id: "old-reply",
+        prompt: "旧问题",
+        body: "旧回复",
+        status: "done",
+        position: { x: 120, y: 310, slotHeight: 180 },
+      },
+    ],
+  };
+  localStorage.setItem("dsh-canvas-conversation:v1:dsh", JSON.stringify(old));
+  let calls = 0;
+  let fail = true;
+  let resolveNew!: (id: string) => void;
+  const createdIn: (string | undefined)[] = [];
+  const opened: string[] = [];
+  const selected: (string | undefined)[] = [];
+  const observers = new Map<string, (snapshot: AgentSessionSnapshot) => void>();
+  const props = {
+    adapter: {
+      ...deferredAdapter().adapter,
+      observeSession(
+        id: string,
+        listener: (snapshot: AgentSessionSnapshot) => void,
+      ) {
+        observers.set(id, listener);
+        return () => observers.delete(id);
+      },
+    },
+    mode: "dsh" as const,
+    useNativeComposer: true,
+    nativeComposer: <button data-native-input="">原生输入</button>,
+    hostSessions: [
+      { id: "old-session", title: "旧会话" },
+      { id: "new-session", title: "新会话" },
+    ],
+    hostWorkspaces: [
+      {
+        id: "project-one",
+        title: "项目一",
+        sessionIds: ["old-session", "new-session"],
+      },
+      { id: "project-two", title: "项目二", sessionIds: [] },
+    ],
+    onOpenSession: (id: string) => opened.push(id),
+    onSessionChange: (id: string | undefined) => selected.push(id),
+    onNewSession: (workspaceId?: string) => {
+      calls++;
+      createdIn.push(workspaceId);
+      if (fail) return Promise.reject(new Error("创建被拒绝"));
+      return new Promise<string>((resolve) => {
+        resolveNew = resolve;
+      });
+    },
+  };
+  root = createRoot(element("#root"));
+  await act(async () => root!.render(<ChatCanvas {...props} />));
+  assert.equal(element(".chat-reply .chat-markdown").textContent, "旧回复");
+  await click('[aria-label="新建画布会话"]');
+  await wait(() => Boolean(document.querySelector(".chat-nav-error")));
+  assert.match(element(".chat-nav-error").textContent ?? "", /创建被拒绝/);
+  assert.equal(element(".chat-reply .chat-markdown").textContent, "旧回复");
+  assert.equal(selected.at(-1), "old-session");
+
+  fail = false;
+  await click('[aria-label="新建画布会话"]');
+  await click('[aria-label="新建画布会话"]');
+  assert.equal(calls, 2, "a repeated click cannot create a second session");
+  assert.deepEqual(createdIn, ["project-one", "project-one"]);
+  assert.equal(element(".chat-reply .chat-markdown").textContent, "旧回复");
+  const staleOldObserver = observers.get("old-session");
+  assert.ok(staleOldObserver);
+  await act(async () => resolveNew("new-session"));
+  assert.equal(selected.at(-1), "new-session");
+  assert.equal(document.querySelectorAll(".chat-reply").length, 0);
+  assert.equal(element("[data-native-input]").textContent, "原生输入");
+  assert.equal(observers.has("old-session"), false);
+  assert.equal(observers.has("new-session"), true);
+  await act(async () =>
+    staleOldObserver({
+      sessionId: "old-session",
+      turns: [],
+      hasMore: false,
+      error: "旧会话延迟错误",
+    }),
+  );
+  assert.equal(document.querySelector(".chat-composer-notice"), null);
+  const savedOld = JSON.parse(
+    localStorage.getItem("dsh-canvas-conversation:v1:dsh:session:old-session")!,
+  );
+  assert.deepEqual(savedOld.viewport, old.viewport);
+  assert.deepEqual(savedOld.replies[0].position, old.replies[0].position);
+
+  await click('[aria-label="导航与工作区"]');
+  await click('.chat-session-row[aria-current="page"]');
+  assert.equal(selected.at(-1), "new-session");
+  assert.deepEqual(opened, [], "canvas switching must not reveal native chat");
+
+  await click('[aria-label="导航与工作区"]');
+  const oldButton = [
+    ...document.querySelectorAll<HTMLButtonElement>(".chat-session-row"),
+  ].find((button) => button.textContent === "旧会话");
+  assert.ok(oldButton);
+  await act(async () => oldButton.click());
+  assert.equal(selected.at(-1), "old-session");
+  assert.equal(element(".chat-reply .chat-markdown").textContent, "旧回复");
+  assert.equal(
+    JSON.parse(localStorage.getItem("dsh-canvas-conversation:v1:dsh")!).viewport
+      .x,
+    233,
+  );
+
+  await act(async () => root!.unmount());
+  root = createRoot(element("#root"));
+  await act(async () => root!.render(<ChatCanvas {...props} />));
+  assert.equal(element(".chat-reply .chat-markdown").textContent, "旧回复");
+  await click('[aria-label="导航与工作区"]');
+  const newButton = [
+    ...document.querySelectorAll<HTMLButtonElement>(".chat-session-row"),
+  ].find((button) => button.textContent === "新会话");
+  assert.ok(newButton);
+  await act(async () => newButton.click());
+  assert.equal(selected.at(-1), "new-session");
+  assert.equal(document.querySelectorAll(".chat-reply").length, 0);
+
+  await click('[aria-label="导航与工作区"]');
+  const otherWorkspace = [
+    ...document.querySelectorAll<HTMLElement>(".chat-workspace-group"),
+  ].find((group) => group.textContent?.includes("项目二"));
+  assert.ok(otherWorkspace);
+  const createInOther =
+    otherWorkspace.querySelector<HTMLButtonElement>(".chat-session-row");
+  assert.ok(createInOther);
+  await act(async () => createInOther.click());
+  assert.equal(createdIn.at(-1), "project-two");
+  await act(async () => resolveNew("project-two-session"));
+  assert.equal(selected.at(-1), "project-two-session");
+  assert.equal(document.querySelectorAll(".chat-reply").length, 0);
+
+  let handled = 0;
+  const requestedSession = { sessionId: "old-session", token: 1 };
+  await act(async () =>
+    root!.render(
+      <ChatCanvas
+        {...props}
+        requestedSession={requestedSession}
+        onRequestHandled={() => handled++}
+      />,
+    ),
+  );
+  assert.equal(handled, 1);
+  assert.equal(selected.at(-1), "old-session");
+  assert.equal(element(".chat-reply .chat-markdown").textContent, "旧回复");
+  await act(async () =>
+    root!.render(
+      <ChatCanvas
+        {...props}
+        requestedSession={requestedSession}
+        onRequestHandled={() => handled++}
+      />,
+    ),
+  );
+  assert.equal(handled, 1, "a sidebar request is handled once");
+});
+
 test("native composer owns its input and observed attachment-only turns enter the canvas once", async () => {
   if (root) await act(async () => root!.unmount());
   localStorage.clear();
@@ -1122,6 +1294,7 @@ test("moved reply uses zoom-adjusted world coordinates and survives reload", asy
     x: -22,
     y: -37,
     slotHeight: 24,
+    kind: "manual",
   });
   assert.equal(saved.viewport.zoom, 2);
   await mount(control.adapter, false);
@@ -2028,7 +2201,9 @@ test("a retired rail resize callback cannot scroll a different session", async (
         oldRail.scrollTop = top ?? oldRail.scrollTop;
       },
     });
-    const resize = observers.at(-1)!;
+    const resize = [...observers]
+      .reverse()
+      .find((observer) => observer.node && oldRail.contains(observer.node))!;
     assert.ok(resize.node);
     resize.node.getBoundingClientRect = () => ({ height: 90 }) as DOMRect;
     oldRail.scrollTop = 0;

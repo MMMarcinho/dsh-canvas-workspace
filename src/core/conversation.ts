@@ -9,7 +9,15 @@ export type ConversationReply = {
   /** Only reasoning supplied by the DSH session; never part of prompt. */
   reasoning?: string;
   /** World coordinates after the user moves this reply by its stable ID. */
-  position?: { x: number; y: number; slotHeight: number };
+  position?: {
+    x: number;
+    y: number;
+    slotHeight: number;
+    /** Automatically placed replies may follow later content-height changes. */
+    kind?: "auto" | "manual";
+    /** Height of the preceding reply when this position was first assigned. */
+    anchorHeight?: number;
+  };
   timestamp?: number;
   durableTime?: boolean;
   hostTurnId?: number;

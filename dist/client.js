@@ -23398,17 +23398,21 @@ function UserMessageActions({
 // src/ui/ChatCanvas.tsx
 var import_jsx_runtime62 = require("react/jsx-runtime");
 var KEY = "dsh-canvas-conversation:v1";
-var fresh = () => ({
+var sessionKey = (mode, id) => `${KEY}:${mode}:session:${encodeURIComponent(id)}`;
+var fresh = (sessionId) => ({
   version: 1,
+  ...sessionId ? { sessionId } : {},
   viewport: { x: 64, y: 104, zoom: 1 },
   replies: []
 });
-function restore(mode) {
+function restore(mode, sessionId) {
   try {
-    const raw = localStorage.getItem(`${KEY}:${mode}`);
-    if (!raw) return { state: fresh(), error: "" };
+    const raw = localStorage.getItem(
+      sessionId ? sessionKey(mode, sessionId) : `${KEY}:${mode}`
+    );
+    if (!raw) return { state: fresh(sessionId), error: "" };
     const value = JSON.parse(raw);
-    if (value.version !== 1 || !Array.isArray(value.replies) || !value.viewport || !Number.isFinite(value.viewport.x) || !Number.isFinite(value.viewport.y) || !Number.isFinite(value.viewport.zoom) || value.viewport.zoom < 0.25 || value.viewport.zoom > 2 || value.replies.some(
+    if (value.version !== 1 || sessionId !== void 0 && value.sessionId !== sessionId || !Array.isArray(value.replies) || !value.viewport || !Number.isFinite(value.viewport.x) || !Number.isFinite(value.viewport.y) || !Number.isFinite(value.viewport.zoom) || value.viewport.zoom < 0.25 || value.viewport.zoom > 2 || value.replies.some(
       (reply) => !reply.id || typeof reply.prompt !== "string" || typeof reply.body !== "string"
     )) {
       throw new Error("\u5B58\u6863\u683C\u5F0F\u65E0\u6548");
@@ -23429,7 +23433,7 @@ function restore(mode) {
     };
   } catch (error) {
     return {
-      state: fresh(),
+      state: fresh(sessionId),
       error: `\u65E0\u6CD5\u6062\u590D\u753B\u5E03\u5B58\u6863\uFF0C\u539F\u6570\u636E\u672A\u8986\u76D6\uFF1A${error instanceof Error ? error.message : String(error)}`
     };
   }
@@ -23507,6 +23511,8 @@ function ChatCanvas({
   useNativeComposer = false,
   nativeComposer,
   onSessionChange,
+  requestedSession,
+  onRequestHandled,
   accountActions
 }) {
   const [initial] = (0, import_react13.useState)(() => restore(mode));
@@ -23527,6 +23533,11 @@ function ChatCanvas({
   const [historyNotice, setHistoryNotice] = (0, import_react13.useState)("");
   const [sessionAttempt, setSessionAttempt] = (0, import_react13.useState)(0);
   const creatingSession = (0, import_react13.useRef)(false);
+  const creatingNewSession = (0, import_react13.useRef)(false);
+  const [newSessionPending, setNewSessionPending] = (0, import_react13.useState)(false);
+  const sessionStates = (0, import_react13.useRef)(/* @__PURE__ */ new Map());
+  const sessionDrafts = (0, import_react13.useRef)(/* @__PURE__ */ new Map());
+  const handledRequest = (0, import_react13.useRef)(0);
   const [hoveredPair, setHoveredPair] = (0, import_react13.useState)(null);
   const [focusedPair, setFocusedPair] = (0, import_react13.useState)(null);
   const keyboardPairing = (0, import_react13.useRef)(true);
@@ -23608,11 +23619,13 @@ function ChatCanvas({
   const userPress = (0, import_react13.useRef)(null);
   const previousReplyCount = (0, import_react13.useRef)(state.replies.length);
   const newReplyIds = (0, import_react13.useRef)(/* @__PURE__ */ new Set());
+  const measuredReplyHeights = (0, import_react13.useRef)(/* @__PURE__ */ new Map());
   const composerInput = (0, import_react13.useRef)(null);
   const iuiActions = (0, import_react13.useRef)(/* @__PURE__ */ new Map());
   const userMessageIds = JSON.stringify(
     pairs.userMessages.map((message) => message.id)
   );
+  const replyIds = JSON.stringify(state.replies.map((reply) => reply.id));
   const stopRailScroll = () => {
     railFollowTail.current = null;
     if (!railScrollAnimating.current) return;
@@ -23698,7 +23711,7 @@ function ChatCanvas({
     stateRef.current = next;
     if (mounted.current) setState(next);
   }, []);
-  (0, import_react13.useEffect)(() => {
+  (0, import_react13.useLayoutEffect)(() => {
     onSessionChange?.(state.sessionId);
   }, [onSessionChange, state.sessionId]);
   (0, import_react13.useEffect)(() => {
@@ -23774,10 +23787,13 @@ function ChatCanvas({
       const previous3 = state.replies[index2 - 1];
       const anchor = positions.get(previous3.id) ?? replyGeometry(previous3.id);
       if (!anchor) continue;
+      const anchorHeight = "height" in anchor ? anchor.height : anchor.slotHeight;
       positions.set(reply.id, {
         x: anchor.x,
-        y: anchor.y + ("height" in anchor ? anchor.height : anchor.slotHeight) + 30,
-        slotHeight: Math.max(24, replyGeometry(reply.id)?.height ?? 24)
+        y: anchor.y + anchorHeight + 30,
+        slotHeight: Math.max(24, replyGeometry(reply.id)?.height ?? 24),
+        kind: "auto",
+        anchorHeight
       });
     }
     if (!positions.size) return;
@@ -23788,6 +23804,85 @@ function ChatCanvas({
       )
     }));
   }, [state.replies, update]);
+  (0, import_react13.useLayoutEffect)(() => {
+    const canvas = stage.current;
+    if (!canvas || typeof ResizeObserver === "undefined") return;
+    measuredReplyHeights.current.clear();
+    const cards = [...canvas.querySelectorAll(".chat-reply")];
+    const observer = new ResizeObserver((entries) => {
+      const current2 = stateRef.current;
+      const cardById = new Map(
+        cards.map((card) => [card.dataset.replyId, card])
+      );
+      const inferredAuto = /* @__PURE__ */ new Map();
+      for (let index2 = 1; index2 < current2.replies.length; index2++) {
+        const previous3 = current2.replies[index2 - 1];
+        const reply = current2.replies[index2];
+        if (!reply.position || reply.position.kind) continue;
+        const anchor = replyGeometry(previous3.id);
+        if (!anchor || Math.abs(reply.position.x - anchor.x) > 2) continue;
+        const oldHeight = previous3.position?.slotHeight;
+        if (oldHeight !== void 0 && Math.abs(reply.position.y - (anchor.y + oldHeight + 30)) < 2)
+          inferredAuto.set(index2, oldHeight);
+        else if (oldHeight === void 0) {
+          const initialHeight = reply.position.y - anchor.y - 30;
+          if (initialHeight >= 24 && reply.position.y < anchor.y + anchor.height - 16 && anchor.height - initialHeight >= 80)
+            inferredAuto.set(index2, initialHeight);
+        }
+      }
+      const changes = /* @__PURE__ */ new Map();
+      for (const entry of entries) {
+        const id = entry.target.dataset.replyId;
+        const index2 = current2.replies.findIndex((reply) => reply.id === id);
+        const card = id && cardById.get(id);
+        if (index2 < 0 || !card) continue;
+        const height = card.getBoundingClientRect().height / current2.viewport.zoom;
+        if (!Number.isFinite(height) || height < 1) continue;
+        const actual = Math.max(24, height);
+        const following = current2.replies[index2 + 1]?.position;
+        const baseline = current2.replies[index2].position?.slotHeight ?? inferredAuto.get(index2 + 1) ?? measuredReplyHeights.current.get(id) ?? (following?.kind === "auto" ? following.anchorHeight : void 0) ?? actual;
+        measuredReplyHeights.current.set(id, actual);
+        if (Math.abs(actual - baseline) > 1)
+          changes.set(index2, { height: actual, delta: actual - baseline });
+      }
+      if (!changes.size && !inferredAuto.size) return;
+      update((value) => {
+        let shift = 0;
+        let changed = false;
+        const replies = value.replies.map((reply, index2) => {
+          let position3 = reply.position;
+          const inferredHeight = inferredAuto.get(index2);
+          if (position3 && !position3.kind && inferredHeight !== void 0) {
+            position3 = {
+              ...position3,
+              kind: "auto",
+              anchorHeight: inferredHeight
+            };
+            changed = true;
+          }
+          if (position3?.kind === "manual") shift = 0;
+          if (position3?.kind === "auto" && shift) {
+            position3 = {
+              ...position3,
+              y: position3.y + shift,
+              anchorHeight: position3.anchorHeight === void 0 ? void 0 : position3.anchorHeight + (changes.get(index2 - 1)?.delta ?? 0)
+            };
+            changed = true;
+          }
+          const resized = changes.get(index2);
+          if (position3 && resized && position3.slotHeight !== resized.height) {
+            position3 = { ...position3, slotHeight: resized.height };
+            changed = true;
+          }
+          if (resized) shift += resized.delta;
+          return position3 === reply.position ? reply : { ...reply, position: position3 };
+        });
+        return changed ? { ...value, replies } : value;
+      });
+    });
+    for (const card of cards) observer.observe(card);
+    return () => observer.disconnect();
+  }, [state.sessionId, replyIds, update]);
   const moveReply = (replyId, dx, dy) => {
     const origin = replyPosition(replyId);
     if (!origin) return;
@@ -23797,7 +23892,13 @@ function ChatCanvas({
       replies: current2.replies.map(
         (reply) => reply.id === replyId ? {
           ...reply,
-          position: { ...origin, x: origin.x + dx, y: origin.y + dy }
+          position: {
+            ...origin,
+            x: origin.x + dx,
+            y: origin.y + dy,
+            kind: "manual",
+            anchorHeight: void 0
+          }
         } : reply
       )
     }));
@@ -23883,7 +23984,8 @@ function ChatCanvas({
   (0, import_react13.useEffect)(() => {
     if (!state.sessionId || !adapter.observeSession) return;
     return adapter.observeSession(state.sessionId, (snapshot) => {
-      if (!mounted.current) return;
+      if (!mounted.current || snapshot.sessionId !== stateRef.current.sessionId)
+        return;
       setHistoryNotice(snapshot.error ?? "");
       update((current2) => {
         const next = reconcileConversation(
@@ -23902,16 +24004,92 @@ function ChatCanvas({
       });
     });
   }, [adapter, state.sessionId, update]);
-  const save = (0, import_react13.useCallback)(() => {
-    if (storageError) return;
-    try {
-      localStorage.setItem(`${KEY}:${mode}`, JSON.stringify(stateRef.current));
-    } catch (error) {
-      setStorageError(
-        `\u672C\u5730\u4FDD\u5B58\u5931\u8D25\uFF1A${error instanceof Error ? error.message : String(error)}`
-      );
+  const persist = (0, import_react13.useCallback)(
+    (snapshot) => {
+      if (storageErrorRef.current) return;
+      try {
+        const value = JSON.stringify(snapshot);
+        if (snapshot.sessionId)
+          localStorage.setItem(sessionKey(mode, snapshot.sessionId), value);
+        localStorage.setItem(`${KEY}:${mode}`, value);
+      } catch (error) {
+        const message = `\u672C\u5730\u4FDD\u5B58\u5931\u8D25\uFF1A${error instanceof Error ? error.message : String(error)}`;
+        storageErrorRef.current = message;
+        setStorageError(message);
+      }
+    },
+    [mode]
+  );
+  const save = (0, import_react13.useCallback)(() => persist(stateRef.current), [persist]);
+  const switchSession = (id) => {
+    if (id === stateRef.current.sessionId) {
+      setMenu(null);
+      return;
     }
-  }, [storageError, mode]);
+    if (running.current || creatingSession.current) {
+      setNavError("\u5F53\u524D\u4F1A\u8BDD\u4ECD\u5728\u51C6\u5907\u6216\u751F\u6210\uFF0C\u8BF7\u7A0D\u540E\u518D\u5207\u6362");
+      setMenu("nav");
+      return;
+    }
+    const previous3 = stateRef.current;
+    const restored = sessionStates.current.get(id);
+    const target = restored ? { state: restored, error: "" } : restore(mode, id);
+    if (target.error) {
+      setNavError(target.error);
+      setMenu("nav");
+      return;
+    }
+    if (previous3.sessionId) {
+      sessionStates.current.set(previous3.sessionId, previous3);
+      sessionDrafts.current.set(previous3.sessionId, draft);
+    }
+    persist(previous3);
+    stopCamera();
+    stopRailScroll();
+    newReplyIds.current.clear();
+    previousReplyCount.current = target.state.replies.length;
+    iuiActions.current.clear();
+    clearPairing();
+    setHistoryNotice("");
+    setRunError("");
+    setDraft(sessionDrafts.current.get(id) ?? "");
+    stateRef.current = target.state;
+    setState(target.state);
+    persist(target.state);
+    setMenu(null);
+    setNavError("");
+  };
+  const createNewSession = async (targetWorkspaceId = workspaceId) => {
+    if (!onNewSession || creatingNewSession.current) return;
+    if (running.current || creatingSession.current) {
+      setNavError("\u5F53\u524D\u4F1A\u8BDD\u4ECD\u5728\u51C6\u5907\u6216\u751F\u6210\uFF0C\u8BF7\u7A0D\u540E\u518D\u65B0\u5EFA");
+      return;
+    }
+    creatingNewSession.current = true;
+    setNewSessionPending(true);
+    setNavError("");
+    try {
+      const id = await onNewSession(targetWorkspaceId);
+      if (mounted.current) switchSession(id);
+    } catch (error) {
+      if (mounted.current) {
+        setNavError(
+          `\u65B0\u5EFA\u4F1A\u8BDD\u5931\u8D25\uFF1A${error instanceof Error ? error.message : String(error)}`
+        );
+        setMenu("nav");
+      }
+    } finally {
+      creatingNewSession.current = false;
+      if (mounted.current) setNewSessionPending(false);
+    }
+  };
+  (0, import_react13.useLayoutEffect)(() => {
+    if (!requestedSession || handledRequest.current === requestedSession.token)
+      return;
+    handledRequest.current = requestedSession.token;
+    switchSession(requestedSession.sessionId);
+    onRequestHandled?.();
+  }, [requestedSession?.token]);
   (0, import_react13.useEffect)(() => {
     const flush = () => save();
     const hidden = () => {
@@ -23936,17 +24114,9 @@ function ChatCanvas({
           void adapter.cancel(active.sessionId).catch(() => {
           });
       }
-      if (!storageErrorRef.current) {
-        try {
-          localStorage.setItem(
-            `${KEY}:${mode}`,
-            JSON.stringify(stateRef.current)
-          );
-        } catch {
-        }
-      }
+      persist(stateRef.current);
     };
-  }, [adapter, mode, stopCamera]);
+  }, [adapter, persist, stopCamera]);
   (0, import_react13.useEffect)(() => {
     const timer = setTimeout(save, 180);
     return () => clearTimeout(timer);
@@ -24168,7 +24338,8 @@ function ChatCanvas({
             position: {
               x: drag.originX + dx / zoom2,
               y: drag.originY + dy / zoom2,
-              slotHeight: drag.slotHeight ?? 24
+              slotHeight: drag.slotHeight ?? 24,
+              kind: "manual"
             }
           } : reply
         )
@@ -24389,6 +24560,18 @@ function ChatCanvas({
               children: navIcon ?? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "grid", size: 18 })
             }
           ),
+          onNewSession && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+            "button",
+            {
+              type: "button",
+              className: "chat-float-button",
+              "aria-label": "\u65B0\u5EFA\u753B\u5E03\u4F1A\u8BDD",
+              title: "\u65B0\u5EFA\u753B\u5E03\u4F1A\u8BDD",
+              disabled: newSessionPending,
+              onClick: () => void createNewSession(),
+              children: /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "plus", size: 18 })
+            }
+          ),
           /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
             "button",
             {
@@ -24404,10 +24587,17 @@ function ChatCanvas({
           mode === "mock" && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { className: "chat-mode mock", title: "\u672C\u5730\u6A21\u62DF\uFF0C\u4E0D\u53D1\u9001\u6A21\u578B\u8BF7\u6C42", children: "MOCK" }),
           menu === "nav" && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-menu", role: "dialog", "aria-label": "\u5BFC\u822A\u4E0E\u5DE5\u4F5C\u533A", children: [
             /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { className: "chat-menu-title", children: "\u5BFC\u822A" }),
-            onNewSession && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("button", { onClick: onNewSession, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "plus", size: 15 }),
-              "\u65B0\u5EFA DSH \u4F1A\u8BDD"
-            ] }),
+            onNewSession && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
+              "button",
+              {
+                disabled: newSessionPending,
+                onClick: () => void createNewSession(),
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "plus", size: 15 }),
+                  "\u65B0\u5EFA\u753B\u5E03\u4F1A\u8BDD"
+                ]
+              }
+            ),
             onExit && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("button", { onClick: onExit, "aria-pressed": "true", children: [
               /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "grid", size: 15 }),
               "\u753B\u5E03\u6A21\u5F0F ",
@@ -24470,11 +24660,24 @@ function ChatCanvas({
                         ]
                       }
                     ),
+                    onNewSession && !search2 && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
+                      "button",
+                      {
+                        className: "chat-session-row",
+                        disabled: newSessionPending,
+                        onClick: () => void createNewSession(workspace.id),
+                        children: [
+                          /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "plus", size: 14 }),
+                          /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { children: "\u5728\u6B64\u5DE5\u4F5C\u533A\u65B0\u5EFA\u753B\u5E03\u4F1A\u8BDD" })
+                        ]
+                      }
+                    ),
                     (search2 ? matching : sessions).map((session) => /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
                       "button",
                       {
                         className: "chat-session-row",
-                        onClick: () => onOpenSession?.(session.id),
+                        "aria-current": state.sessionId === session.id ? "page" : void 0,
+                        onClick: () => switchSession(session.id),
                         children: /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { children: session.title })
                       },
                       session.id
@@ -24488,7 +24691,8 @@ function ChatCanvas({
                 ).map((session) => /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
                   "button",
                   {
-                    onClick: () => onOpenSession?.(session.id),
+                    "aria-current": state.sessionId === session.id ? "page" : void 0,
+                    onClick: () => switchSession(session.id),
                     children: [
                       /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "agent", size: 15 }),
                       /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { children: session.title })
@@ -28293,6 +28497,12 @@ var styles_default = `.canvas-app {
   color: var(--cw-text);
   background: var(--cw-hover);
 }
+.canvas-app .chat-float-button:disabled,
+.canvas-app .chat-session-list button:disabled,
+.canvas-app .chat-menu > button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
 .canvas-app .chat-avatar {
   border-radius: 50%;
 }
@@ -28356,6 +28566,11 @@ var styles_default = `.canvas-app {
 .canvas-app .chat-session-list button:hover,
 .canvas-app .chat-zoom button:hover {
   background: var(--cw-hover);
+}
+.canvas-app .chat-session-list button[aria-current="page"] {
+  color: var(--cw-text);
+  background: var(--cw-hover);
+  font-weight: 600;
 }
 .canvas-app .chat-menu button svg {
   color: var(--cw-muted);
@@ -29036,6 +29251,18 @@ var inject = [
   "uiConversation"
 ];
 var PANEL_ID = "canvas-workspace";
+var openRequest = null;
+var openRequestToken = 0;
+var openRequestListeners = /* @__PURE__ */ new Set();
+var subscribeOpenRequest = (listener) => {
+  openRequestListeners.add(listener);
+  return () => openRequestListeners.delete(listener);
+};
+var getOpenRequest = () => openRequest;
+var publishOpenRequest = (request) => {
+  openRequest = request;
+  for (const listener of openRequestListeners) listener();
+};
 function CanvasPanel(_props) {
   return null;
 }
@@ -29050,6 +29277,10 @@ function CanvasOverlay(props) {
   const active = props.usePanelInfo((info) => info.activePanelId === PANEL_ID);
   const sessionList = props.useSessions((state) => state);
   const workspaceList = props.useWorkspaces((state) => state);
+  const requestedSession = (0, import_react14.useSyncExternalStore)(
+    subscribeOpenRequest,
+    getOpenRequest
+  );
   const [legacy, setLegacy] = (0, import_react14.useState)(false);
   const [canvasSessionId, setCanvasSessionId] = (0, import_react14.useState)();
   const [composerReference, setComposerReference] = (0, import_react14.useState)();
@@ -29103,6 +29334,11 @@ function CanvasOverlay(props) {
     ChatCanvas,
     {
       ...props,
+      onNewSession: props.createCanvasSession,
+      requestedSession,
+      onRequestHandled: () => {
+        if (openRequest === requestedSession) publishOpenRequest(null);
+      },
       hostSessions,
       hostWorkspaces,
       NativeBrand: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(NativeBrand, {}),
@@ -29204,6 +29440,9 @@ function apply(ctx) {
             id
           ),
           onNewSession: () => ctx.uiWorkspace.startSession(),
+          createCanvasSession: (workspaceId) => ctx.sessions.create(
+            workspaceId ? { workspaceId } : void 0
+          ),
           onOpenWorkspace: (id) => ctx.uiWorkspace.openWorkspace(
             id
           ),
@@ -29234,6 +29473,33 @@ function apply(ctx) {
         label: "Canvas \xB7 \u753B\u5E03"
       },
       CanvasIcon
+    )
+  );
+  ctx.slots.inject(
+    "sidebar.workspaces.session.menu.item",
+    () => ctx.slots.register(
+      {
+        name: "sidebar.workspaces.session.menu.item",
+        id: "dsh-canvas-open",
+        order: 480
+      },
+      ({ sessionId, useMenuOpenState }) => {
+        const [, setMenuOpen] = useMenuOpenState();
+        return /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+          import_dsh_client_ui_primitives2.MenuItemButton,
+          {
+            onSelect: () => {
+              setMenuOpen(false);
+              ctx.layout.selectPanel(PANEL_ID);
+              publishOpenRequest({
+                sessionId,
+                token: ++openRequestToken
+              });
+            },
+            children: "\u5728\u753B\u5E03\u4E2D\u6253\u5F00"
+          }
+        );
+      }
     )
   );
 }

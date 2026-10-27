@@ -1,5 +1,6 @@
 import { resolveNativeImageResource } from "./host/native-images";
 import type { SessionId } from "@deepseek-ai/dsh-session/types";
+import type { WorkspaceId } from "@deepseek-ai/dsh-api-workspace-controller/client";
 import type { MessageImageLoader } from "@deepseek-ai/dsh-client-ui-conversation/client";
 import {
   FileTypeIcon,
@@ -7,6 +8,7 @@ import {
   fileSizeText,
   IconCheckOutlineRegular,
   IconCopyOutlineRegular,
+  MenuItemButton,
   Tooltip,
   writeClipboard,
 } from "@deepseek-ai/dsh-client-ui-primitives";
@@ -24,7 +26,7 @@ import type {
 } from "@deepseek-ai/dsh-client-ui-slots";
 import { CanvasWorkspace } from "./ui/CanvasWorkspace";
 import { ChatCanvas } from "./ui/ChatCanvas";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createDshAdapter } from "./adapters/dsh";
 import { createMockAdapter } from "./adapters/mock";
 import type { AgentAdapter } from "./core/types";
@@ -55,6 +57,19 @@ export const inject = [
   "uiConversation",
 ];
 const PANEL_ID = "canvas-workspace" as MainPanelId;
+type CanvasOpenRequest = { sessionId: string; token: number };
+let openRequest: CanvasOpenRequest | null = null;
+let openRequestToken = 0;
+const openRequestListeners = new Set<() => void>();
+const subscribeOpenRequest = (listener: () => void) => {
+  openRequestListeners.add(listener);
+  return () => openRequestListeners.delete(listener);
+};
+const getOpenRequest = () => openRequest;
+const publishOpenRequest = (request: CanvasOpenRequest | null) => {
+  openRequest = request;
+  for (const listener of openRequestListeners) listener();
+};
 declare module "@deepseek-ai/dsh-client-ui-slots" {
   interface SlotMap {
     "canvas.composer.native": { kind: "single"; scope: "session-maybe" };
@@ -66,6 +81,7 @@ interface CanvasFace {
   onExit: () => void;
   onOpenSession: (id: string) => void;
   onNewSession: () => void;
+  createCanvasSession: (workspaceId?: string) => Promise<string>;
   onOpenWorkspace: (id: string) => Promise<void>;
   onCreateWorkspace: () => Promise<void>;
   onPlugins: () => void;
@@ -97,6 +113,10 @@ function CanvasOverlay(
   const active = props.usePanelInfo((info) => info.activePanelId === PANEL_ID);
   const sessionList = props.useSessions((state) => state);
   const workspaceList = props.useWorkspaces((state) => state);
+  const requestedSession = useSyncExternalStore(
+    subscribeOpenRequest,
+    getOpenRequest,
+  );
   const [legacy, setLegacy] = useState(false);
   const [canvasSessionId, setCanvasSessionId] = useState<string>();
   const [composerReference, setComposerReference] =
@@ -151,6 +171,11 @@ function CanvasOverlay(
       ) : (
         <ChatCanvas
           {...props}
+          onNewSession={props.createCanvasSession}
+          requestedSession={requestedSession}
+          onRequestHandled={() => {
+            if (openRequest === requestedSession) publishOpenRequest(null);
+          }}
           hostSessions={hostSessions}
           hostWorkspaces={hostWorkspaces}
           NativeBrand={<NativeBrand />}
@@ -282,6 +307,12 @@ export function apply(ctx: Context): void {
               id as Parameters<typeof ctx.uiWorkspace.openSession>[0],
             ),
           onNewSession: () => ctx.uiWorkspace.startSession(),
+          createCanvasSession: (workspaceId) =>
+            ctx.sessions.create(
+              workspaceId
+                ? { workspaceId: workspaceId as WorkspaceId }
+                : undefined,
+            ),
           onOpenWorkspace: (id) =>
             ctx.uiWorkspace.openWorkspace(
               id as Parameters<typeof ctx.uiWorkspace.openWorkspace>[0],
@@ -311,6 +342,32 @@ export function apply(ctx: Context): void {
         label: "Canvas · 画布",
       },
       CanvasIcon,
+    ),
+  );
+  ctx.slots.inject("sidebar.workspaces.session.menu.item", () =>
+    ctx.slots.register(
+      {
+        name: "sidebar.workspaces.session.menu.item",
+        id: "dsh-canvas-open",
+        order: 480,
+      },
+      ({ sessionId, useMenuOpenState }) => {
+        const [, setMenuOpen] = useMenuOpenState();
+        return (
+          <MenuItemButton
+            onSelect={() => {
+              setMenuOpen(false);
+              ctx.layout.selectPanel(PANEL_ID);
+              publishOpenRequest({
+                sessionId,
+                token: ++openRequestToken,
+              });
+            }}
+          >
+            在画布中打开
+          </MenuItemButton>
+        );
+      },
     ),
   );
 }
