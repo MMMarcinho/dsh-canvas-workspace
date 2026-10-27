@@ -42,6 +42,17 @@ modified.
   the full original source remains available. Whitespace-only text placeholders
   do not create empty Markdown panels.
 
+## Safe legacy predicate sync, 0.2.4
+
+- `protocol/runtime.ts` accepts only direct array `.filter(Boolean)` with one
+  argument as a bounded, built-in truthiness predicate. A locally declared
+  `Boolean` still takes precedence and must be an allowed arrow closure.
+  Arbitrary global calls, other array callbacks, computed member aliases, and
+  dangerous properties remain blocked. The existing bounded string `slice`
+  patch remains in place.
+- `src/adapters/iui.ts` recognizes that exact syntax during declaration and
+  root readiness checks; mixed Markdown and IUI roots keep their shared state.
+
 The import closure uses only the safe parser/runtime and React UI renderer.
 The website DOM-interception coordinator is not started or instantiated.
 Script authorization and resource adapters are deliberately not provided.
