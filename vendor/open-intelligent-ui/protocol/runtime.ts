@@ -13,6 +13,8 @@ function keyOf(value:unknown):string {const key=String(value);if(forbidden.has(k
 function own(obj:unknown,key:string):unknown {if(obj==null)return undefined;if(typeof obj==='string'){if(key==='length')return obj.length;if(/^\d+$/.test(key))return obj[Number(key)];return undefined;}if(Array.isArray(obj)){if(key==='length')return obj.length;if(/^\d+$/.test(key))return obj[Number(key)];return undefined;}if(typeof obj==='object'&&Object.prototype.hasOwnProperty.call(obj,key))return (obj as Env)[key];return undefined;}
 const finite=(x:unknown)=>{const n=Number(x);return Number.isFinite(n)?n:0;};
 const bounded=(s:string)=>{if(s.length>limits.stringLength)throw new Error('string budget exceeded');return s;};
+// Internal marker for the exact array.filter(Boolean) shorthand; never exposes a global function.
+const booleanFilterPredicate = Symbol('IUI filter Boolean');
 export class SafeEvaluator {
   steps=0;
   constructor(readonly hooks?:{set?:(name:string,value:unknown)=>void; action?:(kind:'copy'|'issueNewTurn',payload:string)=>void}){}
@@ -39,7 +41,8 @@ export class SafeEvaluator {
       case 'SequenceExpression':{let v:unknown;for(const x of n.expressions)v=go(x);return v;}
       case 'BlockStatement':{let v:unknown;for(const x of n.body){if(x.type!=='ExpressionStatement')throw new Error('only expression statements in action');v=go(x.expression);}return v;}
       case 'CallExpression':{
-        const args=n.arguments.map((a:any)=>{if(a.type==='SpreadElement')throw new Error('call spread forbidden');return go(a);});
+        const filterBoolean=n.callee.type==='MemberExpression'&&!n.callee.computed&&n.callee.property.name==='filter'&&n.arguments.length===1&&n.arguments[0].type==='Identifier'&&n.arguments[0].name==='Boolean'&&!Object.prototype.hasOwnProperty.call(env,'Boolean');
+        const args=n.arguments.map((a:any,i:number)=>{if(a.type==='SpreadElement')throw new Error('call spread forbidden');return filterBoolean&&i===0?booleanFilterPredicate:go(a);});
         if(n.callee.type==='Identifier'){
           const id=n.callee.name,v=env[id];if(v&&typeof v==='object'&&'$setter' in v){if(!this.hooks?.set)throw new Error('setter unavailable');const x=args[0];this.hooks.set((v as Setter).$setter,x&&typeof x==='object'&&'$closure' in x?this.invoke(x as Closure,[(env.__currentState as Env)?.[(v as Setter).$setter]],depth+1):x);return undefined;}
           if(id==='Number')return finite(args[0]);if(id==='String')return bounded(String(args[0]??''));throw new Error(`call forbidden: ${id}`);
@@ -52,6 +55,7 @@ export class SafeEvaluator {
         if(n.callee.object.type==='Identifier'&&n.callee.object.name==='GenUI'){if(key!=='copy'&&key!=='issueNewTurn')throw new Error('host action forbidden');const payload=String(args[0]??'');if(payload.length>limits.actionLength)throw new Error('action length exceeded');this.hooks?.action?.(key,payload);return undefined;}
         if(Array.isArray(obj)){
           if(key==='includes')return obj.includes(args[0]);if(key==='join')return bounded(obj.join(String(args[0]??',')));if(key==='slice')return obj.slice(finite(args[0]),args[1]===undefined?undefined:finite(args[1]));
+          if(key==='filter'&&args[0]===booleanFilterPredicate)return obj.slice(0,limits.arrayItems).filter(Boolean);
           if(['map','filter','find','sort'].includes(key)){const fn=args[0] as Closure;if(!fn||typeof fn!=='object'||!('$closure' in fn))throw new Error('array callback must be arrow');const arr=obj.slice(0,limits.arrayItems);if(key==='map')return arr.map((x,i)=>this.invoke(fn,[x,i],depth+1));if(key==='filter')return arr.filter((x,i)=>this.invoke(fn,[x,i],depth+1));if(key==='find')return arr.find((x,i)=>this.invoke(fn,[x,i],depth+1));return arr.sort((a,b)=>finite(this.invoke(fn,[a,b],depth+1)));}
           throw new Error('array method forbidden');
         }

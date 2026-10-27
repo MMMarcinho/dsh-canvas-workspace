@@ -161,3 +161,36 @@ test("long fences, embedded fence-like text and top-level indented code never be
   assert.equal(indented.document.children[0].kind, "element");
   assert.ok(indented.segments[0].text.includes("code"));
 });
+
+test("legacy Boolean predicate and cross-segment declarations render as one safe IUI reply", () => {
+  const declaration = `{@body const [sel,setSel]=DIL.useState([false,true,false])}
+{@body const onCount=sel.filter(Boolean).length}`;
+  const first = `<box><badge>选中 {onCount} 台</badge><button onClick={()=>setSel(v=>v.map((b,i)=>i===2?!b:b))}>选择</button></box>`;
+  const second = `<card><text>{onCount}</text></card>`;
+  const result = split(
+    `之前\n\n${declaration}\n${first}\n\n中间\n\n${second}\n\n之后`,
+  );
+  assert.equal(result.segments.filter((item) => item.kind === "ui").length, 2);
+  assert.equal(
+    result.segments.filter((item) => item.kind === "error").length,
+    0,
+  );
+  const runtime = new Runtime(result.document);
+  assert.equal(runtime.scope().onCount, 1);
+});
+
+test("a declared Boolean shadows the shorthand; unresolved globals stay source-only", () => {
+  const local = split(
+    "{@body const Boolean=x=>x>1}{@body const kept=[0,1,2].filter(Boolean)}<box><text>{kept.length}</text></box>",
+  );
+  assert.equal(local.segments.filter((item) => item.kind === "ui").length, 1);
+  assert.deepEqual(new Runtime(local.document).scope().kept, [2]);
+  const unsafe = split(
+    "<box><text>{Boolean(1)}</text></box><card><text>仍可显示</text></card>",
+  );
+  assert.equal(
+    unsafe.segments.filter((item) => item.kind === "error").length,
+    1,
+  );
+  assert.equal(unsafe.segments.filter((item) => item.kind === "ui").length, 1);
+});
