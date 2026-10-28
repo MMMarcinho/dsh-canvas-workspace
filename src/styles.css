@@ -2585,6 +2585,12 @@
   color: var(--cw-text);
   background: var(--cw-hover);
 }
+.canvas-app .chat-float-button:disabled,
+.canvas-app .chat-session-list button:disabled,
+.canvas-app .chat-menu > button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
 .canvas-app .chat-avatar {
   border-radius: 50%;
 }
@@ -2648,6 +2654,11 @@
 .canvas-app .chat-session-list button:hover,
 .canvas-app .chat-zoom button:hover {
   background: var(--cw-hover);
+}
+.canvas-app .chat-session-list button[aria-current="page"] {
+  color: var(--cw-text);
+  background: var(--cw-hover);
+  font-weight: 600;
 }
 .canvas-app .chat-menu button svg {
   color: var(--cw-muted);

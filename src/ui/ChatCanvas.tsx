@@ -35,24 +35,33 @@ import { UserMessageMedia, type UserImageLoader } from "./UserMessageMedia";
 import { UserMessageActions } from "./UserMessageActions";
 
 const KEY = "dsh-canvas-conversation:v1";
+const sessionKey = (mode: "mock" | "dsh", id: string) =>
+  `${KEY}:${mode}:session:${encodeURIComponent(id)}`;
 type ActiveRun = {
   id: string;
   controller: AbortController;
   sessionId?: string;
   stopping?: boolean;
 };
-const fresh = (): State => ({
+const fresh = (sessionId?: string): State => ({
   version: 1,
+  ...(sessionId ? { sessionId } : {}),
   viewport: { x: 64, y: 104, zoom: 1 },
   replies: [],
 });
-function restore(mode: "mock" | "dsh"): { state: State; error: string } {
+function restore(
+  mode: "mock" | "dsh",
+  sessionId?: string,
+): { state: State; error: string } {
   try {
-    const raw = localStorage.getItem(`${KEY}:${mode}`);
-    if (!raw) return { state: fresh(), error: "" };
+    const raw = localStorage.getItem(
+      sessionId ? sessionKey(mode, sessionId) : `${KEY}:${mode}`,
+    );
+    if (!raw) return { state: fresh(sessionId), error: "" };
     const value = JSON.parse(raw) as State;
     if (
       value.version !== 1 ||
+      (sessionId !== undefined && value.sessionId !== sessionId) ||
       !Array.isArray(value.replies) ||
       !value.viewport ||
       !Number.isFinite(value.viewport.x) ||
@@ -93,7 +102,7 @@ function restore(mode: "mock" | "dsh"): { state: State; error: string } {
     };
   } catch (error) {
     return {
-      state: fresh(),
+      state: fresh(sessionId),
       error: `无法恢复画布存档，原数据未覆盖：${error instanceof Error ? error.message : String(error)}`,
     };
   }
@@ -182,6 +191,8 @@ export function ChatCanvas({
   useNativeComposer = false,
   nativeComposer,
   onSessionChange,
+  requestedSession,
+  onRequestHandled,
   accountActions,
 }: {
   adapter: AgentAdapter;
@@ -190,7 +201,7 @@ export function ChatCanvas({
   hostSessions?: { id: string; title: string; cwd?: string }[];
   hostWorkspaces?: { id: string; title: string; sessionIds: string[] }[];
   onOpenSession?: (id: string) => void;
-  onNewSession?: () => void;
+  onNewSession?: (workspaceId?: string) => Promise<string>;
   onOpenWorkspace?: (id: string) => Promise<void>;
   onCreateWorkspace?: () => Promise<void>;
   onPlugins?: () => void;
@@ -216,6 +227,8 @@ export function ChatCanvas({
   useNativeComposer?: boolean;
   nativeComposer?: ReactNode;
   onSessionChange?: (sessionId: string | undefined) => void;
+  requestedSession?: { sessionId: string; token: number } | null;
+  onRequestHandled?: () => void;
   accountActions?: {
     settings: { label: string; description: string; run: () => void };
     version: { label: string; description: string; run: () => void };
@@ -239,6 +252,11 @@ export function ChatCanvas({
   const [historyNotice, setHistoryNotice] = useState("");
   const [sessionAttempt, setSessionAttempt] = useState(0);
   const creatingSession = useRef(false);
+  const creatingNewSession = useRef(false);
+  const [newSessionPending, setNewSessionPending] = useState(false);
+  const sessionStates = useRef(new Map<string, State>());
+  const sessionDrafts = useRef(new Map<string, string>());
+  const handledRequest = useRef(0);
   const [hoveredPair, setHoveredPair] = useState<PairTarget | null>(null);
   const [focusedPair, setFocusedPair] = useState<PairTarget | null>(null);
   const keyboardPairing = useRef(true);
@@ -345,11 +363,13 @@ export function ChatCanvas({
   } | null>(null);
   const previousReplyCount = useRef(state.replies.length);
   const newReplyIds = useRef(new Set<string>());
+  const measuredReplyHeights = useRef(new Map<string, number>());
   const composerInput = useRef<HTMLTextAreaElement>(null);
   const iuiActions = useRef(new Map<string, ReturnType<IuiActionHandler>>());
   const userMessageIds = JSON.stringify(
     pairs.userMessages.map((message) => message.id),
   );
+  const replyIds = JSON.stringify(state.replies.map((reply) => reply.id));
   const stopRailScroll = () => {
     railFollowTail.current = null;
     if (!railScrollAnimating.current) return;
@@ -459,7 +479,7 @@ export function ChatCanvas({
     stateRef.current = next;
     if (mounted.current) setState(next);
   }, []);
-  useEffect(() => {
+  useLayoutEffect(() => {
     onSessionChange?.(state.sessionId);
   }, [onSessionChange, state.sessionId]);
   useEffect(() => {
@@ -546,7 +566,7 @@ export function ChatCanvas({
     if (!newReplyIds.current.size) return;
     const positions = new Map<
       string,
-      { x: number; y: number; slotHeight: number }
+      NonNullable<State["replies"][number]["position"]>
     >();
     for (const [index, reply] of state.replies.entries()) {
       if (!newReplyIds.current.delete(reply.id) || reply.position || !index)
@@ -554,13 +574,14 @@ export function ChatCanvas({
       const previous = state.replies[index - 1];
       const anchor = positions.get(previous.id) ?? replyGeometry(previous.id);
       if (!anchor) continue;
+      const anchorHeight =
+        "height" in anchor ? anchor.height : anchor.slotHeight;
       positions.set(reply.id, {
         x: anchor.x,
-        y:
-          anchor.y +
-          ("height" in anchor ? anchor.height : anchor.slotHeight) +
-          30,
+        y: anchor.y + anchorHeight + 30,
         slotHeight: Math.max(24, replyGeometry(reply.id)?.height ?? 24),
+        kind: "auto",
+        anchorHeight,
       });
     }
     if (!positions.size) return;
@@ -573,6 +594,104 @@ export function ChatCanvas({
       ),
     }));
   }, [state.replies, update]);
+  useLayoutEffect(() => {
+    const canvas = stage.current;
+    if (!canvas || typeof ResizeObserver === "undefined") return;
+    measuredReplyHeights.current.clear();
+    const cards = [...canvas.querySelectorAll<HTMLElement>(".chat-reply")];
+    const observer = new ResizeObserver((entries) => {
+      const current = stateRef.current;
+      const cardById = new Map(
+        cards.map((card) => [card.dataset.replyId, card]),
+      );
+      const inferredAuto = new Map<number, number>();
+      // Old archives did not label automatic placement. Repair only an aligned
+      // next card that still has the old auto gap or now overlaps a grown card.
+      for (let index = 1; index < current.replies.length; index++) {
+        const previous = current.replies[index - 1];
+        const reply = current.replies[index];
+        if (!reply.position || reply.position.kind) continue;
+        const anchor = replyGeometry(previous.id);
+        if (!anchor || Math.abs(reply.position.x - anchor.x) > 2) continue;
+        const oldHeight = previous.position?.slotHeight;
+        if (
+          oldHeight !== undefined &&
+          Math.abs(reply.position.y - (anchor.y + oldHeight + 30)) < 2
+        )
+          inferredAuto.set(index, oldHeight);
+        else if (oldHeight === undefined) {
+          const initialHeight = reply.position.y - anchor.y - 30;
+          if (
+            initialHeight >= 24 &&
+            reply.position.y < anchor.y + anchor.height - 16 &&
+            anchor.height - initialHeight >= 80
+          )
+            inferredAuto.set(index, initialHeight);
+        }
+      }
+      const changes = new Map<number, { height: number; delta: number }>();
+      for (const entry of entries) {
+        const id = (entry.target as HTMLElement).dataset.replyId;
+        const index = current.replies.findIndex((reply) => reply.id === id);
+        const card = id && cardById.get(id);
+        if (index < 0 || !card) continue;
+        const height =
+          card.getBoundingClientRect().height / current.viewport.zoom;
+        if (!Number.isFinite(height) || height < 1) continue;
+        const actual = Math.max(24, height);
+        const following = current.replies[index + 1]?.position;
+        const baseline =
+          current.replies[index].position?.slotHeight ??
+          inferredAuto.get(index + 1) ??
+          measuredReplyHeights.current.get(id) ??
+          (following?.kind === "auto" ? following.anchorHeight : undefined) ??
+          actual;
+        measuredReplyHeights.current.set(id, actual);
+        if (Math.abs(actual - baseline) > 1)
+          changes.set(index, { height: actual, delta: actual - baseline });
+      }
+      if (!changes.size && !inferredAuto.size) return;
+      update((value) => {
+        let shift = 0;
+        let changed = false;
+        const replies = value.replies.map((reply, index) => {
+          let position = reply.position;
+          const inferredHeight = inferredAuto.get(index);
+          if (position && !position.kind && inferredHeight !== undefined) {
+            position = {
+              ...position,
+              kind: "auto",
+              anchorHeight: inferredHeight,
+            };
+            changed = true;
+          }
+          if (position?.kind === "manual") shift = 0;
+          if (position?.kind === "auto" && shift) {
+            position = {
+              ...position,
+              y: position.y + shift,
+              anchorHeight:
+                position.anchorHeight === undefined
+                  ? undefined
+                  : position.anchorHeight +
+                    (changes.get(index - 1)?.delta ?? 0),
+            };
+            changed = true;
+          }
+          const resized = changes.get(index);
+          if (position && resized && position.slotHeight !== resized.height) {
+            position = { ...position, slotHeight: resized.height };
+            changed = true;
+          }
+          if (resized) shift += resized.delta;
+          return position === reply.position ? reply : { ...reply, position };
+        });
+        return changed ? { ...value, replies } : value;
+      });
+    });
+    for (const card of cards) observer.observe(card);
+    return () => observer.disconnect();
+  }, [state.sessionId, replyIds, update]);
   const moveReply = (replyId: string, dx: number, dy: number) => {
     const origin = replyPosition(replyId);
     if (!origin) return;
@@ -583,7 +702,13 @@ export function ChatCanvas({
         reply.id === replyId
           ? {
               ...reply,
-              position: { ...origin, x: origin.x + dx, y: origin.y + dy },
+              position: {
+                ...origin,
+                x: origin.x + dx,
+                y: origin.y + dy,
+                kind: "manual",
+                anchorHeight: undefined,
+              },
             }
           : reply,
       ),
@@ -684,7 +809,8 @@ export function ChatCanvas({
   useEffect(() => {
     if (!state.sessionId || !adapter.observeSession) return;
     return adapter.observeSession(state.sessionId, (snapshot) => {
-      if (!mounted.current) return;
+      if (!mounted.current || snapshot.sessionId !== stateRef.current.sessionId)
+        return;
       setHistoryNotice(snapshot.error ?? "");
       update((current) => {
         const next = reconcileConversation(
@@ -704,16 +830,94 @@ export function ChatCanvas({
       });
     });
   }, [adapter, state.sessionId, update]);
-  const save = useCallback(() => {
-    if (storageError) return;
-    try {
-      localStorage.setItem(`${KEY}:${mode}`, JSON.stringify(stateRef.current));
-    } catch (error) {
-      setStorageError(
-        `本地保存失败：${error instanceof Error ? error.message : String(error)}`,
-      );
+  const persist = useCallback(
+    (snapshot: State) => {
+      if (storageErrorRef.current) return;
+      try {
+        const value = JSON.stringify(snapshot);
+        if (snapshot.sessionId)
+          localStorage.setItem(sessionKey(mode, snapshot.sessionId), value);
+        localStorage.setItem(`${KEY}:${mode}`, value);
+      } catch (error) {
+        const message = `本地保存失败：${error instanceof Error ? error.message : String(error)}`;
+        storageErrorRef.current = message;
+        setStorageError(message);
+      }
+    },
+    [mode],
+  );
+  const save = useCallback(() => persist(stateRef.current), [persist]);
+  const switchSession = (id: string) => {
+    if (id === stateRef.current.sessionId) {
+      setMenu(null);
+      return;
     }
-  }, [storageError, mode]);
+    if (running.current || creatingSession.current) {
+      setNavError("当前会话仍在准备或生成，请稍后再切换");
+      setMenu("nav");
+      return;
+    }
+    const previous = stateRef.current;
+    const restored = sessionStates.current.get(id);
+    const target = restored
+      ? { state: restored, error: "" }
+      : restore(mode, id);
+    if (target.error) {
+      setNavError(target.error);
+      setMenu("nav");
+      return;
+    }
+    if (previous.sessionId) {
+      sessionStates.current.set(previous.sessionId, previous);
+      sessionDrafts.current.set(previous.sessionId, draft);
+    }
+    persist(previous);
+    stopCamera();
+    stopRailScroll();
+    newReplyIds.current.clear();
+    previousReplyCount.current = target.state.replies.length;
+    iuiActions.current.clear();
+    clearPairing();
+    setHistoryNotice("");
+    setRunError("");
+    setDraft(sessionDrafts.current.get(id) ?? "");
+    stateRef.current = target.state;
+    setState(target.state);
+    persist(target.state);
+    setMenu(null);
+    setNavError("");
+  };
+  const createNewSession = async (targetWorkspaceId = workspaceId) => {
+    if (!onNewSession || creatingNewSession.current) return;
+    if (running.current || creatingSession.current) {
+      setNavError("当前会话仍在准备或生成，请稍后再新建");
+      return;
+    }
+    creatingNewSession.current = true;
+    setNewSessionPending(true);
+    setNavError("");
+    try {
+      const id = await onNewSession(targetWorkspaceId);
+      if (mounted.current) switchSession(id);
+    } catch (error) {
+      if (mounted.current) {
+        setNavError(
+          `新建会话失败：${error instanceof Error ? error.message : String(error)}`,
+        );
+        setMenu("nav");
+      }
+    } finally {
+      creatingNewSession.current = false;
+      if (mounted.current) setNewSessionPending(false);
+    }
+  };
+  useLayoutEffect(() => {
+    if (!requestedSession || handledRequest.current === requestedSession.token)
+      return;
+    handledRequest.current = requestedSession.token;
+    switchSession(requestedSession.sessionId);
+    onRequestHandled?.();
+  }, [requestedSession?.token]);
   useEffect(() => {
     const flush = () => save();
     const hidden = () => {
@@ -737,18 +941,9 @@ export function ChatCanvas({
         if (active.sessionId)
           void adapter.cancel(active.sessionId).catch(() => {});
       }
-      if (!storageErrorRef.current) {
-        try {
-          localStorage.setItem(
-            `${KEY}:${mode}`,
-            JSON.stringify(stateRef.current),
-          );
-        } catch {
-          /* warning was visible before leaving */
-        }
-      }
+      persist(stateRef.current);
     };
-  }, [adapter, mode, stopCamera]);
+  }, [adapter, persist, stopCamera]);
   useEffect(() => {
     const timer = setTimeout(save, 180);
     return () => clearTimeout(timer);
@@ -1003,6 +1198,7 @@ export function ChatCanvas({
                   x: drag.originX + dx / zoom,
                   y: drag.originY + dy / zoom,
                   slotHeight: drag.slotHeight ?? 24,
+                  kind: "manual",
                 },
               }
             : reply,
@@ -1255,6 +1451,18 @@ export function ChatCanvas({
         >
           {navIcon ?? <Icon name="grid" size={18} />}
         </button>
+        {onNewSession && (
+          <button
+            type="button"
+            className="chat-float-button"
+            aria-label="新建画布会话"
+            title="新建画布会话"
+            disabled={newSessionPending}
+            onClick={() => void createNewSession()}
+          >
+            <Icon name="plus" size={18} />
+          </button>
+        )}
         <button
           ref={accountButton}
           className="chat-float-button chat-avatar"
@@ -1274,9 +1482,12 @@ export function ChatCanvas({
           <div className="chat-menu" role="dialog" aria-label="导航与工作区">
             <div className="chat-menu-title">导航</div>
             {onNewSession && (
-              <button onClick={onNewSession}>
+              <button
+                disabled={newSessionPending}
+                onClick={() => void createNewSession()}
+              >
                 <Icon name="plus" size={15} />
-                新建 DSH 会话
+                新建画布会话
               </button>
             )}
             {onExit && (
@@ -1361,11 +1572,26 @@ export function ChatCanvas({
                           <Icon name="home" size={15} />
                           <span>{workspace.title}</span>
                         </button>
+                        {onNewSession && !search && (
+                          <button
+                            className="chat-session-row"
+                            disabled={newSessionPending}
+                            onClick={() => void createNewSession(workspace.id)}
+                          >
+                            <Icon name="plus" size={14} />
+                            <span>在此工作区新建画布会话</span>
+                          </button>
+                        )}
                         {(search ? matching : sessions).map((session) => (
                           <button
                             className="chat-session-row"
                             key={session.id}
-                            onClick={() => onOpenSession?.(session.id)}
+                            aria-current={
+                              state.sessionId === session.id
+                                ? "page"
+                                : undefined
+                            }
+                            onClick={() => switchSession(session.id)}
                           >
                             <span>{session.title}</span>
                           </button>
@@ -1386,7 +1612,10 @@ export function ChatCanvas({
                     .map((session) => (
                       <button
                         key={session.id}
-                        onClick={() => onOpenSession?.(session.id)}
+                        aria-current={
+                          state.sessionId === session.id ? "page" : undefined
+                        }
+                        onClick={() => switchSession(session.id)}
                       >
                         <Icon name="agent" size={15} />
                         <span>{session.title}</span>
