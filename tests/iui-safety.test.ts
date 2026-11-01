@@ -142,3 +142,33 @@ test("pure primitive string slice is bounded and preserves array slice behavior"
     "xx",
   );
 });
+
+test("exact array.filter(Boolean) keeps truthiness and blocks other function calls", () => {
+  const evaluator = new SafeEvaluator();
+  const values = [false, null, undefined, 0, "", true, 1, "x", [], {}];
+  assert.deepEqual(evaluator.evaluate("values.filter(Boolean)", { values }), [
+    true,
+    1,
+    "x",
+    values[8],
+    values[9],
+  ]);
+  for (const expression of [
+    "Boolean(1)",
+    "[1].map(Boolean)",
+    "[1].find(Boolean)",
+    "[1].sort(Boolean)",
+    '[1]["filter"](Boolean)',
+    "[1].filter(Boolean, 1)",
+    "[1].filter(window.Boolean)",
+    "[1].filter(globalThis.Boolean)",
+    "[1].filter(Function)",
+    "[1].filter(Boolean.constructor)",
+    "[1].filter(x=>fetch('https://example.com'))",
+  ])
+    assert.throws(() => evaluator.evaluate(expression), expression);
+  assert.throws(
+    () => evaluator.evaluate("[1].filter(Boolean)", { Boolean: 0 }),
+    /array callback must be arrow/,
+  );
+});

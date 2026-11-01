@@ -63,6 +63,19 @@ function referencesReady(source: string, available: Set<string>): boolean {
     if (!value || typeof value !== "object") return true;
     if (Array.isArray(value))
       return value.every((child) => visit(child, names));
+    // Only this exact shorthand names the intrinsic predicate. A declared local
+    // Boolean still resolves normally and must be an allowed arrow closure.
+    if (
+      value.type === "CallExpression" &&
+      value.callee?.type === "MemberExpression" &&
+      !value.callee.computed &&
+      value.callee.property.name === "filter" &&
+      value.arguments?.length === 1 &&
+      value.arguments[0].type === "Identifier" &&
+      value.arguments[0].name === "Boolean" &&
+      !names.has("Boolean")
+    )
+      return visit(value.callee.object, names);
     if (value.type === "Identifier") return names.has(value.name);
     if (value.type === "Literal" || value.type === "TemplateElement")
       return true;

@@ -21280,6 +21280,7 @@ var bounded = (s) => {
   if (s.length > limits.stringLength) throw new Error("string budget exceeded");
   return s;
 };
+var booleanFilterPredicate = Symbol("IUI filter Boolean");
 var SafeEvaluator = class {
   constructor(hooks) {
     this.hooks = hooks;
@@ -21439,9 +21440,10 @@ var SafeEvaluator = class {
         return v;
       }
       case "CallExpression": {
-        const args = n.arguments.map((a) => {
+        const filterBoolean = n.callee.type === "MemberExpression" && !n.callee.computed && n.callee.property.name === "filter" && n.arguments.length === 1 && n.arguments[0].type === "Identifier" && n.arguments[0].name === "Boolean" && !Object.prototype.hasOwnProperty.call(env2, "Boolean");
+        const args = n.arguments.map((a, i) => {
           if (a.type === "SpreadElement") throw new Error("call spread forbidden");
-          return go(a);
+          return filterBoolean && i === 0 ? booleanFilterPredicate : go(a);
         });
         if (n.callee.type === "Identifier") {
           const id = n.callee.name, v = env2[id];
@@ -21482,6 +21484,7 @@ var SafeEvaluator = class {
           if (key === "includes") return obj.includes(args[0]);
           if (key === "join") return bounded(obj.join(String(args[0] ?? ",")));
           if (key === "slice") return obj.slice(finite(args[0]), args[1] === void 0 ? void 0 : finite(args[1]));
+          if (key === "filter" && args[0] === booleanFilterPredicate) return obj.slice(0, limits.arrayItems).filter(Boolean);
           if (["map", "filter", "find", "sort"].includes(key)) {
             const fn = args[0];
             if (!fn || typeof fn !== "object" || !("$closure" in fn)) throw new Error("array callback must be arrow");
@@ -22528,6 +22531,8 @@ function referencesReady(source, available) {
     if (!value || typeof value !== "object") return true;
     if (Array.isArray(value))
       return value.every((child) => visit2(child, names));
+    if (value.type === "CallExpression" && value.callee?.type === "MemberExpression" && !value.callee.computed && value.callee.property.name === "filter" && value.arguments?.length === 1 && value.arguments[0].type === "Identifier" && value.arguments[0].name === "Boolean" && !names.has("Boolean"))
+      return visit2(value.callee.object, names);
     if (value.type === "Identifier") return names.has(value.name);
     if (value.type === "Literal" || value.type === "TemplateElement")
       return true;
