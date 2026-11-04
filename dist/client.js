@@ -370,6 +370,43 @@ __export(client_exports, {
 });
 module.exports = __toCommonJS(client_exports);
 
+// src/host/sidebar-projection.ts
+function projectSidebar(list4, workspaces, selected) {
+  const current2 = selected ?? Object.values(list4.byId).find((s) => (s.retainedBy?.mainView ?? 0) > 0)?.id;
+  const archived = new Set(workspaces.archivedSessionIds);
+  const pinned = new Set(workspaces.pinnedSessionIds);
+  const members = new Set(list4.ids);
+  const sessions = list4.ids.flatMap((id) => {
+    const s = list4.byId[id];
+    if (!s || s.origin === "subagent" || archived.has(id) || s.blank && id !== current2)
+      return [];
+    return [
+      {
+        id,
+        title: s.blank ? "\u65B0\u4F1A\u8BDD" : s.title?.trim() || "\u672A\u547D\u540D",
+        cwd: s.cwd,
+        blank: s.blank,
+        pinned: pinned.has(id),
+        updatedAt: s.updatedAt
+      }
+    ];
+  }).sort(
+    (a, b) => Number(b.blank) - Number(a.blank) || Number(b.pinned) - Number(a.pinned) || b.updatedAt - a.updatedAt || a.id.localeCompare(b.id)
+  );
+  const rank = new Map(sessions.map((s, i) => [s.id, i]));
+  const accounted = /* @__PURE__ */ new Set();
+  const groups = workspaces.items.map((w) => ({
+    id: w.workspaceId,
+    title: w.title === "default-workspace" ? "\u9ED8\u8BA4\u5DE5\u4F5C\u533A" : w.title,
+    sessionIds: w.sessionIds.filter((id) => {
+      if (accounted.has(id) || !members.has(id)) return false;
+      accounted.add(id);
+      return rank.has(id);
+    }).sort((a, b) => rank.get(a) - rank.get(b))
+  }));
+  return { sessions, workspaces: groups };
+}
+
 // ../../../../../github/dsh-canvas-workspace/node_modules/@deepseek-ai/dsh-util-workspace-path/lib/index.js
 function isWindowsStylePath(value) {
   return /^[A-Za-z]:[/\\]/.test(value) || value.startsWith("\\\\");
@@ -2396,6 +2433,7 @@ function CanvasSidebar({
   const [searchOpen, setSearchOpen] = (0, import_react2.useState)(false);
   const [viewOpen, setViewOpen] = (0, import_react2.useState)(false);
   const [flat, setFlat] = (0, import_react2.useState)(false);
+  const [expanded, setExpanded] = (0, import_react2.useState)({});
   const [moreOpen, setMoreOpen] = (0, import_react2.useState)(false);
   const searchInput = (0, import_react2.useRef)(null);
   (0, import_react2.useEffect)(() => {
@@ -2451,6 +2489,7 @@ function CanvasSidebar({
         className: "chat-session-row chat-sidebar-session",
         "aria-current": currentSessionId === session.id ? "page" : void 0,
         title: session.title,
+        "data-session-id": session.id,
         onClick: () => onSwitchSession(session.id),
         children: [
           /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-session-title", children: session.title }),
@@ -2704,7 +2743,11 @@ function CanvasSidebar({
                         {
                           type: "button",
                           className: "chat-sidebar-project",
-                          onClick: () => onOpenWorkspace?.(workspace.id),
+                          "aria-expanded": Boolean(query) || (expanded[workspace.id] ?? workspace.id === currentWorkspaceId),
+                          onClick: () => setExpanded((value) => ({
+                            ...value,
+                            [workspace.id]: !(value[workspace.id] ?? workspace.id === currentWorkspaceId)
+                          })),
                           children: [
                             /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                               "span",
@@ -2718,20 +2761,18 @@ function CanvasSidebar({
                           ]
                         }
                       ),
-                      onNewSessionInWorkspace && !query && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+                      (Boolean(query) || (expanded[workspace.id] ?? workspace.id === currentWorkspaceId)) && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_jsx_runtime5.Fragment, { children: visible.map((session) => sessionRow(session)) }),
+                      onNewSessionInWorkspace && !query && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                         "button",
                         {
                           type: "button",
-                          className: "chat-session-row chat-sidebar-session chat-sidebar-session-create",
+                          className: "chat-sidebar-workspace-create",
+                          "aria-label": `\u5728${workspace.title}\u4E2D\u65B0\u5EFA\u4F1A\u8BDD`,
                           disabled: newSessionPending,
                           onClick: () => onNewSessionInWorkspace(workspace.id),
-                          children: [
-                            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-session-plus", children: icons?.plus ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "plus", size: 14 }) }),
-                            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u5728\u6B64\u5DE5\u4F5C\u533A\u65B0\u5EFA\u753B\u5E03\u4F1A\u8BDD" })
-                          ]
+                          children: icons?.plus ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "plus", size: 14 })
                         }
-                      ),
-                      visible.map((session) => sessionRow(session))
+                      )
                     ]
                   },
                   workspace.id
@@ -24721,14 +24762,62 @@ function ChatCanvas({
     update,
     useNativeComposer
   ]);
+  const layoutAnimations = (0, import_react14.useRef)(/* @__PURE__ */ new Set());
+  const pendingLayoutRects = (0, import_react14.useRef)(null);
+  const [layoutRequest, setLayoutRequest] = (0, import_react14.useState)(0);
+  const cancelLayoutMotion = (0, import_react14.useCallback)(() => {
+    pendingLayoutRects.current = null;
+    for (const animation of layoutAnimations.current) animation.cancel();
+    layoutAnimations.current.clear();
+  }, []);
+  (0, import_react14.useLayoutEffect)(() => {
+    const previous3 = pendingLayoutRects.current;
+    pendingLayoutRects.current = null;
+    if (!previous3 || window.matchMedia?.("(prefers-reduced-motion: reduce)").matches)
+      return;
+    const zoom2 = stateRef.current.viewport.zoom;
+    for (const card of stage.current?.querySelectorAll(
+      ".chat-reply"
+    ) ?? []) {
+      const before = previous3.get(card.dataset.replyId);
+      if (!before || typeof card.animate !== "function") continue;
+      const after = card.getBoundingClientRect();
+      const dx = (before.left - after.left) / zoom2;
+      const dy = (before.top - after.top) / zoom2;
+      if (Math.hypot(dx, dy) < 0.5) continue;
+      const animation = card.animate(
+        [
+          { transform: `translate(${dx}px, ${dy}px)` },
+          { transform: "translate(0, 0)" }
+        ],
+        { duration: 320, easing: "cubic-bezier(0.2, 0.75, 0.25, 1)" }
+      );
+      layoutAnimations.current.add(animation);
+      const settle = () => layoutAnimations.current.delete(animation);
+      animation.onfinish = settle;
+      animation.oncancel = settle;
+    }
+  }, [layoutRequest]);
+  (0, import_react14.useEffect)(() => {
+    const media = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    const change = () => {
+      if (media?.matches) cancelLayoutMotion();
+    };
+    media?.addEventListener?.("change", change);
+    return () => {
+      media?.removeEventListener?.("change", change);
+      cancelLayoutMotion();
+    };
+  }, [cancelLayoutMotion]);
   const cameraFrame = (0, import_react14.useRef)(null);
   const cameraRun = (0, import_react14.useRef)(0);
   const stopCamera = (0, import_react14.useCallback)(() => {
+    cancelLayoutMotion();
     cameraRun.current++;
     if (cameraFrame.current !== null)
       window.cancelAnimationFrame?.(cameraFrame.current);
     cameraFrame.current = null;
-  }, []);
+  }, [cancelLayoutMotion]);
   const replyGeometry = (replyId) => {
     const reply = stateRef.current.replies.find((item) => item.id === replyId);
     const canvas = stage.current;
@@ -24805,7 +24894,17 @@ function ChatCanvas({
     let right = bounds.right - 24;
     if (overlay && overlay.left - left > 360)
       right = Math.min(right, overlay.left - 24);
+    const previous3 = /* @__PURE__ */ new Map();
+    const manual = new Set(
+      stateRef.current.replies.filter((reply) => reply.position?.kind === "manual").map((reply) => reply.id)
+    );
+    for (const card of canvas.querySelectorAll(".chat-reply")) {
+      if (!manual.has(card.dataset.replyId))
+        previous3.set(card.dataset.replyId, card.getBoundingClientRect());
+    }
     stopCamera();
+    pendingLayoutRects.current = previous3;
+    setLayoutRequest((value) => value + 1);
     update(
       (current2) => layoutReplies(current2, {
         x: (24 - x) / zoom2,
@@ -24849,6 +24948,7 @@ function ChatCanvas({
     const observer = new ResizeObserver((entries) => {
       const current2 = stateRef.current;
       if (current2.replies.some((reply) => reply.position?.kind === "viewport")) {
+        cancelLayoutMotion();
         update((value) => layoutReplies(value));
         return;
       }
@@ -25240,6 +25340,7 @@ function ChatCanvas({
   const finishPan = (0, import_react14.useCallback)(() => {
     const drag = dragging.current;
     dragging.current = null;
+    stage.current?.removeAttribute("data-canvas-dragging");
     if (drag && (drag.active || drag.explicit)) suppressPanClick.current = true;
     setIsPanning(false);
     setIsMovingReply(false);
@@ -25277,7 +25378,7 @@ function ChatCanvas({
     };
     const selectstart = (event) => {
       const drag = dragging.current;
-      if (drag && (drag.active || drag.explicit)) event.preventDefault();
+      if (drag) event.preventDefault();
     };
     document.addEventListener("keydown", keydown);
     document.addEventListener("keyup", keyup);
@@ -25290,6 +25391,7 @@ function ChatCanvas({
       window.removeEventListener("blur", blur);
       const drag = dragging.current;
       dragging.current = null;
+      stage.current?.removeAttribute("data-canvas-dragging");
       if (drag?.captureTarget.hasPointerCapture(drag.pointerId))
         drag.captureTarget.releasePointerCapture(drag.pointerId);
     };
@@ -25306,7 +25408,28 @@ function ChatCanvas({
       const replyId = replyHandle.closest(".chat-reply")?.dataset.replyId;
       const position3 = replyId && replyPosition(replyId);
       if (!replyId || !position3) return;
+      const card = replyHandle.closest(".chat-reply");
+      const moving = card?.getAnimations?.().some((animation) => layoutAnimations.current.has(animation));
+      let origin = position3;
+      if (moving && card) {
+        const rect = card.getBoundingClientRect();
+        const view = stage.current.getBoundingClientRect();
+        const camera = stateRef.current.viewport;
+        origin = {
+          ...position3,
+          x: (rect.left - view.left - camera.x) / camera.zoom,
+          y: (rect.top - view.top - camera.y) / camera.zoom,
+          kind: "manual"
+        };
+      }
       stopCamera();
+      if (moving)
+        update((current2) => ({
+          ...current2,
+          replies: current2.replies.map(
+            (reply) => reply.id === replyId ? { ...reply, position: origin } : reply
+          )
+        }));
       event.preventDefault();
       event.stopPropagation();
       suppressPanClick.current = true;
@@ -25318,11 +25441,12 @@ function ChatCanvas({
         captureTarget: event.currentTarget,
         x: event.clientX,
         y: event.clientY,
-        originX: position3.x,
-        originY: position3.y,
+        originX: origin.x,
+        originY: origin.y,
         active: false,
         explicit: true
       };
+      stage.current?.setAttribute("data-canvas-dragging", "");
       setPanArmed(true);
       event.currentTarget.setPointerCapture(event.pointerId);
       return;
@@ -25332,7 +25456,8 @@ function ChatCanvas({
     const blankRail = target === event.currentTarget && target.classList.contains("chat-user-history");
     const background = blankRail || target.matches(".chat-stage,.chat-world,.chat-reply-slot");
     if (!explicit && !background) return;
-    if (blankRail) event.preventDefault();
+    event.preventDefault();
+    stage.current?.setAttribute("data-canvas-dragging", "");
     stopCamera();
     const { x, y } = stateRef.current.viewport;
     dragging.current = {
@@ -30728,6 +30853,46 @@ html[data-platform="darwin"]
 .canvas-app .chat-layout-action:hover:not(:disabled) {
   background: var(--cw-hover);
 }
+
+/* A valid background/handle press must block selection before React's next paint.
+   Reply text presses never arm this attribute, so selecting and copying still work. */
+.canvas-app .chat-stage[data-canvas-dragging],
+.canvas-app .chat-stage[data-canvas-dragging] * {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+/* Let the native row measure the model's full width and choose its compact
+   presentation; its default 45cqw cap otherwise clips the effort badge first. */
+[data-conversation-content]:has([data-canvas-conversation-view])
+  [data-composer-seat]
+  [data-slot="conversation.input.model"]
+  button[aria-haspopup="menu"] {
+  max-width: none;
+}
+
+.canvas-app .chat-workspace-group {
+  position: relative;
+}
+.canvas-app .chat-sidebar-workspace-create {
+  position: absolute;
+  top: 7px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--cw-muted);
+  cursor: pointer;
+}
+.canvas-app .chat-sidebar-project-title {
+  padding-right: 22px;
+}
+.canvas-app .chat-sidebar-workspace-create:hover {
+  background: var(--cw-hover);
+}
 `;
 
 // src/host/native-ui.tsx
@@ -30876,16 +31041,11 @@ function CanvasOverlay(props) {
   );
   if (!active) return null;
   const SessionProvider = props.SessionProvider;
-  const hostSessions = sessionList.ids.map((id) => ({
-    id,
-    title: sessionList.byId[id]?.displayTitle ?? String(id),
-    cwd: sessionList.byId[id]?.cwd
-  }));
-  const hostWorkspaces = workspaceList.items.map((workspace) => ({
-    id: workspace.workspaceId,
-    title: workspace.title,
-    sessionIds: [...workspace.sessionIds]
-  }));
+  const { sessions: hostSessions, workspaces: hostWorkspaces } = projectSidebar(
+    sessionList,
+    workspaceList,
+    canvasSessionId ?? void 0
+  );
   return /* @__PURE__ */ (0, import_jsx_runtime67.jsx)("div", { className: "canvas-frame-overlay", children: legacy ? /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(
     CanvasWorkspace,
     {
@@ -30960,6 +31120,7 @@ function CanvasConversationView(props) {
     () => ({ sessionId: props.sessionId, token: ++openRequestToken }),
     [props.sessionId]
   );
+  const sidebar = projectSidebar(sessionList, workspaceList, props.sessionId);
   const exit3 = () => props.openView("chat", "");
   return /* @__PURE__ */ (0, import_jsx_runtime67.jsx)("div", { className: "canvas-conversation-view", "data-canvas-conversation-view": true, children: /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(
     CanvasChat,
@@ -30968,16 +31129,8 @@ function CanvasConversationView(props) {
       onExit: exit3,
       accountActions: createNativeAccountActions(exit3),
       requestedSession: request,
-      hostSessions: sessionList.ids.map((id) => ({
-        id,
-        title: sessionList.byId[id]?.displayTitle ?? String(id),
-        cwd: sessionList.byId[id]?.cwd
-      })),
-      hostWorkspaces: workspaceList.items.map((workspace) => ({
-        id: workspace.workspaceId,
-        title: workspace.title,
-        sessionIds: [...workspace.sessionIds]
-      })),
+      hostSessions: sidebar.sessions,
+      hostWorkspaces: sidebar.workspaces,
       externalComposer: true
     }
   ) });

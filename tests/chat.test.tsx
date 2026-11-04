@@ -329,8 +329,9 @@ test("new canvas sessions use a real workspace session and restore each canvas w
     ...document.querySelectorAll<HTMLElement>(".chat-workspace-group"),
   ].find((group) => group.textContent?.includes("项目二"));
   assert.ok(otherWorkspace);
-  const createInOther =
-    otherWorkspace.querySelector<HTMLButtonElement>(".chat-session-row");
+  const createInOther = otherWorkspace.querySelector<HTMLButtonElement>(
+    ".chat-sidebar-workspace-create",
+  );
   assert.ok(createInOther);
   await act(async () => createInOther.click());
   assert.equal(createdIn.at(-1), "project-two");
@@ -1115,14 +1116,15 @@ function selectionStart() {
   return event;
 }
 
-test("background and world-gap pan wait for threshold and suppress only active selection", async () => {
+test("background pan blocks selection immediately but waits for movement threshold", async () => {
   const control = await mountPanFixture();
   const stage = element(".chat-stage");
   const before = viewportTransform();
-  assert.equal((await pointer(stage, "pointerdown")).defaultPrevented, false);
+  assert.equal((await pointer(stage, "pointerdown")).defaultPrevented, true);
   await pointer(stage, "pointermove", 102, 101);
   assert.equal(viewportTransform(), before);
-  assert.equal(selectionStart().defaultPrevented, false);
+  assert.equal(selectionStart().defaultPrevented, true);
+  assert.ok(stage.hasAttribute("data-canvas-dragging"));
   assert.equal(stage.classList.contains("is-chat-panning"), false);
   selectReplyText();
   await pointer(stage, "pointermove", 140, 120);
@@ -1133,6 +1135,7 @@ test("background and world-gap pan wait for threshold and suppress only active s
   await pointer(stage, "pointerup", 140, 120);
   assert.equal(stage.classList.contains("is-chat-panning"), false);
   assert.equal(stage.hasPointerCapture(1), false);
+  assert.equal(stage.hasAttribute("data-canvas-dragging"), false);
   assert.equal(selectionStart().defaultPrevented, false);
   await pointer(element(".chat-world"), "pointerdown");
   await pointer(stage, "pointermove", 110, 110);
@@ -2303,10 +2306,15 @@ test("canvas sidebar reuses the DSH shell while keeping canvas navigation", asyn
     "true",
   );
   assert.equal(dialog.querySelectorAll(".chat-workspace-group").length, 3);
+  await act(async () =>
+    (
+      dialog.querySelector(".chat-sidebar-project") as HTMLButtonElement
+    ).click(),
+  );
   assert.equal(
     dialog.querySelectorAll(".chat-session-row").length,
     3,
-    "two create rows and the grouped sessions; ungrouped sessions stay listed",
+    "only real grouped and ungrouped sessions are listed",
   );
   assert.equal(
     dialog.querySelector('.chat-session-row[aria-current="page"]'),

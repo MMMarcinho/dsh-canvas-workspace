@@ -3760,3 +3760,43 @@ html[data-platform="darwin"]
 .canvas-app .chat-layout-action:hover:not(:disabled) {
   background: var(--cw-hover);
 }
+
+/* A valid background/handle press must block selection before React's next paint.
+   Reply text presses never arm this attribute, so selecting and copying still work. */
+.canvas-app .chat-stage[data-canvas-dragging],
+.canvas-app .chat-stage[data-canvas-dragging] * {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+/* Let the native row measure the model's full width and choose its compact
+   presentation; its default 45cqw cap otherwise clips the effort badge first. */
+[data-conversation-content]:has([data-canvas-conversation-view])
+  [data-composer-seat]
+  [data-slot="conversation.input.model"]
+  button[aria-haspopup="menu"] {
+  max-width: none;
+}
+
+.canvas-app .chat-workspace-group {
+  position: relative;
+}
+.canvas-app .chat-sidebar-workspace-create {
+  position: absolute;
+  top: 7px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--cw-muted);
+  cursor: pointer;
+}
+.canvas-app .chat-sidebar-project-title {
+  padding-right: 22px;
+}
+.canvas-app .chat-sidebar-workspace-create:hover {
+  background: var(--cw-hover);
+}

@@ -1,3 +1,4 @@
+import { projectSidebar } from "./host/sidebar-projection";
 import { resolveNativeImageResource } from "./host/native-images";
 import type { SessionId } from "@deepseek-ai/dsh-session/types";
 import type { WorkspaceId } from "@deepseek-ai/dsh-api-workspace-controller/client";
@@ -161,16 +162,11 @@ function CanvasOverlay(
   );
   if (!active) return null;
   const SessionProvider = props.SessionProvider;
-  const hostSessions = sessionList.ids.map((id) => ({
-    id,
-    title: sessionList.byId[id]?.displayTitle ?? String(id),
-    cwd: sessionList.byId[id]?.cwd,
-  }));
-  const hostWorkspaces = workspaceList.items.map((workspace) => ({
-    id: workspace.workspaceId,
-    title: workspace.title,
-    sessionIds: [...workspace.sessionIds],
-  }));
+  const { sessions: hostSessions, workspaces: hostWorkspaces } = projectSidebar(
+    sessionList,
+    workspaceList,
+    canvasSessionId ?? undefined,
+  );
   return (
     <div className="canvas-frame-overlay">
       {legacy ? (
@@ -289,6 +285,7 @@ export function CanvasConversationView(
     () => ({ sessionId: props.sessionId, token: ++openRequestToken }),
     [props.sessionId],
   );
+  const sidebar = projectSidebar(sessionList, workspaceList, props.sessionId);
   const exit = () => props.openView("chat", "");
   return (
     <div className="canvas-conversation-view" data-canvas-conversation-view>
@@ -297,16 +294,8 @@ export function CanvasConversationView(
         onExit={exit}
         accountActions={createNativeAccountActions(exit)}
         requestedSession={request}
-        hostSessions={sessionList.ids.map((id) => ({
-          id,
-          title: sessionList.byId[id]?.displayTitle ?? String(id),
-          cwd: sessionList.byId[id]?.cwd,
-        }))}
-        hostWorkspaces={workspaceList.items.map((workspace) => ({
-          id: workspace.workspaceId,
-          title: workspace.title,
-          sessionIds: [...workspace.sessionIds],
-        }))}
+        hostSessions={sidebar.sessions}
+        hostWorkspaces={sidebar.workspaces}
         externalComposer
       />
     </div>

@@ -528,14 +528,65 @@ export function ChatCanvas({
     update,
     useNativeComposer,
   ]);
+  const layoutAnimations = useRef(new Set<Animation>());
+  const pendingLayoutRects = useRef<Map<string, DOMRect> | null>(null);
+  const [layoutRequest, setLayoutRequest] = useState(0);
+  const cancelLayoutMotion = useCallback(() => {
+    pendingLayoutRects.current = null;
+    for (const animation of layoutAnimations.current) animation.cancel();
+    layoutAnimations.current.clear();
+  }, []);
+  useLayoutEffect(() => {
+    const previous = pendingLayoutRects.current;
+    pendingLayoutRects.current = null;
+    if (
+      !previous ||
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+    const zoom = stateRef.current.viewport.zoom;
+    for (const card of stage.current?.querySelectorAll<HTMLElement>(
+      ".chat-reply",
+    ) ?? []) {
+      const before = previous.get(card.dataset.replyId!);
+      if (!before || typeof card.animate !== "function") continue;
+      const after = card.getBoundingClientRect();
+      const dx = (before.left - after.left) / zoom;
+      const dy = (before.top - after.top) / zoom;
+      if (Math.hypot(dx, dy) < 0.5) continue;
+      const animation = card.animate(
+        [
+          { transform: `translate(${dx}px, ${dy}px)` },
+          { transform: "translate(0, 0)" },
+        ],
+        { duration: 320, easing: "cubic-bezier(0.2, 0.75, 0.25, 1)" },
+      );
+      layoutAnimations.current.add(animation);
+      const settle = () => layoutAnimations.current.delete(animation);
+      animation.onfinish = settle;
+      animation.oncancel = settle;
+    }
+  }, [layoutRequest]);
+  useEffect(() => {
+    const media = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    const change = () => {
+      if (media?.matches) cancelLayoutMotion();
+    };
+    media?.addEventListener?.("change", change);
+    return () => {
+      media?.removeEventListener?.("change", change);
+      cancelLayoutMotion();
+    };
+  }, [cancelLayoutMotion]);
   const cameraFrame = useRef<number | null>(null);
   const cameraRun = useRef(0);
   const stopCamera = useCallback(() => {
+    cancelLayoutMotion();
     cameraRun.current++;
     if (cameraFrame.current !== null)
       window.cancelAnimationFrame?.(cameraFrame.current);
     cameraFrame.current = null;
-  }, []);
+  }, [cancelLayoutMotion]);
   const replyGeometry = (replyId: string) => {
     const reply = stateRef.current.replies.find((item) => item.id === replyId);
     const canvas = stage.current;
@@ -631,7 +682,21 @@ export function ChatCanvas({
     let right = bounds.right - 24;
     if (overlay && overlay.left - left > 360)
       right = Math.min(right, overlay.left - 24);
+    // Measure the current presentation before cancelling an earlier animation;
+    // repeated clicks then continue from the visible position without jumping.
+    const previous = new Map<string, DOMRect>();
+    const manual = new Set(
+      stateRef.current.replies
+        .filter((reply) => reply.position?.kind === "manual")
+        .map((reply) => reply.id),
+    );
+    for (const card of canvas.querySelectorAll<HTMLElement>(".chat-reply")) {
+      if (!manual.has(card.dataset.replyId!))
+        previous.set(card.dataset.replyId!, card.getBoundingClientRect());
+    }
     stopCamera();
+    pendingLayoutRects.current = previous;
+    setLayoutRequest((value) => value + 1);
     update((current) =>
       layoutReplies(current, {
         x: (24 - x) / zoom,
@@ -685,6 +750,7 @@ export function ChatCanvas({
       if (
         current.replies.some((reply) => reply.position?.kind === "viewport")
       ) {
+        cancelLayoutMotion();
         update((value) => layoutReplies(value));
         return;
       }
@@ -1125,6 +1191,7 @@ export function ChatCanvas({
   const finishPan = useCallback(() => {
     const drag = dragging.current;
     dragging.current = null;
+    stage.current?.removeAttribute("data-canvas-dragging");
     if (drag && (drag.active || drag.explicit)) suppressPanClick.current = true;
     setIsPanning(false);
     setIsMovingReply(false);
@@ -1170,7 +1237,7 @@ export function ChatCanvas({
     };
     const selectstart = (event: Event) => {
       const drag = dragging.current;
-      if (drag && (drag.active || drag.explicit)) event.preventDefault();
+      if (drag) event.preventDefault();
     };
     document.addEventListener("keydown", keydown);
     document.addEventListener("keyup", keyup);
@@ -1183,6 +1250,7 @@ export function ChatCanvas({
       window.removeEventListener("blur", blur);
       const drag = dragging.current;
       dragging.current = null;
+      stage.current?.removeAttribute("data-canvas-dragging");
       if (drag?.captureTarget.hasPointerCapture(drag.pointerId))
         drag.captureTarget.releasePointerCapture(drag.pointerId);
     };
@@ -1206,7 +1274,30 @@ export function ChatCanvas({
         replyHandle.closest<HTMLElement>(".chat-reply")?.dataset.replyId;
       const position = replyId && replyPosition(replyId);
       if (!replyId || !position) return;
+      const card = replyHandle.closest<HTMLElement>(".chat-reply");
+      const moving = card
+        ?.getAnimations?.()
+        .some((animation) => layoutAnimations.current.has(animation));
+      let origin = position;
+      if (moving && card) {
+        const rect = card.getBoundingClientRect();
+        const view = stage.current!.getBoundingClientRect();
+        const camera = stateRef.current.viewport;
+        origin = {
+          ...position,
+          x: (rect.left - view.left - camera.x) / camera.zoom,
+          y: (rect.top - view.top - camera.y) / camera.zoom,
+          kind: "manual",
+        };
+      }
       stopCamera();
+      if (moving)
+        update((current) => ({
+          ...current,
+          replies: current.replies.map((reply) =>
+            reply.id === replyId ? { ...reply, position: origin } : reply,
+          ),
+        }));
       event.preventDefault();
       event.stopPropagation();
       suppressPanClick.current = true;
@@ -1218,11 +1309,12 @@ export function ChatCanvas({
         captureTarget: event.currentTarget,
         x: event.clientX,
         y: event.clientY,
-        originX: position.x,
-        originY: position.y,
+        originX: origin.x,
+        originY: origin.y,
         active: false,
         explicit: true,
       };
+      stage.current?.setAttribute("data-canvas-dragging", "");
       setPanArmed(true);
       event.currentTarget.setPointerCapture(event.pointerId);
       return;
@@ -1235,7 +1327,10 @@ export function ChatCanvas({
     const background =
       blankRail || target.matches(".chat-stage,.chat-world,.chat-reply-slot");
     if (!explicit && !background) return;
-    if (blankRail) event.preventDefault();
+    // This press is already a canvas gesture, even below the movement threshold.
+    // Cancel native selection synchronously, before React commits drag classes.
+    event.preventDefault();
+    stage.current?.setAttribute("data-canvas-dragging", "");
     stopCamera();
     const { x, y } = stateRef.current.viewport;
     dragging.current = {
@@ -1268,7 +1363,7 @@ export function ChatCanvas({
       if (drag.kind === "reply") setIsMovingReply(true);
       else setIsPanning(true);
       suppressPanClick.current = true;
-      // A background press may have begun native selection before the threshold.
+      // Clear any selection that existed before this deliberate drag.
       window.getSelection()?.removeAllRanges();
     }
     event.preventDefault();

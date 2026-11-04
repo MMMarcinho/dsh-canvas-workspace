@@ -98,7 +98,41 @@ try {
     await page
       .getByRole("button", { name: "按视口自动排布", exact: true })
       .click();
-    await page.waitForTimeout(300);
+    const moving = await page.locator(".chat-reply").evaluateAll((cards) =>
+      cards.map((card) => ({
+        id: card.dataset.replyId,
+        animations: card.getAnimations().length,
+      })),
+    );
+    assert.ok(
+      moving.some((card) => card.animations > 0),
+      "explicit layout animates from current presentation",
+    );
+    assert.equal(
+      moving.find((card) => card.id === "r4").animations,
+      0,
+      "manual card does not animate",
+    );
+    const early = await read();
+    await page.waitForTimeout(80);
+    const middle = await read();
+    assert.ok(
+      middle.cards.some(
+        (card, i) =>
+          Math.abs(card.left - early.cards[i].left) +
+            Math.abs(card.top - early.cards[i].top) >
+          0.1,
+      ),
+    );
+    await page.waitForTimeout(400);
+    assert.equal(
+      await page
+        .locator(".chat-reply")
+        .evaluateAll((cards) =>
+          cards.reduce((n, card) => n + card.getAnimations().length, 0),
+        ),
+      0,
+    );
     const arranged = await read();
     assert.deepEqual(arranged.saved.viewport, original.saved.viewport);
     assert.deepEqual(arranged.saved.replies[4].position, {
@@ -153,7 +187,7 @@ try {
     // Camera changes never trigger a fresh pack.
     await page.mouse.move(sidebar + 150, 600);
     await page.mouse.wheel(0, -100);
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(400);
     const afterCamera = await read();
     assert.deepEqual(
       afterCamera.saved.replies.map((r) => r.position),
@@ -164,12 +198,12 @@ try {
       .locator('.chat-reply[data-reply-id="r1"] [data-canvas-reply-handle]')
       .focus();
     await page.keyboard.press("ArrowRight");
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(400);
     const moved = await read();
     assert.equal(moved.saved.replies[1].position.kind, "manual");
     await page.reload();
     await page.locator('.chat-reply[data-reply-id="r5"]').waitFor();
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(400);
     const restored = await read();
     assert.deepEqual(
       restored.saved.replies[1].position,
@@ -193,6 +227,103 @@ try {
       noOverlap(continued);
     }
 
+    if (width === 1900) {
+      const arrangeAgain = async () => {
+        await page
+          .getByRole("button", { name: "导航与工作区", exact: true })
+          .click();
+        await page.getByRole("button", { name: "更多", exact: true }).click();
+        await page
+          .getByRole("button", { name: "按视口自动排布", exact: true })
+          .click();
+      };
+      // A camera change gives the next explicit layout a different destination.
+      await page.mouse.move(900, 500);
+      await page.mouse.wheel(0, 160);
+      await arrangeAgain();
+      assert.ok(
+        await page
+          .locator(".chat-reply")
+          .evaluateAll((cards) =>
+            cards.some((card) => card.getAnimations().length),
+          ),
+      );
+      await arrangeAgain();
+      await page.waitForTimeout(400);
+      assert.equal(
+        await page
+          .locator(".chat-reply")
+          .evaluateAll((cards) =>
+            cards.reduce((n, card) => n + card.getAnimations().length, 0),
+          ),
+        0,
+      );
+      await page.mouse.wheel(0, 180);
+      await arrangeAgain();
+      const handle = page.locator(
+        '[data-reply-id="r0"] [data-canvas-reply-handle]',
+      );
+      await page.locator('.chat-reply[data-reply-id="r0"]').evaluate((node) => {
+        for (const animation of node.getAnimations()) {
+          animation.pause();
+          animation.currentTime = 305;
+        }
+      });
+      const box = await handle.boundingBox();
+      const card = page.locator('.chat-reply[data-reply-id="r0"]');
+      // Pointer-down freezes the card where it is currently drawn, so the grab
+      // does not use a stale target position while the animation is in flight.
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      assert.ok(
+        await page.evaluate(
+          ({ x, y }) =>
+            Boolean(
+              document
+                .elementFromPoint(x, y)
+                ?.closest("[data-canvas-reply-handle]"),
+            ),
+          { x: box.x + box.width / 2, y: box.y + box.height / 2 },
+        ),
+        JSON.stringify(box),
+      );
+      await page.mouse.down();
+      assert.equal(
+        await page
+          .locator(".chat-reply")
+          .evaluateAll((cards) =>
+            cards.reduce((n, card) => n + card.getAnimations().length, 0),
+          ),
+        0,
+      );
+      const start = await card.boundingBox();
+      await page.mouse.move(
+        box.x + box.width / 2 + 25,
+        box.y + box.height / 2 + 15,
+        { steps: 5 },
+      );
+      await page.mouse.up();
+      const end = await card.boundingBox();
+      assert.ok(
+        Math.abs(end.x - start.x - 25) < 2 &&
+          Math.abs(end.y - start.y - 15) < 2,
+      );
+      await page.waitForFunction(
+        () =>
+          JSON.parse(localStorage.getItem("dsh-canvas-conversation:v1:mock"))
+            .replies[0].position.kind === "manual",
+      );
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      await page.mouse.wheel(0, 100);
+      await arrangeAgain();
+      assert.equal(
+        await page
+          .locator(".chat-reply")
+          .evaluateAll((cards) =>
+            cards.reduce((n, card) => n + card.getAnimations().length, 0),
+          ),
+        0,
+      );
+    }
     await page.close();
     console.log(`viewport ${width}, zoom ${zoom}, sidebar ${sidebar}: OK`);
   }
