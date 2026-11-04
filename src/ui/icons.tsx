@@ -22,7 +22,15 @@ export type IconName =
   | "home"
   | "help"
   | "user"
-  | "arrow-up";
+  | "arrow-up"
+  | "search"
+  | "sliders"
+  | "folder"
+  | "folder-open"
+  | "clock"
+  | "sparkle"
+  | "apps-add"
+  | "panel-left";
 const paths: Record<IconName, ReactNode> = {
   user: (
     <>
@@ -94,6 +102,52 @@ const paths: Record<IconName, ReactNode> = {
     </>
   ),
   home: <path d="m3 10 9-7 9 7M5 9v12h14V9M10 21v-7h4v7" />,
+  search: (
+    <>
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="m16 16 4 4" />
+    </>
+  ),
+  sliders: (
+    <>
+      <path d="M4 7h10M18 7h2M4 17h4M12 17h8" />
+      <circle cx="16" cy="7" r="2" />
+      <circle cx="10" cy="17" r="2" />
+    </>
+  ),
+  folder: <path d="M3 6h6l2 2h10v11H3z" />,
+  "folder-open": (
+    <>
+      <path d="M3 6h6l2 2h10v3H3z" />
+      <path d="M3 11h18l-2 8H5z" />
+    </>
+  ),
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7v5l3 2" />
+    </>
+  ),
+  sparkle: (
+    <>
+      <path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" />
+      <path d="M18 16v4M16 18h4" />
+    </>
+  ),
+  "apps-add": (
+    <>
+      <rect x="4" y="4" width="6" height="6" rx="1" />
+      <rect x="14" y="4" width="6" height="6" rx="1" />
+      <rect x="4" y="14" width="6" height="6" rx="1" />
+      <path d="M17 14v6M14 17h6" />
+    </>
+  ),
+  "panel-left": (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M9 4v16" />
+    </>
+  ),
   help: (
     <>
       <circle cx="12" cy="12" r="9" />

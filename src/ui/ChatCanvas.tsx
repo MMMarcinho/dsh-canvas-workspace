@@ -23,6 +23,7 @@ import {
 } from "./reply-pairing";
 import { Icon } from "./icons";
 import { Brand } from "./brand";
+import { CanvasSidebar, type SidebarIcons } from "./CanvasSidebar";
 import { formatReplyTime } from "./reply-time";
 import {
   ReplyContent,
@@ -194,6 +195,8 @@ export function ChatCanvas({
   requestedSession,
   onRequestHandled,
   accountActions,
+  sidebarIcons,
+  onSchedules,
 }: {
   adapter: AgentAdapter;
   mode: "mock" | "dsh";
@@ -233,6 +236,8 @@ export function ChatCanvas({
     settings: { label: string; description: string; run: () => void };
     version: { label: string; description: string; run: () => void };
   };
+  sidebarIcons?: SidebarIcons;
+  onSchedules?: () => void;
 }) {
   const [initial] = useState(() => restore(mode));
   const calendarNow = useCalendarNow();
@@ -245,7 +250,6 @@ export function ChatCanvas({
   const [draft, setDraft] = useState("");
   const [iuiEnabled, setIuiEnabled] = useState(true);
   const [menu, setMenu] = useState<"nav" | "account" | null>(null);
-  const [search, setSearch] = useState("");
   const [navError, setNavError] = useState("");
   const [busy, setBusy] = useState(false);
   const [runError, setRunError] = useState("");
@@ -1451,6 +1455,22 @@ export function ChatCanvas({
         >
           {navIcon ?? <Icon name="grid" size={18} />}
         </button>
+        {onExit && (
+          <button
+            type="button"
+            className="chat-canvas-switch"
+            role="switch"
+            aria-checked="true"
+            aria-label="画布模式"
+            title="画布模式已开启；点击返回原生对话"
+            onClick={onExit}
+          >
+            <span className="chat-canvas-switch-track" aria-hidden="true">
+              <span className="chat-canvas-switch-thumb" />
+            </span>
+            <span className="chat-canvas-switch-label">画布</span>
+          </button>
+        )}
         {onNewSession && (
           <button
             type="button"
@@ -1479,231 +1499,90 @@ export function ChatCanvas({
           </span>
         )}
         {menu === "nav" && (
-          <div className="chat-menu" role="dialog" aria-label="导航与工作区">
-            <div className="chat-menu-title">导航</div>
-            {onNewSession && (
-              <button
-                disabled={newSessionPending}
-                onClick={() => void createNewSession()}
-              >
-                <Icon name="plus" size={15} />
-                新建画布会话
-              </button>
-            )}
-            {onExit && (
-              <button onClick={onExit} aria-pressed="true">
-                <Icon name="grid" size={15} />
-                画布模式 <span className="chat-switch-on">开启</span>
-              </button>
-            )}
-            {onPlugins && (
-              <button onClick={onPlugins}>
-                <Icon name="artifact" size={15} />
-                插件
-              </button>
-            )}
-            {(onCreateWorkspace ||
-              hostWorkspaces.length > 0 ||
-              hostSessions.length > 0) && (
-              <>
-                <div className="chat-menu-title divider">工作区</div>
-                <div className="chat-nav-tools">
-                  <input
-                    aria-label="搜索会话"
-                    placeholder="搜索会话"
-                    value={search}
-                    onChange={(event) => setSearch(event.target.value)}
-                  />
-                  {onCreateWorkspace && (
-                    <button
-                      aria-label="添加工作区"
-                      title="添加工作区"
-                      onClick={() =>
-                        void onCreateWorkspace().catch((error) =>
-                          setNavError(
-                            error instanceof Error
-                              ? error.message
-                              : String(error),
-                          ),
-                        )
-                      }
-                    >
-                      <Icon name="plus" size={16} />
-                    </button>
-                  )}
-                </div>
-                <div className="chat-session-list">
-                  {hostWorkspaces.map((workspace) => {
-                    const sessions = workspace.sessionIds
-                      .map((id) =>
-                        hostSessions.find((session) => session.id === id),
-                      )
-                      .filter(
-                        (session): session is { id: string; title: string } =>
-                          Boolean(session),
-                      );
-                    const matching = sessions.filter((session) =>
-                      session.title
-                        .toLocaleLowerCase()
-                        .includes(search.toLocaleLowerCase()),
+          <CanvasSidebar
+            icons={sidebarIcons}
+            sessions={hostSessions}
+            workspaces={hostWorkspaces}
+            currentSessionId={state.sessionId}
+            newSessionPending={newSessionPending}
+            navError={navError}
+            iuiEnabled={iuiEnabled}
+            zoom={v.zoom}
+            legacyReplies={state.legacyReplies}
+            onNewSession={() => void createNewSession()}
+            onNewSessionInWorkspace={
+              onNewSession
+                ? (workspaceId) => void createNewSession(workspaceId)
+                : undefined
+            }
+            onSwitchSession={switchSession}
+            onOpenWorkspace={
+              onOpenWorkspace
+                ? (workspaceId) => {
+                    setNavError("");
+                    void onOpenWorkspace(workspaceId).catch((error) =>
+                      setNavError(
+                        error instanceof Error ? error.message : String(error),
+                      ),
                     );
-                    if (
-                      search &&
-                      !matching.length &&
-                      !workspace.title
-                        .toLocaleLowerCase()
-                        .includes(search.toLocaleLowerCase())
-                    )
-                      return null;
-                    return (
-                      <div className="chat-workspace-group" key={workspace.id}>
-                        <button
-                          onClick={() =>
-                            void onOpenWorkspace?.(workspace.id).catch(
-                              (error) =>
-                                setNavError(
-                                  error instanceof Error
-                                    ? error.message
-                                    : String(error),
-                                ),
-                            )
-                          }
-                        >
-                          <Icon name="home" size={15} />
-                          <span>{workspace.title}</span>
-                        </button>
-                        {onNewSession && !search && (
-                          <button
-                            className="chat-session-row"
-                            disabled={newSessionPending}
-                            onClick={() => void createNewSession(workspace.id)}
-                          >
-                            <Icon name="plus" size={14} />
-                            <span>在此工作区新建画布会话</span>
-                          </button>
-                        )}
-                        {(search ? matching : sessions).map((session) => (
-                          <button
-                            className="chat-session-row"
-                            key={session.id}
-                            aria-current={
-                              state.sessionId === session.id
-                                ? "page"
-                                : undefined
-                            }
-                            onClick={() => switchSession(session.id)}
-                          >
-                            <span>{session.title}</span>
-                          </button>
-                        ))}
-                      </div>
+                  }
+                : undefined
+            }
+            onCreateWorkspace={
+              onCreateWorkspace
+                ? () => {
+                    setNavError("");
+                    void onCreateWorkspace().catch((error) =>
+                      setNavError(
+                        error instanceof Error ? error.message : String(error),
+                      ),
                     );
-                  })}
-                  {hostSessions
-                    .filter(
-                      (session) =>
-                        !hostWorkspaces.some((workspace) =>
-                          workspace.sessionIds.includes(session.id),
-                        ) &&
-                        session.title
-                          .toLocaleLowerCase()
-                          .includes(search.toLocaleLowerCase()),
-                    )
-                    .map((session) => (
-                      <button
-                        key={session.id}
-                        aria-current={
-                          state.sessionId === session.id ? "page" : undefined
-                        }
-                        onClick={() => switchSession(session.id)}
-                      >
-                        <Icon name="agent" size={15} />
-                        <span>{session.title}</span>
-                      </button>
-                    ))}
-                </div>
-              </>
-            )}
-            {navError && (
-              <p className="chat-nav-error" role="alert">
-                {navError}
-              </p>
-            )}
-            {onLegacy && (
-              <>
-                <div className="chat-menu-title divider">旧画布</div>
-                <button onClick={onLegacy}>打开节点画布</button>
-              </>
-            )}
-            {state.legacyReplies?.length ? (
-              <button
-                onClick={() => {
-                  const blob = new Blob(
-                    [JSON.stringify(state.legacyReplies, null, 2)],
-                    { type: "application/json" },
-                  );
-                  const url = URL.createObjectURL(blob);
-                  const link = document.createElement("a");
-                  link.href = url;
-                  link.download = "canvas-before-history-repair.json";
-                  link.click();
-                  setTimeout(() => URL.revokeObjectURL(url), 1000);
-                }}
-              >
-                导出升级前原文（{state.legacyReplies.length} 条）
-              </button>
-            ) : null}
-            <div className="chat-menu-title divider">视图</div>
-            <button
-              aria-pressed={iuiEnabled}
-              onClick={() => setIuiEnabled((value) => !value)}
-            >
-              <Icon name="artifact" size={15} />
-              画布 IUI 渲染{" "}
-              <span className="chat-switch-on">
-                {iuiEnabled ? "开启" : "关闭"}
-              </span>
-            </button>
-            <div className="chat-zoom">
-              <button
-                aria-label="缩小"
-                onClick={() =>
-                  zoom(
-                    v.zoom / 1.2,
-                    stage.current?.clientWidth ?? 600,
-                    stage.current?.clientHeight ?? 400,
-                  )
-                }
-              >
-                <Icon name="minus" size={15} />
-              </button>
-              <span>{Math.round(v.zoom * 100)}%</span>
-              <button
-                aria-label="放大"
-                onClick={() =>
-                  zoom(
-                    v.zoom * 1.2,
-                    stage.current?.clientWidth ?? 600,
-                    stage.current?.clientHeight ?? 400,
-                  )
-                }
-              >
-                <Icon name="plus" size={15} />
-              </button>
-            </div>
-            <button
-              onClick={() => {
-                stopCamera();
-                update((current) => ({
-                  ...current,
-                  viewport: { x: 64, y: 104, zoom: 1 },
-                }));
-              }}
-            >
-              <Icon name="fit" size={15} />
-              重置视图
-            </button>
-          </div>
+                  }
+                : undefined
+            }
+            onClose={() => setMenu(null)}
+            onPlugins={onPlugins}
+            onSchedules={onSchedules}
+            onLegacy={onLegacy}
+            onToggleIui={() => setIuiEnabled((value) => !value)}
+            onZoomOut={() =>
+              zoom(
+                v.zoom / 1.2,
+                stage.current?.clientWidth ?? 600,
+                stage.current?.clientHeight ?? 400,
+              )
+            }
+            onZoomIn={() =>
+              zoom(
+                v.zoom * 1.2,
+                stage.current?.clientWidth ?? 600,
+                stage.current?.clientHeight ?? 400,
+              )
+            }
+            onResetView={() => {
+              stopCamera();
+              update((current) => ({
+                ...current,
+                viewport: { x: 64, y: 104, zoom: 1 },
+              }));
+            }}
+            onExportLegacy={
+              state.legacyReplies?.length
+                ? () => {
+                    const blob = new Blob(
+                      [JSON.stringify(state.legacyReplies, null, 2)],
+                      { type: "application/json" },
+                    );
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.download = "canvas-before-history-repair.json";
+                    link.click();
+                    setTimeout(() => URL.revokeObjectURL(url), 1000);
+                  }
+                : undefined
+            }
+          />
         )}
         {menu === "account" && (
           <div
@@ -1736,7 +1615,7 @@ export function ChatCanvas({
               </p>
             )}
             <div className="chat-menu-title divider">
-              Canvas 0.2.4-experimental.1
+              Canvas 0.2.4-experimental.2
             </div>
           </div>
         )}

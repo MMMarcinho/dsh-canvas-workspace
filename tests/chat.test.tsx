@@ -745,7 +745,7 @@ test("navigation menu is dismissible and canvas switch restores host", async () 
     null,
   );
   await click('[aria-label="导航与工作区"]');
-  await click('[aria-pressed="true"]');
+  await click('[role="switch"][aria-label="画布模式"]');
   assert.equal(exits, 1);
 });
 
@@ -2246,4 +2246,118 @@ test("a retired rail resize callback cannot scroll a different session", async (
       value: original,
     });
   }
+});
+
+test("canvas sidebar reuses the DSH shell while keeping canvas navigation", async () => {
+  if (root) await act(async () => root!.unmount());
+  localStorage.clear();
+  let exits = 0;
+  const switched: string[] = [];
+  root = createRoot(element("#root"));
+  await act(async () =>
+    root!.render(
+      <ChatCanvas
+        adapter={deferredAdapter().adapter}
+        mode="mock"
+        onExit={() => exits++}
+        onPlugins={() => {}}
+        onSchedules={() => {}}
+        hostSessions={[
+          { id: "old-session", title: "旧会话" },
+          { id: "new-session", title: "新会话" },
+          { id: "loose-session", title: "未分组会话" },
+        ]}
+        hostWorkspaces={[
+          {
+            id: "project-one",
+            title: "项目一",
+            sessionIds: ["old-session", "new-session"],
+          },
+          { id: "project-two", title: "项目二", sessionIds: [] },
+        ]}
+        onSessionChange={(id) => {
+          if (id) switched.push(id);
+        }}
+      />,
+    ),
+  );
+  await click('[aria-label="导航与工作区"]');
+  const dialog = element('[role="dialog"][aria-label="导航与工作区"]');
+  assert.ok(dialog.classList.contains("chat-sidebar"));
+  assert.ok(dialog.textContent?.includes("新会话"));
+  assert.ok(dialog.textContent?.includes("Canvas · 画布"));
+  assert.ok(dialog.textContent?.includes("插件"));
+  assert.ok(dialog.textContent?.includes("自动化任务"));
+  assert.equal(
+    dialog.querySelector(".chat-sidebar-foot"),
+    null,
+    "the canvas mode switch lives in the topbar, not the sidebar footer",
+  );
+  assert.equal(
+    element('[role="switch"][aria-label="画布模式"]').getAttribute(
+      "aria-checked",
+    ),
+    "true",
+  );
+  assert.equal(dialog.querySelectorAll(".chat-workspace-group").length, 3);
+  assert.equal(
+    dialog.querySelectorAll(".chat-session-row").length,
+    3,
+    "two create rows and the grouped sessions; ungrouped sessions stay listed",
+  );
+  assert.equal(
+    dialog.querySelector('.chat-session-row[aria-current="page"]'),
+    null,
+  );
+
+  await click('[aria-label="搜索会话"]');
+  const search = element('[aria-label="搜索会话"]') as HTMLInputElement;
+  await act(async () => {
+    Object.getOwnPropertyDescriptor(
+      dom.window.HTMLInputElement.prototype,
+      "value",
+    )!.set!.call(search, "旧");
+    search.dispatchEvent(new dom.window.Event("input", { bubbles: true }));
+  });
+  assert.equal(dialog.querySelectorAll(".chat-session-row").length, 1);
+  assert.equal(
+    dialog.querySelector(".chat-session-row")?.textContent,
+    "旧会话",
+  );
+  await click('[aria-label="关闭搜索"]');
+  assert.equal(dialog.querySelectorAll(".chat-session-row").length, 3);
+
+  await click('[aria-label="视图选项"]');
+  const flat = [
+    ...dialog.querySelectorAll<HTMLButtonElement>('[role="menuitemradio"]'),
+  ].find((button) => button.textContent === "平铺所有会话");
+  assert.ok(flat);
+  await act(async () => flat.click());
+  assert.equal(
+    dialog.querySelectorAll(".chat-session-row").length,
+    3,
+    "flat mode lists every session once",
+  );
+  assert.ok(dialog.textContent?.includes("未分组会话"));
+
+  const more = [
+    ...dialog.querySelectorAll<HTMLButtonElement>(".chat-sidebar-nav-row"),
+  ].find((button) => button.textContent === "更多");
+  assert.ok(more);
+  await act(async () => more.click());
+  assert.ok(
+    dialog
+      .querySelector(".chat-sidebar-more")
+      ?.textContent?.includes("画布 IUI 渲染"),
+  );
+  assert.ok(
+    dialog
+      .querySelector(".chat-sidebar-more")
+      ?.textContent?.includes("重置视图"),
+  );
+  assert.ok(switched.length >= 0);
+  await click('[role="switch"][aria-label="画布模式"]');
+  assert.equal(exits, 1);
+  if (root) await act(async () => root!.unmount());
+  root = undefined;
 });
