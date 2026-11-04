@@ -52,6 +52,7 @@ interface CanvasSidebarProps {
   onZoomOut: () => void;
   onZoomIn: () => void;
   onResetView: () => void;
+  onArrangeReplies?: () => void;
   onExportLegacy?: () => void;
 }
 
@@ -79,6 +80,7 @@ export function CanvasSidebar({
   onZoomOut,
   onZoomIn,
   onResetView,
+  onArrangeReplies,
   onExportLegacy,
 }: CanvasSidebarProps) {
   const [search, setSearch] = useState("");
@@ -258,6 +260,15 @@ export function CanvasSidebar({
               <Icon name="plus" size={15} />
             </button>
           </div>
+          <button
+            type="button"
+            disabled={!onArrangeReplies}
+            onClick={onArrangeReplies}
+            title="按可用宽度整理全部自动回复；保留手动位置，超出时向下延伸"
+          >
+            <Icon name="fit" size={15} />
+            按视口自动排布
+          </button>
           <button type="button" onClick={onResetView}>
             <Icon name="fit" size={15} />
             重置视图

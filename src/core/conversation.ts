@@ -14,7 +14,7 @@ export type ConversationReply = {
     y: number;
     slotHeight: number;
     /** Automatically placed replies may follow later content-height changes. */
-    kind?: "auto" | "manual";
+    kind?: "auto" | "manual" | "viewport";
     /** Height of the preceding reply when this position was first assigned. */
     anchorHeight?: number;
   };
