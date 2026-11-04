@@ -2247,6 +2247,40 @@ function activeReplyPair(pairs, target) {
   );
 }
 
+// src/ui/reply-layout.ts
+var GAP = 30;
+function avoid(card, occupied) {
+  let y = card.y;
+  for (; ; ) {
+    const hits = occupied.filter(
+      (other) => card.x < other.x + other.width + GAP && card.x + card.width + GAP > other.x && y < other.y + other.height + GAP && y + card.height + GAP > other.y
+    );
+    if (!hits.length) return { ...card, y };
+    y = Math.max(...hits.map((other) => other.y + other.height + GAP));
+  }
+}
+function arrangeReplies(cards, area) {
+  const occupied = cards.filter((card) => card.fixed);
+  let x = area?.x ?? 0;
+  let y = area?.y ?? 0;
+  let rowBottom = y;
+  return cards.map((card) => {
+    if (card.fixed) return card;
+    if (area && x > area.x && x + card.width > area.x + area.width) {
+      x = area.x;
+      y = rowBottom + GAP;
+    }
+    const placed = avoid(area ? { ...card, x, y } : card, occupied);
+    occupied.push(placed);
+    if (area) {
+      x = placed.x + placed.width + GAP;
+      y = placed.y;
+      rowBottom = Math.max(rowBottom, placed.y + placed.height);
+    }
+    return placed;
+  });
+}
+
 // vendor/deepseek-harness/ui-primitives/BrandWordmark.tsx
 var import_jsx_runtime3 = require("react/jsx-runtime");
 function BrandWordmark({ size = 24, className, includeMark = true }) {
@@ -23758,7 +23792,8 @@ function ChatCanvas({
       return reply?.position ? {
         x: reply.position.x,
         y: reply.position.y,
-        height: reply.position.slotHeight
+        height: reply.position.slotHeight,
+        width: 600
       } : null;
     const view = canvas.getBoundingClientRect();
     const bounds = card.getBoundingClientRect();
@@ -23766,6 +23801,7 @@ function ChatCanvas({
     return {
       x: reply?.position?.x ?? (bounds.left - view.left - x) / zoom2,
       y: reply?.position?.y ?? (bounds.top - view.top - y) / zoom2,
+      width: bounds.width / zoom2 || card.offsetWidth || 600,
       height: Math.max(
         24,
         bounds.height / zoom2 || card.offsetHeight || reply?.position?.slotHeight || 0
@@ -23777,6 +23813,60 @@ function ChatCanvas({
     if (reply?.position) return reply.position;
     const geometry = replyGeometry(replyId);
     return geometry ? { x: geometry.x, y: geometry.y, slotHeight: geometry.height } : null;
+  };
+  const layoutReplies = (current2, area) => {
+    const cards = current2.replies.flatMap((reply) => {
+      const geometry = replyGeometry(reply.id);
+      return geometry ? [
+        {
+          id: reply.id,
+          ...geometry,
+          fixed: area ? reply.position?.kind === "manual" : reply.position?.kind !== "viewport"
+        }
+      ] : [];
+    });
+    const positions = new Map(
+      arrangeReplies(cards, area).map((card) => [card.id, card])
+    );
+    let changed = false;
+    const replies = current2.replies.map((reply) => {
+      const card = positions.get(reply.id);
+      if (!card || card.fixed) return reply;
+      const old = reply.position;
+      if (old?.kind === "viewport" && Math.abs(old.x - card.x) < 0.5 && Math.abs(old.y - card.y) < 0.5 && Math.abs(old.slotHeight - card.height) < 0.5)
+        return reply;
+      changed = true;
+      return {
+        ...reply,
+        position: {
+          x: card.x,
+          y: card.y,
+          slotHeight: card.height,
+          kind: "viewport"
+        }
+      };
+    });
+    return changed ? { ...current2, replies } : current2;
+  };
+  const arrangeViewport = () => {
+    const canvas = stage.current;
+    if (!canvas) return;
+    const bounds = canvas.getBoundingClientRect();
+    const overlay = dock.current?.getBoundingClientRect();
+    const { x, y, zoom: zoom2 } = stateRef.current.viewport;
+    const left = bounds.left + 24;
+    let right = bounds.right - 24;
+    if (overlay && overlay.left - left > 360)
+      right = Math.min(right, overlay.left - 24);
+    stopCamera();
+    update(
+      (current2) => layoutReplies(current2, {
+        x: (24 - x) / zoom2,
+        y: (88 - y) / zoom2,
+        width: Math.max(80, right - left) / zoom2
+      })
+    );
+    setMenu(null);
   };
   (0, import_react13.useLayoutEffect)(() => {
     if (!newReplyIds.current.size) return;
@@ -23792,7 +23882,7 @@ function ChatCanvas({
         x: anchor.x,
         y: anchor.y + anchorHeight + 30,
         slotHeight: Math.max(24, replyGeometry(reply.id)?.height ?? 24),
-        kind: "auto",
+        kind: state.replies.some((item) => item.position?.kind === "viewport") ? "viewport" : "auto",
         anchorHeight
       });
     }
@@ -23811,6 +23901,10 @@ function ChatCanvas({
     const cards = [...canvas.querySelectorAll(".chat-reply")];
     const observer = new ResizeObserver((entries) => {
       const current2 = stateRef.current;
+      if (current2.replies.some((reply) => reply.position?.kind === "viewport")) {
+        update((value) => layoutReplies(value));
+        return;
+      }
       const cardById = new Map(
         cards.map((card) => [card.dataset.replyId, card])
       );
@@ -24773,6 +24867,18 @@ function ChatCanvas({
                 }
               )
             ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
+              "button",
+              {
+                disabled: !state.replies.length,
+                title: "\u6309\u5F53\u524D\u53EF\u7528\u5BBD\u5EA6\u6574\u7406\u5168\u90E8\u81EA\u52A8\u56DE\u590D\uFF1B\u4FDD\u7559\u624B\u52A8\u4F4D\u7F6E\uFF0C\u5185\u5BB9\u8D85\u51FA\u65F6\u5411\u4E0B\u5EF6\u4F38",
+                onClick: arrangeViewport,
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "fit", size: 15 }),
+                  "\u6309\u89C6\u53E3\u81EA\u52A8\u6392\u5E03"
+                ]
+              }
+            ),
             /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
               "button",
               {

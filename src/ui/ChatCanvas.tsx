@@ -22,6 +22,7 @@ import {
   type PairTarget,
 } from "./reply-pairing";
 import { Icon } from "./icons";
+import { arrangeReplies } from "./reply-layout";
 import { Brand } from "./brand";
 import { formatReplyTime } from "./reply-time";
 import {
@@ -537,6 +538,7 @@ export function ChatCanvas({
             x: reply.position.x,
             y: reply.position.y,
             height: reply.position.slotHeight,
+            width: 600,
           }
         : null;
     const view = canvas.getBoundingClientRect();
@@ -545,6 +547,7 @@ export function ChatCanvas({
     return {
       x: reply?.position?.x ?? (bounds.left - view.left - x) / zoom,
       y: reply?.position?.y ?? (bounds.top - view.top - y) / zoom,
+      width: bounds.width / zoom || card.offsetWidth || 600,
       height: Math.max(
         24,
         bounds.height / zoom ||
@@ -561,6 +564,72 @@ export function ChatCanvas({
     return geometry
       ? { x: geometry.x, y: geometry.y, slotHeight: geometry.height }
       : null;
+  };
+  const layoutReplies = (
+    current: State,
+    area?: { x: number; y: number; width: number },
+  ) => {
+    const cards = current.replies.flatMap((reply) => {
+      const geometry = replyGeometry(reply.id);
+      return geometry
+        ? [
+            {
+              id: reply.id,
+              ...geometry,
+              fixed: area
+                ? reply.position?.kind === "manual"
+                : reply.position?.kind !== "viewport",
+            },
+          ]
+        : [];
+    });
+    const positions = new Map(
+      arrangeReplies(cards, area).map((card) => [card.id, card]),
+    );
+    let changed = false;
+    const replies = current.replies.map((reply) => {
+      const card = positions.get(reply.id);
+      if (!card || card.fixed) return reply;
+      const old = reply.position;
+      if (
+        old?.kind === "viewport" &&
+        Math.abs(old.x - card.x) < 0.5 &&
+        Math.abs(old.y - card.y) < 0.5 &&
+        Math.abs(old.slotHeight - card.height) < 0.5
+      )
+        return reply;
+      changed = true;
+      return {
+        ...reply,
+        position: {
+          x: card.x,
+          y: card.y,
+          slotHeight: card.height,
+          kind: "viewport" as const,
+        },
+      };
+    });
+    return changed ? { ...current, replies } : current;
+  };
+  const arrangeViewport = () => {
+    const canvas = stage.current;
+    if (!canvas) return;
+    const bounds = canvas.getBoundingClientRect();
+    const overlay = dock.current?.getBoundingClientRect();
+    const { x, y, zoom } = stateRef.current.viewport;
+    const left = bounds.left + 24;
+    let right = bounds.right - 24;
+    if (overlay && overlay.left - left > 360)
+      right = Math.min(right, overlay.left - 24);
+    stopCamera();
+    update((current) =>
+      layoutReplies(current, {
+        x: (24 - x) / zoom,
+        y: (88 - y) / zoom,
+        width: Math.max(80, right - left) / zoom,
+      }),
+    );
+    setMenu(null);
   };
   useLayoutEffect(() => {
     if (!newReplyIds.current.size) return;
@@ -580,7 +649,9 @@ export function ChatCanvas({
         x: anchor.x,
         y: anchor.y + anchorHeight + 30,
         slotHeight: Math.max(24, replyGeometry(reply.id)?.height ?? 24),
-        kind: "auto",
+        kind: state.replies.some((item) => item.position?.kind === "viewport")
+          ? "viewport"
+          : "auto",
         anchorHeight,
       });
     }
@@ -601,6 +672,12 @@ export function ChatCanvas({
     const cards = [...canvas.querySelectorAll<HTMLElement>(".chat-reply")];
     const observer = new ResizeObserver((entries) => {
       const current = stateRef.current;
+      if (
+        current.replies.some((reply) => reply.position?.kind === "viewport")
+      ) {
+        update((value) => layoutReplies(value));
+        return;
+      }
       const cardById = new Map(
         cards.map((card) => [card.dataset.replyId, card]),
       );
@@ -1691,6 +1768,14 @@ export function ChatCanvas({
                 <Icon name="plus" size={15} />
               </button>
             </div>
+            <button
+              disabled={!state.replies.length}
+              title="按当前可用宽度整理全部自动回复；保留手动位置，内容超出时向下延伸"
+              onClick={arrangeViewport}
+            >
+              <Icon name="fit" size={15} />
+              按视口自动排布
+            </button>
             <button
               onClick={() => {
                 stopCamera();
