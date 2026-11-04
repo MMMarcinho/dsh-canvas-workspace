@@ -1,8 +1,6 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { mkdir } from "node:fs/promises";
 import { chromium } from "@playwright/test";
-await mkdir("artifacts", { recursive: true });
 const server = spawn(
   process.execPath,
   [
@@ -33,9 +31,7 @@ try {
   browser = await chromium.launch({
     executablePath:
       process.env.CHROMIUM_PATH ||
-      (process.platform === "darwin"
-        ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-        : "/usr/bin/chromium"),
+      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     headless: true,
     args: ["--no-sandbox"],
   });
@@ -98,6 +94,7 @@ try {
       }));
     const original = await read();
     await page.getByRole("button", { name: "导航与工作区" }).click();
+    await page.getByRole("button", { name: "更多", exact: true }).click();
     await page
       .getByRole("button", { name: "按视口自动排布", exact: true })
       .click();

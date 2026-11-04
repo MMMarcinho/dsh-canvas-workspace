@@ -47,6 +47,8 @@ export interface AgentConversationTurn {
   userMessages: {
     id: string;
     requestId?: string;
+    /** Literal human answers from native question tools have no transport suffix. */
+    source?: "user";
     text: string;
     /** Presentation only; attachment labels never enter the host prompt. */
     displayText?: string;

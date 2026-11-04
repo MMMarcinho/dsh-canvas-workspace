@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { CanvasIcon } from "./CanvasIcon";
 import { Icon } from "./icons";
 
 /** Native-drawn glyphs supplied by the host; the mock/tests use Icon fallbacks. */
@@ -189,17 +188,6 @@ export function CanvasSidebar({
       </button>
 
       <nav className="chat-sidebar-nav" aria-label="导航">
-        <button
-          type="button"
-          className="chat-sidebar-nav-row is-active"
-          aria-current="page"
-          onClick={onClose}
-        >
-          <span className="chat-sidebar-nav-icon">
-            {icons?.canvas ?? <CanvasIcon size={16} />}
-          </span>
-          <span className="chat-sidebar-nav-label">Canvas · 画布</span>
-        </button>
         {onPlugins && (
           <button
             type="button"
@@ -244,7 +232,12 @@ export function CanvasSidebar({
           aria-label="更多画布操作"
         >
           <div className="chat-sidebar-more-title">视图</div>
-          <button type="button" aria-pressed={iuiEnabled} onClick={onToggleIui}>
+          <button
+            type="button"
+            aria-pressed={iuiEnabled}
+            onClick={onToggleIui}
+            title="只切换已有 IUI 内容的显示，不会给模型注入 IUI 生成提示"
+          >
             <Icon name="artifact" size={15} />
             <span>画布 IUI 渲染</span>
             <span className="chat-sidebar-switch">

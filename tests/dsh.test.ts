@@ -1538,3 +1538,120 @@ test("DSH observation releases a failed history acquisition and reports the actu
   assert.equal(f.released, 1);
   assert.equal(f.canceled, 0);
 });
+
+test("native question answers appear once beside user messages and retain turn pairing", async () => {
+  const f = fixture();
+  f.start();
+  f.emit("tool/call", {
+    turn: 1,
+    step: 2,
+    callId: "ask-call",
+    name: "ask_user_question",
+    arguments: JSON.stringify({
+      questions: [
+        {
+          id: "what_is_iui",
+          question: "你说的 iui 是指哪个？",
+          options: [{ label: "现有项目" }],
+        },
+      ],
+    }),
+  });
+  const answer = f.emit(
+    "tool/result",
+    {
+      turn: 1,
+      step: 2,
+      message: {
+        toolCallId: "ask-call",
+        isError: false,
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({
+              answers: [
+                {
+                  id: "what_is_iui",
+                  selected: ["现有项目"],
+                  custom: "我之前做的那个 open-intelligent-ui",
+                },
+              ],
+            }),
+          },
+        ],
+      },
+    },
+    false,
+    500,
+  );
+  const snapshots: AgentSessionSnapshot[] = [];
+  const stop = f.adapter.observeSession!(f.id, (snapshot) =>
+    snapshots.push(snapshot),
+  );
+  await tick();
+  assert.deepEqual(
+    snapshots.at(-1)?.turns[0]?.userMessages.map((m) => m.text),
+    ["任务", "现有项目\n我之前做的那个 open-intelligent-ui"],
+  );
+  assert.equal(snapshots.at(-1)?.turns[0]?.userMessages[1]?.source, "user");
+  assert.equal(snapshots.at(-1)?.turns[0]?.userMessages[1]?.timestamp, 500);
+  f.publish({ kind: "append", entries: [answer] });
+  await tick();
+  assert.equal(snapshots.at(-1)?.turns[0]?.userMessages.length, 2);
+  const { reconcileConversation } = await import("../src/core/conversation");
+  const { buildReplyPairs } = await import("../src/ui/reply-pairing");
+  const state = reconcileConversation(
+    {
+      version: 1,
+      sessionId: f.id,
+      viewport: { x: 0, y: 0, zoom: 1 },
+      replies: [],
+    },
+    snapshots.at(-1)!,
+  );
+  const pairs = buildReplyPairs(state.replies, "question-fixture");
+  assert.equal(pairs.userMessages.length, 2);
+  assert.equal(pairs.userMessages[0].pairKey, pairs.userMessages[1].pairKey);
+  stop();
+});
+
+test("question projection ignores unrelated tools, failed answers and mismatched turns", async () => {
+  const f = fixture();
+  f.start();
+  for (const [name, callId, turn, isError] of [
+    ["echo", "echo", 1, false],
+    ["ask_user_question", "failed", 1, true],
+    ["ask_user_question", "wrong-turn", 2, false],
+  ] as const) {
+    f.emit("tool/call", {
+      turn,
+      step: 2,
+      callId,
+      name,
+      arguments: JSON.stringify({ questions: [{ id: "q" }] }),
+    });
+    f.emit("tool/result", {
+      turn: 1,
+      step: 2,
+      message: {
+        toolCallId: callId,
+        isError,
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({
+              answers: [{ id: "q", selected: [], custom: "must not be shown" }],
+            }),
+          },
+        ],
+      },
+    });
+  }
+  const snapshots: AgentSessionSnapshot[] = [];
+  const stop = f.adapter.observeSession!(f.id, (snapshot) =>
+    snapshots.push(snapshot),
+  );
+  await tick();
+  assert.equal(snapshots.at(-1)?.turns[0]?.userMessages.length, 1);
+  stop();
+});

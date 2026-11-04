@@ -2285,7 +2285,10 @@ test("canvas sidebar reuses the DSH shell while keeping canvas navigation", asyn
   const dialog = element('[role="dialog"][aria-label="导航与工作区"]');
   assert.ok(dialog.classList.contains("chat-sidebar"));
   assert.ok(dialog.textContent?.includes("新会话"));
-  assert.ok(dialog.textContent?.includes("Canvas · 画布"));
+  assert.ok(
+    !dialog.textContent?.includes("Canvas · 画布"),
+    "the View tab owns the Canvas entry",
+  );
   assert.ok(dialog.textContent?.includes("插件"));
   assert.ok(dialog.textContent?.includes("自动化任务"));
   assert.equal(
@@ -2360,4 +2363,112 @@ test("canvas sidebar reuses the DSH shell while keeping canvas navigation", asyn
   assert.equal(exits, 1);
   if (root) await act(async () => root!.unmount());
   root = undefined;
+});
+
+test("native View binds its requested Session immediately and reuses the resident composer", async () => {
+  const control = deferredAdapter();
+  await mount(control.adapter);
+  localStorage.setItem(
+    `${key.replace(":mock", ":dsh")}:session:native-view-session`,
+    JSON.stringify({
+      version: 1,
+      sessionId: "native-view-session",
+      viewport: { x: 25, y: 40, zoom: 0.75 },
+      replies: [
+        {
+          id: "native-view-reply",
+          prompt: "同一会话",
+          body: "恢复既有画布位置",
+          status: "done",
+          position: { x: 700, y: 250, slotHeight: 90, kind: "manual" },
+        },
+      ],
+    }),
+  );
+  await act(async () =>
+    root!.render(
+      <ChatCanvas
+        key="native-view-test"
+        adapter={control.adapter}
+        mode="dsh"
+        useNativeComposer
+        externalComposer
+        requestedSession={{ sessionId: "native-view-session", token: 9800 }}
+      />,
+    ),
+  );
+  assert.equal(
+    control.creates,
+    0,
+    "selecting an existing Session View cannot create another Session",
+  );
+  assert.equal(document.querySelector(".chat-native-composer"), null);
+  assert.equal(document.querySelector("textarea"), null);
+  assert.equal(element(".chat-reply").style.left, "700px");
+  assert.equal(
+    element(".chat-world").style.transform,
+    "translate(25px, 40px) scale(0.75)",
+  );
+  assert.match(element(".chat-user-history").textContent ?? "", /同一会话/);
+  if (root) await act(async () => root!.unmount());
+  root = undefined;
+});
+
+test("IUI turns in the native View use host dispatch and survive View unmount", async () => {
+  const control = deferredAdapter();
+  await mount(control.adapter);
+  localStorage.setItem(
+    `${key.replace(":mock", ":dsh")}:session:host-owned`,
+    JSON.stringify({
+      version: 1,
+      sessionId: "host-owned",
+      viewport: { x: 0, y: 0, zoom: 1 },
+      replies: [
+        {
+          id: "native-iui",
+          prompt: "IUI",
+          body: '<card><button onClick={() => GenUI.issueNewTurn("native follow-up")}>Continue native</button></card>',
+          status: "done",
+        },
+      ],
+    }),
+  );
+  const calls: { id: string; text: string }[] = [];
+  let finish!: () => void;
+  await act(async () =>
+    root!.render(
+      <ChatCanvas
+        key="host-owned"
+        adapter={control.adapter}
+        mode="dsh"
+        useNativeComposer
+        externalComposer
+        requestedSession={{ sessionId: "host-owned", token: 9900 }}
+        onNativeTurn={(id, text) => {
+          calls.push({ id, text });
+          return new Promise<void>((resolve) => {
+            finish = resolve;
+          });
+        }}
+      />,
+    ),
+  );
+  const button = element(
+    "[data-canvas-iui-root]",
+  ).shadowRoot?.querySelector<HTMLButtonElement>("button");
+  assert.ok(button);
+  await act(async () => {
+    button.click();
+    button.click();
+  });
+  assert.deepEqual(calls, [{ id: "host-owned", text: "native follow-up" }]);
+  assert.equal(control.runs.length, 0);
+  await act(async () => root!.unmount());
+  root = undefined;
+  assert.equal(
+    control.cancels,
+    0,
+    "switching native Views must not cancel host execution",
+  );
+  await act(async () => finish());
 });

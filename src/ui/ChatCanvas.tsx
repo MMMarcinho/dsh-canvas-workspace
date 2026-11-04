@@ -192,6 +192,8 @@ export function ChatCanvas({
   resolveImage,
   useNativeComposer = false,
   nativeComposer,
+  externalComposer = false,
+  onNativeTurn,
   onSessionChange,
   requestedSession,
   onRequestHandled,
@@ -230,6 +232,9 @@ export function ChatCanvas({
   ) => ReturnType<IuiResourceHandler>;
   useNativeComposer?: boolean;
   nativeComposer?: ReactNode;
+  /** The native Conversation view keeps its existing composer mounted. */
+  externalComposer?: boolean;
+  onNativeTurn?: (sessionId: string, text: string) => Promise<void>;
   onSessionChange?: (sessionId: string | undefined) => void;
   requestedSession?: { sessionId: string; token: number } | null;
   onRequestHandled?: () => void;
@@ -240,7 +245,7 @@ export function ChatCanvas({
   sidebarIcons?: SidebarIcons;
   onSchedules?: () => void;
 }) {
-  const [initial] = useState(() => restore(mode));
+  const [initial] = useState(() => restore(mode, requestedSession?.sessionId));
   const calendarNow = useCalendarNow();
   const [state, setState] = useState(initial.state);
   const stateRef = useRef(state);
@@ -257,6 +262,7 @@ export function ChatCanvas({
   const [historyNotice, setHistoryNotice] = useState("");
   const [sessionAttempt, setSessionAttempt] = useState(0);
   const creatingSession = useRef(false);
+  const nativeTurnPending = useRef(false);
   const creatingNewSession = useRef(false);
   const [newSessionPending, setNewSessionPending] = useState(false);
   const sessionStates = useRef(new Map<string, State>());
@@ -1317,6 +1323,25 @@ export function ChatCanvas({
       adapter.isSessionBusy?.(stateRef.current.sessionId)
     )
       return { ok: false, message: "当前会话正在生成，请等待或停止后重试" };
+    if (externalComposer) {
+      if (nativeTurnPending.current)
+        return { ok: false, message: "正在提交，请稍后再试" };
+      const sessionId = stateRef.current.sessionId;
+      if (!sessionId || !onNativeTurn)
+        return { ok: false, message: "原生会话尚未准备好，请稍后重试" };
+      nativeTurnPending.current = true;
+      try {
+        // Host owns execution: unmounting this View must never cancel the turn.
+        await onNativeTurn(sessionId, prompt);
+        return { ok: true };
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        if (mounted.current) setRunError(message);
+        return { ok: false, message };
+      } finally {
+        nativeTurnPending.current = false;
+      }
+    }
     const id = crypto.randomUUID();
     const active: ActiveRun = {
       id,
@@ -1546,6 +1571,19 @@ export function ChatCanvas({
               <span className="chat-canvas-switch-thumb" />
             </span>
             <span className="chat-canvas-switch-label">画布</span>
+          </button>
+        )}
+        {externalComposer && (
+          <button
+            type="button"
+            className="chat-layout-action"
+            aria-label="自动排布画布内容"
+            title="按当前可用宽度整理自动回复，保留手动位置和当前视角"
+            disabled={!state.replies.length}
+            onClick={arrangeViewport}
+          >
+            <Icon name="fit" size={16} />
+            <span>自动排布</span>
           </button>
         )}
         {onNewSession && (
@@ -1987,7 +2025,13 @@ export function ChatCanvas({
             </aside>
           </div>
         )}
-        {useNativeComposer ? (
+        {externalComposer ? (
+          storageError || historyNotice || runError ? (
+            <div className="chat-external-notices" role="status">
+              {storageError || historyNotice || runError}
+            </div>
+          ) : null
+        ) : useNativeComposer ? (
           <div className="chat-native-composer" aria-label="画布输入">
             {nativeComposer ?? (
               <div className="chat-native-composer-wait" role="status">

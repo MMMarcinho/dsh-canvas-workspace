@@ -265,24 +265,34 @@ try {
         railZ: Number(getComputedStyle(rail).zIndex),
         mask: getComputedStyle(glass).maskImage,
         maskComposite: getComputedStyle(glass).maskComposite,
+        radius: getComputedStyle(glass).borderTopLeftRadius,
+        clip: getComputedStyle(glass).clipPath,
         text: first.querySelector(".chat-user-message-bubble").textContent,
         scrollHeight: rail.scrollHeight,
         clientHeight: rail.clientHeight,
       };
     });
     assert.ok(layout.frame.height > 30, JSON.stringify(layout));
+    assert.equal(layout.radius, "20px");
+    assert.ok(layout.clip.includes("20px"), "blur has rounded corners");
     assert.ok(layout.railZ > layout.glassZ, "messages paint above blur");
     assert.ok(layout.mask.includes("linear-gradient"), "blur fades at edges");
     assert.ok(
       layout.maskComposite.includes("intersect"),
       JSON.stringify(layout),
     );
-    assert.ok(layout.glass.top <= layout.rail.top - 23);
-    assert.ok(layout.glass.bottom >= layout.rail.bottom + 23);
+    assert.ok(
+      Math.abs(layout.glass.top - layout.rail.top) < 1,
+      "background starts at the message list, without a top halo",
+    );
+    assert.ok(Math.abs(layout.glass.bottom - layout.rail.bottom) < 1);
     assert.ok(
       layout.text.startsWith("Prompt") || layout.text.startsWith("Long"),
     );
-    assert.ok(layout.first.top - layout.rail.top >= 11, JSON.stringify(layout));
+    assert.ok(
+      Math.abs(layout.first.top - layout.rail.top) < 1,
+      "first message has no top padding",
+    );
     assert.ok(
       Math.abs(layout.frame.left - layout.composer.left) < 1 &&
         Math.abs(layout.frame.width - layout.composer.width) < 1,

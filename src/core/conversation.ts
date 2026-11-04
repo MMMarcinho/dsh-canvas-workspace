@@ -121,12 +121,16 @@ export function reconcileConversation(
       ...(message.attachments ? { attachments: message.attachments } : {}),
       timestamp: message.timestamp,
       text:
-        localPrompt !== undefined && message.requestId === previous?.requestId
-          ? localPrompt
-          : (message.displayText ?? message.text),
-      ...(localPrompt !== undefined &&
-      message.requestId === previous?.requestId &&
-      previous?.promptSource === "user"
+        message.source === "user"
+          ? message.text
+          : localPrompt !== undefined &&
+              message.requestId === previous?.requestId
+            ? localPrompt
+            : (message.displayText ?? message.text),
+      ...(message.source === "user" ||
+      (localPrompt !== undefined &&
+        message.requestId === previous?.requestId &&
+        previous?.promptSource === "user")
         ? { source: "user" as const }
         : {}),
     }));

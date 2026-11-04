@@ -31,9 +31,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// ../../../../node_modules/inline-style-parser/cjs/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/inline-style-parser/cjs/index.js
 var require_cjs = __commonJS({
-  "../../../../node_modules/inline-style-parser/cjs/index.js"(exports, module2) {
+  "../../../../../github/dsh-canvas-workspace/node_modules/inline-style-parser/cjs/index.js"(exports, module2) {
     "use strict";
     var COMMENT_REGEX = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g;
     var NEWLINE_REGEX = /\n/g;
@@ -170,9 +170,9 @@ var require_cjs = __commonJS({
   }
 });
 
-// ../../../../node_modules/style-to-object/cjs/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/style-to-object/cjs/index.js
 var require_cjs2 = __commonJS({
-  "../../../../node_modules/style-to-object/cjs/index.js"(exports) {
+  "../../../../../github/dsh-canvas-workspace/node_modules/style-to-object/cjs/index.js"(exports) {
     "use strict";
     var __importDefault = exports && exports.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : { "default": mod };
@@ -204,9 +204,9 @@ var require_cjs2 = __commonJS({
   }
 });
 
-// ../../../../node_modules/style-to-js/cjs/utilities.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/style-to-js/cjs/utilities.js
 var require_utilities = __commonJS({
-  "../../../../node_modules/style-to-js/cjs/utilities.js"(exports) {
+  "../../../../../github/dsh-canvas-workspace/node_modules/style-to-js/cjs/utilities.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.camelCase = void 0;
@@ -243,9 +243,9 @@ var require_utilities = __commonJS({
   }
 });
 
-// ../../../../node_modules/style-to-js/cjs/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/style-to-js/cjs/index.js
 var require_cjs3 = __commonJS({
-  "../../../../node_modules/style-to-js/cjs/index.js"(exports, module2) {
+  "../../../../../github/dsh-canvas-workspace/node_modules/style-to-js/cjs/index.js"(exports, module2) {
     "use strict";
     var __importDefault = exports && exports.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : { "default": mod };
@@ -269,9 +269,9 @@ var require_cjs3 = __commonJS({
   }
 });
 
-// ../../../../node_modules/extend/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/extend/index.js
 var require_extend = __commonJS({
-  "../../../../node_modules/extend/index.js"(exports, module2) {
+  "../../../../../github/dsh-canvas-workspace/node_modules/extend/index.js"(exports, module2) {
     "use strict";
     var hasOwn2 = Object.prototype.hasOwnProperty;
     var toStr = Object.prototype.toString;
@@ -363,13 +363,14 @@ var require_extend = __commonJS({
 // src/client.tsx
 var client_exports = {};
 __export(client_exports, {
+  CanvasConversationView: () => CanvasConversationView,
   apply: () => apply,
   inject: () => inject,
   name: () => name2
 });
 module.exports = __toCommonJS(client_exports);
 
-// ../../../../node_modules/@deepseek-ai/dsh-util-workspace-path/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/@deepseek-ai/dsh-util-workspace-path/lib/index.js
 function isWindowsStylePath(value) {
   return /^[A-Za-z]:[/\\]/.test(value) || value.startsWith("\\\\");
 }
@@ -2182,8 +2183,8 @@ function reconcileConversation(state, snapshot, activeReplyId) {
       id: message.id,
       ...message.attachments ? { attachments: message.attachments } : {},
       timestamp: message.timestamp,
-      text: localPrompt !== void 0 && message.requestId === previous3?.requestId ? localPrompt : message.displayText ?? message.text,
-      ...localPrompt !== void 0 && message.requestId === previous3?.requestId && previous3?.promptSource === "user" ? { source: "user" } : {}
+      text: message.source === "user" ? message.text : localPrompt !== void 0 && message.requestId === previous3?.requestId ? localPrompt : message.displayText ?? message.text,
+      ...message.source === "user" || localPrompt !== void 0 && message.requestId === previous3?.requestId && previous3?.promptSource === "user" ? { source: "user" } : {}
     }));
     const reply = {
       id: previous3?.id ?? `host:${snapshot.sessionId}:${turn.turnId}`,
@@ -2364,32 +2365,7 @@ function Brand() {
 
 // src/ui/CanvasSidebar.tsx
 var import_react2 = require("react");
-
-// src/ui/CanvasIcon.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
-function CanvasIcon({ size = 16 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
-    "svg",
-    {
-      width: size,
-      height: size,
-      viewBox: "0 0 24 24",
-      fill: "none",
-      stroke: "currentColor",
-      strokeWidth: "1.7",
-      "aria-hidden": "true",
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("rect", { x: "3", y: "3", width: "8", height: "8", rx: "2" }),
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("rect", { x: "14", y: "4", width: "7", height: "5", rx: "1.5" }),
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("rect", { x: "13", y: "13", width: "8", height: "8", rx: "2" }),
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "M7 14v4a1 1 0 0 0 1 1h2M16 10v1" })
-      ]
-    }
-  );
-}
-
-// src/ui/CanvasSidebar.tsx
-var import_jsx_runtime6 = require("react/jsx-runtime");
 function CanvasSidebar({
   icons,
   sessions,
@@ -2468,7 +2444,7 @@ function CanvasSidebar({
   )?.id;
   const sessionRow = (session, showWorkspace = false) => {
     const workspace = showWorkspace ? workspaces.find((item) => item.sessionIds.includes(session.id)) : void 0;
-    return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
       "button",
       {
         type: "button",
@@ -2477,21 +2453,21 @@ function CanvasSidebar({
         title: session.title,
         onClick: () => onSwitchSession(session.id),
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-session-title", children: session.title }),
-          workspace && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-session-meta", children: workspace.title })
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-session-title", children: session.title }),
+          workspace && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-session-meta", children: workspace.title })
         ]
       },
       session.id
     );
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
     "div",
     {
       className: "chat-menu chat-sidebar",
       role: "dialog",
       "aria-label": "\u5BFC\u822A\u4E0E\u5DE5\u4F5C\u533A",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
           "button",
           {
             type: "button",
@@ -2500,50 +2476,37 @@ function CanvasSidebar({
             disabled: newSessionPending,
             onClick: onNewSession,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-new-icon", children: icons?.newSession ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "plus", size: 14 }) }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u65B0\u4F1A\u8BDD" })
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-new-icon", children: icons?.newSession ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "plus", size: 14 }) }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u65B0\u4F1A\u8BDD" })
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("nav", { className: "chat-sidebar-nav", "aria-label": "\u5BFC\u822A", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
-            "button",
-            {
-              type: "button",
-              className: "chat-sidebar-nav-row is-active",
-              "aria-current": "page",
-              onClick: onClose,
-              children: [
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-icon", children: icons?.canvas ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(CanvasIcon, { size: 16 }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-label", children: "Canvas \xB7 \u753B\u5E03" })
-              ]
-            }
-          ),
-          onPlugins && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("nav", { className: "chat-sidebar-nav", "aria-label": "\u5BFC\u822A", children: [
+          onPlugins && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
             "button",
             {
               type: "button",
               className: "chat-sidebar-nav-row",
               onClick: onPlugins,
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-icon", children: icons?.plugins ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "sparkle", size: 16 }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-label", children: "\u63D2\u4EF6" })
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-nav-icon", children: icons?.plugins ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "sparkle", size: 16 }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-nav-label", children: "\u63D2\u4EF6" })
               ]
             }
           ),
-          onSchedules && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+          onSchedules && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
             "button",
             {
               type: "button",
               className: "chat-sidebar-nav-row",
               onClick: onSchedules,
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-icon", children: icons?.schedules ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "clock", size: 16 }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-label", children: "\u81EA\u52A8\u5316\u4EFB\u52A1" })
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-nav-icon", children: icons?.schedules ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "clock", size: 16 }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-nav-label", children: "\u81EA\u52A8\u5316\u4EFB\u52A1" })
               ]
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
             "button",
             {
               type: "button",
@@ -2551,34 +2514,43 @@ function CanvasSidebar({
               "aria-expanded": moreOpen,
               onClick: () => setMoreOpen((value) => !value),
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-icon", children: icons?.more ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "apps-add", size: 16 }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-label", children: "\u66F4\u591A" })
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-nav-icon", children: icons?.more ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "apps-add", size: 16 }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-nav-label", children: "\u66F4\u591A" })
               ]
             }
           )
         ] }),
-        moreOpen && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+        moreOpen && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
           "div",
           {
             className: "chat-sidebar-more",
             role: "group",
             "aria-label": "\u66F4\u591A\u753B\u5E03\u64CD\u4F5C",
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "chat-sidebar-more-title", children: "\u89C6\u56FE" }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("button", { type: "button", "aria-pressed": iuiEnabled, onClick: onToggleIui, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "artifact", size: 15 }),
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u753B\u5E03 IUI \u6E32\u67D3" }),
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-switch", children: iuiEnabled ? "\u5F00\u542F" : "\u5173\u95ED" })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "chat-zoom", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", { type: "button", "aria-label": "\u7F29\u5C0F", onClick: onZoomOut, children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "minus", size: 15 }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "chat-sidebar-more-title", children: "\u89C6\u56FE" }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+                "button",
+                {
+                  type: "button",
+                  "aria-pressed": iuiEnabled,
+                  onClick: onToggleIui,
+                  title: "\u53EA\u5207\u6362\u5DF2\u6709 IUI \u5185\u5BB9\u7684\u663E\u793A\uFF0C\u4E0D\u4F1A\u7ED9\u6A21\u578B\u6CE8\u5165 IUI \u751F\u6210\u63D0\u793A",
+                  children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "artifact", size: 15 }),
+                    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u753B\u5E03 IUI \u6E32\u67D3" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-switch", children: iuiEnabled ? "\u5F00\u542F" : "\u5173\u95ED" })
+                  ]
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "chat-zoom", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("button", { type: "button", "aria-label": "\u7F29\u5C0F", onClick: onZoomOut, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "minus", size: 15 }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("span", { children: [
                   Math.round(zoom * 100),
                   "%"
                 ] }),
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", { type: "button", "aria-label": "\u653E\u5927", onClick: onZoomIn, children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "plus", size: 15 }) })
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("button", { type: "button", "aria-label": "\u653E\u5927", onClick: onZoomIn, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "plus", size: 15 }) })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
                 "button",
                 {
                   type: "button",
@@ -2586,20 +2558,20 @@ function CanvasSidebar({
                   onClick: onArrangeReplies,
                   title: "\u6309\u53EF\u7528\u5BBD\u5EA6\u6574\u7406\u5168\u90E8\u81EA\u52A8\u56DE\u590D\uFF1B\u4FDD\u7559\u624B\u52A8\u4F4D\u7F6E\uFF0C\u8D85\u51FA\u65F6\u5411\u4E0B\u5EF6\u4F38",
                   children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "fit", size: 15 }),
+                    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "fit", size: 15 }),
                     "\u6309\u89C6\u53E3\u81EA\u52A8\u6392\u5E03"
                   ]
                 }
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("button", { type: "button", onClick: onResetView, children: [
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "fit", size: 15 }),
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("button", { type: "button", onClick: onResetView, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "fit", size: 15 }),
                 "\u91CD\u7F6E\u89C6\u56FE"
               ] }),
-              onLegacy && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "chat-sidebar-more-title", children: "\u65E7\u753B\u5E03" }),
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", { type: "button", onClick: onLegacy, children: "\u6253\u5F00\u8282\u70B9\u753B\u5E03" })
+              onLegacy && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(import_jsx_runtime5.Fragment, { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "chat-sidebar-more-title", children: "\u65E7\u753B\u5E03" }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("button", { type: "button", onClick: onLegacy, children: "\u6253\u5F00\u8282\u70B9\u753B\u5E03" })
               ] }),
-              legacyReplies?.length ? /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("button", { type: "button", onClick: onExportLegacy, children: [
+              legacyReplies?.length ? /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("button", { type: "button", onClick: onExportLegacy, children: [
                 "\u5BFC\u51FA\u5347\u7EA7\u524D\u539F\u6587\uFF08",
                 legacyReplies.length,
                 " \u6761\uFF09"
@@ -2607,10 +2579,10 @@ function CanvasSidebar({
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "chat-sidebar-region", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "chat-sidebar-section", children: searchOpen ? /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "chat-sidebar-search", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-search-icon", "aria-hidden": "true", children: icons?.search ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "search", size: 16 }) }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "chat-sidebar-region", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "chat-sidebar-section", children: searchOpen ? /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "chat-sidebar-search", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-search-icon", "aria-hidden": "true", children: icons?.search ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "search", size: 16 }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
               "input",
               {
                 ref: searchInput,
@@ -2626,7 +2598,7 @@ function CanvasSidebar({
                 }
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
               "button",
               {
                 type: "button",
@@ -2635,23 +2607,23 @@ function CanvasSidebar({
                   setSearch("");
                   setSearchOpen(false);
                 },
-                children: icons?.close ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "close", size: 14 })
+                children: icons?.close ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "close", size: 14 })
               }
             )
-          ] }) : /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-section-label", children: "\u5DE5\u4F5C\u533A" }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "chat-sidebar-head-actions", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+          ] }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(import_jsx_runtime5.Fragment, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-section-label", children: "\u5DE5\u4F5C\u533A" }),
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "chat-sidebar-head-actions", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                 "button",
                 {
                   type: "button",
                   "aria-label": "\u641C\u7D22\u4F1A\u8BDD",
                   title: "\u641C\u7D22\u4F1A\u8BDD",
                   onClick: () => setSearchOpen(true),
-                  children: icons?.search ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "search", size: 16 })
+                  children: icons?.search ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "search", size: 16 })
                 }
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                 "button",
                 {
                   type: "button",
@@ -2659,29 +2631,29 @@ function CanvasSidebar({
                   title: "\u89C6\u56FE\u9009\u9879",
                   "aria-expanded": viewOpen,
                   onClick: () => setViewOpen((value) => !value),
-                  children: icons?.view ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "sliders", size: 16 })
+                  children: icons?.view ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "sliders", size: 16 })
                 }
               ),
-              onCreateWorkspace && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+              onCreateWorkspace && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                 "button",
                 {
                   type: "button",
                   "aria-label": "\u6DFB\u52A0\u5DE5\u4F5C\u533A",
                   title: "\u6DFB\u52A0\u5DE5\u4F5C\u533A",
                   onClick: onCreateWorkspace,
-                  children: icons?.addWorkspace ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "folder", size: 16 })
+                  children: icons?.addWorkspace ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "folder", size: 16 })
                 }
               )
             ] })
           ] }) }),
-          viewOpen && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+          viewOpen && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
             "div",
             {
               className: "chat-sidebar-view-menu",
               role: "menu",
               "aria-label": "\u89C6\u56FE\u9009\u9879",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                   "button",
                   {
                     type: "button",
@@ -2694,7 +2666,7 @@ function CanvasSidebar({
                     children: "\u6309\u5DE5\u4F5C\u533A\u5206\u7EC4"
                   }
                 ),
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                   "button",
                   {
                     type: "button",
@@ -2710,43 +2682,43 @@ function CanvasSidebar({
               ]
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
             "div",
             {
               className: "chat-sidebar-list",
               role: "tree",
               "aria-label": "\u5DE5\u4F5C\u533A\u4E0E\u4F1A\u8BDD",
-              children: flat ? /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
+              children: flat ? /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(import_jsx_runtime5.Fragment, { children: [
                 flatSessions.map((session) => sessionRow(session, true)),
-                flatSessions.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "chat-sidebar-empty", children: "\u6CA1\u6709\u5339\u914D\u7684\u4F1A\u8BDD" })
-              ] }) : /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
-                groups.map(({ workspace, visible }) => /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+                flatSessions.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "chat-sidebar-empty", children: "\u6CA1\u6709\u5339\u914D\u7684\u4F1A\u8BDD" })
+              ] }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(import_jsx_runtime5.Fragment, { children: [
+                groups.map(({ workspace, visible }) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
                   "div",
                   {
                     className: "chat-workspace-group",
                     role: "group",
                     "aria-label": workspace.title,
                     children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+                      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
                         "button",
                         {
                           type: "button",
                           className: "chat-sidebar-project",
                           onClick: () => onOpenWorkspace?.(workspace.id),
                           children: [
-                            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+                            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
                               "span",
                               {
                                 className: "chat-sidebar-project-icon",
                                 "data-current": workspace.id === currentWorkspaceId ? "true" : void 0,
-                                children: workspace.id === currentWorkspaceId ? icons?.folderOpen ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "folder-open", size: 16 }) : icons?.folder ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "folder", size: 16 })
+                                children: workspace.id === currentWorkspaceId ? icons?.folderOpen ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "folder-open", size: 16 }) : icons?.folder ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "folder", size: 16 })
                               }
                             ),
-                            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-project-title", children: workspace.title })
+                            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-project-title", children: workspace.title })
                           ]
                         }
                       ),
-                      onNewSessionInWorkspace && !query && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+                      onNewSessionInWorkspace && !query && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
                         "button",
                         {
                           type: "button",
@@ -2754,8 +2726,8 @@ function CanvasSidebar({
                           disabled: newSessionPending,
                           onClick: () => onNewSessionInWorkspace(workspace.id),
                           children: [
-                            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-session-plus", children: icons?.plus ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "plus", size: 14 }) }),
-                            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u5728\u6B64\u5DE5\u4F5C\u533A\u65B0\u5EFA\u753B\u5E03\u4F1A\u8BDD" })
+                            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-session-plus", children: icons?.plus ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "plus", size: 14 }) }),
+                            /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: "\u5728\u6B64\u5DE5\u4F5C\u533A\u65B0\u5EFA\u753B\u5E03\u4F1A\u8BDD" })
                           ]
                         }
                       ),
@@ -2764,27 +2736,27 @@ function CanvasSidebar({
                   },
                   workspace.id
                 )),
-                ungrouped.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+                ungrouped.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
                   "div",
                   {
                     className: "chat-workspace-group chat-sidebar-ungrouped",
                     role: "group",
                     "aria-label": "\u672A\u5206\u7EC4",
                     children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "chat-sidebar-project chat-sidebar-project-label", children: [
-                        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-project-icon", children: icons?.folder ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "folder", size: 16 }) }),
-                        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-project-title", children: "\u672A\u5206\u7EC4" })
+                      /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "chat-sidebar-project chat-sidebar-project-label", children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-project-icon", children: icons?.folder ?? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Icon, { name: "folder", size: 16 }) }),
+                        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "chat-sidebar-project-title", children: "\u672A\u5206\u7EC4" })
                       ] }),
                       ungrouped.map((session) => sessionRow(session))
                     ]
                   }
                 ),
-                groups.length === 0 && ungrouped.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "chat-sidebar-empty", children: "\u6CA1\u6709\u5339\u914D\u7684\u4F1A\u8BDD" })
+                groups.length === 0 && ungrouped.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "chat-sidebar-empty", children: "\u6CA1\u6709\u5339\u914D\u7684\u4F1A\u8BDD" })
               ] })
             }
           )
         ] }),
-        navError && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "chat-nav-error", role: "alert", children: navError })
+        navError && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "chat-nav-error", role: "alert", children: navError })
       ]
     }
   );
@@ -2810,13 +2782,13 @@ function formatReplyTime(value, now = Date.now()) {
 // src/ui/ReplyContent.tsx
 var import_react11 = require("react");
 
-// ../../../../node_modules/devlop/lib/default.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/devlop/lib/default.js
 function ok() {
 }
 function unreachable() {
 }
 
-// ../../../../node_modules/comma-separated-tokens/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/comma-separated-tokens/index.js
 function stringify(values, options) {
   const settings = options || {};
   const input = values[values.length - 1] === "" ? [...values, ""] : values;
@@ -2825,7 +2797,7 @@ function stringify(values, options) {
   ).trim();
 }
 
-// ../../../../node_modules/estree-util-is-identifier-name/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/estree-util-is-identifier-name/lib/index.js
 var nameRe = /^[$_\p{ID_Start}][$_\u{200C}\u{200D}\p{ID_Continue}]*$/u;
 var nameReJsx = /^[$_\p{ID_Start}][-$_\u{200C}\u{200D}\p{ID_Continue}]*$/u;
 var emptyOptions = {};
@@ -2835,7 +2807,7 @@ function name(name3, options) {
   return re2.test(name3);
 }
 
-// ../../../../node_modules/hast-util-whitespace/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/hast-util-whitespace/lib/index.js
 var re = /[ \t\n\f\r]/g;
 function whitespace(thing) {
   return typeof thing === "object" ? thing.type === "text" ? empty(thing.value) : false : empty(thing);
@@ -2844,7 +2816,7 @@ function empty(value) {
   return value.replace(re, "") === "";
 }
 
-// ../../../../node_modules/property-information/lib/util/schema.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/schema.js
 var Schema = class {
   /**
    * @param {SchemaType['property']} property
@@ -2868,7 +2840,7 @@ Schema.prototype.normal = {};
 Schema.prototype.property = {};
 Schema.prototype.space = void 0;
 
-// ../../../../node_modules/property-information/lib/util/merge.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/merge.js
 function merge(definitions, space2) {
   const property = {};
   const normal = {};
@@ -2879,12 +2851,12 @@ function merge(definitions, space2) {
   return new Schema(property, normal, space2);
 }
 
-// ../../../../node_modules/property-information/lib/normalize.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/normalize.js
 function normalize(value) {
   return value.toLowerCase();
 }
 
-// ../../../../node_modules/property-information/lib/util/info.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/info.js
 var Info = class {
   /**
    * @param {string} property
@@ -2912,7 +2884,7 @@ Info.prototype.property = "";
 Info.prototype.spaceSeparated = false;
 Info.prototype.space = void 0;
 
-// ../../../../node_modules/property-information/lib/util/types.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/types.js
 var types_exports = {};
 __export(types_exports, {
   boolean: () => boolean,
@@ -2935,7 +2907,7 @@ function increment() {
   return 2 ** ++powers;
 }
 
-// ../../../../node_modules/property-information/lib/util/defined-info.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/defined-info.js
 var checks = (
   /** @type {ReadonlyArray<keyof typeof types>} */
   Object.keys(types_exports)
@@ -2973,7 +2945,7 @@ function mark(values, key, value) {
   }
 }
 
-// ../../../../node_modules/property-information/lib/util/create.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/create.js
 function create(definition3) {
   const properties = {};
   const normals = {};
@@ -2994,7 +2966,7 @@ function create(definition3) {
   return new Schema(properties, normals, definition3.space);
 }
 
-// ../../../../node_modules/property-information/lib/aria.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/aria.js
 var aria = create({
   properties: {
     ariaActiveDescendant: null,
@@ -3052,17 +3024,17 @@ var aria = create({
   }
 });
 
-// ../../../../node_modules/property-information/lib/util/case-sensitive-transform.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/case-sensitive-transform.js
 function caseSensitiveTransform(attributes, attribute) {
   return attribute in attributes ? attributes[attribute] : attribute;
 }
 
-// ../../../../node_modules/property-information/lib/util/case-insensitive-transform.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/case-insensitive-transform.js
 function caseInsensitiveTransform(attributes, property) {
   return caseSensitiveTransform(attributes, property.toLowerCase());
 }
 
-// ../../../../node_modules/property-information/lib/html.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/html.js
 var html = create({
   attributes: {
     acceptcharset: "accept-charset",
@@ -3436,7 +3408,7 @@ var html = create({
   transform: caseInsensitiveTransform
 });
 
-// ../../../../node_modules/property-information/lib/svg.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/svg.js
 var svg = create({
   attributes: {
     accentHeight: "accent-height",
@@ -4000,7 +3972,7 @@ var svg = create({
   transform: caseSensitiveTransform
 });
 
-// ../../../../node_modules/property-information/lib/xlink.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/xlink.js
 var xlink = create({
   properties: {
     xLinkActuate: null,
@@ -4017,7 +3989,7 @@ var xlink = create({
   }
 });
 
-// ../../../../node_modules/property-information/lib/xmlns.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/xmlns.js
 var xmlns = create({
   attributes: { xmlnsxlink: "xmlns:xlink" },
   properties: { xmlnsXLink: null, xmlns: null },
@@ -4025,7 +3997,7 @@ var xmlns = create({
   transform: caseInsensitiveTransform
 });
 
-// ../../../../node_modules/property-information/lib/xml.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/xml.js
 var xml = create({
   properties: { xmlBase: null, xmlLang: null, xmlSpace: null },
   space: "xml",
@@ -4034,7 +4006,7 @@ var xml = create({
   }
 });
 
-// ../../../../node_modules/property-information/lib/hast-to-react.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/hast-to-react.js
 var hastToReact = {
   classId: "classID",
   dataType: "datatype",
@@ -4055,7 +4027,7 @@ var hastToReact = {
   xmlnsXLink: "xmlnsXlink"
 };
 
-// ../../../../node_modules/property-information/lib/find.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/find.js
 var cap = /[A-Z]/g;
 var dash = /-[a-z]/g;
 var valid = /^data[-\w.:]+$/i;
@@ -4091,19 +4063,19 @@ function camelcase($0) {
   return $0.charAt(1).toUpperCase();
 }
 
-// ../../../../node_modules/property-information/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/index.js
 var html2 = merge([aria, html, xlink, xmlns, xml], "html");
 var svg2 = merge([aria, svg, xlink, xmlns, xml], "svg");
 
-// ../../../../node_modules/space-separated-tokens/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/space-separated-tokens/index.js
 function stringify2(values) {
   return values.join(" ").trim();
 }
 
-// ../../../../node_modules/hast-util-to-jsx-runtime/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/hast-util-to-jsx-runtime/lib/index.js
 var import_style_to_js = __toESM(require_cjs3(), 1);
 
-// ../../../../node_modules/unist-util-position/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/unist-util-position/lib/index.js
 var pointEnd = point("end");
 var pointStart = point("start");
 function point(type) {
@@ -4127,7 +4099,7 @@ function position(node2) {
   }
 }
 
-// ../../../../node_modules/unist-util-stringify-position/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/unist-util-stringify-position/lib/index.js
 function stringifyPosition(value) {
   if (!value || typeof value !== "object") {
     return "";
@@ -4153,7 +4125,7 @@ function index(value) {
   return value && typeof value === "number" ? value : 1;
 }
 
-// ../../../../node_modules/vfile-message/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/vfile-message/lib/index.js
 var VFileMessage = class extends Error {
   /**
    * Create a message for `reason`.
@@ -4289,7 +4261,7 @@ VFileMessage.prototype.place = void 0;
 VFileMessage.prototype.ruleId = void 0;
 VFileMessage.prototype.source = void 0;
 
-// ../../../../node_modules/hast-util-to-jsx-runtime/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/hast-util-to-jsx-runtime/lib/index.js
 var own = {}.hasOwnProperty;
 var emptyMap = /* @__PURE__ */ new Map();
 var cap2 = /[A-Z]/g;
@@ -4668,7 +4640,7 @@ function toDash($0) {
   return "-" + $0.toLowerCase();
 }
 
-// ../../../../node_modules/html-url-attributes/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/html-url-attributes/lib/index.js
 var urlAttributes = {
   action: ["form"],
   cite: ["blockquote", "del", "ins", "q"],
@@ -4693,11 +4665,11 @@ var urlAttributes = {
   ]
 };
 
-// ../../../../node_modules/react-markdown/lib/index.js
-var import_jsx_runtime7 = require("react/jsx-runtime");
+// ../../../../../github/dsh-canvas-workspace/node_modules/react-markdown/lib/index.js
+var import_jsx_runtime6 = require("react/jsx-runtime");
 var import_react3 = require("react");
 
-// ../../../../node_modules/mdast-util-to-string/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-string/lib/index.js
 var emptyOptions2 = {};
 function toString(value, options) {
   const settings = options || emptyOptions2;
@@ -4734,7 +4706,7 @@ function node(value) {
   return Boolean(value && typeof value === "object");
 }
 
-// ../../../../node_modules/decode-named-character-reference/index.dom.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/decode-named-character-reference/index.dom.js
 var element2 = document.createElement("i");
 function decodeNamedCharacterReference(value) {
   const characterReference2 = "&" + value + ";";
@@ -4746,7 +4718,7 @@ function decodeNamedCharacterReference(value) {
   return character === characterReference2 ? false : character;
 }
 
-// ../../../../node_modules/micromark-util-chunked/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-chunked/index.js
 function splice(list4, start2, remove, items) {
   const end = list4.length;
   let chunkStart = 0;
@@ -4780,7 +4752,7 @@ function push(list4, items) {
   return items;
 }
 
-// ../../../../node_modules/micromark-util-combine-extensions/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-combine-extensions/index.js
 var hasOwnProperty = {}.hasOwnProperty;
 function combineExtensions(extensions) {
   const all2 = {};
@@ -4820,7 +4792,7 @@ function constructs(existing, list4) {
   splice(existing, 0, 0, before);
 }
 
-// ../../../../node_modules/micromark-util-decode-numeric-character-reference/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-decode-numeric-character-reference/index.js
 function decodeNumericCharacterReference(value, base) {
   const code4 = Number.parseInt(value, base);
   if (
@@ -4838,12 +4810,12 @@ function decodeNumericCharacterReference(value, base) {
   return String.fromCodePoint(code4);
 }
 
-// ../../../../node_modules/micromark-util-normalize-identifier/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-normalize-identifier/index.js
 function normalizeIdentifier(value) {
   return value.replace(/[\t\n\r ]+/g, " ").replace(/^ | $/g, "").toLowerCase().toUpperCase();
 }
 
-// ../../../../node_modules/micromark-util-character/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-character/index.js
 var asciiAlpha = regexCheck(/[A-Za-z]/);
 var asciiAlphanumeric = regexCheck(/[\dA-Za-z]/);
 var asciiAtext = regexCheck(/[#-'*+\--9=?A-Z^-~]/);
@@ -4875,7 +4847,7 @@ function regexCheck(regex) {
   }
 }
 
-// ../../../../node_modules/micromark-util-sanitize-uri/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-sanitize-uri/index.js
 function normalizeUri(value) {
   const result = [];
   let index2 = -1;
@@ -4914,7 +4886,7 @@ function normalizeUri(value) {
   return result.join("") + value.slice(start2);
 }
 
-// ../../../../node_modules/micromark-factory-space/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-factory-space/index.js
 function factorySpace(effects, ok3, type, max) {
   const limit = max ? max - 1 : Infinity;
   let size = 0;
@@ -4959,7 +4931,7 @@ function factorySpaceMinMax(effects, ok3, nok, type, min, max) {
   }
 }
 
-// ../../../../node_modules/micromark/lib/initialize/content.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/initialize/content.js
 var content = {
   tokenize: initializeContent
 };
@@ -5009,7 +4981,7 @@ function initializeContent(effects) {
   }
 }
 
-// ../../../../node_modules/micromark-util-edit-map/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-edit-map/index.js
 var EditMap = class {
   /**
    * Create a new edit map.
@@ -5107,7 +5079,7 @@ function addImplementation(editMap, at2, remove, add, before) {
   editMap.index.set(at2, change);
 }
 
-// ../../../../node_modules/micromark/lib/initialize/document.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/initialize/document.js
 var document2 = {
   tokenize: initializeDocument
 };
@@ -5301,7 +5273,7 @@ function tokenizeContainer(effects, ok3, nok) {
   return factorySpace(effects, effects.attempt(this.parser.constructs.document, ok3, nok), "linePrefix", this.parser.constructs.disable.null.includes("codeIndented") ? void 0 : 4);
 }
 
-// ../../../../node_modules/micromark-util-classify-character/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-classify-character/index.js
 function classifyCharacter(code4) {
   if (code4 === null || markdownLineEndingOrSpace(code4) || unicodeWhitespace(code4)) {
     return 1;
@@ -5311,7 +5283,7 @@ function classifyCharacter(code4) {
   }
 }
 
-// ../../../../node_modules/micromark-util-resolve-all/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-resolve-all/index.js
 function resolveAll(constructs2, events, context) {
   const called = [];
   let index2 = -1;
@@ -5325,7 +5297,7 @@ function resolveAll(constructs2, events, context) {
   return events;
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/attention.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/attention.js
 var attention = {
   name: "attention",
   resolveAll: resolveAllAttention,
@@ -5448,7 +5420,7 @@ function movePoint(point4, offset2) {
   point4._bufferIndex += offset2;
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/autolink.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/autolink.js
 var autolink = {
   name: "autolink",
   tokenize: tokenizeAutolink
@@ -5549,7 +5521,7 @@ function tokenizeAutolink(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/blank-line.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/blank-line.js
 var blankLine = {
   partial: true,
   tokenize: tokenizeBlankLine
@@ -5564,7 +5536,7 @@ function tokenizeBlankLine(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/block-quote.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/block-quote.js
 var blockQuote = {
   continuation: {
     tokenize: tokenizeBlockQuoteContinuation
@@ -5622,7 +5594,7 @@ function exit(effects) {
   effects.exit("blockQuote");
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/character-escape.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/character-escape.js
 var characterEscape = {
   name: "characterEscape",
   tokenize: tokenizeCharacterEscape
@@ -5648,7 +5620,7 @@ function tokenizeCharacterEscape(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/character-reference.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/character-reference.js
 var characterReference = {
   name: "characterReference",
   tokenize: tokenizeCharacterReference
@@ -5713,7 +5685,7 @@ function tokenizeCharacterReference(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/partial-non-lazy-continuation.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/partial-non-lazy-continuation.js
 var nonLazyContinuation = {
   partial: true,
   tokenize: tokenizeNonLazyContinuation
@@ -5735,7 +5707,7 @@ function tokenizeNonLazyContinuation(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/code-fenced.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/code-fenced.js
 var codeFenced = {
   concrete: true,
   name: "codeFenced",
@@ -5898,7 +5870,7 @@ function tokenizeCodeFenced(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/code-indented.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/code-indented.js
 var codeIndented = {
   name: "codeIndented",
   tokenize: tokenizeCodeIndented
@@ -5956,7 +5928,7 @@ function tokenizeFurtherStart(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/code-text.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/code-text.js
 var codeText = {
   name: "codeText",
   previous,
@@ -6071,7 +6043,7 @@ function tokenizeCodeText(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-util-subtokenize/lib/splice-buffer.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-subtokenize/lib/splice-buffer.js
 var SpliceBuffer = class {
   /**
    * @param {ReadonlyArray<T> | null | undefined} [initial]
@@ -6264,7 +6236,7 @@ function chunkedPush(list4, right) {
   }
 }
 
-// ../../../../node_modules/micromark-util-subtokenize/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-subtokenize/index.js
 function subtokenize(eventsArray) {
   const jumps = {};
   let index2 = -1;
@@ -6417,7 +6389,7 @@ function subcontent(events, eventIndex) {
   return gaps;
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/content.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/content.js
 var content2 = {
   resolve: resolveContent,
   tokenize: tokenizeContent
@@ -6488,7 +6460,7 @@ function tokenizeContinuation(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-factory-destination/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-factory-destination/index.js
 function factoryDestination(effects, ok3, nok, type, literalType, literalMarkerType, rawType, stringType, max) {
   const limit = max || Number.POSITIVE_INFINITY;
   let balance = 0;
@@ -6580,7 +6552,7 @@ function factoryDestination(effects, ok3, nok, type, literalType, literalMarkerT
   }
 }
 
-// ../../../../node_modules/micromark-factory-label/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-factory-label/index.js
 function factoryLabel(effects, ok3, nok, type, markerType, stringType) {
   const self2 = this;
   let size = 0;
@@ -6641,7 +6613,7 @@ function factoryLabel(effects, ok3, nok, type, markerType, stringType) {
   }
 }
 
-// ../../../../node_modules/micromark-factory-title/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-factory-title/index.js
 function factoryTitle(effects, ok3, nok, type, markerType, stringType) {
   let marker;
   return start2;
@@ -6703,7 +6675,7 @@ function factoryTitle(effects, ok3, nok, type, markerType, stringType) {
   }
 }
 
-// ../../../../node_modules/micromark-factory-whitespace/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-factory-whitespace/index.js
 function factoryWhitespace(effects, ok3) {
   let seen;
   return start2;
@@ -6722,7 +6694,7 @@ function factoryWhitespace(effects, ok3) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/definition.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/definition.js
 var definition = {
   name: "definition",
   tokenize: tokenizeDefinition
@@ -6808,7 +6780,7 @@ function tokenizeTitleBefore(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/hard-break-escape.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/hard-break-escape.js
 var hardBreakEscape = {
   name: "hardBreakEscape",
   tokenize: tokenizeHardBreakEscape
@@ -6829,7 +6801,7 @@ function tokenizeHardBreakEscape(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/heading-atx.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/heading-atx.js
 var headingAtx = {
   name: "headingAtx",
   resolve: resolveHeadingAtx,
@@ -6918,7 +6890,7 @@ function tokenizeHeadingAtx(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-util-html-tag-name/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-html-tag-name/index.js
 var htmlBlockNames = [
   "address",
   "article",
@@ -6985,7 +6957,7 @@ var htmlBlockNames = [
 ];
 var htmlRawNames = ["pre", "script", "style", "textarea"];
 
-// ../../../../node_modules/micromark-core-commonmark/lib/html-flow.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/html-flow.js
 var htmlFlow = {
   concrete: true,
   name: "htmlFlow",
@@ -7344,7 +7316,7 @@ function tokenizeBlankLineBefore(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/html-text.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/html-text.js
 var htmlText = {
   name: "htmlText",
   tokenize: tokenizeHtmlText
@@ -7650,7 +7622,7 @@ function tokenizeHtmlText(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/label-end.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/label-end.js
 var labelEnd = {
   name: "labelEnd",
   resolveAll: resolveAllLabelEnd,
@@ -7876,7 +7848,7 @@ function tokenizeReferenceCollapsed(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/label-start-image.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/label-start-image.js
 var labelStartImage = {
   name: "labelStartImage",
   resolveAll: labelEnd.resolveAll,
@@ -7913,7 +7885,7 @@ function tokenizeLabelStartImage(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/label-start-link.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/label-start-link.js
 var labelStartLink = {
   name: "labelStartLink",
   resolveAll: labelEnd.resolveAll,
@@ -7941,7 +7913,7 @@ function tokenizeLabelStartLink(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/line-ending.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/line-ending.js
 var lineEnding = {
   name: "lineEnding",
   tokenize: tokenizeLineEnding
@@ -7956,7 +7928,7 @@ function tokenizeLineEnding(effects, ok3) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/thematic-break.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/thematic-break.js
 var thematicBreak = {
   name: "thematicBreak",
   tokenize: tokenizeThematicBreak
@@ -7995,7 +7967,7 @@ function tokenizeThematicBreak(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/list.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/list.js
 var list = {
   continuation: {
     tokenize: tokenizeListContinuation
@@ -8125,7 +8097,7 @@ function tokenizeListItemPrefixWhitespace(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-core-commonmark/lib/setext-underline.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/setext-underline.js
 var setextUnderline = {
   name: "setextUnderline",
   resolveTo: resolveToSetextUnderline,
@@ -8219,7 +8191,7 @@ function tokenizeSetextUnderline(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark/lib/initialize/flow.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/initialize/flow.js
 var flow = {
   tokenize: initializeFlow
 };
@@ -8257,7 +8229,7 @@ function initializeFlow(effects) {
   }
 }
 
-// ../../../../node_modules/micromark/lib/initialize/text.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/initialize/text.js
 var resolver = {
   resolveAll: createResolver()
 };
@@ -8399,7 +8371,7 @@ function resolveAllLineSuffixes(events, context) {
   return events;
 }
 
-// ../../../../node_modules/micromark/lib/constructs.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/constructs.js
 var constructs_exports = {};
 __export(constructs_exports, {
   attentionMarkers: () => attentionMarkers,
@@ -8474,7 +8446,7 @@ var disable = {
   null: []
 };
 
-// ../../../../node_modules/micromark/lib/create-tokenizer.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/create-tokenizer.js
 function createTokenizer(parser, initialize, from) {
   let point4 = {
     _bufferIndex: -1,
@@ -8800,7 +8772,7 @@ function serializeChunks(chunks, expandTabs) {
   return result.join("");
 }
 
-// ../../../../node_modules/micromark/lib/parse.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/parse.js
 function parse(options) {
   const settings = options || {};
   const constructs2 = (
@@ -8826,14 +8798,14 @@ function parse(options) {
   }
 }
 
-// ../../../../node_modules/micromark/lib/postprocess.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/postprocess.js
 function postprocess(events) {
   while (!subtokenize(events)) {
   }
   return events;
 }
 
-// ../../../../node_modules/micromark/lib/preprocess.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/preprocess.js
 var search = /[\0\t\n\r]/g;
 function preprocess() {
   let column = 1;
@@ -8913,7 +8885,7 @@ function preprocess() {
   }
 }
 
-// ../../../../node_modules/micromark-util-decode-string/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-decode-string/index.js
 var characterEscapeOrReference = /\\([!-/:-@[-`{-~])|&(#(?:\d{1,7}|x[\da-f]{1,6})|[\da-z]{1,31});/gi;
 function decodeString(value) {
   return value.replace(characterEscapeOrReference, decode);
@@ -8931,7 +8903,7 @@ function decode($0, $1, $2) {
   return decodeNamedCharacterReference($2) || $0;
 }
 
-// ../../../../node_modules/mdast-util-from-markdown/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-from-markdown/lib/index.js
 var own2 = {}.hasOwnProperty;
 function fromMarkdown(value, encoding, options) {
   if (encoding && typeof encoding === "object") {
@@ -9701,7 +9673,7 @@ function defaultOnError(left, right) {
   }) + ") is still open");
 }
 
-// ../../../../node_modules/remark-parse/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/remark-parse/lib/index.js
 function remarkParse(options) {
   const self2 = this;
   self2.parser = parser;
@@ -9718,7 +9690,7 @@ function remarkParse(options) {
   }
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/blockquote.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/blockquote.js
 function blockquote(state, node2) {
   const result = {
     type: "element",
@@ -9730,14 +9702,14 @@ function blockquote(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/break.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/break.js
 function hardBreak(state, node2) {
   const result = { type: "element", tagName: "br", properties: {}, children: [] };
   state.patch(node2, result);
   return [state.applyData(node2, result), { type: "text", value: "\n" }];
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/code.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/code.js
 function code(state, node2) {
   const value = node2.value ? node2.value + "\n" : "";
   const properties = {};
@@ -9761,7 +9733,7 @@ function code(state, node2) {
   return result;
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/delete.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/delete.js
 function strikethrough(state, node2) {
   const result = {
     type: "element",
@@ -9773,7 +9745,7 @@ function strikethrough(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/emphasis.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/emphasis.js
 function emphasis(state, node2) {
   const result = {
     type: "element",
@@ -9785,7 +9757,7 @@ function emphasis(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/footnote-reference.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/footnote-reference.js
 function footnoteReference(state, node2) {
   const clobberPrefix = typeof state.options.clobberPrefix === "string" ? state.options.clobberPrefix : "user-content-";
   const id = String(node2.identifier).toUpperCase();
@@ -9824,7 +9796,7 @@ function footnoteReference(state, node2) {
   return state.applyData(node2, sup);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/heading.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/heading.js
 function heading(state, node2) {
   const result = {
     type: "element",
@@ -9836,7 +9808,7 @@ function heading(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/html.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/html.js
 function html3(state, node2) {
   if (state.options.allowDangerousHtml) {
     const result = { type: "raw", value: node2.value };
@@ -9846,7 +9818,7 @@ function html3(state, node2) {
   return void 0;
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/revert.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/revert.js
 function revert(state, node2) {
   const subtype = node2.referenceType;
   let suffix = "]";
@@ -9874,7 +9846,7 @@ function revert(state, node2) {
   return contents;
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/image-reference.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/image-reference.js
 function imageReference(state, node2) {
   const id = String(node2.identifier).toUpperCase();
   const definition3 = state.definitionById.get(id);
@@ -9890,7 +9862,7 @@ function imageReference(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/image.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/image.js
 function image(state, node2) {
   const properties = { src: normalizeUri(node2.url) };
   if (node2.alt !== null && node2.alt !== void 0) {
@@ -9904,7 +9876,7 @@ function image(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/inline-code.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/inline-code.js
 function inlineCode(state, node2) {
   const text8 = { type: "text", value: node2.value.replace(/\r?\n|\r/g, " ") };
   state.patch(node2, text8);
@@ -9918,7 +9890,7 @@ function inlineCode(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/link-reference.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/link-reference.js
 function linkReference(state, node2) {
   const id = String(node2.identifier).toUpperCase();
   const definition3 = state.definitionById.get(id);
@@ -9939,7 +9911,7 @@ function linkReference(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/link.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/link.js
 function link(state, node2) {
   const properties = { href: normalizeUri(node2.url) };
   if (node2.title !== null && node2.title !== void 0) {
@@ -9955,7 +9927,7 @@ function link(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/list-item.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/list-item.js
 function listItem(state, node2, parent) {
   const results = state.all(node2);
   const loose = parent ? listLoose(parent) : listItemLoose(node2);
@@ -10018,7 +9990,7 @@ function listItemLoose(node2) {
   return spread === null || spread === void 0 ? node2.children.length > 1 : spread;
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/list.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/list.js
 function list2(state, node2) {
   const properties = {};
   const results = state.all(node2);
@@ -10043,7 +10015,7 @@ function list2(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/paragraph.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/paragraph.js
 function paragraph(state, node2) {
   const result = {
     type: "element",
@@ -10055,14 +10027,14 @@ function paragraph(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/root.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/root.js
 function root2(state, node2) {
   const result = { type: "root", children: state.wrap(state.all(node2)) };
   state.patch(node2, result);
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/strong.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/strong.js
 function strong(state, node2) {
   const result = {
     type: "element",
@@ -10074,7 +10046,7 @@ function strong(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/table.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/table.js
 function table(state, node2) {
   const rows = state.all(node2);
   const firstRow = rows.shift();
@@ -10111,7 +10083,7 @@ function table(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/table-row.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/table-row.js
 function tableRow(state, node2, parent) {
   const siblings = parent ? parent.children : void 0;
   const rowIndex = siblings ? siblings.indexOf(node2) : 1;
@@ -10145,7 +10117,7 @@ function tableRow(state, node2, parent) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/table-cell.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/table-cell.js
 function tableCell(state, node2) {
   const result = {
     type: "element",
@@ -10158,7 +10130,7 @@ function tableCell(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/trim-lines/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/trim-lines/index.js
 var tab = 9;
 var space = 32;
 function trimLines(value) {
@@ -10198,14 +10170,14 @@ function trimLine(value, start2, end) {
   return endIndex > startIndex ? value.slice(startIndex, endIndex) : "";
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/text.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/text.js
 function text5(state, node2) {
   const result = { type: "text", value: trimLines(String(node2.value)) };
   state.patch(node2, result);
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js
 function thematicBreak2(state, node2) {
   const result = {
     type: "element",
@@ -10217,7 +10189,7 @@ function thematicBreak2(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/handlers/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/index.js
 var handlers = {
   blockquote,
   break: hardBreak,
@@ -10252,7 +10224,7 @@ function ignore() {
   return void 0;
 }
 
-// ../../../../node_modules/@ungap/structured-clone/esm/types.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/@ungap/structured-clone/esm/types.js
 var VOID = -1;
 var PRIMITIVE = 0;
 var ARRAY = 1;
@@ -10264,7 +10236,7 @@ var SET = 6;
 var ERROR = 7;
 var BIGINT = 8;
 
-// ../../../../node_modules/@ungap/structured-clone/esm/deserialize.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/@ungap/structured-clone/esm/deserialize.js
 var { defineProperty } = Object;
 var env = typeof self === "object" ? self : globalThis;
 var guard = (name3, init) => {
@@ -10356,7 +10328,7 @@ var deserializer = ($, _) => {
 };
 var deserialize = (serialized) => deserializer(/* @__PURE__ */ new Map(), serialized)(0);
 
-// ../../../../node_modules/@ungap/structured-clone/esm/serialize.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/@ungap/structured-clone/esm/serialize.js
 var EMPTY = "";
 var { toString: toString2 } = {};
 var { keys, is } = Object;
@@ -10493,13 +10465,13 @@ var serialize = (value, { json, lossy } = {}) => {
   return serializer(!(json || lossy), !!json, /* @__PURE__ */ new Map(), _)(value), _;
 };
 
-// ../../../../node_modules/@ungap/structured-clone/esm/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/@ungap/structured-clone/esm/index.js
 var esm_default = typeof structuredClone === "function" ? (
   /* c8 ignore start */
   (any, options) => options && ("json" in options || "lossy" in options) ? deserialize(serialize(any, options)) : structuredClone(any)
 ) : (any, options) => deserialize(serialize(any, options));
 
-// ../../../../node_modules/mdast-util-to-hast/lib/footer.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/footer.js
 function defaultFootnoteBackContent(_, rereferenceIndex) {
   const result = [{ type: "text", value: "\u21A9" }];
   if (rereferenceIndex > 1) {
@@ -10609,7 +10581,7 @@ function footer(state) {
   };
 }
 
-// ../../../../node_modules/unist-util-is/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/unist-util-is/lib/index.js
 var convert = (
   // Note: overloads in JSDoc can’t yet use different `@template`s.
   /**
@@ -10708,12 +10680,12 @@ function looksLikeANode(value) {
   return value !== null && typeof value === "object" && "type" in value;
 }
 
-// ../../../../node_modules/unist-util-visit-parents/lib/color.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/unist-util-visit-parents/lib/color.js
 function color(d) {
   return d;
 }
 
-// ../../../../node_modules/unist-util-visit-parents/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/unist-util-visit-parents/lib/index.js
 var empty2 = [];
 var CONTINUE = true;
 var EXIT = false;
@@ -10833,7 +10805,7 @@ function toResult(value) {
   return value === null || value === void 0 ? empty2 : [value];
 }
 
-// ../../../../node_modules/unist-util-visit/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/unist-util-visit/lib/index.js
 function visit(tree, testOrEnterOrVisitors, enterOrVisitorsOrReverse, maybeReverse) {
   let check2;
   let visitors;
@@ -10868,7 +10840,7 @@ function wrap(visitor) {
   }
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/state.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/state.js
 var own3 = {}.hasOwnProperty;
 var emptyOptions3 = {};
 function createState(tree, options) {
@@ -11010,7 +10982,7 @@ function trimMarkdownSpaceStart(value) {
   return value.slice(index2);
 }
 
-// ../../../../node_modules/mdast-util-to-hast/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/index.js
 function toHast(tree, options) {
   const state = createState(tree, options);
   const node2 = state.one(tree, void 0);
@@ -11023,7 +10995,7 @@ function toHast(tree, options) {
   return result;
 }
 
-// ../../../../node_modules/remark-rehype/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/remark-rehype/lib/index.js
 function remarkRehype(destination, options) {
   if (destination && "run" in destination) {
     return async function(tree, file) {
@@ -11042,17 +11014,17 @@ function remarkRehype(destination, options) {
   };
 }
 
-// ../../../../node_modules/bail/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/bail/index.js
 function bail(error) {
   if (error) {
     throw error;
   }
 }
 
-// ../../../../node_modules/unified/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/unified/lib/index.js
 var import_extend = __toESM(require_extend(), 1);
 
-// ../../../../node_modules/is-plain-obj/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/is-plain-obj/index.js
 function isPlainObject(value) {
   if (typeof value !== "object" || value === null) {
     return false;
@@ -11061,7 +11033,7 @@ function isPlainObject(value) {
   return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
 }
 
-// ../../../../node_modules/trough/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/trough/lib/index.js
 function trough() {
   const fns = [];
   const pipeline = { run, use };
@@ -11145,7 +11117,7 @@ function wrap3(middleware, callback) {
   }
 }
 
-// ../../../../node_modules/vfile/lib/minpath.browser.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/vfile/lib/minpath.browser.js
 var minpath = { basename, dirname, extname, join, sep: "/" };
 function basename(path2, extname2) {
   if (extname2 !== void 0 && typeof extname2 !== "string") {
@@ -11358,13 +11330,13 @@ function assertPath(path2) {
   }
 }
 
-// ../../../../node_modules/vfile/lib/minproc.browser.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/vfile/lib/minproc.browser.js
 var minproc = { cwd };
 function cwd() {
   return "/";
 }
 
-// ../../../../node_modules/vfile/lib/minurl.shared.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/vfile/lib/minurl.shared.js
 function isUrl(fileUrlOrPath) {
   return Boolean(
     fileUrlOrPath !== null && typeof fileUrlOrPath === "object" && "href" in fileUrlOrPath && fileUrlOrPath.href && "protocol" in fileUrlOrPath && fileUrlOrPath.protocol && // @ts-expect-error: indexing is fine.
@@ -11372,7 +11344,7 @@ function isUrl(fileUrlOrPath) {
   );
 }
 
-// ../../../../node_modules/vfile/lib/minurl.browser.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/vfile/lib/minurl.browser.js
 function urlToPath(path2) {
   if (typeof path2 === "string") {
     path2 = new URL(path2);
@@ -11415,7 +11387,7 @@ function getPathFromURLPosix(url) {
   return decodeURIComponent(pathname);
 }
 
-// ../../../../node_modules/vfile/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/vfile/lib/index.js
 var order = (
   /** @type {const} */
   [
@@ -11871,7 +11843,7 @@ function isUint8Array(value) {
   );
 }
 
-// ../../../../node_modules/unified/lib/callable-instance.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/unified/lib/callable-instance.js
 var CallableInstance = (
   /**
    * @type {new <Parameters extends Array<unknown>, Result>(property: string | symbol) => (...parameters: Parameters) => Result}
@@ -11900,7 +11872,7 @@ var CallableInstance = (
   })
 );
 
-// ../../../../node_modules/unified/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/unified/lib/index.js
 var own4 = {}.hasOwnProperty;
 var Processor = class _Processor extends CallableInstance {
   /**
@@ -12536,7 +12508,7 @@ function isUint8Array2(value) {
   );
 }
 
-// ../../../../node_modules/react-markdown/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/react-markdown/lib/index.js
 var changelog = "https://github.com/remarkjs/react-markdown/blob/main/changelog.md";
 var emptyPlugins = [];
 var emptyRemarkRehypeOptions = { allowDangerousHtml: true };
@@ -12621,11 +12593,11 @@ function post(tree, options) {
   }
   visit(tree, transform);
   return toJsxRuntime(tree, {
-    Fragment: import_jsx_runtime7.Fragment,
+    Fragment: import_jsx_runtime6.Fragment,
     components,
     ignoreInvalidStyle: true,
-    jsx: import_jsx_runtime7.jsx,
-    jsxs: import_jsx_runtime7.jsxs,
+    jsx: import_jsx_runtime6.jsx,
+    jsxs: import_jsx_runtime6.jsxs,
     passKeys: true,
     passNode: true
   });
@@ -12682,7 +12654,7 @@ function defaultUrlTransform(value) {
   return "";
 }
 
-// ../../../../node_modules/ccount/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/ccount/index.js
 function ccount(value, character) {
   const source = String(value);
   if (typeof character !== "string") {
@@ -12697,7 +12669,7 @@ function ccount(value, character) {
   return count;
 }
 
-// ../../../../node_modules/escape-string-regexp/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/escape-string-regexp/index.js
 function escapeStringRegexp(string3) {
   if (typeof string3 !== "string") {
     throw new TypeError("Expected a string");
@@ -12705,7 +12677,7 @@ function escapeStringRegexp(string3) {
   return string3.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
 }
 
-// ../../../../node_modules/mdast-util-find-and-replace/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-find-and-replace/lib/index.js
 function findAndReplace(tree, list4, options) {
   const settings = options || {};
   const ignored = convert(settings.ignore || []);
@@ -12806,7 +12778,7 @@ function toFunction(replace2) {
   };
 }
 
-// ../../../../node_modules/mdast-util-gfm-autolink-literal/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-gfm-autolink-literal/lib/index.js
 var inConstruct = "phrasing";
 var notInConstruct = ["autolink", "link", "image", "label"];
 function gfmAutolinkLiteralFromMarkdown() {
@@ -12956,7 +12928,7 @@ function previous2(match, email) {
   (!email || code4 !== 47);
 }
 
-// ../../../../node_modules/mdast-util-gfm-footnote/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-gfm-footnote/lib/index.js
 footnoteReference2.peek = footnoteReferencePeek;
 function enterFootnoteCallString() {
   this.buffer();
@@ -13069,7 +13041,7 @@ function mapAll(line, index2, blank) {
   return (blank ? "" : "    ") + line;
 }
 
-// ../../../../node_modules/mdast-util-gfm-strikethrough/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-gfm-strikethrough/lib/index.js
 var constructsWithoutStrikethrough = [
   "autolink",
   "destinationLiteral",
@@ -13126,7 +13098,7 @@ function peekDelete() {
   return "~";
 }
 
-// ../../../../node_modules/markdown-table/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/markdown-table/index.js
 function defaultStringLength(value) {
   return value.length;
 }
@@ -13267,7 +13239,7 @@ function toAlignment(value) {
   return code4 === 67 || code4 === 99 ? 99 : code4 === 76 || code4 === 108 ? 108 : code4 === 82 || code4 === 114 ? 114 : 0;
 }
 
-// ../../../../node_modules/mdast-util-phrasing/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-phrasing/lib/index.js
 var phrasing = (
   /** @type {(node?: unknown) => node is Exclude<PhrasingContent, Html>} */
   convert([
@@ -13295,7 +13267,7 @@ var phrasing = (
   ])
 );
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/blockquote.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/blockquote.js
 function blockquote2(node2, _, state, info) {
   const exit3 = state.enter("blockquote");
   const tracker = state.createTracker(info);
@@ -13312,7 +13284,7 @@ function map(line, _, blank) {
   return ">" + (blank ? "" : " ") + line;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/pattern-in-scope.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/pattern-in-scope.js
 function patternInScope(stack, pattern) {
   return listInScope(stack, pattern.inConstruct, true) && !listInScope(stack, pattern.notInConstruct, false);
 }
@@ -13332,7 +13304,7 @@ function listInScope(stack, list4, none) {
   return false;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/break.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/break.js
 function hardBreak2(_, _1, state, info) {
   let index2 = -1;
   while (++index2 < state.unsafe.length) {
@@ -13344,7 +13316,7 @@ function hardBreak2(_, _1, state, info) {
   return "\\\n";
 }
 
-// ../../../../node_modules/longest-streak/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/longest-streak/index.js
 function longestStreak(value, substring) {
   const source = String(value);
   let index2 = source.indexOf(substring);
@@ -13368,7 +13340,7 @@ function longestStreak(value, substring) {
   return max;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/format-code-as-indented.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/format-code-as-indented.js
 function formatCodeAsIndented(node2, state) {
   return Boolean(
     state.options.fences === false && node2.value && // If there’s no info…
@@ -13378,7 +13350,7 @@ function formatCodeAsIndented(node2, state) {
   );
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-fence.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-fence.js
 function checkFence(state) {
   const marker = state.options.fence || "`";
   if (marker !== "`" && marker !== "~") {
@@ -13389,7 +13361,7 @@ function checkFence(state) {
   return marker;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/code.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/code.js
 function code2(node2, _, state, info) {
   const marker = checkFence(state);
   const raw = node2.value || "";
@@ -13441,7 +13413,7 @@ function map2(line, _, blank) {
   return (blank ? "" : "    ") + line;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-quote.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-quote.js
 function checkQuote(state) {
   const marker = state.options.quote || '"';
   if (marker !== '"' && marker !== "'") {
@@ -13452,7 +13424,7 @@ function checkQuote(state) {
   return marker;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/definition.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/definition.js
 function definition2(node2, _, state, info) {
   const quote = checkQuote(state);
   const suffix = quote === '"' ? "Quote" : "Apostrophe";
@@ -13508,7 +13480,7 @@ function definition2(node2, _, state, info) {
   return value;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-emphasis.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-emphasis.js
 function checkEmphasis(state) {
   const marker = state.options.emphasis || "*";
   if (marker !== "*" && marker !== "_") {
@@ -13519,7 +13491,7 @@ function checkEmphasis(state) {
   return marker;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/character.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/character.js
 function firstCharacter(value) {
   const code4 = value.codePointAt(0);
   return code4 === void 0 ? "" : String.fromCodePoint(code4);
@@ -13529,12 +13501,12 @@ function lastCharacter(value) {
   return code4 !== void 0 && code4 > 65535 ? value.slice(-2) : value.slice(-1);
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/encode-character-reference.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/encode-character-reference.js
 function encodeCharacterReference(code4) {
   return "&#x" + code4.toString(16).toUpperCase() + ";";
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/encode-info.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/encode-info.js
 function encodeInfo(outside, inside, marker) {
   const outsideKind = classifyCharacter(outside);
   const insideKind = classifyCharacter(inside);
@@ -13576,7 +13548,7 @@ function encodeInfo(outside, inside, marker) {
   );
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/html-kind.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/html-kind.js
 function htmlKind(value) {
   if (value.charCodeAt(0) !== 60) return;
   const next = value.charCodeAt(1);
@@ -13603,7 +13575,7 @@ function htmlKind(value) {
   return htmlBlockNames.includes(name3) ? 6 : 7;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/container-phrasing.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/container-phrasing.js
 var builtins = /* @__PURE__ */ new Map([
   ["*", false],
   ["_", true]
@@ -13947,7 +13919,7 @@ function serialize3(items, before, after) {
   return result;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/emphasis.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/emphasis.js
 emphasis2.attention = attention2;
 emphasis2.peek = peek;
 function emphasis2(node2, _, state, info) {
@@ -13969,7 +13941,7 @@ function peek(_, _1, state) {
   return state.options.emphasis || "*";
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/format-heading-as-setext.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/format-heading-as-setext.js
 function formatHeadingAsSetext(node2, state) {
   let literalWithBreak = false;
   visit(node2, function(node3) {
@@ -13983,7 +13955,7 @@ function formatHeadingAsSetext(node2, state) {
   );
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/heading.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/heading.js
 function heading2(node2, _, state, info) {
   const rank = Math.max(Math.min(6, node2.depth || 1), 1);
   const tracker = state.createTracker(info);
@@ -14026,7 +13998,7 @@ function heading2(node2, _, state, info) {
   return value;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/html.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/html.js
 html4.peek = htmlPeek;
 function html4(node2) {
   return node2.value || "";
@@ -14035,7 +14007,7 @@ function htmlPeek() {
   return "<";
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/image.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/image.js
 image2.peek = imagePeek;
 function image2(node2, _, state, info) {
   const quote = checkQuote(state);
@@ -14092,7 +14064,7 @@ function imagePeek() {
   return "!";
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/image-reference.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/image-reference.js
 imageReference2.peek = imageReferencePeek;
 function imageReference2(node2, _, state, info) {
   const type = node2.referenceType;
@@ -14133,7 +14105,7 @@ function imageReferencePeek() {
   return "!";
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/inline-code.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/inline-code.js
 inlineCode2.peek = inlineCodePeek;
 function inlineCode2(node2, _, state) {
   let value = node2.value || "";
@@ -14164,7 +14136,7 @@ function inlineCodePeek() {
   return "`";
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/format-link-as-autolink.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/format-link-as-autolink.js
 function formatLinkAsAutolink(node2, state) {
   const raw = toString(node2);
   return Boolean(
@@ -14179,7 +14151,7 @@ function formatLinkAsAutolink(node2, state) {
   );
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/link.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/link.js
 link2.peek = linkPeek;
 function link2(node2, _, state, info) {
   const quote = checkQuote(state);
@@ -14268,7 +14240,7 @@ function linkPeek(node2, _, state) {
   return formatLinkAsAutolink(node2, state) ? "<" : "[";
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/link-reference.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/link-reference.js
 linkReference2.peek = linkReferencePeek;
 function linkReference2(node2, _, state, info) {
   const type = node2.referenceType;
@@ -14309,7 +14281,7 @@ function linkReferencePeek() {
   return "[";
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-bullet.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-bullet.js
 function checkBullet(state) {
   const marker = state.options.bullet || "*";
   if (marker !== "*" && marker !== "+" && marker !== "-") {
@@ -14320,7 +14292,7 @@ function checkBullet(state) {
   return marker;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-bullet-other.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-bullet-other.js
 function checkBulletOther(state) {
   const bullet = checkBullet(state);
   const bulletOther = state.options.bulletOther;
@@ -14340,7 +14312,7 @@ function checkBulletOther(state) {
   return bulletOther;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-bullet-ordered.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-bullet-ordered.js
 function checkBulletOrdered(state) {
   const marker = state.options.bulletOrdered || ".";
   if (marker !== "." && marker !== ")") {
@@ -14351,7 +14323,7 @@ function checkBulletOrdered(state) {
   return marker;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-rule.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-rule.js
 function checkRule(state) {
   const marker = state.options.rule || "*";
   if (marker !== "*" && marker !== "-" && marker !== "_") {
@@ -14362,7 +14334,7 @@ function checkRule(state) {
   return marker;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/list.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/list.js
 function list3(node2, parent, state, info) {
   const exit3 = state.enter("list");
   const bulletCurrent = state.bulletCurrent;
@@ -14402,7 +14374,7 @@ function list3(node2, parent, state, info) {
   return value;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-list-item-indent.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-list-item-indent.js
 function checkListItemIndent(state) {
   const style = state.options.listItemIndent || "one";
   if (style !== "tab" && style !== "one" && style !== "mixed") {
@@ -14413,7 +14385,7 @@ function checkListItemIndent(state) {
   return style;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/list-item.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/list-item.js
 function listItem2(node2, parent, state, info) {
   const listItemIndent = checkListItemIndent(state);
   let bullet = state.bulletCurrent || checkBullet(state);
@@ -14442,7 +14414,7 @@ function listItem2(node2, parent, state, info) {
   }
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/paragraph.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/paragraph.js
 function paragraph2(node2, _, state, info) {
   const exit3 = state.enter("paragraph");
   const subexit = state.enter("phrasing");
@@ -14452,7 +14424,7 @@ function paragraph2(node2, _, state, info) {
   return value;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/root.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/root.js
 function root3(node2, _, state, info) {
   const hasPhrasing = node2.children.some(function(d) {
     return phrasing(d);
@@ -14464,7 +14436,7 @@ function root3(node2, _, state, info) {
   return value;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-strong.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-strong.js
 function checkStrong(state) {
   const marker = state.options.strong || "*";
   if (marker !== "*" && marker !== "_") {
@@ -14475,7 +14447,7 @@ function checkStrong(state) {
   return marker;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/strong.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/strong.js
 strong2.attention = attention3;
 strong2.peek = peek2;
 function strong2(node2, _, state, info) {
@@ -14497,7 +14469,7 @@ function peek2(_, _1, state) {
   return state.options.strong || "*";
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/text.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/text.js
 function text6(node2, parent, state, info) {
   const siblings = parent ? parent.children : [];
   const index2 = state.indexStack[state.indexStack.length - 1];
@@ -14508,7 +14480,7 @@ function text6(node2, parent, state, info) {
   });
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-rule-repetition.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-rule-repetition.js
 function checkRuleRepetition(state) {
   const repetition = state.options.ruleRepetition || 3;
   if (repetition < 3) {
@@ -14519,13 +14491,13 @@ function checkRuleRepetition(state) {
   return repetition;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/thematic-break.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/thematic-break.js
 function thematicBreak3(_, _1, state) {
   const value = (checkRule(state) + (state.options.ruleSpaces ? " " : "")).repeat(checkRuleRepetition(state));
   return state.options.ruleSpaces ? value.slice(0, -1) : value;
 }
 
-// ../../../../node_modules/mdast-util-to-markdown/lib/handle/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/index.js
 var handle = {
   blockquote: blockquote2,
   break: hardBreak2,
@@ -14549,7 +14521,7 @@ var handle = {
   thematicBreak: thematicBreak3
 };
 
-// ../../../../node_modules/mdast-util-gfm-table/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-gfm-table/lib/index.js
 function gfmTableFromMarkdown() {
   return {
     enter: {
@@ -14702,7 +14674,7 @@ function gfmTableToMarkdown(options) {
   }
 }
 
-// ../../../../node_modules/mdast-util-gfm-task-list-item/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-gfm-task-list-item/lib/index.js
 function gfmTaskListItemFromMarkdown() {
   return {
     exit: {
@@ -14775,7 +14747,7 @@ function listItemWithTaskListItem(node2, parent, state, info) {
   }
 }
 
-// ../../../../node_modules/mdast-util-gfm/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-gfm/lib/index.js
 function gfmFromMarkdown() {
   return [
     gfmAutolinkLiteralFromMarkdown(),
@@ -14797,7 +14769,7 @@ function gfmToMarkdown(options) {
   };
 }
 
-// ../../../../node_modules/micromark-extension-gfm-autolink-literal/lib/syntax.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-autolink-literal/lib/syntax.js
 var wwwPrefix = {
   tokenize: tokenizeWwwPrefix,
   partial: true
@@ -15139,7 +15111,7 @@ function previousUnbalanced(events) {
   return result;
 }
 
-// ../../../../node_modules/micromark-extension-gfm-footnote/lib/syntax.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-footnote/lib/syntax.js
 var indent = {
   tokenize: tokenizeIndent2,
   partial: true
@@ -15414,7 +15386,7 @@ function tokenizeIndent2(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-extension-gfm-strikethrough/lib/syntax.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-strikethrough/lib/syntax.js
 function gfmStrikethrough(options) {
   const options_ = options || {};
   let single = options_.singleTilde;
@@ -15508,7 +15480,7 @@ function gfmStrikethrough(options) {
   }
 }
 
-// ../../../../node_modules/micromark-extension-gfm-table/lib/edit-map.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-table/lib/edit-map.js
 var EditMap2 = class {
   /**
    * Create a new edit map.
@@ -15594,7 +15566,7 @@ function addImplementation2(editMap, at2, remove, add) {
   editMap.index.set(at2, change);
 }
 
-// ../../../../node_modules/micromark-extension-gfm-table/lib/infer.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-table/lib/infer.js
 function gfmTableAlign(events, index2) {
   let inDelimiterRow = false;
   const align = [];
@@ -15621,7 +15593,7 @@ function gfmTableAlign(events, index2) {
   return align;
 }
 
-// ../../../../node_modules/micromark-extension-gfm-table/lib/syntax.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-table/lib/syntax.js
 function gfmTable() {
   return {
     flow: {
@@ -16012,7 +15984,7 @@ function getPoint(events, index2) {
   return event[1][side];
 }
 
-// ../../../../node_modules/micromark-extension-gfm-task-list-item/lib/syntax.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-task-list-item/lib/syntax.js
 var tasklistCheck = {
   name: "tasklistCheck",
   tokenize: tokenizeTasklistCheck
@@ -16086,7 +16058,7 @@ function spaceThenNonSpace(effects, ok3, nok) {
   }
 }
 
-// ../../../../node_modules/micromark-extension-gfm/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm/index.js
 function gfm(options) {
   return combineExtensions([
     gfmAutolinkLiteral(),
@@ -16097,7 +16069,7 @@ function gfm(options) {
   ]);
 }
 
-// ../../../../node_modules/remark-gfm/lib/index.js
+// ../../../../../github/dsh-canvas-workspace/node_modules/remark-gfm/lib/index.js
 var emptyOptions4 = {};
 function remarkGfm(options) {
   const self2 = (
@@ -16527,7 +16499,7 @@ function parseDslPreview(source, messageId = "preview") {
   return parseDsl(source, messageId, false, true);
 }
 
-// ../../../../node_modules/acorn/dist/acorn.mjs
+// ../../../../../github/dsh-canvas-workspace/node_modules/acorn/dist/acorn.mjs
 var astralIdentifierCodes = [509, 0, 227, 0, 150, 4, 294, 9, 1368, 2, 2, 1, 6, 3, 41, 2, 5, 0, 166, 1, 574, 3, 9, 9, 7, 9, 32, 4, 318, 1, 31, 4, 33, 15, 71, 10, 50, 3, 123, 2, 54, 14, 32, 10, 3, 1, 11, 3, 46, 10, 8, 0, 46, 9, 7, 2, 37, 13, 2, 9, 6, 1, 45, 0, 13, 2, 49, 13, 9, 3, 2, 11, 83, 11, 7, 0, 3, 0, 158, 11, 6, 9, 7, 3, 56, 1, 2, 6, 3, 1, 3, 2, 10, 0, 11, 1, 3, 6, 4, 4, 68, 8, 2, 0, 3, 0, 2, 3, 2, 4, 2, 0, 15, 1, 83, 17, 10, 9, 5, 0, 82, 19, 13, 9, 214, 6, 3, 8, 28, 1, 83, 16, 16, 9, 82, 12, 9, 9, 7, 19, 58, 14, 5, 9, 243, 14, 166, 9, 71, 5, 2, 1, 3, 3, 2, 0, 2, 1, 13, 9, 120, 6, 3, 6, 4, 0, 29, 9, 41, 6, 2, 3, 9, 0, 10, 10, 47, 15, 199, 7, 137, 9, 54, 7, 2, 7, 17, 9, 57, 21, 2, 13, 123, 5, 4, 0, 2, 1, 2, 6, 2, 0, 9, 9, 49, 4, 2, 1, 2, 4, 9, 9, 55, 9, 7, 0, 259, 3, 10, 1, 2, 0, 49, 6, 4, 4, 14, 10, 5350, 0, 7, 14, 11465, 27, 2343, 9, 87, 9, 39, 4, 60, 6, 26, 9, 535, 9, 470, 0, 2, 54, 8, 3, 82, 0, 12, 1, 19628, 1, 4178, 9, 519, 45, 3, 22, 481, 1, 61, 4, 4, 5, 9, 7, 3, 6, 31, 3, 149, 2, 12, 2, 9, 1, 3, 0, 33, 1, 1357, 49, 513, 54, 5, 49, 9, 0, 15, 0, 23, 4, 2, 14, 1361, 6, 2, 16, 3, 6, 2, 1, 2, 4, 101, 0, 161, 6, 10, 9, 357, 0, 62, 13, 499, 13, 245, 1, 2, 9, 233, 0, 3, 0, 8, 1, 6, 0, 475, 6, 110, 6, 6, 9, 4759, 9, 787719, 239];
 var astralIdentifierStartCodes = [0, 11, 2, 25, 2, 18, 2, 1, 2, 14, 3, 13, 35, 122, 70, 52, 268, 28, 4, 48, 48, 31, 14, 29, 6, 37, 11, 29, 3, 35, 5, 7, 2, 4, 43, 157, 19, 35, 5, 35, 5, 39, 9, 51, 13, 10, 2, 14, 2, 6, 2, 1, 2, 10, 2, 14, 2, 6, 2, 1, 4, 51, 13, 310, 10, 21, 11, 7, 25, 5, 2, 41, 2, 13, 65, 5, 3, 0, 2, 43, 2, 1, 4, 0, 3, 22, 11, 22, 10, 30, 66, 18, 2, 1, 11, 21, 11, 25, 7, 25, 39, 55, 7, 1, 65, 0, 16, 3, 2, 2, 2, 28, 43, 28, 4, 28, 36, 7, 2, 27, 28, 53, 11, 21, 11, 18, 14, 17, 111, 72, 56, 50, 14, 50, 14, 35, 39, 27, 10, 22, 251, 41, 7, 1, 17, 5, 18, 21, 18, 28, 11, 0, 9, 21, 43, 17, 47, 20, 28, 22, 13, 52, 58, 1, 3, 0, 14, 44, 33, 24, 27, 35, 30, 0, 3, 0, 9, 34, 4, 0, 13, 47, 15, 3, 22, 0, 2, 0, 36, 17, 2, 24, 20, 1, 64, 6, 2, 0, 2, 3, 2, 14, 2, 9, 8, 46, 39, 7, 3, 1, 3, 21, 2, 6, 2, 1, 2, 4, 4, 0, 19, 0, 13, 4, 31, 9, 2, 0, 3, 0, 2, 37, 2, 0, 26, 0, 2, 0, 45, 52, 19, 3, 21, 2, 31, 47, 21, 1, 2, 0, 185, 46, 42, 3, 37, 47, 21, 0, 60, 42, 14, 0, 72, 26, 38, 6, 186, 43, 117, 63, 32, 7, 3, 0, 3, 7, 2, 1, 2, 23, 16, 0, 2, 0, 95, 7, 3, 38, 17, 0, 2, 0, 29, 0, 11, 39, 8, 0, 22, 0, 12, 45, 20, 0, 19, 72, 18, 0, 182, 32, 32, 8, 2, 36, 18, 0, 50, 29, 113, 6, 2, 1, 2, 37, 22, 0, 26, 5, 2, 1, 2, 31, 15, 0, 24, 43, 22, 0, 239, 18, 16, 0, 2, 12, 2, 33, 125, 0, 80, 921, 103, 111, 6, 206, 13, 310, 2314, 96, 16, 1071, 18, 5, 26, 3994, 6, 582, 6842, 29, 1763, 568, 8, 30, 18, 78, 18, 29, 19, 47, 17, 3, 32, 20, 6, 18, 433, 44, 212, 63, 33, 24, 3, 24, 45, 74, 6, 0, 67, 12, 65, 1, 2, 0, 15, 4, 10, 7386, 37, 33, 96, 114, 14, 913, 15, 50, 7710, 3, 2, 6, 2, 1, 2, 296, 10, 0, 30, 2, 3, 0, 15, 4, 8, 395, 2309, 106, 6, 12, 4, 8, 8, 9, 5991, 84, 2, 70, 2, 1, 3, 0, 3, 1, 3, 3, 2, 11, 2, 0, 2, 6, 2, 64, 2, 3, 3, 7, 2, 6, 2, 27, 2, 3, 2, 4, 2, 0, 4, 6, 2, 340, 2, 24, 2, 24, 2, 30, 2, 24, 2, 30, 2, 24, 2, 30, 2, 24, 2, 30, 2, 24, 2, 7, 1845, 129, 15, 6, 55, 50, 49, 61, 147, 44, 11, 6, 17, 0, 322, 29, 19, 43, 485, 27, 229, 29, 3, 0, 208, 30, 2, 2, 2, 1, 2, 6, 3, 4, 10, 1, 225, 6, 2, 3, 2, 1, 2, 14, 2, 196, 60, 67, 8, 0, 1205, 3, 2, 26, 2, 1, 2, 0, 3, 0, 2, 9, 2, 3, 2, 0, 2, 0, 7, 0, 5, 0, 2, 0, 2, 0, 2, 2, 2, 1, 2, 0, 3, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 1, 2, 0, 3, 3, 2, 6, 2, 3, 2, 3, 2, 0, 2, 9, 2, 16, 6, 2, 2, 4, 2, 16, 4421, 42719, 33, 4382, 2, 5773, 3, 7472, 16, 621, 2467, 541, 1507, 4938, 6, 8489, 39815, 11327];
 var nonASCIIidentifierChars = "\u200C\u200D\xB7\u0300-\u036F\u0387\u0483-\u0487\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7-\u05C9\u0610-\u061A\u064B-\u0669\u0670\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED\u06F0-\u06F9\u0711\u0730-\u074A\u07A6-\u07B0\u07C0-\u07C9\u07EB-\u07F3\u07FD\u0816-\u0819\u081B-\u0823\u0825-\u0827\u0829-\u082D\u0859-\u085B\u0897-\u089F\u08CA-\u08E1\u08E3-\u0903\u093A-\u093C\u093E-\u094F\u0951-\u0957\u0962\u0963\u0966-\u096F\u0981-\u0983\u09BC\u09BE-\u09C4\u09C7\u09C8\u09CB-\u09CD\u09D7\u09E2\u09E3\u09E6-\u09EF\u09FE\u0A01-\u0A03\u0A3C\u0A3E-\u0A42\u0A47\u0A48\u0A4B-\u0A4D\u0A51\u0A66-\u0A71\u0A75\u0A81-\u0A83\u0ABC\u0ABE-\u0AC5\u0AC7-\u0AC9\u0ACB-\u0ACD\u0AE2\u0AE3\u0AE6-\u0AEF\u0AFA-\u0AFF\u0B01-\u0B03\u0B3C\u0B3E-\u0B44\u0B47\u0B48\u0B4B-\u0B4D\u0B53-\u0B57\u0B62\u0B63\u0B66-\u0B6F\u0B82\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCD\u0BD7\u0BE6-\u0BEF\u0C00-\u0C04\u0C3C\u0C3E-\u0C44\u0C46-\u0C48\u0C4A-\u0C4D\u0C55\u0C56\u0C62\u0C63\u0C66-\u0C6F\u0C81-\u0C83\u0CBC\u0CBE-\u0CC4\u0CC6-\u0CC8\u0CCA-\u0CCD\u0CD5\u0CD6\u0CE2\u0CE3\u0CE6-\u0CEF\u0CF3\u0D00-\u0D03\u0D3B\u0D3C\u0D3E-\u0D44\u0D46-\u0D48\u0D4A-\u0D4D\u0D57\u0D62\u0D63\u0D66-\u0D6F\u0D81-\u0D83\u0DCA\u0DCF-\u0DD4\u0DD6\u0DD8-\u0DDF\u0DE6-\u0DEF\u0DF2\u0DF3\u0E31\u0E34-\u0E3A\u0E47-\u0E4E\u0E50-\u0E59\u0EB1\u0EB4-\u0EBC\u0EC8-\u0ECE\u0ED0-\u0ED9\u0F18\u0F19\u0F20-\u0F29\u0F35\u0F37\u0F39\u0F3E\u0F3F\u0F71-\u0F84\u0F86\u0F87\u0F8D-\u0F97\u0F99-\u0FBC\u0FC6\u102B-\u103E\u1040-\u1049\u1056-\u1059\u105E-\u1060\u1062-\u1064\u1067-\u106D\u1071-\u1074\u1082-\u108D\u108F-\u109D\u135D-\u135F\u1369-\u1371\u1712-\u1715\u1732-\u1734\u1752\u1753\u1772\u1773\u17B4-\u17D3\u17DD\u17E0-\u17E9\u180B-\u180D\u180F-\u1819\u18A9\u1920-\u192B\u1930-\u193B\u1946-\u194F\u19D0-\u19DA\u1A17-\u1A1B\u1A55-\u1A5E\u1A60-\u1A7C\u1A7F-\u1A89\u1A90-\u1A99\u1AB0-\u1ABD\u1ABF-\u1AF0\u1B00-\u1B04\u1B34-\u1B44\u1B50-\u1B59\u1B6B-\u1B73\u1B80-\u1B82\u1BA1-\u1BAD\u1BB0-\u1BB9\u1BE6-\u1BF3\u1C24-\u1C37\u1C40-\u1C49\u1C50-\u1C59\u1CD0-\u1CD2\u1CD4-\u1CE8\u1CED\u1CF4\u1CF7-\u1CF9\u1DC0-\u1DFF\u200C\u200D\u203F\u2040\u2054\u20D0-\u20DC\u20E1\u20E5-\u20F0\u2CEF-\u2CF1\u2D7F\u2DE0-\u2DFF\u302A-\u302F\u3099\u309A\u30FB\uA620-\uA629\uA66F\uA674-\uA67D\uA69E\uA69F\uA6F0\uA6F1\uA802\uA806\uA80B\uA823-\uA827\uA82C\uA880\uA881\uA8B4-\uA8C5\uA8D0-\uA8D9\uA8E0-\uA8F1\uA8FF-\uA909\uA926-\uA92D\uA947-\uA953\uA980-\uA983\uA9B3-\uA9C0\uA9D0-\uA9D9\uA9E5\uA9F0-\uA9F9\uAA29-\uAA36\uAA43\uAA4C\uAA4D\uAA50-\uAA59\uAA7B-\uAA7D\uAAB0\uAAB2-\uAAB4\uAAB7\uAAB8\uAABE\uAABF\uAAC1\uAAEB-\uAAEF\uAAF5\uAAF6\uABE3-\uABEA\uABEC\uABED\uABF0-\uABF9\uFB1E\uFE00-\uFE0F\uFE20-\uFE2F\uFE33\uFE34\uFE4D-\uFE4F\uFF10-\uFF19\uFF3F\uFF65";
@@ -22631,7 +22603,7 @@ var import_react_dom = require("react-dom");
 
 // vendor/open-intelligent-ui/ui/theme/index.tsx
 var import_react4 = require("react");
-var import_jsx_runtime8 = require("react/jsx-runtime");
+var import_jsx_runtime7 = require("react/jsx-runtime");
 var systemFont = 'ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif';
 var serifFont = "Iowan Old Style,Georgia,serif";
 var themes = {
@@ -22690,257 +22662,257 @@ function ThemeProvider({ name: name3 = "studio", mode = "light", overrides = {},
     "--iui-shadow": t.shadow === "none" ? "none" : t.shadow === "lift" ? "0 13px 0 #0000001a" : "0 3px 12px #0000000d",
     ...Object.fromEntries(t.chart.map((c, i) => [`--iui-chart-${i + 1}`, c]))
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(ThemeContext.Provider, { value: t, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "iui-theme", style: { ...vars, colorScheme: mode }, children }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(ThemeContext.Provider, { value: t, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "iui-theme", style: { ...vars, colorScheme: mode }, children }) });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/text/Text.tsx
-var import_jsx_runtime9 = require("react/jsx-runtime");
+var import_jsx_runtime8 = require("react/jsx-runtime");
 function Text({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "iui-text", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "iui-text", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/title/Title.tsx
-var import_jsx_runtime10 = require("react/jsx-runtime");
+var import_jsx_runtime9 = require("react/jsx-runtime");
 function Title({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h3", { className: "iui-title", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h3", { className: "iui-title", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/caption/Caption.tsx
-var import_jsx_runtime11 = require("react/jsx-runtime");
+var import_jsx_runtime10 = require("react/jsx-runtime");
 function Caption({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("small", { className: "iui-caption", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("small", { className: "iui-caption", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/badge/Badge.tsx
-var import_jsx_runtime12 = require("react/jsx-runtime");
+var import_jsx_runtime11 = require("react/jsx-runtime");
 function Badge({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "iui-badge", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "iui-badge", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/code/Code.tsx
-var import_jsx_runtime13 = require("react/jsx-runtime");
+var import_jsx_runtime12 = require("react/jsx-runtime");
 function Code({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("pre", { className: "iui-code", style, children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("code", { children }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("pre", { className: "iui-code", style, children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("code", { children }) });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/math-text/MathText.tsx
-var import_jsx_runtime14 = require("react/jsx-runtime");
+var import_jsx_runtime13 = require("react/jsx-runtime");
 function MathText({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "iui-math", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "iui-math", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/label/Label.tsx
-var import_jsx_runtime15 = require("react/jsx-runtime");
+var import_jsx_runtime14 = require("react/jsx-runtime");
 function Label({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "iui-label", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "iui-label", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/bold/Bold.tsx
-var import_jsx_runtime16 = require("react/jsx-runtime");
+var import_jsx_runtime15 = require("react/jsx-runtime");
 function Bold({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("strong", { style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("strong", { style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/italic/Italic.tsx
-var import_jsx_runtime17 = require("react/jsx-runtime");
+var import_jsx_runtime16 = require("react/jsx-runtime");
 function Italic({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("em", { style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("em", { style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/underline/Underline.tsx
-var import_jsx_runtime18 = require("react/jsx-runtime");
+var import_jsx_runtime17 = require("react/jsx-runtime");
 function Underline({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("u", { style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("u", { style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/strikethrough/Strikethrough.tsx
-var import_jsx_runtime19 = require("react/jsx-runtime");
+var import_jsx_runtime18 = require("react/jsx-runtime");
 function Strikethrough({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("s", { style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("s", { style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/blockquote/Blockquote.tsx
-var import_jsx_runtime20 = require("react/jsx-runtime");
+var import_jsx_runtime19 = require("react/jsx-runtime");
 function Blockquote({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("blockquote", { style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("blockquote", { style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/code-block/CodeBlock.tsx
-var import_jsx_runtime21 = require("react/jsx-runtime");
+var import_jsx_runtime20 = require("react/jsx-runtime");
 function CodeBlock({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("pre", { className: "iui-code", style, children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("code", { children }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("pre", { className: "iui-code", style, children: /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("code", { children }) });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/icon/Icon.tsx
-var import_jsx_runtime22 = require("react/jsx-runtime");
+var import_jsx_runtime21 = require("react/jsx-runtime");
 var glyphs = { check: "\u2713", "check-circle": "\u2713", "alert-triangle": "\u26A0", settings: "\u2699", github: "\u25C6", sparkles: "\u2726", copy: "\u29C9", info: "\u24D8", cpu: "\u25A3", layers: "\u25A4", "arrow-right": "\u2192", "chevron-right": "\u203A", "arrow-down": "\u2193", "arrow-down-up": "\u2195", "chart-no-axes-combined": "\u25A5", "shield-check": "\u2B21" };
 function Icon2({ name: name3, style, inline = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: "iui-icon", style: { ...style, display: inline ? "inline-flex" : void 0 }, "aria-label": name3, children: glyphs[name3] ?? "\u2022" });
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("span", { className: "iui-icon", style: { ...style, display: inline ? "inline-flex" : void 0 }, "aria-label": name3, children: glyphs[name3] ?? "\u2022" });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/box/Box.tsx
-var import_jsx_runtime23 = require("react/jsx-runtime");
+var import_jsx_runtime22 = require("react/jsx-runtime");
 function Box({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "iui-box", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "iui-box", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/row/Row.tsx
-var import_jsx_runtime24 = require("react/jsx-runtime");
+var import_jsx_runtime23 = require("react/jsx-runtime");
 function Row({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "iui-row", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "iui-row", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/column/Column.tsx
-var import_jsx_runtime25 = require("react/jsx-runtime");
+var import_jsx_runtime24 = require("react/jsx-runtime");
 function Column({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "iui-col", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "iui-col", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/flow/Flow.tsx
-var import_jsx_runtime26 = require("react/jsx-runtime");
+var import_jsx_runtime25 = require("react/jsx-runtime");
 function Flow({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "iui-flow", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "iui-flow", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/card/Card.tsx
-var import_jsx_runtime27 = require("react/jsx-runtime");
+var import_jsx_runtime26 = require("react/jsx-runtime");
 function Card({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("section", { className: "iui-card", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("section", { className: "iui-card", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/grid/Grid.tsx
-var import_jsx_runtime28 = require("react/jsx-runtime");
+var import_jsx_runtime27 = require("react/jsx-runtime");
 function Grid({ children, style, columns = 2 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "iui-grid", style: { ...style, gridTemplateColumns: `repeat(${Math.max(1, Math.min(6, columns))},minmax(0,1fr))` }, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "iui-grid", style: { ...style, gridTemplateColumns: `repeat(${Math.max(1, Math.min(6, columns))},minmax(0,1fr))` }, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/grid-item/GridItem.tsx
-var import_jsx_runtime29 = require("react/jsx-runtime");
+var import_jsx_runtime28 = require("react/jsx-runtime");
 function GridItem({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "iui-grid-item", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "iui-grid-item", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/flow-item/FlowItem.tsx
-var import_jsx_runtime30 = require("react/jsx-runtime");
+var import_jsx_runtime29 = require("react/jsx-runtime");
 function FlowItem({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "iui-flow-item", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "iui-flow-item", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/carousel-item/CarouselItem.tsx
-var import_jsx_runtime31 = require("react/jsx-runtime");
+var import_jsx_runtime30 = require("react/jsx-runtime");
 function CarouselItem({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "iui-carousel-item", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "iui-carousel-item", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/divider/Divider.tsx
-var import_jsx_runtime32 = require("react/jsx-runtime");
+var import_jsx_runtime31 = require("react/jsx-runtime");
 function Divider({ style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("hr", { className: "iui-divider", style });
+  return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("hr", { className: "iui-divider", style });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/spacer/Spacer.tsx
-var import_jsx_runtime33 = require("react/jsx-runtime");
+var import_jsx_runtime32 = require("react/jsx-runtime");
 function Spacer({ style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("span", { className: "iui-spacer", style: { flex: 1, minWidth: 8, ...style } });
+  return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("span", { className: "iui-spacer", style: { flex: 1, minWidth: 8, ...style } });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/table/Table.tsx
-var import_jsx_runtime34 = require("react/jsx-runtime");
+var import_jsx_runtime33 = require("react/jsx-runtime");
 function Table({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { role: "table", className: "iui-table", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { role: "table", className: "iui-table", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/table-row/TableRow.tsx
-var import_jsx_runtime35 = require("react/jsx-runtime");
+var import_jsx_runtime34 = require("react/jsx-runtime");
 function TableRow({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { role: "row", className: "iui-table-row", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { role: "row", className: "iui-table-row", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/table-cell/TableCell.tsx
-var import_jsx_runtime36 = require("react/jsx-runtime");
+var import_jsx_runtime35 = require("react/jsx-runtime");
 function TableCell({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { role: "cell", className: "iui-table-cell", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { role: "cell", className: "iui-table-cell", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/list/List.tsx
-var import_jsx_runtime37 = require("react/jsx-runtime");
+var import_jsx_runtime36 = require("react/jsx-runtime");
 function List({ children, style, marker }) {
   const listStyle = { ...style, listStyleType: marker === "none" ? "none" : marker === "disc" ? "disc" : void 0 };
-  return marker === "disc" ? /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("ul", { className: "iui-list", style: listStyle, children }) : /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("ol", { className: "iui-list", style: listStyle, children });
+  return marker === "disc" ? /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("ul", { className: "iui-list", style: listStyle, children }) : /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("ol", { className: "iui-list", style: listStyle, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/list-item/ListItem.tsx
-var import_jsx_runtime38 = require("react/jsx-runtime");
+var import_jsx_runtime37 = require("react/jsx-runtime");
 function ListItem({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("li", { style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("li", { style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/popover/Popover.tsx
-var import_jsx_runtime39 = require("react/jsx-runtime");
+var import_jsx_runtime38 = require("react/jsx-runtime");
 function Popover({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("details", { className: "iui-popover", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("details", { className: "iui-popover", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/popover-trigger/PopoverTrigger.tsx
-var import_jsx_runtime40 = require("react/jsx-runtime");
+var import_jsx_runtime39 = require("react/jsx-runtime");
 function PopoverTrigger({ children }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("summary", { children });
+  return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("summary", { children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/popover-content/PopoverContent.tsx
-var import_jsx_runtime41 = require("react/jsx-runtime");
+var import_jsx_runtime40 = require("react/jsx-runtime");
 function PopoverContent({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("div", { className: "iui-popover-content", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("div", { className: "iui-popover-content", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/carousel/Carousel.tsx
 var import_react5 = __toESM(require("react"), 1);
-var import_jsx_runtime42 = require("react/jsx-runtime");
+var import_jsx_runtime41 = require("react/jsx-runtime");
 function Carousel({ children, activeIndex = 0, onChange, style }) {
   const items = import_react5.default.Children.toArray(children), index2 = Math.max(0, Math.min(items.length - 1, Math.trunc(activeIndex)));
-  return /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)("div", { className: "iui-carousel", style, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("button", { type: "button", "aria-label": "\u4E0A\u4E00\u9879", disabled: index2 <= 0, onClick: () => onChange?.(index2 - 1), children: "\u2039" }),
-    /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("div", { children: items[index2] }),
-    /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("button", { type: "button", "aria-label": "\u4E0B\u4E00\u9879", disabled: index2 >= items.length - 1, onClick: () => onChange?.(index2 + 1), children: "\u203A" })
+  return /* @__PURE__ */ (0, import_jsx_runtime41.jsxs)("div", { className: "iui-carousel", style, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("button", { type: "button", "aria-label": "\u4E0A\u4E00\u9879", disabled: index2 <= 0, onClick: () => onChange?.(index2 - 1), children: "\u2039" }),
+    /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("div", { children: items[index2] }),
+    /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("button", { type: "button", "aria-label": "\u4E0B\u4E00\u9879", disabled: index2 >= items.length - 1, onClick: () => onChange?.(index2 + 1), children: "\u203A" })
   ] });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/button/Button.tsx
-var import_jsx_runtime43 = require("react/jsx-runtime");
+var import_jsx_runtime42 = require("react/jsx-runtime");
 function Button({ children, style, onClick, disabled = false, variant, block = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("button", { type: "button", className: `iui-button${variant === "ghost" || variant === "outline" ? ` iui-${variant}` : ""}`, style: { ...style, width: block ? "100%" : style?.width }, onClick, disabled, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("button", { type: "button", className: `iui-button${variant === "ghost" || variant === "outline" ? ` iui-${variant}` : ""}`, style: { ...style, width: block ? "100%" : style?.width }, onClick, disabled, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/pressable/Pressable.tsx
-var import_jsx_runtime44 = require("react/jsx-runtime");
+var import_jsx_runtime43 = require("react/jsx-runtime");
 function Pressable({ children, style, onClick, disabled = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("button", { type: "button", className: "iui-pressable", style, onClick, disabled, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("button", { type: "button", className: "iui-pressable", style, onClick, disabled, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/input/Input.tsx
-var import_jsx_runtime45 = require("react/jsx-runtime");
+var import_jsx_runtime44 = require("react/jsx-runtime");
 function Input({ value, onChange, placeholder = "", style, disabled = false, number: number3 = false, block = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("input", { className: "iui-field", type: number3 ? "number" : "text", value, onChange: (e) => onChange?.(e.target.value), placeholder, style: { ...style, width: block ? "100%" : style?.width }, disabled });
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("input", { className: "iui-field", type: number3 ? "number" : "text", value, onChange: (e) => onChange?.(e.target.value), placeholder, style: { ...style, width: block ? "100%" : style?.width }, disabled });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/textarea/Textarea.tsx
-var import_jsx_runtime46 = require("react/jsx-runtime");
+var import_jsx_runtime45 = require("react/jsx-runtime");
 function Textarea({ value, onChange, placeholder = "", style, disabled = false, rows = 3, block = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("textarea", { className: "iui-field", value, onChange: (e) => onChange?.(e.target.value), placeholder, rows: Math.max(1, Math.min(12, rows)), style: { ...style, width: block ? "100%" : style?.width }, disabled });
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("textarea", { className: "iui-field", value, onChange: (e) => onChange?.(e.target.value), placeholder, rows: Math.max(1, Math.min(12, rows)), style: { ...style, width: block ? "100%" : style?.width }, disabled });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/select/Select.tsx
-var import_jsx_runtime47 = require("react/jsx-runtime");
+var import_jsx_runtime46 = require("react/jsx-runtime");
 function Select({ value, onChange, options = [], style, disabled = false, block = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("select", { className: "iui-field", value, onChange: (e) => onChange?.(e.target.value), style: { ...style, width: block ? "100%" : style?.width }, disabled, children: options.map((o, i) => /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("option", { value: o.value, children: o.label }, `${o.value}-${i}`)) });
+  return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("select", { className: "iui-field", value, onChange: (e) => onChange?.(e.target.value), style: { ...style, width: block ? "100%" : style?.width }, disabled, children: options.map((o, i) => /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("option", { value: o.value, children: o.label }, `${o.value}-${i}`)) });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/checkbox/Checkbox.tsx
-var import_jsx_runtime48 = require("react/jsx-runtime");
+var import_jsx_runtime47 = require("react/jsx-runtime");
 function Checkbox({ children, checked, onChange, disabled = false, lineThrough = false, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("label", { className: "iui-check", style, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("input", { type: "checkbox", checked, onChange: (e) => onChange?.(e.target.checked), disabled }),
-    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("span", { style: { textDecoration: checked && lineThrough ? "line-through" : void 0 }, children })
+  return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("label", { className: "iui-check", style, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("input", { type: "checkbox", checked, onChange: (e) => onChange?.(e.target.checked), disabled }),
+    /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("span", { style: { textDecoration: checked && lineThrough ? "line-through" : void 0 }, children })
   ] });
 }
 
@@ -22949,42 +22921,42 @@ var import_react6 = require("react");
 var RadioContext = (0, import_react6.createContext)({ value: void 0 });
 
 // vendor/open-intelligent-ui/ui/components/interaction/radio-group/RadioGroup.tsx
-var import_jsx_runtime49 = require("react/jsx-runtime");
+var import_jsx_runtime48 = require("react/jsx-runtime");
 function RadioGroup({ children, value, onChange, direction = "row", style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(RadioContext.Provider, { value: { value, onChange }, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: `iui-radio-group${direction === "col" ? " vertical" : ""}`, style, children }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(RadioContext.Provider, { value: { value, onChange }, children: /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("div", { className: `iui-radio-group${direction === "col" ? " vertical" : ""}`, style, children }) });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/radio/Radio.tsx
 var import_react7 = require("react");
-var import_jsx_runtime50 = require("react/jsx-runtime");
+var import_jsx_runtime49 = require("react/jsx-runtime");
 function Radio({ children, value, disabled = false, style }) {
   const group = (0, import_react7.useContext)(RadioContext);
-  return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("label", { className: "iui-check", style, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("input", { type: "radio", checked: group.value === value, onChange: () => group.onChange?.(value), disabled }),
-    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { children })
+  return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("label", { className: "iui-check", style, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("input", { type: "radio", checked: group.value === value, onChange: () => group.onChange?.(value), disabled }),
+    /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { children })
   ] });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/slider/Slider.tsx
-var import_jsx_runtime51 = require("react/jsx-runtime");
+var import_jsx_runtime50 = require("react/jsx-runtime");
 function Slider({ value, onChange, min = 0, max = 100, step = 1, disabled = false, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("input", { className: "iui-slider", type: "range", min, max, step, value, onChange: (e) => onChange?.(Number(e.target.value)), disabled, style });
+  return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("input", { className: "iui-slider", type: "range", min, max, step, value, onChange: (e) => onChange?.(Number(e.target.value)), disabled, style });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/date-picker/DatePicker.tsx
-var import_jsx_runtime52 = require("react/jsx-runtime");
+var import_jsx_runtime51 = require("react/jsx-runtime");
 function DatePicker({ value, onChange, disabled = false, style, block = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("input", { className: "iui-field", type: "date", value, onChange: (e) => onChange?.(e.target.value), disabled, style: { ...style, width: block ? "100%" : style?.width } });
+  return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("input", { className: "iui-field", type: "date", value, onChange: (e) => onChange?.(e.target.value), disabled, style: { ...style, width: block ? "100%" : style?.width } });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/segmented-control/SegmentedControl.tsx
-var import_jsx_runtime53 = require("react/jsx-runtime");
+var import_jsx_runtime52 = require("react/jsx-runtime");
 function SegmentedControl({ value, onChange, options = [], disabled = false, style, block = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { className: "iui-segments", style: { ...style, width: block ? "100%" : style?.width }, children: options.map((o, i) => /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("button", { type: "button", className: value === o.value ? "active" : "", onClick: () => onChange?.(o.value), disabled, children: o.label }, `${o.value}-${i}`)) });
+  return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "iui-segments", style: { ...style, width: block ? "100%" : style?.width }, children: options.map((o, i) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("button", { type: "button", className: value === o.value ? "active" : "", onClick: () => onChange?.(o.value), disabled, children: o.label }, `${o.value}-${i}`)) });
 }
 
 // vendor/open-intelligent-ui/ui/components/visualization/chart/Chart.tsx
-var import_jsx_runtime54 = require("react/jsx-runtime");
+var import_jsx_runtime53 = require("react/jsx-runtime");
 var colors = ["var(--iui-chart-1)", "var(--iui-chart-2)", "var(--iui-chart-3)", "var(--iui-chart-4)"];
 var num = (x) => {
   const v = Number(x);
@@ -22992,24 +22964,24 @@ var num = (x) => {
 };
 function Chart({ content: content3 }) {
   const c = content3;
-  if (!c || !Array.isArray(c.data) || !["line", "bar", "scatter", "pie"].includes(c.chartType)) return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "iui-unavailable", children: "\u56FE\u8868\u914D\u7F6E\u65E0\u6548" });
+  if (!c || !Array.isArray(c.data) || !["line", "bar", "scatter", "pie"].includes(c.chartType)) return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { className: "iui-unavailable", children: "\u56FE\u8868\u914D\u7F6E\u65E0\u6548" });
   const data2 = c.data.slice(0, 100), series = (c.series || []).slice(0, 4);
-  if (!data2.length) return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "iui-unavailable", children: "\u56FE\u8868\u65E0\u6570\u636E" });
+  if (!data2.length) return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { className: "iui-unavailable", children: "\u56FE\u8868\u65E0\u6570\u636E" });
   const width = 600, height = 240, left = 42, right = 18, top = 16, bottom = 40, iw = width - left - right, ih = height - top - bottom;
   if (c.chartType === "pie") {
     const key = c.valueKey || series[0]?.dataKey || "value", vals = data2.map((d) => Math.max(0, num(d[key]))), sum = vals.reduce((a, b) => a + b, 0);
-    if (!sum) return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "iui-unavailable", children: "\u997C\u56FE\u6570\u503C\u65E0\u6548" });
+    if (!sum) return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { className: "iui-unavailable", children: "\u997C\u56FE\u6570\u503C\u65E0\u6548" });
     let angle = -Math.PI / 2;
     const paths2 = vals.map((v, i) => {
       const a = angle, b = angle + v / sum * Math.PI * 2;
       angle = b;
       const x1 = 300 + Math.cos(a) * 90, y1 = 112 + Math.sin(a) * 90, x2 = 300 + Math.cos(b) * 90, y2 = 112 + Math.sin(b) * 90;
-      return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("path", { d: v === sum ? `M 300 22 A 90 90 0 1 1 299.99 22 Z` : `M 300 112 L ${x1} ${y1} A 90 90 0 ${b - a > Math.PI ? 1 : 0} 1 ${x2} ${y2} Z`, fill: colors[i % colors.length] }, i);
+      return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("path", { d: v === sum ? `M 300 22 A 90 90 0 1 1 299.99 22 Z` : `M 300 112 L ${x1} ${y1} A 90 90 0 ${b - a > Math.PI ? 1 : 0} 1 ${x2} ${y2} Z`, fill: colors[i % colors.length] }, i);
     });
-    return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("div", { className: "iui-chart", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("svg", { viewBox: "0 0 600 230", role: "img", "aria-label": "\u997C\u56FE", children: paths2 }),
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "iui-legend", children: data2.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("span", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("i", { style: { background: colors[i % colors.length] } }),
+    return /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("div", { className: "iui-chart", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("svg", { viewBox: "0 0 600 230", role: "img", "aria-label": "\u997C\u56FE", children: paths2 }),
+      /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { className: "iui-legend", children: data2.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("span", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("i", { style: { background: colors[i % colors.length] } }),
         String(d[c.nameKey || "name"] ?? i),
         ": ",
         vals[i]
@@ -23019,9 +22991,9 @@ function Chart({ content: content3 }) {
   const ys = series.flatMap((s) => data2.map((d) => num(d[s.dataKey]))), min = typeof c.yAxisMin === "number" ? c.yAxisMin : Math.min(0, ...ys), max = typeof c.yAxisMax === "number" ? c.yAxisMax : Math.max(1, ...ys), range = Math.max(1, max - min);
   const y = (v) => top + ih - (v - min) / range * ih, x = (i) => left + (data2.length === 1 ? iw / 2 : i * iw / (data2.length - 1));
   const suffix = series.length && series.every((s) => s.valueSuffix === series[0].valueSuffix) ? series[0].valueSuffix || "" : "";
-  const ticks = [0, 0.25, 0.5, 0.75, 1].map((f, i) => /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("g", { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("line", { x1: left, y1: top + ih * (1 - f), x2: width - right, y2: top + ih * (1 - f), stroke: "var(--iui-border)" }),
-    /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("text", { x: left - 7, y: top + ih * (1 - f) + 4, textAnchor: "end", fontSize: "11", fill: "var(--iui-text-muted)", children: [
+  const ticks = [0, 0.25, 0.5, 0.75, 1].map((f, i) => /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("g", { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("line", { x1: left, y1: top + ih * (1 - f), x2: width - right, y2: top + ih * (1 - f), stroke: "var(--iui-border)" }),
+    /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("text", { x: left - 7, y: top + ih * (1 - f) + 4, textAnchor: "end", fontSize: "11", fill: "var(--iui-text-muted)", children: [
       Math.round(min + range * f),
       suffix
     ] })
@@ -23030,23 +23002,23 @@ function Chart({ content: content3 }) {
     const color3 = colors[si % colors.length];
     if (c.chartType === "bar") return data2.map((d, i) => {
       const bw = iw / data2.length / Math.max(1, series.length + 0.5), xx = left + i * iw / data2.length + si * bw + bw * 0.2, yy = y(num(d[s.dataKey]));
-      return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("rect", { x: xx, y: Math.min(yy, y(0)), width: bw * 0.84, height: Math.abs(y(0) - yy), rx: "3", fill: color3 }, `${si}-${i}`);
+      return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("rect", { x: xx, y: Math.min(yy, y(0)), width: bw * 0.84, height: Math.abs(y(0) - yy), rx: "3", fill: color3 }, `${si}-${i}`);
     });
-    if (c.chartType === "scatter") return data2.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("circle", { cx: left + (num(d[c.xKey || "x"]) - Math.min(...data2.map((z) => num(z[c.xKey || "x"])))) / (Math.max(...data2.map((z) => num(z[c.xKey || "x"]))) - Math.min(...data2.map((z) => num(z[c.xKey || "x"]))) || 1) * iw, cy: y(num(d[s.dataKey])), r: "5", fill: color3 }, `${si}-${i}`));
-    return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("g", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("polyline", { points: data2.map((d, i) => `${x(i)},${y(num(d[s.dataKey]))}`).join(" "), fill: "none", stroke: color3, strokeWidth: "3", strokeLinejoin: "round" }),
-      data2.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("circle", { cx: x(i), cy: y(num(d[s.dataKey])), r: "4", fill: color3 }, i))
+    if (c.chartType === "scatter") return data2.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("circle", { cx: left + (num(d[c.xKey || "x"]) - Math.min(...data2.map((z) => num(z[c.xKey || "x"])))) / (Math.max(...data2.map((z) => num(z[c.xKey || "x"]))) - Math.min(...data2.map((z) => num(z[c.xKey || "x"]))) || 1) * iw, cy: y(num(d[s.dataKey])), r: "5", fill: color3 }, `${si}-${i}`));
+    return /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("g", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("polyline", { points: data2.map((d, i) => `${x(i)},${y(num(d[s.dataKey]))}`).join(" "), fill: "none", stroke: color3, strokeWidth: "3", strokeLinejoin: "round" }),
+      data2.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("circle", { cx: x(i), cy: y(num(d[s.dataKey])), r: "4", fill: color3 }, i))
     ] }, si);
   });
-  return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("div", { className: "iui-chart", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${c.chartType} \u56FE\u8868`, children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("div", { className: "iui-chart", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${c.chartType} \u56FE\u8868`, children: [
       ticks,
       marks,
-      data2.map((d, i) => ({ d, i })).filter(({ i }) => i % Math.max(1, Math.ceil(data2.length / 8)) === 0).map(({ d, i }) => /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("text", { x: c.chartType === "bar" ? left + (i + 0.5) * iw / data2.length : x(i), y: height - 10, textAnchor: "middle", fontSize: "11", fill: "var(--iui-text-muted)", children: String(d[c.xKey || "x"] ?? "").slice(0, 12) }, i))
+      data2.map((d, i) => ({ d, i })).filter(({ i }) => i % Math.max(1, Math.ceil(data2.length / 8)) === 0).map(({ d, i }) => /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("text", { x: c.chartType === "bar" ? left + (i + 0.5) * iw / data2.length : x(i), y: height - 10, textAnchor: "middle", fontSize: "11", fill: "var(--iui-text-muted)", children: String(d[c.xKey || "x"] ?? "").slice(0, 12) }, i))
     ] }),
-    c.xAxisLabel ? /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "iui-axis-label", children: c.xAxisLabel }) : null,
-    /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "iui-legend", children: series.map((s, i) => /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("span", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("i", { style: { background: colors[i % colors.length] } }),
+    c.xAxisLabel ? /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { className: "iui-axis-label", children: c.xAxisLabel }) : null,
+    /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { className: "iui-legend", children: series.map((s, i) => /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("span", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("i", { style: { background: colors[i % colors.length] } }),
       s.label || s.dataKey,
       s.valueSuffix ? ` (${s.valueSuffix})` : ""
     ] }, i)) })
@@ -23054,18 +23026,18 @@ function Chart({ content: content3 }) {
 }
 
 // vendor/open-intelligent-ui/ui/components/media/unconfigured-host/UnconfiguredHost.tsx
-var import_jsx_runtime55 = require("react/jsx-runtime");
+var import_jsx_runtime54 = require("react/jsx-runtime");
 function UnconfiguredHost({ name: name3 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("div", { className: "iui-unavailable", "data-component": name3, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("strong", { children: name3 }),
+  return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("div", { className: "iui-unavailable", "data-component": name3, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("strong", { children: name3 }),
     " \xB7 \u5BBF\u4E3B\u672A\u914D\u7F6E\u3002\u9700\u7531\u5BBF\u4E3B\u63D0\u4F9B\u53EF\u4FE1\u8D44\u6E90\u6216\u6388\u6743\u64CD\u4F5C\u3002"
   ] });
 }
 
 // vendor/open-intelligent-ui/ui/components/media/unsupported-component/UnsupportedComponent.tsx
-var import_jsx_runtime56 = require("react/jsx-runtime");
+var import_jsx_runtime55 = require("react/jsx-runtime");
 function UnsupportedComponent({ name: name3 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("div", { className: "iui-unavailable", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("div", { className: "iui-unavailable", children: [
     name3,
     " \xB7 v0.1 \u672A\u652F\u6301"
   ] });
@@ -23096,7 +23068,7 @@ function isolatedAppDocument(approvedHtml) {
 }
 
 // vendor/open-intelligent-ui/ui/components/media/app-block/AppBlock.tsx
-var import_jsx_runtime57 = require("react/jsx-runtime");
+var import_jsx_runtime56 = require("react/jsx-runtime");
 function AppBlock({ request, adapter }) {
   const sourceKey = `${request.messageId}\0${request.id}\0${request.html}`;
   const latest = (0, import_react8.useRef)(sourceKey);
@@ -23142,29 +23114,29 @@ function AppBlock({ request, adapter }) {
     setSession({ ...live, sequence: live.sequence + 1 });
     setStatus("\u5DF2\u91CD\u542F\u9694\u79BB\u5B9E\u4F8B");
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("section", { className: `iui-app-block ${request.id === "paint-demo-01" ? "is-paint" : ""}`, "aria-label": `AppBlock ${request.title || request.id}`, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("div", { className: "iui-app-block-head", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("strong", { children: request.title || "AppBlock" }),
-        /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("small", { children: "\u672C\u5730\u53D7\u9650\u5BBF\u4E3B\u6F14\u793A \xB7 \u9700\u624B\u52A8\u8FD0\u884C" })
+  return /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("section", { className: `iui-app-block ${request.id === "paint-demo-01" ? "is-paint" : ""}`, "aria-label": `AppBlock ${request.title || request.id}`, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("div", { className: "iui-app-block-head", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("strong", { children: request.title || "AppBlock" }),
+        /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("small", { children: "\u672C\u5730\u53D7\u9650\u5BBF\u4E3B\u6F14\u793A \xB7 \u9700\u624B\u52A8\u8FD0\u884C" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("div", { className: "iui-app-block-actions", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("button", { type: "button", onClick: () => void run(), disabled: !request.html, children: live ? "\u91CD\u65B0\u6838\u5BF9\u5E76\u8FD0\u884C" : runLabel }),
-        /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("button", { type: "button", onClick: stop, disabled: !live, children: "\u505C\u6B62" }),
-        /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("button", { type: "button", onClick: restart, disabled: !live, children: "\u91CD\u542F" })
+      /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("div", { className: "iui-app-block-actions", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("button", { type: "button", onClick: () => void run(), disabled: !request.html, children: live ? "\u91CD\u65B0\u6838\u5BF9\u5E76\u8FD0\u884C" : runLabel }),
+        /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("button", { type: "button", onClick: stop, disabled: !live, children: "\u505C\u6B62" }),
+        /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("button", { type: "button", onClick: restart, disabled: !live, children: "\u91CD\u542F" })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("p", { className: "iui-app-block-status", role: "status", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("p", { className: "iui-app-block-status", role: "status", children: [
       live ? "\u25CF " : "",
       live ? status : session ? "\u5185\u5BB9\u5DF2\u53D8\u5316\uFF0C\u539F\u5B9E\u4F8B\u5DF2\u9694\u79BB\u505C\u6B62" : status
     ] }),
-    live ? /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("iframe", { title: `${request.title || "AppBlock"} \u9694\u79BB\u5E94\u7528`, sandbox: "allow-scripts", referrerPolicy: "no-referrer", srcDoc: live.document }, `${request.messageId}:${live.sequence}`) : /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("div", { className: "iui-app-block-empty", children: "\u660E\u786E\u70B9\u51FB\u8FD0\u884C\u540E\u624D\u4F1A\u521B\u5EFA\u72EC\u7ACB\u6C99\u7BB1\u3002\u6539\u52A8\u6E90\u7801\u540E\u9700\u91CD\u65B0\u5BA1\u9605\u3002" })
+    live ? /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("iframe", { title: `${request.title || "AppBlock"} \u9694\u79BB\u5E94\u7528`, sandbox: "allow-scripts", referrerPolicy: "no-referrer", srcDoc: live.document }, `${request.messageId}:${live.sequence}`) : /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("div", { className: "iui-app-block-empty", children: "\u660E\u786E\u70B9\u51FB\u8FD0\u884C\u540E\u624D\u4F1A\u521B\u5EFA\u72EC\u7ACB\u6C99\u7BB1\u3002\u6539\u52A8\u6E90\u7801\u540E\u9700\u91CD\u65B0\u5BA1\u9605\u3002" })
   ] });
 }
 
 // vendor/open-intelligent-ui/ui/components/media/async-image/AsyncImage.tsx
 var import_react9 = require("react");
-var import_jsx_runtime58 = require("react/jsx-runtime");
+var import_jsx_runtime57 = require("react/jsx-runtime");
 function safeImageSource(src) {
   if (/^data:image\/(?:png|jpeg|webp);base64,[a-z0-9+/=]+$/i.test(src) && src.length <= 4e6) return src;
   try {
@@ -23215,10 +23187,10 @@ function AsyncImage({ query, aspectRatio, width, messageId, adapter }) {
       active = false;
     };
   }, [adapter, query, messageId]);
-  if (!adapter.resolveResource) return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(UnconfiguredHost, { name: "AsyncImage" });
+  if (!adapter.resolveResource) return /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(UnconfiguredHost, { name: "AsyncImage" });
   const style = { width: safeCssSize(width) ?? "100%", aspectRatio: ratio(aspectRatio) };
-  return /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)("figure", { className: "iui-async-image", style, "data-image-status": state.phase, children: [
-    state.image && /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("figure", { className: "iui-async-image", style, "data-image-status": state.phase, children: [
+    state.image && /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(
       "img",
       {
         src: state.image.src,
@@ -23229,47 +23201,47 @@ function AsyncImage({ query, aspectRatio, width, messageId, adapter }) {
         onError: () => setState({ phase: "error", message: "\u56FE\u7247\u52A0\u8F7D\u5931\u8D25", image: state.image })
       }
     ),
-    state.phase !== "ready" && /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("div", { className: "iui-image-status", role: "status", children: state.phase === "error" ? `${state.image?.alt ?? String(query ?? "")}\uFF1A${state.message}` : "\u56FE\u7247\u52A0\u8F7D\u4E2D\u2026" })
+    state.phase !== "ready" && /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("div", { className: "iui-image-status", role: "status", children: state.phase === "error" ? `${state.image?.alt ?? String(query ?? "")}\uFF1A${state.message}` : "\u56FE\u7247\u52A0\u8F7D\u4E2D\u2026" })
   ] });
 }
 function AsyncImageGroup({ queries, aspectRatio, layout, messageId, adapter }) {
   const [index2, setIndex] = (0, import_react9.useState)(0);
-  if (!adapter.resolveResource) return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(UnconfiguredHost, { name: "AsyncImageGroup" });
+  if (!adapter.resolveResource) return /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(UnconfiguredHost, { name: "AsyncImageGroup" });
   if (!Array.isArray(queries) || !queries.length || queries.length > 8 || queries.some((query) => typeof query !== "string" || !query.trim())) {
-    return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("div", { className: "iui-unavailable", children: "AsyncImageGroup \xB7 \u56FE\u7247\u67E5\u8BE2\u9700\u4E3A 1\u20138 \u4E2A\u975E\u7A7A\u5B57\u7B26\u4E32" });
+    return /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("div", { className: "iui-unavailable", children: "AsyncImageGroup \xB7 \u56FE\u7247\u67E5\u8BE2\u9700\u4E3A 1\u20138 \u4E2A\u975E\u7A7A\u5B57\u7B26\u4E32" });
   }
-  if (layout === "carousel") return /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)("div", { className: "iui-image-carousel", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(AsyncImage, { query: queries[index2 % queries.length], aspectRatio, messageId, adapter }, queries[index2 % queries.length]),
-    /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)("div", { className: "iui-image-controls", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("button", { type: "button", onClick: () => setIndex((value) => (value + queries.length - 1) % queries.length), "aria-label": "\u4E0A\u4E00\u5F20\u56FE\u7247", children: "\u2039" }),
-      /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)("span", { children: [
+  if (layout === "carousel") return /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("div", { className: "iui-image-carousel", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(AsyncImage, { query: queries[index2 % queries.length], aspectRatio, messageId, adapter }, queries[index2 % queries.length]),
+    /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("div", { className: "iui-image-controls", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("button", { type: "button", onClick: () => setIndex((value) => (value + queries.length - 1) % queries.length), "aria-label": "\u4E0A\u4E00\u5F20\u56FE\u7247", children: "\u2039" }),
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("span", { children: [
         index2 % queries.length + 1,
         " / ",
         queries.length
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("button", { type: "button", onClick: () => setIndex((value) => (value + 1) % queries.length), "aria-label": "\u4E0B\u4E00\u5F20\u56FE\u7247", children: "\u203A" })
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("button", { type: "button", onClick: () => setIndex((value) => (value + 1) % queries.length), "aria-label": "\u4E0B\u4E00\u5F20\u56FE\u7247", children: "\u203A" })
     ] })
   ] });
-  return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("div", { className: "iui-image-group", children: queries.map((query, index3) => /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(AsyncImage, { query, aspectRatio, messageId, adapter }, `${query}:${index3}`)) });
+  return /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("div", { className: "iui-image-group", children: queries.map((query, index3) => /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(AsyncImage, { query, aspectRatio, messageId, adapter }, `${query}:${index3}`)) });
 }
 
 // vendor/open-intelligent-ui/ui/renderer/markdown.tsx
-var import_jsx_runtime59 = require("react/jsx-runtime");
+var import_jsx_runtime58 = require("react/jsx-runtime");
 function renderMarkdownText(text8) {
   const result = [], pattern = /(```[\s\S]*?```|~~~[\s\S]*?~~~|\*\*[^*]+\*\*|~~[^~]+~~|`[^`]+`|\*[^*]+\*|\[[^\]]+\]\([^)]+\))/g;
   let last = 0, m, index2 = 0;
   while (m = pattern.exec(text8)) {
     if (m.index > last) result.push(text8.slice(last, m.index));
     const token = m[0], key = index2++;
-    if (token.startsWith("```") || token.startsWith("~~~")) result.push(/* @__PURE__ */ (0, import_jsx_runtime59.jsx)("pre", { className: "iui-code", children: /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("code", { children: token.slice(3, -3).replace(/^[^\n]*\n/, "") }) }, key));
-    else if (token.startsWith("**")) result.push(/* @__PURE__ */ (0, import_jsx_runtime59.jsx)("strong", { children: token.slice(2, -2) }, key));
-    else if (token.startsWith("~~")) result.push(/* @__PURE__ */ (0, import_jsx_runtime59.jsx)("s", { children: token.slice(2, -2) }, key));
-    else if (token.startsWith("`")) result.push(/* @__PURE__ */ (0, import_jsx_runtime59.jsx)("code", { children: token.slice(1, -1) }, key));
-    else if (token.startsWith("*")) result.push(/* @__PURE__ */ (0, import_jsx_runtime59.jsx)("em", { children: token.slice(1, -1) }, key));
+    if (token.startsWith("```") || token.startsWith("~~~")) result.push(/* @__PURE__ */ (0, import_jsx_runtime58.jsx)("pre", { className: "iui-code", children: /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("code", { children: token.slice(3, -3).replace(/^[^\n]*\n/, "") }) }, key));
+    else if (token.startsWith("**")) result.push(/* @__PURE__ */ (0, import_jsx_runtime58.jsx)("strong", { children: token.slice(2, -2) }, key));
+    else if (token.startsWith("~~")) result.push(/* @__PURE__ */ (0, import_jsx_runtime58.jsx)("s", { children: token.slice(2, -2) }, key));
+    else if (token.startsWith("`")) result.push(/* @__PURE__ */ (0, import_jsx_runtime58.jsx)("code", { children: token.slice(1, -1) }, key));
+    else if (token.startsWith("*")) result.push(/* @__PURE__ */ (0, import_jsx_runtime58.jsx)("em", { children: token.slice(1, -1) }, key));
     else {
       const x = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(token);
       const url = x && safeUrl(x[2]);
-      result.push(url ? /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("a", { href: url, target: "_blank", rel: "noopener noreferrer", children: x[1] }, key) : x?.[1] || token);
+      result.push(url ? /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("a", { href: url, target: "_blank", rel: "noopener noreferrer", children: x[1] }, key) : x?.[1] || token);
     }
     last = pattern.lastIndex;
   }
@@ -23278,7 +23250,7 @@ function renderMarkdownText(text8) {
 }
 
 // vendor/open-intelligent-ui/ui/renderer/Renderer.tsx
-var import_jsx_runtime60 = require("react/jsx-runtime");
+var import_jsx_runtime59 = require("react/jsx-runtime");
 var get = (a, scope, runtime) => {
   if (!a) return void 0;
   if (a.kind === "literal") return a.value;
@@ -23331,13 +23303,13 @@ function UIRenderer({ runtime, showPlainText = false, targets, themeMode = "ligh
   const [, revision] = (0, import_react10.useState)(0), scope = runtime.scope();
   const force = () => revision((v) => v + 1);
   const render2 = (n, key, env2 = scope) => {
-    if (n.kind === "text") return showPlainText || n.text.trim() ? /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(import_react10.default.Fragment, { children: renderMarkdownText(n.text) }, key) : null;
+    if (n.kind === "text") return showPlainText || n.text.trim() ? /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(import_react10.default.Fragment, { children: renderMarkdownText(n.text) }, key) : null;
     if (n.kind === "expression") {
       try {
         const value = runtime.value(n.source, env2);
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(import_react10.default.Fragment, { children: value == null ? "" : String(value) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(import_react10.default.Fragment, { children: value == null ? "" : String(value) }, key);
       } catch (e) {
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("span", { className: "iui-error", title: String(e), children: "\u8868\u8FBE\u5F0F\u9519\u8BEF" }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("span", { className: "iui-error", title: String(e), children: "\u8868\u8FBE\u5F0F\u9519\u8BEF" }, key);
       }
     }
     if (n.kind === "if") {
@@ -23346,7 +23318,7 @@ function UIRenderer({ runtime, showPlainText = false, targets, themeMode = "ligh
         visible = !!runtime.value(n.test, env2);
       } catch {
       }
-      return visible ? /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(import_react10.default.Fragment, { children: n.children.map((c, i) => render2(c, i, env2)) }, key) : null;
+      return visible ? /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(import_react10.default.Fragment, { children: n.children.map((c, i) => render2(c, i, env2)) }, key) : null;
     }
     if (n.kind === "each") {
       let values = [];
@@ -23355,23 +23327,23 @@ function UIRenderer({ runtime, showPlainText = false, targets, themeMode = "ligh
       } catch {
       }
       if (!Array.isArray(values)) return null;
-      return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(import_react10.default.Fragment, { children: values.slice(0, 100).map((v, i) => {
+      return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(import_react10.default.Fragment, { children: values.slice(0, 100).map((v, i) => {
         const local2 = { ...env2, [n.item]: v, ...n.index ? { [n.index]: i } : {} };
         const first = n.children.find((c) => c.kind === "element" && c.attributes.key);
         const stable = first?.kind === "element" ? String(get(first.attributes.key, local2, runtime) ?? i) : i;
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(import_react10.default.Fragment, { children: n.children.map((c, j) => render2(c, j, local2)) }, stable);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(import_react10.default.Fragment, { children: n.children.map((c, j) => render2(c, j, local2)) }, stable);
       }) }, key);
     }
     const name3 = n.name, spec = byName.get(name3), p = (name4) => get(n.attributes[name4], env2, runtime), event = (name4) => n.attributes[name4]?.kind === "expression" ? String(n.attributes[name4].value) : void 0;
     const action = (source, value) => {
       if (source) void runtime.event(source, value, env2).then(force);
     };
-    if (!spec || spec.support === "unsupported") return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(UnsupportedComponent, { name: name3 }, key);
+    if (!spec || spec.support === "unsupported") return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(UnsupportedComponent, { name: name3 }, key);
     if (name3 === "AppBlock") {
       const literal2 = (key2) => n.attributes[key2]?.kind === "literal" && typeof n.attributes[key2].value === "string" ? String(n.attributes[key2].value) : void 0;
-      return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(AppBlock, { request: { messageId: runtime.document.messageId, id: literal2("app_block_id") || "", title: literal2("title"), html: n.rawContent || "" }, adapter: runtime.adapter }, key);
+      return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(AppBlock, { request: { messageId: runtime.document.messageId, id: literal2("app_block_id") || "", title: literal2("title"), html: n.rawContent || "" }, adapter: runtime.adapter }, key);
     }
-    if (name3 === "AsyncImage") return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
+    if (name3 === "AsyncImage") return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
       AsyncImage,
       {
         query: p("query"),
@@ -23383,7 +23355,7 @@ function UIRenderer({ runtime, showPlainText = false, targets, themeMode = "ligh
       key
     );
     if (name3 === "AsyncImageGroup") {
-      return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
+      return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
         AsyncImageGroup,
         {
           queries: p("query"),
@@ -23395,108 +23367,108 @@ function UIRenderer({ runtime, showPlainText = false, targets, themeMode = "ligh
         key
       );
     }
-    if (spec.support === "host") return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(UnconfiguredHost, { name: name3 }, key);
+    if (spec.support === "host") return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(UnconfiguredHost, { name: name3 }, key);
     const kids = n.children.map((c, i) => render2(c, i, env2));
     const style = resolvedStyle(p);
     switch (name3) {
       case "text":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Text, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Text, { style, children: kids }, key);
       case "title":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Title, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Title, { style, children: kids }, key);
       case "caption":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Caption, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Caption, { style, children: kids }, key);
       case "badge":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Badge, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Badge, { style, children: kids }, key);
       case "code":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Code, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Code, { style, children: kids }, key);
       case "math":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(MathText, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(MathText, { style, children: kids }, key);
       case "label":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Label, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Label, { style, children: kids }, key);
       case "bold":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Bold, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Bold, { style, children: kids }, key);
       case "italic":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Italic, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Italic, { style, children: kids }, key);
       case "underline":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Underline, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Underline, { style, children: kids }, key);
       case "strikethrough":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Strikethrough, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Strikethrough, { style, children: kids }, key);
       case "icon":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Icon2, { name: String(p("name") ?? "icon"), style, inline: !!p("inline") }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Icon2, { name: String(p("name") ?? "icon"), style, inline: !!p("inline") }, key);
       case "blockquote":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Blockquote, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Blockquote, { style, children: kids }, key);
       case "CodeBlock":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(CodeBlock, { style, children: n.rawContent ?? kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(CodeBlock, { style, children: n.rawContent ?? kids }, key);
       case "box":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Box, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Box, { style, children: kids }, key);
       case "row":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Row, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Row, { style, children: kids }, key);
       case "col":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Column, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Column, { style, children: kids }, key);
       case "flow":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Flow, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Flow, { style, children: kids }, key);
       case "card":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Card, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Card, { style, children: kids }, key);
       case "grid":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Grid, { style, columns: asNumber(p("columns"), 2), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Grid, { style, columns: asNumber(p("columns"), 2), children: kids }, key);
       case "grid-item":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(GridItem, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(GridItem, { style, children: kids }, key);
       case "flow-item":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(FlowItem, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(FlowItem, { style, children: kids }, key);
       case "carousel-item":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(CarouselItem, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(CarouselItem, { style, children: kids }, key);
       case "divider":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Divider, { style }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Divider, { style }, key);
       case "spacer":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Spacer, { style }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Spacer, { style }, key);
       case "table":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Table, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Table, { style, children: kids }, key);
       case "table-row":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(TableRow, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(TableRow, { style, children: kids }, key);
       case "table-cell":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(TableCell, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(TableCell, { style, children: kids }, key);
       case "list":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(List, { style, marker: String(p("marker") ?? ""), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(List, { style, marker: String(p("marker") ?? ""), children: kids }, key);
       case "list-item":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(ListItem, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(ListItem, { style, children: kids }, key);
       case "popover":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Popover, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Popover, { style, children: kids }, key);
       case "popover-trigger":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(PopoverTrigger, { children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(PopoverTrigger, { children: kids }, key);
       case "popover-content":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(PopoverContent, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(PopoverContent, { style, children: kids }, key);
       case "carousel":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Carousel, { style, activeIndex: asNumber(p("activeIndex"), 0), onChange: (v) => action(event("onChange"), v), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Carousel, { style, activeIndex: asNumber(p("activeIndex"), 0), onChange: (v) => action(event("onChange"), v), children: kids }, key);
       case "button":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Button, { style, variant: String(p("variant") ?? ""), block: !!p("block"), disabled: !!p("disabled"), onClick: () => action(event("onClick")), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Button, { style, variant: String(p("variant") ?? ""), block: !!p("block"), disabled: !!p("disabled"), onClick: () => action(event("onClick")), children: kids }, key);
       case "pressable":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Pressable, { style, disabled: !!p("disabled"), onClick: () => action(event("onClick")), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Pressable, { style, disabled: !!p("disabled"), onClick: () => action(event("onClick")), children: kids }, key);
       case "input":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Input, { style, value: String(p("value") ?? ""), placeholder: String(p("placeholder") ?? ""), number: p("inputType") === "number", block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Input, { style, value: String(p("value") ?? ""), placeholder: String(p("placeholder") ?? ""), number: p("inputType") === "number", block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
       case "textarea":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Textarea, { style, value: String(p("value") ?? ""), placeholder: String(p("placeholder") ?? ""), rows: asNumber(p("rows"), 3), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Textarea, { style, value: String(p("value") ?? ""), placeholder: String(p("placeholder") ?? ""), rows: asNumber(p("rows"), 3), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
       case "select":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Select, { style, value: String(p("value") ?? ""), options: asOptions(p("options")), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Select, { style, value: String(p("value") ?? ""), options: asOptions(p("options")), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
       case "checkbox":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Checkbox, { style, checked: !!p("checked"), lineThrough: !!p("lineThrough"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Checkbox, { style, checked: !!p("checked"), lineThrough: !!p("lineThrough"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v), children: kids }, key);
       case "radio-group":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(RadioGroup, { style, value: p("value"), direction: String(p("direction") ?? "row"), onChange: (v) => action(event("onChange"), v), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(RadioGroup, { style, value: p("value"), direction: String(p("direction") ?? "row"), onChange: (v) => action(event("onChange"), v), children: kids }, key);
       case "radio":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Radio, { style, value: p("value"), disabled: !!p("disabled"), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Radio, { style, value: p("value"), disabled: !!p("disabled"), children: kids }, key);
       case "slider":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Slider, { style, min: asNumber(p("min"), 0), max: asNumber(p("max"), 100), step: asNumber(p("step"), 1), value: asNumber(p("value"), 0), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Slider, { style, min: asNumber(p("min"), 0), max: asNumber(p("max"), 100), step: asNumber(p("step"), 1), value: asNumber(p("value"), 0), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
       case "date-picker":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(DatePicker, { style, value: String(p("value") ?? ""), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(DatePicker, { style, value: String(p("value") ?? ""), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
       case "segmented-control":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(SegmentedControl, { style, value: p("value"), options: asOptions(p("options")), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(SegmentedControl, { style, value: p("value"), options: asOptions(p("options")), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
       case "Chart":
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Chart, { content: p("content") }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Chart, { content: p("content") }, key);
       default:
-        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(UnsupportedComponent, { name: name3 }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(UnsupportedComponent, { name: name3 }, key);
     }
   };
-  if (targets) return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(import_jsx_runtime60.Fragment, { children: runtime.document.children.map((node2, index2) => targets[index2] ? (0, import_react_dom.createPortal)(/* @__PURE__ */ (0, import_jsx_runtime60.jsx)(ThemeProvider, { name: "studio", mode: themeMode, children: /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("div", { className: "iui-root", children: render2(node2, index2) }) }), targets[index2], index2) : null) });
-  return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("div", { className: "iui-root", children: runtime.document.children.map((n, i) => render2(n, i)) });
+  if (targets) return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(import_jsx_runtime59.Fragment, { children: runtime.document.children.map((node2, index2) => targets[index2] ? (0, import_react_dom.createPortal)(/* @__PURE__ */ (0, import_jsx_runtime59.jsx)(ThemeProvider, { name: "studio", mode: themeMode, children: /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("div", { className: "iui-root", children: render2(node2, index2) }) }), targets[index2], index2) : null) });
+  return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("div", { className: "iui-root", children: runtime.document.children.map((n, i) => render2(n, i)) });
 }
 
 // src/adapters/iui.ts
@@ -23793,7 +23765,7 @@ function splitCanvasReply(source, messageId, streaming, recoveryDepth = 0) {
 var iui_styles_default = "/* Component styles: import from open-intelligent-ui/styles.css alongside the React UI package. */\n.iui-theme{min-height:100vh;background:var(--iui-background);color:var(--iui-text);font-family:var(--iui-font)}\n.iui-root{font-size:14px;line-height:1.55;white-space:pre-wrap}.iui-box,.iui-col,.iui-card,.iui-grid-item,.iui-flow-item,.iui-WritingBlock,.iui-carousel-item{display:flex;flex-direction:column;gap:8px;min-width:0}.iui-row,.iui-flow{display:flex;align-items:center;gap:8px;min-width:0}.iui-grid{display:grid;gap:8px}.iui-card{border:1px solid var(--iui-border);border-radius:12px;padding:14px}.iui-title{font-size:19px;line-height:1.2;letter-spacing:-.025em;margin:0;font-weight:750}.iui-caption{color:var(--iui-text-muted);font-size:12px}.iui-badge{display:inline-flex;background:var(--iui-surface-muted);border-radius:99px;padding:3px 9px;font-size:11px;font-weight:700;white-space:nowrap}.iui-label{font-size:12px;font-weight:700;color:var(--iui-text-muted)}.iui-icon{display:inline-block;min-width:1em;text-align:center;color:var(--iui-primary)}.iui-divider{border:0;border-top:1px solid var(--iui-border);width:100%;margin:5px 0}.iui-field{border:1px solid var(--iui-border);border-radius:8px;padding:9px 11px;min-width:0;max-width:100%;background:var(--iui-surface);color:var(--iui-text-muted);outline:none}.iui-field:focus{border-color:var(--iui-primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--iui-primary) 18%,transparent)}.iui-slider{width:100%;accent-color:var(--iui-primary)}.iui-check{display:inline-flex;align-items:center;gap:6px;cursor:pointer}.iui-check input{accent-color:var(--iui-primary)}.iui-radio-group{display:flex;gap:12px;flex-wrap:wrap}.iui-radio-group.vertical{flex-direction:column}.iui-button,.iui-pressable{border:0;border-radius:8px;padding:9px 13px;background:var(--iui-primary);color:var(--iui-surface);font-weight:700;font-size:12px;text-align:left}.iui-pressable{background:transparent;color:inherit}.iui-pressable:hover{background:var(--iui-surface-muted)}.iui-segments{display:flex;border:1px solid var(--iui-border);border-radius:9px;padding:3px;gap:3px}.iui-segments button{border:0;background:transparent;padding:6px 10px;border-radius:6px;color:var(--iui-text-muted);font-size:11px;font-weight:700}.iui-segments button.active{color:var(--iui-text-muted);background:var(--iui-surface-muted)}.iui-table{display:table;width:100%;border-collapse:collapse}.iui-table-row{display:table-row}.iui-table-cell{display:table-cell;border-bottom:1px solid var(--iui-border);padding:8px}.iui-list{padding-left:24px}.iui-code{overflow:auto;background:var(--iui-surface-muted);border-radius:9px;padding:12px}.iui-popover{position:relative}.iui-popover summary{cursor:pointer;list-style:none}.iui-popover-content{position:relative;z-index:2;background:var(--iui-surface-muted);border:1px solid var(--iui-border);border-radius:10px;box-shadow:0 12px 25px var(--iui-shadow);padding:10px;margin-top:8px}.iui-carousel{display:flex;align-items:center;gap:8px}.iui-carousel>div{flex:1;min-width:0}.iui-carousel>button{border:1px solid var(--iui-border);background:var(--iui-background);border-radius:7px;font-size:20px;color:var(--iui-primary)}.iui-chart svg{width:100%;height:auto;display:block}.iui-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--iui-text-muted)}.iui-legend span{display:flex;align-items:center;gap:4px}.iui-legend i{width:8px;height:8px;border-radius:2px}.iui-unavailable{padding:12px;border:1px dashed var(--iui-border);border-radius:8px;background:var(--iui-surface-muted);color:var(--iui-text-muted);font-size:12px}.iui-error{color:var(--iui-danger)}\n.iui-card,.iui-field,.iui-button,.iui-pressable,.iui-badge{border-radius:var(--iui-radius)}\n.iui-root :disabled{cursor:not-allowed;opacity:.55}\n.iui-box,.iui-col,.iui-card,.iui-grid-item,.iui-flow-item,.iui-carousel-item{gap:var(--iui-spacing)}\n@media(max-width:850px){.iui-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}\n@media(max-width:480px){.iui-grid{grid-template-columns:1fr!important}.iui-row{flex-wrap:wrap}}\n.iui-button.iui-outline{background:transparent;color:var(--iui-primary);border:1px solid var(--iui-primary)}\n.iui-button.iui-ghost{background:transparent;color:var(--iui-primary)}\n.iui-button:hover:not(:disabled){filter:brightness(.95)}\n.iui-app-block{border:1px solid var(--iui-border);border-radius:13px;overflow:hidden;background:var(--iui-surface)}\n.iui-app-block-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border-bottom:1px solid var(--iui-border)}\n.iui-app-block-head>div:first-child{display:flex;flex-direction:column;gap:2px}.iui-app-block-head strong{font-size:13px}.iui-app-block-head small{font-size:10px;color:var(--iui-text-muted)}\n.iui-app-block-actions{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}.iui-app-block-actions button{border:1px solid var(--iui-border);border-radius:7px;background:var(--iui-surface-muted);color:var(--iui-text);padding:6px 8px;font-size:10px;font-weight:700}.iui-app-block-actions button:first-child{background:var(--iui-primary);border-color:var(--iui-primary);color:var(--iui-surface)}.iui-app-block-actions button:disabled{opacity:.4;cursor:default}\n.iui-app-block-status{margin:0;padding:8px 12px;background:var(--iui-surface-muted);color:var(--iui-text-muted);font-size:10px}.iui-app-block-empty{padding:36px 18px;text-align:center;color:var(--iui-text-muted);font-size:12px}\n.iui-app-block iframe{display:block;width:100%;height:770px;border:0;background:#111b2a}.iui-app-block.is-paint iframe{height:440px}\n@media(max-width:520px){.iui-app-block-head{align-items:flex-start;flex-direction:column}.iui-app-block-actions{justify-content:flex-start}}\n.iui-async-image{position:relative;display:block;max-width:100%;min-height:120px;margin:0;overflow:hidden;border:1px solid var(--iui-border);border-radius:var(--iui-radius);background:var(--iui-surface-muted)}\n.iui-async-image img{display:block;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .18s ease}\n.iui-async-image[data-image-status=ready] img{opacity:1}\n.iui-image-status{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;text-align:center;color:var(--iui-text-muted);font-size:12px;background:var(--iui-surface-muted)}\n.iui-async-image[data-image-status=error] .iui-image-status{color:var(--iui-danger)}\n.iui-image-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}\n.iui-image-carousel{min-width:0}.iui-image-controls{display:flex;align-items:center;justify-content:center;gap:18px;padding:6px;color:var(--iui-text-muted);font-size:12px}\n.iui-image-controls button{border:1px solid var(--iui-border);background:var(--iui-surface);color:var(--iui-primary);border-radius:7px;min-width:30px;height:28px;cursor:pointer}\n@media(max-width:520px){.iui-image-group{grid-template-columns:1fr}}\n\n/* Default component language: measured from the user's static ChatGPT UI capture.\n   Theme tokens stay on ThemeProvider so Studio and Citrus share the same geometry. */\n.iui-theme{min-width:0;min-height:0}\n.iui-root{min-width:0;container-type:inline-size;color:var(--iui-text);font-size:16px;line-height:1.625;overflow-wrap:break-word}\n.iui-root,.iui-root *,.iui-root *::before,.iui-root *::after{box-sizing:border-box}\n.iui-root :where(button,input,textarea,select){font-family:inherit}\n.iui-root :disabled{opacity:.42;cursor:not-allowed}\n.iui-root :where(button,input,textarea,select,summary):focus-visible{\n  outline:2px solid var(--iui-info);outline-offset:2px\n}\n\n/* Type is led by the 16/26 body, 18/28 heading and 14px secondary text. */\n.iui-text{min-width:0}\n.iui-title{margin:0;color:var(--iui-text);font-size:18px;line-height:1.55;letter-spacing:-.01em;font-weight:600}\n.iui-caption{color:var(--iui-text-muted);font-size:14px;line-height:1.3;font-weight:400}\n.iui-label{color:var(--iui-text);font-size:14px;line-height:1.45;font-weight:500}\n.iui-badge{\n  display:inline-flex;align-items:center;min-height:20px;width:max-content;max-width:100%;\n  padding:1px 8px;border-radius:999px;background:color-mix(in srgb,currentColor 11%,transparent);\n  color:var(--iui-text-muted);font-size:12px;line-height:18px;font-weight:500;letter-spacing:.015em\n}\n.iui-icon{color:var(--iui-primary)}\n.iui-code{\n  max-width:100%;margin:0;padding:12px 14px;overflow:auto;white-space:pre-wrap;\n  border:1px solid var(--iui-border);border-radius:10px;background:var(--iui-surface-muted);\n  color:var(--iui-text);font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace\n}\n.iui-root :not(pre)>code{\n  padding:2px 5px;border-radius:5px;background:var(--iui-surface-muted);\n  font: .86em/1.45 ui-monospace,SFMono-Regular,Menlo,monospace\n}\n.iui-root a{color:var(--iui-text);text-decoration-color:var(--iui-text-muted);text-underline-offset:3px}\n.iui-root a:hover{text-decoration-color:currentColor}\n.iui-root blockquote{\n  margin:2px 0;padding:5px 0 5px 16px;border-left:3px solid var(--iui-border);\n  color:var(--iui-text-muted)\n}\n.iui-list{margin:0;padding-left:24px}\n.iui-list li{padding-left:2px}\n\n/* Structure uses an eight-pixel default gap; explicit DSL gaps use the 4px theme unit. */\n.iui-box,.iui-col,.iui-card,.iui-grid-item,.iui-flow-item,.iui-WritingBlock,.iui-carousel-item{\n  gap:calc(var(--iui-spacing) * 2);min-width:0\n}\n.iui-row,.iui-flow,.iui-grid{gap:calc(var(--iui-spacing) * 2);min-width:0}\n.iui-card{\n  padding:16px;border:1px solid var(--iui-border);\n  border-radius:calc(var(--iui-radius) + 8px);background:var(--iui-surface);\n  box-shadow:none\n}\n.iui-divider{margin:4px 0;border-top-color:var(--iui-border)}\n\n/* Native form controls keep their semantics while matching the captured 40px fields. */\n.iui-field{\n  min-width:0;min-height:40px;max-width:100%;padding:8px 14px;\n  border:1px solid var(--iui-border);border-radius:10px;background:var(--iui-surface);\n  color:var(--iui-text);font-size:16px;line-height:22px;box-shadow:none;\n  transition:border-color .15s ease,box-shadow .15s ease\n}\n.iui-field::placeholder{color:var(--iui-text-muted);opacity:.7}\n.iui-field:hover:not(:disabled){border-color:color-mix(in srgb,var(--iui-text) 24%,var(--iui-border))}\n.iui-field:focus{border-color:var(--iui-info);box-shadow:0 0 0 3px color-mix(in srgb,var(--iui-info) 12%,transparent)}\n.iui-root textarea.iui-field{min-height:64px;padding:10px 14px;line-height:1.5;resize:vertical}\n.iui-root select.iui-field{padding-right:28px}\n.iui-check{min-height:24px;gap:9px;color:var(--iui-text);font-size:16px;line-height:24px}\n.iui-check input{width:20px;height:20px;flex:none;margin:0;accent-color:var(--iui-primary);cursor:pointer}\n.iui-radio-group{gap:12px 16px}\n.iui-radio-group.vertical{gap:8px}\n.iui-slider{display:block;width:100%;height:24px;margin:0;accent-color:var(--iui-primary);cursor:pointer}\n.iui-slider::-webkit-slider-runnable-track{height:8px;border-radius:999px;background:var(--iui-surface-tertiary)}\n.iui-slider::-webkit-slider-thumb{\n  appearance:none;width:20px;height:20px;margin-top:-6px;border:1px solid var(--iui-border);\n  border-radius:50%;background:var(--iui-surface);box-shadow:0 1px 3px #0000001c\n}\n.iui-slider:focus-visible{outline:2px solid var(--iui-info);outline-offset:3px;border-radius:999px}\n\n/* Buttons and selectable rows use quiet surfaces with a visible keyboard ring. */\n.iui-button{\n  display:inline-flex;align-items:center;justify-content:center;min-height:36px;max-width:100%;\n  padding:7px 16px;border:1px solid var(--iui-primary);border-radius:999px;\n  background:var(--iui-primary);color:var(--iui-surface);\n  font-size:14px;line-height:20px;font-weight:500;text-align:center;cursor:pointer;\n  transition:background-color .15s ease,border-color .15s ease,box-shadow .15s ease\n}\n.iui-button:hover:not(:disabled){filter:none;background:color-mix(in srgb,var(--iui-primary) 84%,var(--iui-surface))}\n.iui-button.iui-outline{border-color:var(--iui-border);background:var(--iui-surface);color:var(--iui-text)}\n.iui-button.iui-outline:hover:not(:disabled){background:var(--iui-surface-muted);border-color:var(--iui-text-muted)}\n.iui-button.iui-ghost{border-color:transparent;background:transparent;color:var(--iui-text)}\n.iui-button.iui-ghost:hover:not(:disabled){background:var(--iui-surface-muted)}\n.iui-pressable{\n  max-width:100%;padding:8px;border:0;border-radius:8px;background:transparent;\n  color:var(--iui-text);font-size:inherit;line-height:inherit;font-weight:inherit;\n  text-align:inherit;cursor:pointer;transition:background-color .15s ease\n}\n.iui-pressable:hover:not(:disabled){background:var(--iui-surface-muted)}\n.iui-segments{max-width:100%;gap:2px;padding:3px;border:0;border-radius:999px;background:var(--iui-surface-muted)}\n.iui-segments button{\n  min-height:30px;padding:5px 12px;border:0;border-radius:999px;background:transparent;\n  color:var(--iui-text-muted);font-size:14px;line-height:20px;font-weight:500;cursor:pointer\n}\n.iui-segments button:hover:not(:disabled){color:var(--iui-text);background:color-mix(in srgb,var(--iui-surface) 55%,transparent)}\n.iui-segments button.active{color:var(--iui-text);background:var(--iui-surface);box-shadow:0 1px 3px #00000014}\n\n/* Data and overlays rely on borders and spacing instead of deep shadows. */\n.iui-table{max-width:100%;border-collapse:collapse;font-size:14px;line-height:20px}\n.iui-table-cell{padding:10px 12px;border-bottom:1px solid var(--iui-border);vertical-align:top}\n.iui-table-cell:first-child{padding-left:0}\n.iui-table-cell:last-child{padding-right:0}\n.iui-popover summary{border-radius:8px}\n.iui-popover-content{\n  margin-top:8px;padding:12px;border:1px solid var(--iui-border);\n  border-radius:var(--iui-radius);background:var(--iui-surface);box-shadow:var(--iui-shadow)\n}\n.iui-carousel>button,.iui-image-controls button{\n  display:grid;place-items:center;min-width:32px;height:32px;border:1px solid var(--iui-border);\n  border-radius:50%;background:var(--iui-surface);color:var(--iui-text);cursor:pointer\n}\n.iui-carousel>button:hover:not(:disabled),.iui-image-controls button:hover:not(:disabled){background:var(--iui-surface-muted)}\n.iui-legend{font-size:12px;line-height:1.4}\n.iui-axis-label{color:var(--iui-text-muted);font-size:12px}\n.iui-unavailable{\n  padding:12px 14px;border:1px dashed var(--iui-border);border-radius:10px;\n  background:var(--iui-surface-muted);color:var(--iui-text-muted);font-size:14px;line-height:1.5\n}\n\n/* Media preserves the restricted host behavior while sharing the same surface. */\n.iui-app-block{border-radius:var(--iui-radius);box-shadow:none}\n.iui-app-block-head{padding:14px 16px}\n.iui-app-block-head strong{font-size:14px;font-weight:600}\n.iui-app-block-head small{font-size:12px}\n.iui-app-block-actions button{min-height:30px;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:500}\n.iui-app-block-status{padding:9px 16px;font-size:12px}\n.iui-app-block-empty{font-size:14px}\n.iui-async-image{border-color:var(--iui-border);border-radius:var(--iui-radius);background:var(--iui-surface-muted)}\n.iui-image-status{font-size:14px}\n.iui-image-group{gap:calc(var(--iui-spacing) * 2)}\n\n@container (max-width:520px){\n  .iui-grid,.iui-image-group{grid-template-columns:1fr!important}\n  .iui-row{flex-wrap:wrap}\n}\n@media(max-width:480px){\n  .iui-root{font-size:16px}\n  .iui-segments{flex-wrap:wrap;border-radius:16px}\n  .iui-segments button{flex:1 1 auto}\n}\n";
 
 // src/ui/ReplyContent.tsx
-var import_jsx_runtime61 = require("react/jsx-runtime");
+var import_jsx_runtime60 = require("react/jsx-runtime");
 var runtimeSequence = 0;
 function MarkdownBody({
   text: text8,
@@ -23801,21 +23773,21 @@ function MarkdownBody({
   renderMarkdown,
   sessionId
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("div", { className: "chat-markdown", children: renderMarkdown ? renderMarkdown(text8, streaming, sessionId) : /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(Markdown, { remarkPlugins: [remarkGfm], children: text8 }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("div", { className: "chat-markdown", children: renderMarkdown ? renderMarkdown(text8, streaming, sessionId) : /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Markdown, { remarkPlugins: [remarkGfm], children: text8 }) });
 }
 function SourceFallback({
   text: text8,
   reason,
   pending = false
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime60.jsxs)(
     "div",
     {
       className: "chat-iui-fallback",
       "data-iui-state": pending ? "pending" : "error",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("p", { role: "status", children: reason }),
-        /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("pre", { "aria-label": "\u4FDD\u7559\u7684\u56DE\u590D\u539F\u6587", children: text8 })
+        /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("p", { role: "status", children: reason }),
+        /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("pre", { "aria-label": "\u4FDD\u7559\u7684\u56DE\u590D\u539F\u6587", children: text8 })
       ]
     }
   );
@@ -23830,15 +23802,15 @@ var ReplyBoundary = class extends import_react11.Component {
   }
   render() {
     if (!this.state.error) return this.props.children;
-    return /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)("div", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime60.jsxs)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
         SourceFallback,
         {
           text: this.props.text,
           reason: "\u56DE\u590D\u6E32\u67D3\u5931\u8D25\uFF0C\u539F\u6587\u5DF2\u4FDD\u7559\u3002\u53EF\u4EE5\u91CD\u8BD5\u6216\u7EE7\u7EED\u5BF9\u8BDD\u3002"
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("button", { type: "button", onClick: () => this.setState({ error: false }), children: "\u91CD\u8BD5\u6E32\u67D3" })
+      /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("button", { type: "button", onClick: () => this.setState({ error: false }), children: "\u91CD\u8BD5\u6E32\u67D3" })
     ] });
   }
 };
@@ -23944,9 +23916,9 @@ function IuiTarget({
     ...runtime.document,
     children: [runtime.document.children[index2]]
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)(import_jsx_runtime61.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("div", { ref: ref2, "data-canvas-iui-root": "" }),
-    target && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime60.jsxs)(import_jsx_runtime60.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("div", { ref: ref2, "data-canvas-iui-root": "" }),
+    target && /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
       UIRenderer,
       {
         runtime: localRuntime,
@@ -24042,7 +24014,7 @@ function IuiReply({
   });
   runtime.update(parsed.document);
   const mode = useHostTheme();
-  return /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime60.jsxs)(
     "div",
     {
       className: "chat-iui-content",
@@ -24051,12 +24023,12 @@ function IuiReply({
         (segment) => segment.kind === "markdown" && segment.text.trim()
       ) ? "mixed" : "standalone",
       children: [
-        parsed.segments.filter((segment) => segment.kind !== "markdown" || segment.text.trim()).map((segment) => /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+        parsed.segments.filter((segment) => segment.kind !== "markdown" || segment.text.trim()).map((segment) => /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
           ReplyBoundary,
           {
             text: segment.text,
             resetKey: `${segment.kind}\0${segment.text}\0${streaming}`,
-            children: segment.kind === "markdown" ? /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+            children: segment.kind === "markdown" ? /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
               MarkdownBody,
               {
                 text: segment.text,
@@ -24064,14 +24036,14 @@ function IuiReply({
                 renderMarkdown,
                 sessionId
               }
-            ) : segment.kind === "error" ? /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+            ) : segment.kind === "error" ? /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
               SourceFallback,
               {
                 text: segment.text,
                 pending: streaming,
                 reason: `${streaming ? "\u8FD9\u6BB5 IUI \u6682\u65F6\u65E0\u6CD5\u5B89\u5168\u663E\u793A" : "\u8FD9\u6BB5 IUI \u672A\u901A\u8FC7\u5B89\u5168\u89E3\u6790"}\uFF0C\u539F\u6587\u5DF2\u4FDD\u7559\u3002\uFF08${segment.reason}\uFF09`
               }
-            ) : /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+            ) : /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
               IuiTarget,
               {
                 index: segment.index,
@@ -24084,8 +24056,8 @@ function IuiReply({
           },
           `${segment.kind}-${segment.start}`
         )),
-        preview && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("p", { role: "status", children: "IUI \u6B63\u5728\u751F\u6210\uFF0C\u5F53\u524D\u663E\u793A\u5DF2\u901A\u8FC7\u5B89\u5168\u89E3\u6790\u7684\u90E8\u5206\u3002" }),
-        feedback && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("p", { className: "chat-iui-feedback", role: "status", children: feedback })
+        preview && /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("p", { role: "status", children: "IUI \u6B63\u5728\u751F\u6210\uFF0C\u5F53\u524D\u663E\u793A\u5DF2\u901A\u8FC7\u5B89\u5168\u89E3\u6790\u7684\u90E8\u5206\u3002" }),
+        feedback && /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("p", { className: "chat-iui-feedback", role: "status", children: feedback })
       ]
     }
   );
@@ -24116,7 +24088,7 @@ function ReplyBody({
   }, [text8, messageId, streaming, iuiEnabled]);
   const hasSource = Boolean(result?.document && result.segments);
   const hasReasoning = Boolean(reasoning?.trim()) && !streaming;
-  const body = hasSource && result?.document && result.segments ? /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+  const body = hasSource && result?.document && result.segments ? /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
     IuiReply,
     {
       resourceScopeKey,
@@ -24132,14 +24104,14 @@ function ReplyBody({
         (segment) => segment.kind === "ui" && !segment.complete
       )
     }
-  ) : result ? /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+  ) : result ? /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
     SourceFallback,
     {
       text: text8,
       pending: streaming,
       reason: "\u89E3\u6790\u5668\u65E0\u6CD5\u5904\u7406\u8FD9\u6BB5\u5185\u5BB9\uFF0C\u539F\u6587\u5DF2\u4FDD\u7559\u3002"
     }
-  ) : /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+  ) : /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
     MarkdownBody,
     {
       text: text8,
@@ -24148,11 +24120,11 @@ function ReplyBody({
       sessionId
     }
   );
-  return /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)(import_jsx_runtime61.Fragment, { children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime60.jsxs)(import_jsx_runtime60.Fragment, { children: [
     body,
-    (hasSource || hasReasoning) && /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)("div", { className: "chat-reply-disclosures", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)("div", { className: "chat-reply-disclosure-actions", children: [
-        hasSource && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+    (hasSource || hasReasoning) && /* @__PURE__ */ (0, import_jsx_runtime60.jsxs)("div", { className: "chat-reply-disclosures", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime60.jsxs)("div", { className: "chat-reply-disclosure-actions", children: [
+        hasSource && /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
           "button",
           {
             type: "button",
@@ -24163,7 +24135,7 @@ function ReplyBody({
             children: "\u67E5\u770B\u539F\u6587"
           }
         ),
-        hasReasoning && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+        hasReasoning && /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
           "button",
           {
             type: "button",
@@ -24174,41 +24146,41 @@ function ReplyBody({
           }
         )
       ] }),
-      hasSource && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+      hasSource && /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
         "div",
         {
           id: sourceId,
           className: "chat-iui-source",
           hidden: open !== "source",
-          children: /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("pre", { children: text8 })
+          children: /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("pre", { children: text8 })
         }
       ),
-      hasReasoning && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+      hasReasoning && /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
         "div",
         {
           id: reasoningId,
           className: "chat-reasoning-done",
           hidden: open !== "reasoning",
-          children: /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("pre", { children: reasoning })
+          children: /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("pre", { children: reasoning })
         }
       )
     ] })
   ] });
 }
 function ReplyContent(props) {
-  return /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
     ReplyBoundary,
     {
       text: props.text,
       resetKey: `${props.messageId}\0${props.iuiEnabled}\0${props.text}`,
-      children: /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(ReplyBody, { ...props }, props.messageId)
+      children: /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(ReplyBody, { ...props }, props.messageId)
     }
   );
 }
 
 // src/ui/UserMessageMedia.tsx
 var import_react12 = require("react");
-var import_jsx_runtime62 = require("react/jsx-runtime");
+var import_jsx_runtime61 = require("react/jsx-runtime");
 function nativeSingleImageFit(attachment) {
   const width = attachment.width;
   const height = attachment.height;
@@ -24258,8 +24230,8 @@ function ImageTile({
       active = false;
     };
   }, [attachment.attachmentId, sessionId, retry]);
-  return /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(import_jsx_runtime62.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)(import_jsx_runtime61.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
       "button",
       {
         className: "chat-user-image-tile",
@@ -24274,7 +24246,7 @@ function ImageTile({
           else if (url) setOpen(true);
         },
         onKeyDown: (event) => event.stopPropagation(),
-        children: url ? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+        children: url ? /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
           "img",
           {
             src: url,
@@ -24283,7 +24255,7 @@ function ImageTile({
             draggable: false,
             style: compact ? void 0 : { objectPosition: fit.objectPosition }
           }
-        ) : /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { children: failed ? "\u91CD\u8BD5\u56FE\u7247" : "\u56FE\u7247\u52A0\u8F7D\u4E2D" })
+        ) : /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("span", { children: failed ? "\u91CD\u8BD5\u56FE\u7247" : "\u56FE\u7247\u52A0\u8F7D\u4E2D" })
       }
     ),
     open && url && renderPreview?.(url, alt, () => setOpen(false))
@@ -24302,22 +24274,22 @@ function UserMessageMedia({
   );
   if (!items?.length) return null;
   const compact = items.length > 1;
-  return /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { className: "chat-user-media", "data-message-attachments": "", children: items.map(
-    (item, index2) => item.type === "file" ? /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("div", { className: "chat-user-media", "data-message-attachments": "", children: items.map(
+    (item, index2) => item.type === "file" ? /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)(
       "span",
       {
         className: "chat-user-file-card",
         title: item.file.name,
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { className: "chat-user-file-icon", children: renderFileIcon?.(item.file.name) ?? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "artifact", size: 28 }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("span", { className: "chat-user-file-content", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { className: "chat-user-file-name", children: item.file.name }),
-            /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { className: "chat-user-file-meta", children: formatFileMeta?.(item.file.name, item.file.bytes) ?? `${item.file.bytes}B` })
+          /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("span", { className: "chat-user-file-icon", children: renderFileIcon?.(item.file.name) ?? /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(Icon, { name: "artifact", size: 28 }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)("span", { className: "chat-user-file-content", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("span", { className: "chat-user-file-name", children: item.file.name }),
+            /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("span", { className: "chat-user-file-meta", children: formatFileMeta?.(item.file.name, item.file.bytes) ?? `${item.file.bytes}B` })
           ] })
         ]
       },
       `file:${item.file.attachmentId}`
-    ) : /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+    ) : /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
       ImageTile,
       {
         image: item,
@@ -24334,7 +24306,7 @@ function UserMessageMedia({
 
 // src/ui/UserMessageActions.tsx
 var import_react13 = require("react");
-var import_jsx_runtime63 = require("react/jsx-runtime");
+var import_jsx_runtime62 = require("react/jsx-runtime");
 function UserMessageActions({
   text: text8,
   time,
@@ -24375,11 +24347,11 @@ function UserMessageActions({
       if (alive.current) setCopied(false);
     }, 1e3);
   }
-  return /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)("div", { className: "chat-user-message-actions", "data-chat-user-actions": "", children: [
-    time && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("time", { className: "chat-user-message-time", title: time.full, children: time.short }),
+  return /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-user-message-actions", "data-chat-user-actions": "", children: [
+    time && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("time", { className: "chat-user-message-time", title: time.full, children: time.short }),
     text8 && (() => {
       const label = copied ? "\u5DF2\u590D\u5236" : "\u590D\u5236";
-      const button = /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
+      const button = /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
         "button",
         {
           className: "chat-user-message-copy",
@@ -24392,7 +24364,7 @@ function UserMessageActions({
             event.stopPropagation();
             void copy();
           },
-          children: renderCopyIcon?.(copied) ?? /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(Icon, { name: copied ? "check" : "copy", size: 15 })
+          children: renderCopyIcon?.(copied) ?? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: copied ? "check" : "copy", size: 15 })
         }
       );
       return wrapCopyButton?.(button, label) ?? button;
@@ -24401,7 +24373,7 @@ function UserMessageActions({
 }
 
 // src/ui/ChatCanvas.tsx
-var import_jsx_runtime64 = require("react/jsx-runtime");
+var import_jsx_runtime63 = require("react/jsx-runtime");
 var KEY = "dsh-canvas-conversation:v1";
 var sessionKey = (mode, id) => `${KEY}:${mode}:session:${encodeURIComponent(id)}`;
 var fresh = (sessionId) => ({
@@ -24457,9 +24429,9 @@ function ReasoningView({ text: text8, running }) {
     if (live.current) live.current.scrollTop = live.current.scrollHeight;
   }, [text8]);
   if (!text8.trim()) return null;
-  return running ? /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-reasoning-live", role: "status", "aria-live": "polite", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { "aria-hidden": "true", children: "\u601D\u8003\u4E2D" }),
-    /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { ref: live, "aria-label": "\u6700\u65B0\u601D\u8003\u5185\u5BB9", children: text8 })
+  return running ? /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)("div", { className: "chat-reasoning-live", role: "status", "aria-live": "polite", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("span", { "aria-hidden": "true", children: "\u601D\u8003\u4E2D" }),
+    /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("div", { ref: live, "aria-label": "\u6700\u65B0\u601D\u8003\u5185\u5BB9", children: text8 })
   ] }) : null;
 }
 function useCalendarNow() {
@@ -24515,6 +24487,8 @@ function ChatCanvas({
   resolveImage,
   useNativeComposer = false,
   nativeComposer,
+  externalComposer = false,
+  onNativeTurn,
   onSessionChange,
   requestedSession,
   onRequestHandled,
@@ -24522,7 +24496,7 @@ function ChatCanvas({
   sidebarIcons,
   onSchedules
 }) {
-  const [initial] = (0, import_react14.useState)(() => restore(mode));
+  const [initial] = (0, import_react14.useState)(() => restore(mode, requestedSession?.sessionId));
   const calendarNow = useCalendarNow();
   const [state, setState] = (0, import_react14.useState)(initial.state);
   const stateRef = (0, import_react14.useRef)(state);
@@ -24539,6 +24513,7 @@ function ChatCanvas({
   const [historyNotice, setHistoryNotice] = (0, import_react14.useState)("");
   const [sessionAttempt, setSessionAttempt] = (0, import_react14.useState)(0);
   const creatingSession = (0, import_react14.useRef)(false);
+  const nativeTurnPending = (0, import_react14.useRef)(false);
   const creatingNewSession = (0, import_react14.useRef)(false);
   const [newSessionPending, setNewSessionPending] = (0, import_react14.useState)(false);
   const sessionStates = (0, import_react14.useRef)(/* @__PURE__ */ new Map());
@@ -25436,6 +25411,24 @@ function ChatCanvas({
       return { ok: false, message: "\u5F53\u524D\u4F1A\u8BDD\u6B63\u5728\u751F\u6210\uFF0C\u8BF7\u7B49\u5F85\u6216\u505C\u6B62\u540E\u91CD\u8BD5" };
     if (stateRef.current.sessionId && adapter.isSessionBusy?.(stateRef.current.sessionId))
       return { ok: false, message: "\u5F53\u524D\u4F1A\u8BDD\u6B63\u5728\u751F\u6210\uFF0C\u8BF7\u7B49\u5F85\u6216\u505C\u6B62\u540E\u91CD\u8BD5" };
+    if (externalComposer) {
+      if (nativeTurnPending.current)
+        return { ok: false, message: "\u6B63\u5728\u63D0\u4EA4\uFF0C\u8BF7\u7A0D\u540E\u518D\u8BD5" };
+      const sessionId = stateRef.current.sessionId;
+      if (!sessionId || !onNativeTurn)
+        return { ok: false, message: "\u539F\u751F\u4F1A\u8BDD\u5C1A\u672A\u51C6\u5907\u597D\uFF0C\u8BF7\u7A0D\u540E\u91CD\u8BD5" };
+      nativeTurnPending.current = true;
+      try {
+        await onNativeTurn(sessionId, prompt);
+        return { ok: true };
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        if (mounted.current) setRunError(message);
+        return { ok: false, message };
+      } finally {
+        nativeTurnPending.current = false;
+      }
+    }
     const id = crypto.randomUUID();
     const active = {
       id,
@@ -25577,7 +25570,7 @@ function ChatCanvas({
     }
   };
   const v = state.viewport;
-  return /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)(
     "div",
     {
       className: "canvas-app chat-canvas",
@@ -25612,9 +25605,9 @@ function ChatCanvas({
       onClickCapture: suppressPanActivation,
       onAuxClickCapture: suppressPanActivation,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-topbar", ref: menuRoot, onClickCapture: clearPairing, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { className: "chat-brand", "aria-label": "DeepSeek Harness", children: NativeBrand2 ?? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(Brand, {}) }),
-          /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)("div", { className: "chat-topbar", ref: menuRoot, onClickCapture: clearPairing, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("div", { className: "chat-brand", "aria-label": "DeepSeek Harness", children: NativeBrand2 ?? /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(Brand, {}) }),
+          /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
             "button",
             {
               ref: navButton,
@@ -25623,10 +25616,10 @@ function ChatCanvas({
               "aria-haspopup": "dialog",
               "aria-expanded": menu === "nav",
               onClick: () => setMenu(menu === "nav" ? null : "nav"),
-              children: navIcon ?? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(Icon, { name: "grid", size: 18 })
+              children: navIcon ?? /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(Icon, { name: "grid", size: 18 })
             }
           ),
-          onExit && /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
+          onExit && /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)(
             "button",
             {
               type: "button",
@@ -25637,12 +25630,27 @@ function ChatCanvas({
               title: "\u753B\u5E03\u6A21\u5F0F\u5DF2\u5F00\u542F\uFF1B\u70B9\u51FB\u8FD4\u56DE\u539F\u751F\u5BF9\u8BDD",
               onClick: onExit,
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { className: "chat-canvas-switch-track", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { className: "chat-canvas-switch-thumb" }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { className: "chat-canvas-switch-label", children: "\u753B\u5E03" })
+                /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("span", { className: "chat-canvas-switch-track", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("span", { className: "chat-canvas-switch-thumb" }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("span", { className: "chat-canvas-switch-label", children: "\u753B\u5E03" })
               ]
             }
           ),
-          onNewSession && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+          externalComposer && /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)(
+            "button",
+            {
+              type: "button",
+              className: "chat-layout-action",
+              "aria-label": "\u81EA\u52A8\u6392\u5E03\u753B\u5E03\u5185\u5BB9",
+              title: "\u6309\u5F53\u524D\u53EF\u7528\u5BBD\u5EA6\u6574\u7406\u81EA\u52A8\u56DE\u590D\uFF0C\u4FDD\u7559\u624B\u52A8\u4F4D\u7F6E\u548C\u5F53\u524D\u89C6\u89D2",
+              disabled: !state.replies.length,
+              onClick: arrangeViewport,
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(Icon, { name: "fit", size: 16 }),
+                /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("span", { children: "\u81EA\u52A8\u6392\u5E03" })
+              ]
+            }
+          ),
+          onNewSession && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
             "button",
             {
               type: "button",
@@ -25651,10 +25659,10 @@ function ChatCanvas({
               title: "\u65B0\u5EFA\u753B\u5E03\u4F1A\u8BDD",
               disabled: newSessionPending,
               onClick: () => void createNewSession(),
-              children: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(Icon, { name: "plus", size: 18 })
+              children: /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(Icon, { name: "plus", size: 18 })
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
             "button",
             {
               ref: accountButton,
@@ -25663,11 +25671,11 @@ function ChatCanvas({
               "aria-haspopup": "dialog",
               "aria-expanded": menu === "account",
               onClick: () => setMenu(menu === "account" ? null : "account"),
-              children: avatar ?? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(Icon, { name: "user", size: 18 })
+              children: avatar ?? /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(Icon, { name: "user", size: 18 })
             }
           ),
-          mode === "mock" && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { className: "chat-mode mock", title: "\u672C\u5730\u6A21\u62DF\uFF0C\u4E0D\u53D1\u9001\u6A21\u578B\u8BF7\u6C42", children: "MOCK" }),
-          menu === "nav" && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+          mode === "mock" && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("span", { className: "chat-mode mock", title: "\u672C\u5730\u6A21\u62DF\uFF0C\u4E0D\u53D1\u9001\u6A21\u578B\u8BF7\u6C42", children: "MOCK" }),
+          menu === "nav" && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
             CanvasSidebar,
             {
               icons: sidebarIcons,
@@ -25735,16 +25743,16 @@ function ChatCanvas({
               } : void 0
             }
           ),
-          menu === "account" && /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
+          menu === "account" && /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)(
             "div",
             {
               className: "chat-menu account",
               role: "dialog",
               "aria-label": "\u8D26\u6237\u4E0E\u7248\u672C",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { className: "chat-menu-title", children: "\u8D26\u6237" }),
-                accountActions ? /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(import_jsx_runtime64.Fragment, { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("div", { className: "chat-menu-title", children: "\u8D26\u6237" }),
+                accountActions ? /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)(import_jsx_runtime63.Fragment, { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                     "button",
                     {
                       onClick: accountActions.settings.run,
@@ -25752,7 +25760,7 @@ function ChatCanvas({
                       children: accountActions.settings.label
                     }
                   ),
-                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                  /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                     "button",
                     {
                       onClick: accountActions.version.run,
@@ -25760,14 +25768,14 @@ function ChatCanvas({
                       children: accountActions.version.label
                     }
                   ),
-                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-menu-note", children: "\u8D26\u6237\u4FE1\u606F\u548C\u5E94\u7528\u7248\u672C\u7531 DSH \u539F\u751F\u8BBE\u7F6E\u7BA1\u7406\u3002" })
-                ] }) : /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-menu-note", children: "MOCK \u6F14\u793A\u6CA1\u6709\u8D26\u6237\uFF0C\u4E0D\u4F1A\u8BFB\u53D6\u6216\u914D\u7F6E\u4EFB\u4F55\u5BC6\u94A5\u3002" }),
-                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { className: "chat-menu-title divider", children: "Canvas 0.2.4-experimental.2" })
+                  /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("p", { className: "chat-menu-note", children: "\u8D26\u6237\u4FE1\u606F\u548C\u5E94\u7528\u7248\u672C\u7531 DSH \u539F\u751F\u8BBE\u7F6E\u7BA1\u7406\u3002" })
+                ] }) : /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("p", { className: "chat-menu-note", children: "MOCK \u6F14\u793A\u6CA1\u6709\u8D26\u6237\uFF0C\u4E0D\u4F1A\u8BFB\u53D6\u6216\u914D\u7F6E\u4EFB\u4F55\u5BC6\u94A5\u3002" }),
+                /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("div", { className: "chat-menu-title divider", children: "Canvas 0.2.4-experimental.2" })
               ]
             }
           )
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
           "div",
           {
             ref: stage,
@@ -25786,7 +25794,7 @@ function ChatCanvas({
               "--chat-grid-x": `${v.x}px`,
               "--chat-grid-y": `${v.y}px`
             },
-            children: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+            children: /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
               "div",
               {
                 className: "chat-world",
@@ -25795,12 +25803,12 @@ function ChatCanvas({
                 },
                 children: state.replies.map((reply, index2) => {
                   const replyTime = formatReplyTime(reply.timestamp, calendarNow);
-                  return /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                  return /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                     "div",
                     {
                       className: "chat-reply-slot",
                       style: reply.position ? { height: reply.position.slotHeight } : void 0,
-                      children: /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
+                      children: /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)(
                         "article",
                         {
                           className: "chat-reply",
@@ -25816,13 +25824,13 @@ function ChatCanvas({
                           tabIndex: 0,
                           "aria-label": replyTime ? `\u56DE\u590D \xB7 ${replyTime.full}` : "\u56DE\u590D",
                           children: [
-                            /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
+                            /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)(
                               "div",
                               {
                                 className: "chat-reply-meta",
                                 title: "\u4F7F\u7528\u56DE\u590D\u624B\u67C4\u79FB\u52A8\uFF1B\u6309\u4F4F\u7A7A\u683C\u6216\u4F7F\u7528\u9F20\u6807\u4E2D\u952E\u53EF\u5E73\u79FB\u753B\u5E03",
                                 children: [
-                                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                                  /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                                     "button",
                                     {
                                       type: "button",
@@ -25846,7 +25854,7 @@ function ChatCanvas({
                                           direction[1] * step / v.zoom
                                         );
                                       },
-                                      children: /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
+                                      children: /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)(
                                         "svg",
                                         {
                                           width: "12",
@@ -25855,18 +25863,18 @@ function ChatCanvas({
                                           fill: "currentColor",
                                           "aria-hidden": "true",
                                           children: [
-                                            /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("circle", { cx: "4", cy: "2", r: "1" }),
-                                            /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("circle", { cx: "8", cy: "2", r: "1" }),
-                                            /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("circle", { cx: "4", cy: "6", r: "1" }),
-                                            /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("circle", { cx: "8", cy: "6", r: "1" }),
-                                            /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("circle", { cx: "4", cy: "10", r: "1" }),
-                                            /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("circle", { cx: "8", cy: "10", r: "1" })
+                                            /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("circle", { cx: "4", cy: "2", r: "1" }),
+                                            /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("circle", { cx: "8", cy: "2", r: "1" }),
+                                            /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("circle", { cx: "4", cy: "6", r: "1" }),
+                                            /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("circle", { cx: "8", cy: "6", r: "1" }),
+                                            /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("circle", { cx: "4", cy: "10", r: "1" }),
+                                            /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("circle", { cx: "8", cy: "10", r: "1" })
                                           ]
                                         }
                                       )
                                     }
                                   ),
-                                  replyTime && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                                  replyTime && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                                     "time",
                                     {
                                       dateTime: new Date(reply.timestamp).toISOString(),
@@ -25874,13 +25882,13 @@ function ChatCanvas({
                                       children: replyTime.short
                                     }
                                   ),
-                                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { className: `chat-reply-status ${reply.status}`, children: reply.status === "running" ? "\u751F\u6210\u4E2D" : reply.status === "done" ? "\u5B8C\u6210" : reply.status === "stopped" ? mode === "dsh" ? "\u5DF2\u4E2D\u65AD\u89C2\u5BDF" : "\u5DF2\u505C\u6B62" : "\u5931\u8D25" })
+                                  /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("span", { className: `chat-reply-status ${reply.status}`, children: reply.status === "running" ? "\u751F\u6210\u4E2D" : reply.status === "done" ? "\u5B8C\u6210" : reply.status === "stopped" ? mode === "dsh" ? "\u5DF2\u4E2D\u65AD\u89C2\u5BDF" : "\u5DF2\u505C\u6B62" : "\u5931\u8D25" })
                                 ]
                               }
                             ),
-                            /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-reply-surface", children: [
-                              reply.status === "running" && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(ReasoningView, { text: reply.reasoning ?? "", running: true }),
-                              (reply.body || reply.status !== "running" && reply.reasoning) && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                            /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)("div", { className: "chat-reply-surface", children: [
+                              reply.status === "running" && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(ReasoningView, { text: reply.reasoning ?? "", running: true }),
+                              (reply.body || reply.status !== "running" && reply.reasoning) && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                                 ReplyContent,
                                 {
                                   text: reply.body,
@@ -25901,14 +25909,14 @@ function ChatCanvas({
                                   onIuiResource: resolveImage ? (request) => resolveImage(request, state.sessionId) : void 0
                                 }
                               ),
-                              reply.status === "running" && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                              reply.status === "running" && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                                 "div",
                                 {
                                   className: "chat-stream-indicator",
                                   "aria-label": "\u6B63\u5728\u6D41\u5F0F\u8F93\u51FA"
                                 }
                               ),
-                              reply.error && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-reply-error", role: "alert", children: reply.error })
+                              reply.error && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("p", { className: "chat-reply-error", role: "alert", children: reply.error })
                             ] })
                           ]
                         }
@@ -25921,15 +25929,15 @@ function ChatCanvas({
             )
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)(
           "div",
           {
             className: `chat-dock${useNativeComposer ? " is-native" : ""}`,
             ref: dock,
             children: [
-              state.replies.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-user-history-frame", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { className: "chat-user-history-glass", "aria-hidden": "true" }),
-                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+              state.replies.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)("div", { className: "chat-user-history-frame", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("div", { className: "chat-user-history-glass", "aria-hidden": "true" }),
+                /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                   "aside",
                   {
                     ref: userRail,
@@ -25956,7 +25964,7 @@ function ChatCanvas({
                     onPointerUp: panEnd,
                     onPointerCancel: panEnd,
                     onLostPointerCapture: panEnd,
-                    children: userGroups.map((group) => /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                    children: userGroups.map((group) => /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                       "div",
                       {
                         className: "chat-user-message-group",
@@ -25967,7 +25975,7 @@ function ChatCanvas({
                             message.timestamp,
                             calendarNow
                           );
-                          return /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
+                          return /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)(
                             "div",
                             {
                               className: "chat-user-message",
@@ -26001,8 +26009,8 @@ function ChatCanvas({
                                 locatePair(message.pairKey);
                               },
                               children: [
-                                /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-user-message-stack", children: [
-                                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                                /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)("div", { className: "chat-user-message-stack", children: [
+                                  /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                                     UserMessageMedia,
                                     {
                                       attachments: message.attachments,
@@ -26013,9 +26021,9 @@ function ChatCanvas({
                                       formatFileMeta: userChrome?.formatFileMeta
                                     }
                                   ),
-                                  message.text && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { className: "chat-user-message-bubble", children: message.text })
+                                  message.text && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("div", { className: "chat-user-message-bubble", children: message.text })
                                 ] }),
-                                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                                /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                                   UserMessageActions,
                                   {
                                     text: message.text,
@@ -26039,10 +26047,10 @@ function ChatCanvas({
                   }
                 )
               ] }),
-              useNativeComposer ? /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-native-composer", "aria-label": "\u753B\u5E03\u8F93\u5165", children: [
-                nativeComposer ?? /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-native-composer-wait", role: "status", children: [
+              externalComposer ? storageError || historyNotice || runError ? /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("div", { className: "chat-external-notices", role: "status", children: storageError || historyNotice || runError }) : null : useNativeComposer ? /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)("div", { className: "chat-native-composer", "aria-label": "\u753B\u5E03\u8F93\u5165", children: [
+                nativeComposer ?? /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)("div", { className: "chat-native-composer-wait", role: "status", children: [
                   runError || "\u6B63\u5728\u51C6\u5907 DSH \u8F93\u5165\u2026",
-                  runError && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                  runError && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                     "button",
                     {
                       type: "button",
@@ -26051,10 +26059,10 @@ function ChatCanvas({
                     }
                   )
                 ] }),
-                storageError && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-composer-error", role: "alert", children: storageError }),
-                historyNotice && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-composer-notice", role: "status", children: historyNotice })
-              ] }) : /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-composer", "aria-label": "\u753B\u5E03\u8F93\u5165", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                storageError && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("p", { className: "chat-composer-error", role: "alert", children: storageError }),
+                historyNotice && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("p", { className: "chat-composer-notice", role: "status", children: historyNotice })
+              ] }) : /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)("div", { className: "chat-composer", "aria-label": "\u753B\u5E03\u8F93\u5165", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                   "textarea",
                   {
                     ref: composerInput,
@@ -26071,18 +26079,18 @@ function ChatCanvas({
                     }
                   }
                 ),
-                /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-composer-footer", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { children: mode === "mock" ? "\u4E0D\u53D1\u9001\u6A21\u578B\u8BF7\u6C42" : state.sessionId ? "" : "\u9996\u6B21\u53D1\u9001\u5C06\u521B\u5EFA DSH \u4F1A\u8BDD" }),
-                  busy ? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)("div", { className: "chat-composer-footer", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("span", { children: mode === "mock" ? "\u4E0D\u53D1\u9001\u6A21\u578B\u8BF7\u6C42" : state.sessionId ? "" : "\u9996\u6B21\u53D1\u9001\u5C06\u521B\u5EFA DSH \u4F1A\u8BDD" }),
+                  busy ? /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                     "button",
                     {
                       className: "chat-stop",
                       "aria-label": "\u505C\u6B62\u751F\u6210",
                       title: "\u505C\u6B62\u751F\u6210",
                       onClick: () => void stop(),
-                      children: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(Icon, { name: "stop", size: 16 })
+                      children: /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(Icon, { name: "stop", size: 16 })
                     }
-                  ) : /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+                  ) : /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
                     "button",
                     {
                       className: "chat-send",
@@ -26090,13 +26098,13 @@ function ChatCanvas({
                       title: "\u53D1\u9001 \xB7 \u2318/Ctrl + Enter",
                       disabled: !draft.trim(),
                       onClick: () => void send(),
-                      children: sendIcon ?? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(Icon, { name: "arrow-up", size: 18 })
+                      children: sendIcon ?? /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(Icon, { name: "arrow-up", size: 18 })
                     }
                   )
                 ] }),
-                runError && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-composer-error", role: "alert", children: runError }),
-                historyNotice && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-composer-notice", role: "status", children: historyNotice }),
-                storageError && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-composer-error", role: "alert", children: storageError })
+                runError && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("p", { className: "chat-composer-error", role: "alert", children: runError }),
+                historyNotice && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("p", { className: "chat-composer-notice", role: "status", children: historyNotice }),
+                storageError && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("p", { className: "chat-composer-error", role: "alert", children: storageError })
               ] })
             ]
           }
@@ -26108,6 +26116,31 @@ function ChatCanvas({
 
 // src/host/native-sidebar-icons.tsx
 var import_dsh_client_ui_primitives = require("@deepseek-ai/dsh-client-ui-primitives");
+
+// src/ui/CanvasIcon.tsx
+var import_jsx_runtime64 = require("react/jsx-runtime");
+function CanvasIcon({ size = 16 }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
+    "svg",
+    {
+      width: size,
+      height: size,
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.7",
+      "aria-hidden": "true",
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("rect", { x: "3", y: "3", width: "8", height: "8", rx: "2" }),
+        /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("rect", { x: "14", y: "4", width: "7", height: "5", rx: "1.5" }),
+        /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("rect", { x: "13", y: "13", width: "8", height: "8", rx: "2" }),
+        /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("path", { d: "M7 14v4a1 1 0 0 0 1 1h2M16 10v1" })
+      ]
+    }
+  );
+}
+
+// src/host/native-sidebar-icons.tsx
 var import_jsx_runtime65 = require("react/jsx-runtime");
 function createNativeSidebarIcons() {
   return {
@@ -26128,6 +26161,38 @@ function createNativeSidebarIcons() {
 
 // src/client.tsx
 var import_react15 = require("react");
+
+// src/adapters/question-answers.ts
+function questionAnswers(argumentsText, resultText) {
+  try {
+    const request = JSON.parse(argumentsText);
+    const result = JSON.parse(resultText);
+    if (!Array.isArray(request?.questions) || !Array.isArray(result?.answers))
+      return [];
+    const ids = new Set(
+      request.questions.flatMap(
+        (question) => question && typeof question.id === "string" ? [question.id] : []
+      )
+    );
+    const seen = /* @__PURE__ */ new Set();
+    return result.answers.flatMap(
+      (answer) => {
+        if (!answer || typeof answer.id !== "string" || !ids.has(answer.id) || seen.has(answer.id) || !Array.isArray(answer.selected) || !answer.selected.every(
+          (value) => typeof value === "string"
+        ) || answer.custom !== void 0 && typeof answer.custom !== "string")
+          return [];
+        seen.add(answer.id);
+        const text8 = [
+          ...answer.selected,
+          ...typeof answer.custom === "string" && answer.custom ? [answer.custom] : []
+        ].join("\n");
+        return text8 ? [{ id: answer.id, text: text8 }] : [];
+      }
+    );
+  } catch {
+    return [];
+  }
+}
 
 // src/adapters/dsh.ts
 var emptyStep = () => ({
@@ -26514,6 +26579,7 @@ function asError(error) {
 function conversationTurns(window2) {
   const turns = /* @__PURE__ */ new Map();
   const seen = /* @__PURE__ */ new Set();
+  const questions = /* @__PURE__ */ new Map();
   let currentTurn;
   for (const { event } of [...window2.entries].sort(
     (a, b) => a.event.seq - b.event.seq
@@ -26554,6 +26620,31 @@ function conversationTurns(window2) {
           ...media.length ? { attachments: media } : {},
           timestamp: event.time
         });
+      }
+      continue;
+    }
+    if (event.type === "tool/call") {
+      if (event.data.name === "ask_user_question")
+        questions.set(event.data.callId, {
+          turn: event.data.turn,
+          step: event.data.step,
+          arguments: event.data.arguments
+        });
+      continue;
+    }
+    if (event.type === "tool/result") {
+      const callId = event.data.message.toolCallId;
+      const question = questions.get(callId);
+      const turn2 = turns.get(event.data.turn);
+      if (question && turn2 && question.turn === event.data.turn && question.step === event.data.step && event.surfaceOp === "append" && !event.data.message.isError) {
+        const text8 = event.data.message.content.flatMap((block) => block.type === "text" ? [block.text] : []).join("\n");
+        for (const answer of questionAnswers(question.arguments, text8))
+          turn2.value.userMessages.push({
+            id: `ask:${callId}:${answer.id}`,
+            text: answer.text,
+            source: "user",
+            timestamp: event.time
+          });
       }
       continue;
     }
@@ -29719,14 +29810,16 @@ var styles_default = `.canvas-app {
   );
   max-height: min(152px, 28vh);
   min-height: 0;
+  border-radius: 20px;
   pointer-events: none;
 }
 .canvas-app .chat-user-history-glass {
   position: absolute;
-  /* Feather outside the scroll viewport so even the last short bubble has blur. */
-  inset: -24px 0;
+  /* Keep blur inside the rounded message-list background, without a top halo. */
+  inset: 0;
   z-index: 0;
-  border-radius: 20px;
+  border-radius: inherit;
+  clip-path: inset(0 round 20px);
   background: color-mix(in srgb, var(--cw-surface) 18%, transparent);
   -webkit-backdrop-filter: blur(22px) saturate(0.95);
   backdrop-filter: blur(22px) saturate(0.95);
@@ -29778,8 +29871,9 @@ var styles_default = `.canvas-app {
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
-  padding: 12px;
-  scroll-padding-block: 12px;
+  padding: 0 12px 12px;
+  scroll-padding-block: 0 12px;
+  border-radius: inherit;
   background: transparent;
   /* This is only the narrow three-row rail; its gaps handle canvas pan. */
   pointer-events: auto;
@@ -29787,6 +29881,9 @@ var styles_default = `.canvas-app {
   user-select: none;
 }
 .canvas-app .chat-user-message-group {
+  /* Give percentage bubble limits a definite rail width, not shrink-to-fit. */
+  width: 100%;
+  min-width: 0;
   display: flex;
   flex: none;
   flex-direction: column;
@@ -29808,6 +29905,8 @@ var styles_default = `.canvas-app {
 }
 /* Adapted from DSH 0.2.0 Chat's UserStyleBubble and MessageIconActions. */
 .canvas-app .chat-user-message {
+  width: 100%;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -30518,6 +30617,117 @@ var styles_default = `.canvas-app {
   font-size: 13px;
   line-height: 18px;
 }
+
+/* Registered Conversation View. Scope changes to our mounted entry and the
+   host's public region markers; no private class names or host store access. */
+.canvas-conversation-view {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  --dsh-frame-top-clearance: 0px;
+}
+[data-conversation-content]:has([data-canvas-conversation-view])
+  > [data-conversation-scroll] {
+  overflow: hidden;
+  scrollbar-gutter: auto;
+  margin: 0;
+}
+[data-conversation-content]:has([data-canvas-conversation-view])
+  > [data-conversation-scroll]
+  > [data-composer-seat] {
+  position: absolute;
+  left: auto;
+  right: 22px;
+  bottom: 22px;
+  width: min(430px, calc(100% - 44px));
+  max-height: calc(100% - 90px);
+  z-index: 10;
+  background: transparent;
+  --dsh-composer-side-clearance: 8px;
+  --dsh-chat-content-width: 100%;
+  --dsh-composer-card-max-width: 100%;
+}
+.canvas-conversation-view .chat-dock {
+  bottom: calc(var(--dsh-composer-height, 160px) + 34px);
+}
+@media (max-width: 640px) {
+  [data-conversation-content]:has([data-canvas-conversation-view])
+    > [data-conversation-scroll]
+    > [data-composer-seat] {
+    right: 12px;
+    bottom: 12px;
+    width: calc(100% - 24px);
+  }
+  .canvas-conversation-view .chat-dock {
+    bottom: calc(var(--dsh-composer-height, 160px) + 24px);
+  }
+}
+.canvas-conversation-view .chat-external-notices {
+  pointer-events: auto;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--cw-surface);
+  color: var(--cw-muted);
+  font-size: 12px;
+}
+/* Mode switching belongs to the resident native View tabs in this entry. */
+.canvas-conversation-view .chat-brand,
+.canvas-conversation-view .chat-canvas-switch {
+  display: none;
+}
+
+/* Match public slot/region markers only while our native View is mounted.
+   Keep the right track and stored widths intact; exit restores the host layout. */
+:has(> [data-shell-overlay]):has([data-canvas-conversation-view])
+  > :has(> [data-slot="sidebar"]),
+:has(> [data-shell-overlay]):has([data-canvas-conversation-view])
+  > [data-side="sidebar"],
+:has(> [data-shell-overlay]):has([data-canvas-conversation-view])
+  > [data-shell-leading] {
+  display: none;
+}
+:has(> [data-shell-overlay]):has([data-canvas-conversation-view])
+  > :has(> [data-slot="main"]) {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  border-left: none;
+}
+:has(> [data-shell-overlay]):has([data-canvas-conversation-view])
+  > [data-rightbar-col] {
+  grid-column: 3;
+  grid-row: 1;
+}
+html[data-platform="darwin"]
+  :has(> [data-shell-overlay]):has([data-canvas-conversation-view]) {
+  /* Leave room for native macOS window controls after hiding the column. */
+  --dsh-frame-leading-clearance: 88px;
+}
+.canvas-conversation-view .chat-menu.chat-sidebar {
+  height: calc(var(--dsh-conversation-viewport-height, 100dvh) - 88px);
+}
+
+/* The compact native toolbar is narrower than the account popover. Anchor to
+   its left edge so every action remains inside the viewport. */
+.canvas-conversation-view .chat-menu.account {
+  left: 0;
+  right: auto;
+  width: min(282px, calc(100vw - 44px));
+}
+.canvas-app .chat-layout-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex: none;
+  min-height: 34px;
+  padding: 0 9px;
+  border-radius: 8px;
+  color: var(--cw-text);
+  white-space: nowrap;
+}
+.canvas-app .chat-layout-action:hover:not(:disabled) {
+  background: var(--cw-hover);
+}
 `;
 
 // src/host/native-ui.tsx
@@ -30684,15 +30894,31 @@ function CanvasOverlay(props) {
       onBackToChat: () => setLegacy(false)
     }
   ) : /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(
+    CanvasChat,
+    {
+      ...props,
+      hostSessions,
+      hostWorkspaces,
+      requestedSession,
+      onRequestHandled: () => {
+        if (openRequest === requestedSession) publishOpenRequest(null);
+      },
+      onSessionChange: setCanvasSessionId,
+      nativeComposer: props.mode === "dsh" && composerReference?.sessionId === canvasSessionId ? /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(SessionProvider, { session: composerReference, children: props.renderSlot("canvas.composer.native", {}) }) : null,
+      onLegacy: () => setLegacy(true)
+    }
+  ) });
+}
+function CanvasChat(props) {
+  const { hostSessions = [], hostWorkspaces = [], requestedSession } = props;
+  return /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(
     ChatCanvas,
     {
       ...props,
       sidebarIcons: NATIVE_SIDEBAR_ICONS,
       onNewSession: props.createCanvasSession,
       requestedSession,
-      onRequestHandled: () => {
-        if (openRequest === requestedSession) publishOpenRequest(null);
-      },
+      onRequestHandled: props.onRequestHandled,
       hostSessions,
       hostWorkspaces,
       NativeBrand: /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(NativeBrand, {}),
@@ -30702,34 +30928,59 @@ function CanvasOverlay(props) {
       renderMarkdown: (text8, streaming, sessionId) => renderNativeMarkdown(
         text8,
         streaming,
-        sessionId ? sessionList.byId[sessionId]?.cwd : void 0
+        sessionId ? hostSessions.find((session) => session.id === sessionId)?.cwd : void 0
       ),
       renderImagePreview: renderNativeImagePreview,
       loadUserImage: (attachment, sessionId) => props.loadUserImage(sessionId, attachment),
       userChrome: {
         renderFileIcon: (name3) => /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(import_dsh_client_ui_primitives3.FileTypeIcon, { path: name3, className: "chat-user-file-icon-glyph" }),
-        formatFileMeta: (name3, bytes) => [
-          (0, import_dsh_client_ui_primitives3.fileExtension)(name3).toUpperCase().slice(0, 8),
-          (0, import_dsh_client_ui_primitives3.fileSizeText)(bytes)
-        ].filter(Boolean).join(" "),
+        formatFileMeta: (name3, bytes) => [(0, import_dsh_client_ui_primitives3.fileExtension)(name3).toUpperCase().slice(0, 8), (0, import_dsh_client_ui_primitives3.fileSizeText)(bytes)].filter(Boolean).join(" "),
         copyText: import_dsh_client_ui_primitives3.writeClipboard,
         renderCopyIcon: (copied) => copied ? /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(import_dsh_client_ui_primitives3.IconCheckOutlineRegular, {}) : /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(import_dsh_client_ui_primitives3.IconCopyOutlineRegular, {}),
         wrapCopyButton: (button, label) => /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(import_dsh_client_ui_primitives3.Tooltip, { label, side: "bottom", children: button })
       },
       resolveImage: (request, sessionId) => resolveNativeImageResource(
         document.baseURI,
-        sessionId ? sessionList.byId[sessionId]?.cwd : void 0,
+        sessionId ? hostSessions.find((session) => session.id === sessionId)?.cwd : void 0,
         request
       ),
       useNativeComposer: props.mode === "dsh",
-      onSessionChange: setCanvasSessionId,
-      nativeComposer: props.mode === "dsh" && composerReference?.sessionId === canvasSessionId ? /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(SessionProvider, { session: composerReference, children: props.renderSlot("canvas.composer.native", {}) }) : null,
-      onLegacy: () => setLegacy(true)
+      onSessionChange: props.onSessionChange,
+      nativeComposer: props.nativeComposer,
+      externalComposer: props.externalComposer,
+      onNativeTurn: props.externalComposer ? props.sendNativeTurn : void 0,
+      onLegacy: props.onLegacy
+    }
+  );
+}
+function CanvasConversationView(props) {
+  const sessionList = props.useSessions((state) => state);
+  const workspaceList = props.useWorkspaces((state) => state);
+  const request = (0, import_react15.useMemo)(
+    () => ({ sessionId: props.sessionId, token: ++openRequestToken }),
+    [props.sessionId]
+  );
+  const exit3 = () => props.openView("chat", "");
+  return /* @__PURE__ */ (0, import_jsx_runtime67.jsx)("div", { className: "canvas-conversation-view", "data-canvas-conversation-view": true, children: /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(
+    CanvasChat,
+    {
+      ...props,
+      onExit: exit3,
+      accountActions: createNativeAccountActions(exit3),
+      requestedSession: request,
+      hostSessions: sessionList.ids.map((id) => ({
+        id,
+        title: sessionList.byId[id]?.displayTitle ?? String(id),
+        cwd: sessionList.byId[id]?.cwd
+      })),
+      hostWorkspaces: workspaceList.items.map((workspace) => ({
+        id: workspace.workspaceId,
+        title: workspace.title,
+        sessionIds: [...workspace.sessionIds]
+      })),
+      externalComposer: true
     }
   ) });
-}
-function CanvasPanelIcon({ size }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(CanvasIcon, { size });
 }
 function apply(ctx) {
   const adapter = createDshAdapter(ctx);
@@ -30737,6 +30988,46 @@ function apply(ctx) {
   const selected = demo ? createMockAdapter() : adapter;
   const returnToNative = () => ctx.layout.selectPanel(null);
   const accountActions = createNativeAccountActions(returnToNative);
+  const canvasFace = () => ({
+    adapter: selected,
+    mode: selected.kind,
+    onExit: returnToNative,
+    accountActions,
+    retainSession: (id) => ctx.sessions.retain(id, { source: "canvas" }),
+    sendNativeTurn: async (id, text8) => {
+      const reference = ctx.sessions.retain(id, {
+        source: "canvas"
+      });
+      try {
+        const binding = await reference.ready;
+        await binding.ctx.conversation.send(text8);
+      } finally {
+        reference.release();
+      }
+    },
+    loadUserImage: (id, attachment) => ctx.uiConversation.imageUrl(id, attachment),
+    onOpenSession: (id) => ctx.uiWorkspace.openSession(
+      id
+    ),
+    onNewSession: () => ctx.uiWorkspace.startSession(),
+    createCanvasSession: (workspaceId) => ctx.sessions.create(
+      workspaceId ? { workspaceId } : void 0
+    ),
+    onOpenWorkspace: (id) => ctx.uiWorkspace.openWorkspace(
+      id
+    ),
+    onCreateWorkspace: async () => {
+      const path2 = await ctx.uiWorkspace.pickDirectory();
+      if (path2) await ctx.workspaces.create({ path: path2 });
+    },
+    onPlugins: () => ctx.layout.selectPanel("plugins"),
+    onSchedules: () => {
+      try {
+        ctx.layout.selectPanel("schedules");
+      } catch {
+      }
+    }
+  });
   ctx.effect(() => {
     const style = document.createElement("style");
     style.dataset.plugin = name2;
@@ -30766,35 +31057,7 @@ function apply(ctx) {
         children: {
           "canvas.composer.native": { kind: "single", scope: "session-maybe" }
         },
-        inject: () => ({
-          adapter: selected,
-          mode: selected.kind,
-          onExit: returnToNative,
-          accountActions,
-          retainSession: (id) => ctx.sessions.retain(id, { source: "canvas" }),
-          loadUserImage: (id, attachment) => ctx.uiConversation.imageUrl(id, attachment),
-          onOpenSession: (id) => ctx.uiWorkspace.openSession(
-            id
-          ),
-          onNewSession: () => ctx.uiWorkspace.startSession(),
-          createCanvasSession: (workspaceId) => ctx.sessions.create(
-            workspaceId ? { workspaceId } : void 0
-          ),
-          onOpenWorkspace: (id) => ctx.uiWorkspace.openWorkspace(
-            id
-          ),
-          onCreateWorkspace: async () => {
-            const path2 = await ctx.uiWorkspace.pickDirectory();
-            if (path2) await ctx.workspaces.create({ path: path2 });
-          },
-          onPlugins: () => ctx.layout.selectPanel("plugins"),
-          onSchedules: () => {
-            try {
-              ctx.layout.selectPanel("schedules");
-            } catch {
-            }
-          }
-        })
+        inject: canvasFace
       },
       CanvasOverlay
     )
@@ -30807,15 +31070,16 @@ function apply(ctx) {
     )
   );
   ctx.slots.inject(
-    "sidebar.panellist",
+    "conversation.view",
     () => ctx.slots.register(
       {
-        name: "sidebar.panellist",
-        id: PANEL_ID,
-        order: -5,
-        label: "Canvas \xB7 \u753B\u5E03"
+        name: "conversation.view",
+        id: "canvas",
+        label: "\u753B\u5E03",
+        order: 50,
+        inject: canvasFace
       },
-      CanvasPanelIcon
+      CanvasConversationView
     )
   );
   ctx.slots.inject(
