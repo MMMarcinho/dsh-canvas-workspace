@@ -1,6 +1,6 @@
 # 第三方软件与素材许可声明
 
-适用于 dsh-canvas-workspace 0.2.4-experimental.1 的源码、插件 bundle 与独立 MOCK 演示。项目自身许可见 LICENSE。以下完整版权和许可文本须随包含相应代码/素材的分发物保留。
+适用于 dsh-canvas-workspace 0.2.4-experimental.2 的源码、插件 bundle 与独立 MOCK 演示。项目自身许可见 LICENSE。以下完整版权和许可文本须随包含相应代码/素材的分发物保留。
 
 ## DeepSeek Harness 主题与品牌素材
 

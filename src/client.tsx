@@ -26,6 +26,8 @@ import type {
 } from "@deepseek-ai/dsh-client-ui-slots";
 import { CanvasWorkspace } from "./ui/CanvasWorkspace";
 import { ChatCanvas } from "./ui/ChatCanvas";
+import { CanvasIcon } from "./ui/CanvasIcon";
+import { createNativeSidebarIcons } from "./host/native-sidebar-icons";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createDshAdapter } from "./adapters/dsh";
 import { createMockAdapter } from "./adapters/mock";
@@ -57,6 +59,7 @@ export const inject = [
   "uiConversation",
 ];
 const PANEL_ID = "canvas-workspace" as MainPanelId;
+const NATIVE_SIDEBAR_ICONS = createNativeSidebarIcons();
 type CanvasOpenRequest = { sessionId: string; token: number };
 let openRequest: CanvasOpenRequest | null = null;
 let openRequestToken = 0;
@@ -85,6 +88,7 @@ interface CanvasFace {
   onOpenWorkspace: (id: string) => Promise<void>;
   onCreateWorkspace: () => Promise<void>;
   onPlugins: () => void;
+  onSchedules: () => void;
   accountActions: NativeAccountActions;
   retainSession: (id: string) => SessionReference;
   loadUserImage: (
@@ -171,6 +175,7 @@ function CanvasOverlay(
       ) : (
         <ChatCanvas
           {...props}
+          sidebarIcons={NATIVE_SIDEBAR_ICONS}
           onNewSession={props.createCanvasSession}
           requestedSession={requestedSession}
           onRequestHandled={() => {
@@ -240,23 +245,8 @@ function CanvasOverlay(
     </div>
   );
 }
-function CanvasIcon({ size }: PropsRuntime<"sidebar.panellist">) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-      aria-hidden="true"
-    >
-      <rect x="3" y="3" width="8" height="8" rx="2" />
-      <rect x="14" y="4" width="7" height="5" rx="1.5" />
-      <rect x="13" y="13" width="8" height="8" rx="2" />
-      <path d="M7 14v4a1 1 0 0 0 1 1h2M16 10v1" />
-    </svg>
-  );
+function CanvasPanelIcon({ size }: PropsRuntime<"sidebar.panellist">) {
+  return <CanvasIcon size={size} />;
 }
 /** Selects a keyed panel and draws the canvas in the supported frame-wide overlay. */
 export function apply(ctx: Context): void {
@@ -322,6 +312,13 @@ export function apply(ctx: Context): void {
             if (path) await ctx.workspaces.create({ path });
           },
           onPlugins: () => ctx.layout.selectPanel("plugins" as MainPanelId),
+          onSchedules: () => {
+            try {
+              ctx.layout.selectPanel("schedules" as MainPanelId);
+            } catch {
+              // Older hosts may not register the Automation tasks panel.
+            }
+          },
         }),
       },
       CanvasOverlay,
@@ -341,7 +338,7 @@ export function apply(ctx: Context): void {
         order: -5,
         label: "Canvas · 画布",
       },
-      CanvasIcon,
+      CanvasPanelIcon,
     ),
   );
   ctx.slots.inject("sidebar.workspaces.session.menu.item", () =>

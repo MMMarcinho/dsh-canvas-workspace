@@ -31,9 +31,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// node_modules/inline-style-parser/cjs/index.js
+// ../../../../node_modules/inline-style-parser/cjs/index.js
 var require_cjs = __commonJS({
-  "node_modules/inline-style-parser/cjs/index.js"(exports, module2) {
+  "../../../../node_modules/inline-style-parser/cjs/index.js"(exports, module2) {
     "use strict";
     var COMMENT_REGEX = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g;
     var NEWLINE_REGEX = /\n/g;
@@ -170,9 +170,9 @@ var require_cjs = __commonJS({
   }
 });
 
-// node_modules/style-to-object/cjs/index.js
+// ../../../../node_modules/style-to-object/cjs/index.js
 var require_cjs2 = __commonJS({
-  "node_modules/style-to-object/cjs/index.js"(exports) {
+  "../../../../node_modules/style-to-object/cjs/index.js"(exports) {
     "use strict";
     var __importDefault = exports && exports.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : { "default": mod };
@@ -204,9 +204,9 @@ var require_cjs2 = __commonJS({
   }
 });
 
-// node_modules/style-to-js/cjs/utilities.js
+// ../../../../node_modules/style-to-js/cjs/utilities.js
 var require_utilities = __commonJS({
-  "node_modules/style-to-js/cjs/utilities.js"(exports) {
+  "../../../../node_modules/style-to-js/cjs/utilities.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.camelCase = void 0;
@@ -243,9 +243,9 @@ var require_utilities = __commonJS({
   }
 });
 
-// node_modules/style-to-js/cjs/index.js
+// ../../../../node_modules/style-to-js/cjs/index.js
 var require_cjs3 = __commonJS({
-  "node_modules/style-to-js/cjs/index.js"(exports, module2) {
+  "../../../../node_modules/style-to-js/cjs/index.js"(exports, module2) {
     "use strict";
     var __importDefault = exports && exports.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : { "default": mod };
@@ -269,9 +269,9 @@ var require_cjs3 = __commonJS({
   }
 });
 
-// node_modules/extend/index.js
+// ../../../../node_modules/extend/index.js
 var require_extend = __commonJS({
-  "node_modules/extend/index.js"(exports, module2) {
+  "../../../../node_modules/extend/index.js"(exports, module2) {
     "use strict";
     var hasOwn2 = Object.prototype.hasOwnProperty;
     var toStr = Object.prototype.toString;
@@ -369,7 +369,7 @@ __export(client_exports, {
 });
 module.exports = __toCommonJS(client_exports);
 
-// node_modules/@deepseek-ai/dsh-util-workspace-path/lib/index.js
+// ../../../../node_modules/@deepseek-ai/dsh-util-workspace-path/lib/index.js
 function isWindowsStylePath(value) {
   return /^[A-Za-z]:[/\\]/.test(value) || value.startsWith("\\\\");
 }
@@ -431,7 +431,7 @@ async function resolveNativeImageResource(base, cwd2, request) {
 }
 
 // src/client.tsx
-var import_dsh_client_ui_primitives2 = require("@deepseek-ai/dsh-client-ui-primitives");
+var import_dsh_client_ui_primitives3 = require("@deepseek-ai/dsh-client-ui-primitives");
 
 // src/ui/CanvasWorkspace.tsx
 var import_react = require("react");
@@ -688,6 +688,38 @@ var paths = {
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "14", y: "14", width: "6", height: "6", rx: "1" })
   ] }),
   home: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "m3 10 9-7 9 7M5 9v12h14V9M10 21v-7h4v7" }),
+  search: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "11", cy: "11", r: "6.5" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "m16 16 4 4" })
+  ] }),
+  sliders: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M4 7h10M18 7h2M4 17h4M12 17h8" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "16", cy: "7", r: "2" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "10", cy: "17", r: "2" })
+  ] }),
+  folder: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M3 6h6l2 2h10v11H3z" }),
+  "folder-open": /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M3 6h6l2 2h10v3H3z" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M3 11h18l-2 8H5z" })
+  ] }),
+  clock: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "12", cy: "12", r: "8.5" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M12 7v5l3 2" })
+  ] }),
+  sparkle: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M18 16v4M16 18h4" })
+  ] }),
+  "apps-add": /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "4", y: "4", width: "6", height: "6", rx: "1" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "14", y: "4", width: "6", height: "6", rx: "1" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "4", y: "14", width: "6", height: "6", rx: "1" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M17 14v6M14 17h6" })
+  ] }),
+  "panel-left": /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", { x: "3", y: "4", width: "18", height: "16", rx: "2" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M9 4v16" })
+  ] }),
   help: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "12", cy: "12", r: "9" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M9.5 8.5a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4M12 16h.01" })
@@ -2112,7 +2144,7 @@ function CanvasWorkspace({
 }
 
 // src/ui/ChatCanvas.tsx
-var import_react13 = require("react");
+var import_react14 = require("react");
 
 // src/core/conversation.ts
 function getVisibleUserMessages(reply) {
@@ -2330,6 +2362,434 @@ function Brand() {
   return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(BrandWordmark, { size: 24 });
 }
 
+// src/ui/CanvasSidebar.tsx
+var import_react2 = require("react");
+
+// src/ui/CanvasIcon.tsx
+var import_jsx_runtime5 = require("react/jsx-runtime");
+function CanvasIcon({ size = 16 }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+    "svg",
+    {
+      width: size,
+      height: size,
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.7",
+      "aria-hidden": "true",
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("rect", { x: "3", y: "3", width: "8", height: "8", rx: "2" }),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("rect", { x: "14", y: "4", width: "7", height: "5", rx: "1.5" }),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("rect", { x: "13", y: "13", width: "8", height: "8", rx: "2" }),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("path", { d: "M7 14v4a1 1 0 0 0 1 1h2M16 10v1" })
+      ]
+    }
+  );
+}
+
+// src/ui/CanvasSidebar.tsx
+var import_jsx_runtime6 = require("react/jsx-runtime");
+function CanvasSidebar({
+  icons,
+  sessions,
+  workspaces,
+  currentSessionId,
+  newSessionPending,
+  navError,
+  iuiEnabled,
+  zoom,
+  legacyReplies,
+  onNewSession,
+  onNewSessionInWorkspace,
+  onSwitchSession,
+  onOpenWorkspace,
+  onCreateWorkspace,
+  onClose,
+  onPlugins,
+  onSchedules,
+  onLegacy,
+  onToggleIui,
+  onZoomOut,
+  onZoomIn,
+  onResetView,
+  onArrangeReplies,
+  onExportLegacy
+}) {
+  const [search2, setSearch] = (0, import_react2.useState)("");
+  const [searchOpen, setSearchOpen] = (0, import_react2.useState)(false);
+  const [viewOpen, setViewOpen] = (0, import_react2.useState)(false);
+  const [flat, setFlat] = (0, import_react2.useState)(false);
+  const [moreOpen, setMoreOpen] = (0, import_react2.useState)(false);
+  const searchInput = (0, import_react2.useRef)(null);
+  (0, import_react2.useEffect)(() => {
+    if (searchOpen) searchInput.current?.focus();
+  }, [searchOpen]);
+  const sessionById = (0, import_react2.useMemo)(
+    () => new Map(sessions.map((session) => [session.id, session])),
+    [sessions]
+  );
+  const query = search2.trim().toLocaleLowerCase();
+  const matches = (value) => value.toLocaleLowerCase().includes(query);
+  const groupedIds = (0, import_react2.useMemo)(
+    () => new Set(workspaces.flatMap((workspace) => workspace.sessionIds)),
+    [workspaces]
+  );
+  const groups = (0, import_react2.useMemo)(
+    () => workspaces.map((workspace) => {
+      const all2 = workspace.sessionIds.map((id) => sessionById.get(id)).filter((session) => Boolean(session));
+      const workspaceMatches = matches(workspace.title);
+      const visible = !query || workspaceMatches ? all2 : all2.filter((session) => matches(session.title));
+      return { workspace, all: all2, visible, workspaceMatches };
+    }).filter(
+      (group) => !query || group.visible.length > 0 || group.workspaceMatches
+    ),
+    [workspaces, sessionById, query]
+  );
+  const ungrouped = (0, import_react2.useMemo)(
+    () => sessions.filter(
+      (session) => !groupedIds.has(session.id) && (!query || matches(session.title))
+    ),
+    [sessions, groupedIds, query]
+  );
+  const flatSessions = (0, import_react2.useMemo)(
+    () => sessions.filter((session) => {
+      if (!query) return true;
+      if (matches(session.title)) return true;
+      const workspace = workspaces.find(
+        (item) => item.sessionIds.includes(session.id)
+      );
+      return workspace ? matches(workspace.title) : false;
+    }),
+    [sessions, workspaces, query]
+  );
+  const currentWorkspaceId = workspaces.find(
+    (workspace) => workspace.sessionIds.includes(currentSessionId ?? "")
+  )?.id;
+  const sessionRow = (session, showWorkspace = false) => {
+    const workspace = showWorkspace ? workspaces.find((item) => item.sessionIds.includes(session.id)) : void 0;
+    return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+      "button",
+      {
+        type: "button",
+        className: "chat-session-row chat-sidebar-session",
+        "aria-current": currentSessionId === session.id ? "page" : void 0,
+        title: session.title,
+        onClick: () => onSwitchSession(session.id),
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-session-title", children: session.title }),
+          workspace && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-session-meta", children: workspace.title })
+        ]
+      },
+      session.id
+    );
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+    "div",
+    {
+      className: "chat-menu chat-sidebar",
+      role: "dialog",
+      "aria-label": "\u5BFC\u822A\u4E0E\u5DE5\u4F5C\u533A",
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+          "button",
+          {
+            type: "button",
+            className: "chat-sidebar-new",
+            "aria-label": "\u65B0\u5EFA\u4F1A\u8BDD",
+            disabled: newSessionPending,
+            onClick: onNewSession,
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-new-icon", children: icons?.newSession ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "plus", size: 14 }) }),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u65B0\u4F1A\u8BDD" })
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("nav", { className: "chat-sidebar-nav", "aria-label": "\u5BFC\u822A", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+            "button",
+            {
+              type: "button",
+              className: "chat-sidebar-nav-row is-active",
+              "aria-current": "page",
+              onClick: onClose,
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-icon", children: icons?.canvas ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(CanvasIcon, { size: 16 }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-label", children: "Canvas \xB7 \u753B\u5E03" })
+              ]
+            }
+          ),
+          onPlugins && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+            "button",
+            {
+              type: "button",
+              className: "chat-sidebar-nav-row",
+              onClick: onPlugins,
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-icon", children: icons?.plugins ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "sparkle", size: 16 }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-label", children: "\u63D2\u4EF6" })
+              ]
+            }
+          ),
+          onSchedules && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+            "button",
+            {
+              type: "button",
+              className: "chat-sidebar-nav-row",
+              onClick: onSchedules,
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-icon", children: icons?.schedules ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "clock", size: 16 }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-label", children: "\u81EA\u52A8\u5316\u4EFB\u52A1" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+            "button",
+            {
+              type: "button",
+              className: "chat-sidebar-nav-row",
+              "aria-expanded": moreOpen,
+              onClick: () => setMoreOpen((value) => !value),
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-icon", children: icons?.more ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "apps-add", size: 16 }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-nav-label", children: "\u66F4\u591A" })
+              ]
+            }
+          )
+        ] }),
+        moreOpen && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+          "div",
+          {
+            className: "chat-sidebar-more",
+            role: "group",
+            "aria-label": "\u66F4\u591A\u753B\u5E03\u64CD\u4F5C",
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "chat-sidebar-more-title", children: "\u89C6\u56FE" }),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("button", { type: "button", "aria-pressed": iuiEnabled, onClick: onToggleIui, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "artifact", size: 15 }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u753B\u5E03 IUI \u6E32\u67D3" }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-switch", children: iuiEnabled ? "\u5F00\u542F" : "\u5173\u95ED" })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "chat-zoom", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", { type: "button", "aria-label": "\u7F29\u5C0F", onClick: onZoomOut, children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "minus", size: 15 }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { children: [
+                  Math.round(zoom * 100),
+                  "%"
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", { type: "button", "aria-label": "\u653E\u5927", onClick: onZoomIn, children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "plus", size: 15 }) })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+                "button",
+                {
+                  type: "button",
+                  disabled: !onArrangeReplies,
+                  onClick: onArrangeReplies,
+                  title: "\u6309\u53EF\u7528\u5BBD\u5EA6\u6574\u7406\u5168\u90E8\u81EA\u52A8\u56DE\u590D\uFF1B\u4FDD\u7559\u624B\u52A8\u4F4D\u7F6E\uFF0C\u8D85\u51FA\u65F6\u5411\u4E0B\u5EF6\u4F38",
+                  children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "fit", size: 15 }),
+                    "\u6309\u89C6\u53E3\u81EA\u52A8\u6392\u5E03"
+                  ]
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("button", { type: "button", onClick: onResetView, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "fit", size: 15 }),
+                "\u91CD\u7F6E\u89C6\u56FE"
+              ] }),
+              onLegacy && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "chat-sidebar-more-title", children: "\u65E7\u753B\u5E03" }),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("button", { type: "button", onClick: onLegacy, children: "\u6253\u5F00\u8282\u70B9\u753B\u5E03" })
+              ] }),
+              legacyReplies?.length ? /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("button", { type: "button", onClick: onExportLegacy, children: [
+                "\u5BFC\u51FA\u5347\u7EA7\u524D\u539F\u6587\uFF08",
+                legacyReplies.length,
+                " \u6761\uFF09"
+              ] }) : null
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "chat-sidebar-region", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "chat-sidebar-section", children: searchOpen ? /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "chat-sidebar-search", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-search-icon", "aria-hidden": "true", children: icons?.search ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "search", size: 16 }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+              "input",
+              {
+                ref: searchInput,
+                "aria-label": "\u641C\u7D22\u4F1A\u8BDD",
+                placeholder: "\u641C\u7D22\u4F1A\u8BDD",
+                value: search2,
+                onChange: (event) => setSearch(event.target.value),
+                onKeyDown: (event) => {
+                  if (event.key !== "Escape") return;
+                  event.preventDefault();
+                  setSearch("");
+                  setSearchOpen(false);
+                }
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+              "button",
+              {
+                type: "button",
+                "aria-label": "\u5173\u95ED\u641C\u7D22",
+                onClick: () => {
+                  setSearch("");
+                  setSearchOpen(false);
+                },
+                children: icons?.close ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "close", size: 14 })
+              }
+            )
+          ] }) : /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-section-label", children: "\u5DE5\u4F5C\u533A" }),
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "chat-sidebar-head-actions", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+                "button",
+                {
+                  type: "button",
+                  "aria-label": "\u641C\u7D22\u4F1A\u8BDD",
+                  title: "\u641C\u7D22\u4F1A\u8BDD",
+                  onClick: () => setSearchOpen(true),
+                  children: icons?.search ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "search", size: 16 })
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+                "button",
+                {
+                  type: "button",
+                  "aria-label": "\u89C6\u56FE\u9009\u9879",
+                  title: "\u89C6\u56FE\u9009\u9879",
+                  "aria-expanded": viewOpen,
+                  onClick: () => setViewOpen((value) => !value),
+                  children: icons?.view ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "sliders", size: 16 })
+                }
+              ),
+              onCreateWorkspace && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+                "button",
+                {
+                  type: "button",
+                  "aria-label": "\u6DFB\u52A0\u5DE5\u4F5C\u533A",
+                  title: "\u6DFB\u52A0\u5DE5\u4F5C\u533A",
+                  onClick: onCreateWorkspace,
+                  children: icons?.addWorkspace ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "folder", size: 16 })
+                }
+              )
+            ] })
+          ] }) }),
+          viewOpen && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+            "div",
+            {
+              className: "chat-sidebar-view-menu",
+              role: "menu",
+              "aria-label": "\u89C6\u56FE\u9009\u9879",
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+                  "button",
+                  {
+                    type: "button",
+                    role: "menuitemradio",
+                    "aria-checked": !flat,
+                    onClick: () => {
+                      setFlat(false);
+                      setViewOpen(false);
+                    },
+                    children: "\u6309\u5DE5\u4F5C\u533A\u5206\u7EC4"
+                  }
+                ),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+                  "button",
+                  {
+                    type: "button",
+                    role: "menuitemradio",
+                    "aria-checked": flat,
+                    onClick: () => {
+                      setFlat(true);
+                      setViewOpen(false);
+                    },
+                    children: "\u5E73\u94FA\u6240\u6709\u4F1A\u8BDD"
+                  }
+                )
+              ]
+            }
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+            "div",
+            {
+              className: "chat-sidebar-list",
+              role: "tree",
+              "aria-label": "\u5DE5\u4F5C\u533A\u4E0E\u4F1A\u8BDD",
+              children: flat ? /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
+                flatSessions.map((session) => sessionRow(session, true)),
+                flatSessions.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "chat-sidebar-empty", children: "\u6CA1\u6709\u5339\u914D\u7684\u4F1A\u8BDD" })
+              ] }) : /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
+                groups.map(({ workspace, visible }) => /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+                  "div",
+                  {
+                    className: "chat-workspace-group",
+                    role: "group",
+                    "aria-label": workspace.title,
+                    children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+                        "button",
+                        {
+                          type: "button",
+                          className: "chat-sidebar-project",
+                          onClick: () => onOpenWorkspace?.(workspace.id),
+                          children: [
+                            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+                              "span",
+                              {
+                                className: "chat-sidebar-project-icon",
+                                "data-current": workspace.id === currentWorkspaceId ? "true" : void 0,
+                                children: workspace.id === currentWorkspaceId ? icons?.folderOpen ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "folder-open", size: 16 }) : icons?.folder ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "folder", size: 16 })
+                              }
+                            ),
+                            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-project-title", children: workspace.title })
+                          ]
+                        }
+                      ),
+                      onNewSessionInWorkspace && !query && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+                        "button",
+                        {
+                          type: "button",
+                          className: "chat-session-row chat-sidebar-session chat-sidebar-session-create",
+                          disabled: newSessionPending,
+                          onClick: () => onNewSessionInWorkspace(workspace.id),
+                          children: [
+                            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-session-plus", children: icons?.plus ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "plus", size: 14 }) }),
+                            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: "\u5728\u6B64\u5DE5\u4F5C\u533A\u65B0\u5EFA\u753B\u5E03\u4F1A\u8BDD" })
+                          ]
+                        }
+                      ),
+                      visible.map((session) => sessionRow(session))
+                    ]
+                  },
+                  workspace.id
+                )),
+                ungrouped.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+                  "div",
+                  {
+                    className: "chat-workspace-group chat-sidebar-ungrouped",
+                    role: "group",
+                    "aria-label": "\u672A\u5206\u7EC4",
+                    children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "chat-sidebar-project chat-sidebar-project-label", children: [
+                        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-project-icon", children: icons?.folder ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Icon, { name: "folder", size: 16 }) }),
+                        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "chat-sidebar-project-title", children: "\u672A\u5206\u7EC4" })
+                      ] }),
+                      ungrouped.map((session) => sessionRow(session))
+                    ]
+                  }
+                ),
+                groups.length === 0 && ungrouped.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "chat-sidebar-empty", children: "\u6CA1\u6709\u5339\u914D\u7684\u4F1A\u8BDD" })
+              ] })
+            }
+          )
+        ] }),
+        navError && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "chat-nav-error", role: "alert", children: navError })
+      ]
+    }
+  );
+}
+
 // src/ui/reply-time.ts
 function formatReplyTime(value, now = Date.now()) {
   if (value === void 0 || !Number.isFinite(value) || !Number.isFinite(now))
@@ -2348,15 +2808,15 @@ function formatReplyTime(value, now = Date.now()) {
 }
 
 // src/ui/ReplyContent.tsx
-var import_react10 = require("react");
+var import_react11 = require("react");
 
-// node_modules/devlop/lib/default.js
+// ../../../../node_modules/devlop/lib/default.js
 function ok() {
 }
 function unreachable() {
 }
 
-// node_modules/comma-separated-tokens/index.js
+// ../../../../node_modules/comma-separated-tokens/index.js
 function stringify(values, options) {
   const settings = options || {};
   const input = values[values.length - 1] === "" ? [...values, ""] : values;
@@ -2365,7 +2825,7 @@ function stringify(values, options) {
   ).trim();
 }
 
-// node_modules/estree-util-is-identifier-name/lib/index.js
+// ../../../../node_modules/estree-util-is-identifier-name/lib/index.js
 var nameRe = /^[$_\p{ID_Start}][$_\u{200C}\u{200D}\p{ID_Continue}]*$/u;
 var nameReJsx = /^[$_\p{ID_Start}][-$_\u{200C}\u{200D}\p{ID_Continue}]*$/u;
 var emptyOptions = {};
@@ -2375,7 +2835,7 @@ function name(name3, options) {
   return re2.test(name3);
 }
 
-// node_modules/hast-util-whitespace/lib/index.js
+// ../../../../node_modules/hast-util-whitespace/lib/index.js
 var re = /[ \t\n\f\r]/g;
 function whitespace(thing) {
   return typeof thing === "object" ? thing.type === "text" ? empty(thing.value) : false : empty(thing);
@@ -2384,7 +2844,7 @@ function empty(value) {
   return value.replace(re, "") === "";
 }
 
-// node_modules/property-information/lib/util/schema.js
+// ../../../../node_modules/property-information/lib/util/schema.js
 var Schema = class {
   /**
    * @param {SchemaType['property']} property
@@ -2408,7 +2868,7 @@ Schema.prototype.normal = {};
 Schema.prototype.property = {};
 Schema.prototype.space = void 0;
 
-// node_modules/property-information/lib/util/merge.js
+// ../../../../node_modules/property-information/lib/util/merge.js
 function merge(definitions, space2) {
   const property = {};
   const normal = {};
@@ -2419,12 +2879,12 @@ function merge(definitions, space2) {
   return new Schema(property, normal, space2);
 }
 
-// node_modules/property-information/lib/normalize.js
+// ../../../../node_modules/property-information/lib/normalize.js
 function normalize(value) {
   return value.toLowerCase();
 }
 
-// node_modules/property-information/lib/util/info.js
+// ../../../../node_modules/property-information/lib/util/info.js
 var Info = class {
   /**
    * @param {string} property
@@ -2452,7 +2912,7 @@ Info.prototype.property = "";
 Info.prototype.spaceSeparated = false;
 Info.prototype.space = void 0;
 
-// node_modules/property-information/lib/util/types.js
+// ../../../../node_modules/property-information/lib/util/types.js
 var types_exports = {};
 __export(types_exports, {
   boolean: () => boolean,
@@ -2475,7 +2935,7 @@ function increment() {
   return 2 ** ++powers;
 }
 
-// node_modules/property-information/lib/util/defined-info.js
+// ../../../../node_modules/property-information/lib/util/defined-info.js
 var checks = (
   /** @type {ReadonlyArray<keyof typeof types>} */
   Object.keys(types_exports)
@@ -2500,8 +2960,8 @@ var DefinedInfo = class extends Info {
     mark(this, "space", space2);
     if (typeof mask === "number") {
       while (++index2 < checks.length) {
-        const check = checks[index2];
-        mark(this, checks[index2], (mask & types_exports[check]) === types_exports[check]);
+        const check2 = checks[index2];
+        mark(this, checks[index2], (mask & types_exports[check2]) === types_exports[check2]);
       }
     }
   }
@@ -2513,7 +2973,7 @@ function mark(values, key, value) {
   }
 }
 
-// node_modules/property-information/lib/util/create.js
+// ../../../../node_modules/property-information/lib/util/create.js
 function create(definition3) {
   const properties = {};
   const normals = {};
@@ -2534,7 +2994,7 @@ function create(definition3) {
   return new Schema(properties, normals, definition3.space);
 }
 
-// node_modules/property-information/lib/aria.js
+// ../../../../node_modules/property-information/lib/aria.js
 var aria = create({
   properties: {
     ariaActiveDescendant: null,
@@ -2592,17 +3052,17 @@ var aria = create({
   }
 });
 
-// node_modules/property-information/lib/util/case-sensitive-transform.js
+// ../../../../node_modules/property-information/lib/util/case-sensitive-transform.js
 function caseSensitiveTransform(attributes, attribute) {
   return attribute in attributes ? attributes[attribute] : attribute;
 }
 
-// node_modules/property-information/lib/util/case-insensitive-transform.js
+// ../../../../node_modules/property-information/lib/util/case-insensitive-transform.js
 function caseInsensitiveTransform(attributes, property) {
   return caseSensitiveTransform(attributes, property.toLowerCase());
 }
 
-// node_modules/property-information/lib/html.js
+// ../../../../node_modules/property-information/lib/html.js
 var html = create({
   attributes: {
     acceptcharset: "accept-charset",
@@ -2976,7 +3436,7 @@ var html = create({
   transform: caseInsensitiveTransform
 });
 
-// node_modules/property-information/lib/svg.js
+// ../../../../node_modules/property-information/lib/svg.js
 var svg = create({
   attributes: {
     accentHeight: "accent-height",
@@ -3540,7 +4000,7 @@ var svg = create({
   transform: caseSensitiveTransform
 });
 
-// node_modules/property-information/lib/xlink.js
+// ../../../../node_modules/property-information/lib/xlink.js
 var xlink = create({
   properties: {
     xLinkActuate: null,
@@ -3557,7 +4017,7 @@ var xlink = create({
   }
 });
 
-// node_modules/property-information/lib/xmlns.js
+// ../../../../node_modules/property-information/lib/xmlns.js
 var xmlns = create({
   attributes: { xmlnsxlink: "xmlns:xlink" },
   properties: { xmlnsXLink: null, xmlns: null },
@@ -3565,7 +4025,7 @@ var xmlns = create({
   transform: caseInsensitiveTransform
 });
 
-// node_modules/property-information/lib/xml.js
+// ../../../../node_modules/property-information/lib/xml.js
 var xml = create({
   properties: { xmlBase: null, xmlLang: null, xmlSpace: null },
   space: "xml",
@@ -3574,7 +4034,7 @@ var xml = create({
   }
 });
 
-// node_modules/property-information/lib/hast-to-react.js
+// ../../../../node_modules/property-information/lib/hast-to-react.js
 var hastToReact = {
   classId: "classID",
   dataType: "datatype",
@@ -3595,7 +4055,7 @@ var hastToReact = {
   xmlnsXLink: "xmlnsXlink"
 };
 
-// node_modules/property-information/lib/find.js
+// ../../../../node_modules/property-information/lib/find.js
 var cap = /[A-Z]/g;
 var dash = /-[a-z]/g;
 var valid = /^data[-\w.:]+$/i;
@@ -3631,19 +4091,19 @@ function camelcase($0) {
   return $0.charAt(1).toUpperCase();
 }
 
-// node_modules/property-information/index.js
+// ../../../../node_modules/property-information/index.js
 var html2 = merge([aria, html, xlink, xmlns, xml], "html");
 var svg2 = merge([aria, svg, xlink, xmlns, xml], "svg");
 
-// node_modules/space-separated-tokens/index.js
+// ../../../../node_modules/space-separated-tokens/index.js
 function stringify2(values) {
   return values.join(" ").trim();
 }
 
-// node_modules/hast-util-to-jsx-runtime/lib/index.js
+// ../../../../node_modules/hast-util-to-jsx-runtime/lib/index.js
 var import_style_to_js = __toESM(require_cjs3(), 1);
 
-// node_modules/unist-util-position/lib/index.js
+// ../../../../node_modules/unist-util-position/lib/index.js
 var pointEnd = point("end");
 var pointStart = point("start");
 function point(type) {
@@ -3667,7 +4127,7 @@ function position(node2) {
   }
 }
 
-// node_modules/unist-util-stringify-position/lib/index.js
+// ../../../../node_modules/unist-util-stringify-position/lib/index.js
 function stringifyPosition(value) {
   if (!value || typeof value !== "object") {
     return "";
@@ -3693,7 +4153,7 @@ function index(value) {
   return value && typeof value === "number" ? value : 1;
 }
 
-// node_modules/vfile-message/lib/index.js
+// ../../../../node_modules/vfile-message/lib/index.js
 var VFileMessage = class extends Error {
   /**
    * Create a message for `reason`.
@@ -3829,7 +4289,7 @@ VFileMessage.prototype.place = void 0;
 VFileMessage.prototype.ruleId = void 0;
 VFileMessage.prototype.source = void 0;
 
-// node_modules/hast-util-to-jsx-runtime/lib/index.js
+// ../../../../node_modules/hast-util-to-jsx-runtime/lib/index.js
 var own = {}.hasOwnProperty;
 var emptyMap = /* @__PURE__ */ new Map();
 var cap2 = /[A-Z]/g;
@@ -3985,11 +4445,11 @@ function addChildren(props, children) {
     }
   }
 }
-function productionCreate(_, jsx64, jsxs18) {
+function productionCreate(_, jsx67, jsxs19) {
   return create2;
   function create2(_2, type, props, key) {
     const isStaticChildren = Array.isArray(props.children);
-    const fn = isStaticChildren ? jsxs18 : jsx64;
+    const fn = isStaticChildren ? jsxs19 : jsx67;
     return key ? fn(type, props, key) : fn(type, props);
   }
 }
@@ -4208,7 +4668,7 @@ function toDash($0) {
   return "-" + $0.toLowerCase();
 }
 
-// node_modules/html-url-attributes/lib/index.js
+// ../../../../node_modules/html-url-attributes/lib/index.js
 var urlAttributes = {
   action: ["form"],
   cite: ["blockquote", "del", "ins", "q"],
@@ -4233,11 +4693,11 @@ var urlAttributes = {
   ]
 };
 
-// node_modules/react-markdown/lib/index.js
-var import_jsx_runtime5 = require("react/jsx-runtime");
-var import_react2 = require("react");
+// ../../../../node_modules/react-markdown/lib/index.js
+var import_jsx_runtime7 = require("react/jsx-runtime");
+var import_react3 = require("react");
 
-// node_modules/mdast-util-to-string/lib/index.js
+// ../../../../node_modules/mdast-util-to-string/lib/index.js
 var emptyOptions2 = {};
 function toString(value, options) {
   const settings = options || emptyOptions2;
@@ -4274,7 +4734,7 @@ function node(value) {
   return Boolean(value && typeof value === "object");
 }
 
-// node_modules/decode-named-character-reference/index.dom.js
+// ../../../../node_modules/decode-named-character-reference/index.dom.js
 var element2 = document.createElement("i");
 function decodeNamedCharacterReference(value) {
   const characterReference2 = "&" + value + ";";
@@ -4286,7 +4746,7 @@ function decodeNamedCharacterReference(value) {
   return character === characterReference2 ? false : character;
 }
 
-// node_modules/micromark-util-chunked/index.js
+// ../../../../node_modules/micromark-util-chunked/index.js
 function splice(list4, start2, remove, items) {
   const end = list4.length;
   let chunkStart = 0;
@@ -4320,7 +4780,7 @@ function push(list4, items) {
   return items;
 }
 
-// node_modules/micromark-util-combine-extensions/index.js
+// ../../../../node_modules/micromark-util-combine-extensions/index.js
 var hasOwnProperty = {}.hasOwnProperty;
 function combineExtensions(extensions) {
   const all2 = {};
@@ -4360,7 +4820,7 @@ function constructs(existing, list4) {
   splice(existing, 0, 0, before);
 }
 
-// node_modules/micromark-util-decode-numeric-character-reference/index.js
+// ../../../../node_modules/micromark-util-decode-numeric-character-reference/index.js
 function decodeNumericCharacterReference(value, base) {
   const code4 = Number.parseInt(value, base);
   if (
@@ -4378,12 +4838,12 @@ function decodeNumericCharacterReference(value, base) {
   return String.fromCodePoint(code4);
 }
 
-// node_modules/micromark-util-normalize-identifier/index.js
+// ../../../../node_modules/micromark-util-normalize-identifier/index.js
 function normalizeIdentifier(value) {
   return value.replace(/[\t\n\r ]+/g, " ").replace(/^ | $/g, "").toLowerCase().toUpperCase();
 }
 
-// node_modules/micromark-util-character/index.js
+// ../../../../node_modules/micromark-util-character/index.js
 var asciiAlpha = regexCheck(/[A-Za-z]/);
 var asciiAlphanumeric = regexCheck(/[\dA-Za-z]/);
 var asciiAtext = regexCheck(/[#-'*+\--9=?A-Z^-~]/);
@@ -4409,13 +4869,13 @@ function markdownSpace(code4) {
 var unicodePunctuation = regexCheck(/\p{P}|\p{S}/u);
 var unicodeWhitespace = regexCheck(/\s/);
 function regexCheck(regex) {
-  return check;
-  function check(code4) {
+  return check2;
+  function check2(code4) {
     return code4 !== null && code4 > -1 && regex.test(String.fromCharCode(code4));
   }
 }
 
-// node_modules/micromark-util-sanitize-uri/index.js
+// ../../../../node_modules/micromark-util-sanitize-uri/index.js
 function normalizeUri(value) {
   const result = [];
   let index2 = -1;
@@ -4454,7 +4914,7 @@ function normalizeUri(value) {
   return result.join("") + value.slice(start2);
 }
 
-// node_modules/micromark-factory-space/index.js
+// ../../../../node_modules/micromark-factory-space/index.js
 function factorySpace(effects, ok3, type, max) {
   const limit = max ? max - 1 : Infinity;
   let size = 0;
@@ -4499,7 +4959,7 @@ function factorySpaceMinMax(effects, ok3, nok, type, min, max) {
   }
 }
 
-// node_modules/micromark/lib/initialize/content.js
+// ../../../../node_modules/micromark/lib/initialize/content.js
 var content = {
   tokenize: initializeContent
 };
@@ -4549,7 +5009,7 @@ function initializeContent(effects) {
   }
 }
 
-// node_modules/micromark-util-edit-map/index.js
+// ../../../../node_modules/micromark-util-edit-map/index.js
 var EditMap = class {
   /**
    * Create a new edit map.
@@ -4647,7 +5107,7 @@ function addImplementation(editMap, at2, remove, add, before) {
   editMap.index.set(at2, change);
 }
 
-// node_modules/micromark/lib/initialize/document.js
+// ../../../../node_modules/micromark/lib/initialize/document.js
 var document2 = {
   tokenize: initializeDocument
 };
@@ -4841,7 +5301,7 @@ function tokenizeContainer(effects, ok3, nok) {
   return factorySpace(effects, effects.attempt(this.parser.constructs.document, ok3, nok), "linePrefix", this.parser.constructs.disable.null.includes("codeIndented") ? void 0 : 4);
 }
 
-// node_modules/micromark-util-classify-character/index.js
+// ../../../../node_modules/micromark-util-classify-character/index.js
 function classifyCharacter(code4) {
   if (code4 === null || markdownLineEndingOrSpace(code4) || unicodeWhitespace(code4)) {
     return 1;
@@ -4851,7 +5311,7 @@ function classifyCharacter(code4) {
   }
 }
 
-// node_modules/micromark-util-resolve-all/index.js
+// ../../../../node_modules/micromark-util-resolve-all/index.js
 function resolveAll(constructs2, events, context) {
   const called = [];
   let index2 = -1;
@@ -4865,7 +5325,7 @@ function resolveAll(constructs2, events, context) {
   return events;
 }
 
-// node_modules/micromark-core-commonmark/lib/attention.js
+// ../../../../node_modules/micromark-core-commonmark/lib/attention.js
 var attention = {
   name: "attention",
   resolveAll: resolveAllAttention,
@@ -4988,7 +5448,7 @@ function movePoint(point4, offset2) {
   point4._bufferIndex += offset2;
 }
 
-// node_modules/micromark-core-commonmark/lib/autolink.js
+// ../../../../node_modules/micromark-core-commonmark/lib/autolink.js
 var autolink = {
   name: "autolink",
   tokenize: tokenizeAutolink
@@ -5089,7 +5549,7 @@ function tokenizeAutolink(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/blank-line.js
+// ../../../../node_modules/micromark-core-commonmark/lib/blank-line.js
 var blankLine = {
   partial: true,
   tokenize: tokenizeBlankLine
@@ -5104,7 +5564,7 @@ function tokenizeBlankLine(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/block-quote.js
+// ../../../../node_modules/micromark-core-commonmark/lib/block-quote.js
 var blockQuote = {
   continuation: {
     tokenize: tokenizeBlockQuoteContinuation
@@ -5162,7 +5622,7 @@ function exit(effects) {
   effects.exit("blockQuote");
 }
 
-// node_modules/micromark-core-commonmark/lib/character-escape.js
+// ../../../../node_modules/micromark-core-commonmark/lib/character-escape.js
 var characterEscape = {
   name: "characterEscape",
   tokenize: tokenizeCharacterEscape
@@ -5188,7 +5648,7 @@ function tokenizeCharacterEscape(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/character-reference.js
+// ../../../../node_modules/micromark-core-commonmark/lib/character-reference.js
 var characterReference = {
   name: "characterReference",
   tokenize: tokenizeCharacterReference
@@ -5253,7 +5713,7 @@ function tokenizeCharacterReference(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/partial-non-lazy-continuation.js
+// ../../../../node_modules/micromark-core-commonmark/lib/partial-non-lazy-continuation.js
 var nonLazyContinuation = {
   partial: true,
   tokenize: tokenizeNonLazyContinuation
@@ -5275,7 +5735,7 @@ function tokenizeNonLazyContinuation(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/code-fenced.js
+// ../../../../node_modules/micromark-core-commonmark/lib/code-fenced.js
 var codeFenced = {
   concrete: true,
   name: "codeFenced",
@@ -5438,7 +5898,7 @@ function tokenizeCodeFenced(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/code-indented.js
+// ../../../../node_modules/micromark-core-commonmark/lib/code-indented.js
 var codeIndented = {
   name: "codeIndented",
   tokenize: tokenizeCodeIndented
@@ -5496,7 +5956,7 @@ function tokenizeFurtherStart(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/code-text.js
+// ../../../../node_modules/micromark-core-commonmark/lib/code-text.js
 var codeText = {
   name: "codeText",
   previous,
@@ -5611,7 +6071,7 @@ function tokenizeCodeText(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-util-subtokenize/lib/splice-buffer.js
+// ../../../../node_modules/micromark-util-subtokenize/lib/splice-buffer.js
 var SpliceBuffer = class {
   /**
    * @param {ReadonlyArray<T> | null | undefined} [initial]
@@ -5804,7 +6264,7 @@ function chunkedPush(list4, right) {
   }
 }
 
-// node_modules/micromark-util-subtokenize/index.js
+// ../../../../node_modules/micromark-util-subtokenize/index.js
 function subtokenize(eventsArray) {
   const jumps = {};
   let index2 = -1;
@@ -5957,7 +6417,7 @@ function subcontent(events, eventIndex) {
   return gaps;
 }
 
-// node_modules/micromark-core-commonmark/lib/content.js
+// ../../../../node_modules/micromark-core-commonmark/lib/content.js
 var content2 = {
   resolve: resolveContent,
   tokenize: tokenizeContent
@@ -6028,7 +6488,7 @@ function tokenizeContinuation(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-factory-destination/index.js
+// ../../../../node_modules/micromark-factory-destination/index.js
 function factoryDestination(effects, ok3, nok, type, literalType, literalMarkerType, rawType, stringType, max) {
   const limit = max || Number.POSITIVE_INFINITY;
   let balance = 0;
@@ -6120,7 +6580,7 @@ function factoryDestination(effects, ok3, nok, type, literalType, literalMarkerT
   }
 }
 
-// node_modules/micromark-factory-label/index.js
+// ../../../../node_modules/micromark-factory-label/index.js
 function factoryLabel(effects, ok3, nok, type, markerType, stringType) {
   const self2 = this;
   let size = 0;
@@ -6181,7 +6641,7 @@ function factoryLabel(effects, ok3, nok, type, markerType, stringType) {
   }
 }
 
-// node_modules/micromark-factory-title/index.js
+// ../../../../node_modules/micromark-factory-title/index.js
 function factoryTitle(effects, ok3, nok, type, markerType, stringType) {
   let marker;
   return start2;
@@ -6243,7 +6703,7 @@ function factoryTitle(effects, ok3, nok, type, markerType, stringType) {
   }
 }
 
-// node_modules/micromark-factory-whitespace/index.js
+// ../../../../node_modules/micromark-factory-whitespace/index.js
 function factoryWhitespace(effects, ok3) {
   let seen;
   return start2;
@@ -6262,7 +6722,7 @@ function factoryWhitespace(effects, ok3) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/definition.js
+// ../../../../node_modules/micromark-core-commonmark/lib/definition.js
 var definition = {
   name: "definition",
   tokenize: tokenizeDefinition
@@ -6348,7 +6808,7 @@ function tokenizeTitleBefore(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/hard-break-escape.js
+// ../../../../node_modules/micromark-core-commonmark/lib/hard-break-escape.js
 var hardBreakEscape = {
   name: "hardBreakEscape",
   tokenize: tokenizeHardBreakEscape
@@ -6369,7 +6829,7 @@ function tokenizeHardBreakEscape(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/heading-atx.js
+// ../../../../node_modules/micromark-core-commonmark/lib/heading-atx.js
 var headingAtx = {
   name: "headingAtx",
   resolve: resolveHeadingAtx,
@@ -6458,7 +6918,7 @@ function tokenizeHeadingAtx(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-util-html-tag-name/index.js
+// ../../../../node_modules/micromark-util-html-tag-name/index.js
 var htmlBlockNames = [
   "address",
   "article",
@@ -6525,7 +6985,7 @@ var htmlBlockNames = [
 ];
 var htmlRawNames = ["pre", "script", "style", "textarea"];
 
-// node_modules/micromark-core-commonmark/lib/html-flow.js
+// ../../../../node_modules/micromark-core-commonmark/lib/html-flow.js
 var htmlFlow = {
   concrete: true,
   name: "htmlFlow",
@@ -6884,7 +7344,7 @@ function tokenizeBlankLineBefore(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/html-text.js
+// ../../../../node_modules/micromark-core-commonmark/lib/html-text.js
 var htmlText = {
   name: "htmlText",
   tokenize: tokenizeHtmlText
@@ -7190,7 +7650,7 @@ function tokenizeHtmlText(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/label-end.js
+// ../../../../node_modules/micromark-core-commonmark/lib/label-end.js
 var labelEnd = {
   name: "labelEnd",
   resolveAll: resolveAllLabelEnd,
@@ -7416,7 +7876,7 @@ function tokenizeReferenceCollapsed(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/label-start-image.js
+// ../../../../node_modules/micromark-core-commonmark/lib/label-start-image.js
 var labelStartImage = {
   name: "labelStartImage",
   resolveAll: labelEnd.resolveAll,
@@ -7453,7 +7913,7 @@ function tokenizeLabelStartImage(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/label-start-link.js
+// ../../../../node_modules/micromark-core-commonmark/lib/label-start-link.js
 var labelStartLink = {
   name: "labelStartLink",
   resolveAll: labelEnd.resolveAll,
@@ -7481,7 +7941,7 @@ function tokenizeLabelStartLink(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/line-ending.js
+// ../../../../node_modules/micromark-core-commonmark/lib/line-ending.js
 var lineEnding = {
   name: "lineEnding",
   tokenize: tokenizeLineEnding
@@ -7496,7 +7956,7 @@ function tokenizeLineEnding(effects, ok3) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/thematic-break.js
+// ../../../../node_modules/micromark-core-commonmark/lib/thematic-break.js
 var thematicBreak = {
   name: "thematicBreak",
   tokenize: tokenizeThematicBreak
@@ -7535,7 +7995,7 @@ function tokenizeThematicBreak(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/list.js
+// ../../../../node_modules/micromark-core-commonmark/lib/list.js
 var list = {
   continuation: {
     tokenize: tokenizeListContinuation
@@ -7665,7 +8125,7 @@ function tokenizeListItemPrefixWhitespace(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-core-commonmark/lib/setext-underline.js
+// ../../../../node_modules/micromark-core-commonmark/lib/setext-underline.js
 var setextUnderline = {
   name: "setextUnderline",
   resolveTo: resolveToSetextUnderline,
@@ -7759,7 +8219,7 @@ function tokenizeSetextUnderline(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark/lib/initialize/flow.js
+// ../../../../node_modules/micromark/lib/initialize/flow.js
 var flow = {
   tokenize: initializeFlow
 };
@@ -7797,7 +8257,7 @@ function initializeFlow(effects) {
   }
 }
 
-// node_modules/micromark/lib/initialize/text.js
+// ../../../../node_modules/micromark/lib/initialize/text.js
 var resolver = {
   resolveAll: createResolver()
 };
@@ -7939,7 +8399,7 @@ function resolveAllLineSuffixes(events, context) {
   return events;
 }
 
-// node_modules/micromark/lib/constructs.js
+// ../../../../node_modules/micromark/lib/constructs.js
 var constructs_exports = {};
 __export(constructs_exports, {
   attentionMarkers: () => attentionMarkers,
@@ -8014,7 +8474,7 @@ var disable = {
   null: []
 };
 
-// node_modules/micromark/lib/create-tokenizer.js
+// ../../../../node_modules/micromark/lib/create-tokenizer.js
 function createTokenizer(parser, initialize, from) {
   let point4 = {
     _bufferIndex: -1,
@@ -8340,7 +8800,7 @@ function serializeChunks(chunks, expandTabs) {
   return result.join("");
 }
 
-// node_modules/micromark/lib/parse.js
+// ../../../../node_modules/micromark/lib/parse.js
 function parse(options) {
   const settings = options || {};
   const constructs2 = (
@@ -8366,14 +8826,14 @@ function parse(options) {
   }
 }
 
-// node_modules/micromark/lib/postprocess.js
+// ../../../../node_modules/micromark/lib/postprocess.js
 function postprocess(events) {
   while (!subtokenize(events)) {
   }
   return events;
 }
 
-// node_modules/micromark/lib/preprocess.js
+// ../../../../node_modules/micromark/lib/preprocess.js
 var search = /[\0\t\n\r]/g;
 function preprocess() {
   let column = 1;
@@ -8453,7 +8913,7 @@ function preprocess() {
   }
 }
 
-// node_modules/micromark-util-decode-string/index.js
+// ../../../../node_modules/micromark-util-decode-string/index.js
 var characterEscapeOrReference = /\\([!-/:-@[-`{-~])|&(#(?:\d{1,7}|x[\da-f]{1,6})|[\da-z]{1,31});/gi;
 function decodeString(value) {
   return value.replace(characterEscapeOrReference, decode);
@@ -8471,7 +8931,7 @@ function decode($0, $1, $2) {
   return decodeNamedCharacterReference($2) || $0;
 }
 
-// node_modules/mdast-util-from-markdown/lib/index.js
+// ../../../../node_modules/mdast-util-from-markdown/lib/index.js
 var own2 = {}.hasOwnProperty;
 function fromMarkdown(value, encoding, options) {
   if (encoding && typeof encoding === "object") {
@@ -9241,7 +9701,7 @@ function defaultOnError(left, right) {
   }) + ") is still open");
 }
 
-// node_modules/remark-parse/lib/index.js
+// ../../../../node_modules/remark-parse/lib/index.js
 function remarkParse(options) {
   const self2 = this;
   self2.parser = parser;
@@ -9258,7 +9718,7 @@ function remarkParse(options) {
   }
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/blockquote.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/blockquote.js
 function blockquote(state, node2) {
   const result = {
     type: "element",
@@ -9270,14 +9730,14 @@ function blockquote(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/break.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/break.js
 function hardBreak(state, node2) {
   const result = { type: "element", tagName: "br", properties: {}, children: [] };
   state.patch(node2, result);
   return [state.applyData(node2, result), { type: "text", value: "\n" }];
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/code.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/code.js
 function code(state, node2) {
   const value = node2.value ? node2.value + "\n" : "";
   const properties = {};
@@ -9301,7 +9761,7 @@ function code(state, node2) {
   return result;
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/delete.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/delete.js
 function strikethrough(state, node2) {
   const result = {
     type: "element",
@@ -9313,7 +9773,7 @@ function strikethrough(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/emphasis.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/emphasis.js
 function emphasis(state, node2) {
   const result = {
     type: "element",
@@ -9325,7 +9785,7 @@ function emphasis(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/footnote-reference.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/footnote-reference.js
 function footnoteReference(state, node2) {
   const clobberPrefix = typeof state.options.clobberPrefix === "string" ? state.options.clobberPrefix : "user-content-";
   const id = String(node2.identifier).toUpperCase();
@@ -9364,7 +9824,7 @@ function footnoteReference(state, node2) {
   return state.applyData(node2, sup);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/heading.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/heading.js
 function heading(state, node2) {
   const result = {
     type: "element",
@@ -9376,7 +9836,7 @@ function heading(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/html.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/html.js
 function html3(state, node2) {
   if (state.options.allowDangerousHtml) {
     const result = { type: "raw", value: node2.value };
@@ -9386,7 +9846,7 @@ function html3(state, node2) {
   return void 0;
 }
 
-// node_modules/mdast-util-to-hast/lib/revert.js
+// ../../../../node_modules/mdast-util-to-hast/lib/revert.js
 function revert(state, node2) {
   const subtype = node2.referenceType;
   let suffix = "]";
@@ -9414,7 +9874,7 @@ function revert(state, node2) {
   return contents;
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/image-reference.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/image-reference.js
 function imageReference(state, node2) {
   const id = String(node2.identifier).toUpperCase();
   const definition3 = state.definitionById.get(id);
@@ -9430,7 +9890,7 @@ function imageReference(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/image.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/image.js
 function image(state, node2) {
   const properties = { src: normalizeUri(node2.url) };
   if (node2.alt !== null && node2.alt !== void 0) {
@@ -9444,7 +9904,7 @@ function image(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/inline-code.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/inline-code.js
 function inlineCode(state, node2) {
   const text8 = { type: "text", value: node2.value.replace(/\r?\n|\r/g, " ") };
   state.patch(node2, text8);
@@ -9458,7 +9918,7 @@ function inlineCode(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/link-reference.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/link-reference.js
 function linkReference(state, node2) {
   const id = String(node2.identifier).toUpperCase();
   const definition3 = state.definitionById.get(id);
@@ -9479,7 +9939,7 @@ function linkReference(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/link.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/link.js
 function link(state, node2) {
   const properties = { href: normalizeUri(node2.url) };
   if (node2.title !== null && node2.title !== void 0) {
@@ -9495,7 +9955,7 @@ function link(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/list-item.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/list-item.js
 function listItem(state, node2, parent) {
   const results = state.all(node2);
   const loose = parent ? listLoose(parent) : listItemLoose(node2);
@@ -9558,7 +10018,7 @@ function listItemLoose(node2) {
   return spread === null || spread === void 0 ? node2.children.length > 1 : spread;
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/list.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/list.js
 function list2(state, node2) {
   const properties = {};
   const results = state.all(node2);
@@ -9583,7 +10043,7 @@ function list2(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/paragraph.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/paragraph.js
 function paragraph(state, node2) {
   const result = {
     type: "element",
@@ -9595,14 +10055,14 @@ function paragraph(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/root.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/root.js
 function root2(state, node2) {
   const result = { type: "root", children: state.wrap(state.all(node2)) };
   state.patch(node2, result);
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/strong.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/strong.js
 function strong(state, node2) {
   const result = {
     type: "element",
@@ -9614,7 +10074,7 @@ function strong(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/table.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/table.js
 function table(state, node2) {
   const rows = state.all(node2);
   const firstRow = rows.shift();
@@ -9651,7 +10111,7 @@ function table(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/table-row.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/table-row.js
 function tableRow(state, node2, parent) {
   const siblings = parent ? parent.children : void 0;
   const rowIndex = siblings ? siblings.indexOf(node2) : 1;
@@ -9685,7 +10145,7 @@ function tableRow(state, node2, parent) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/table-cell.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/table-cell.js
 function tableCell(state, node2) {
   const result = {
     type: "element",
@@ -9698,7 +10158,7 @@ function tableCell(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/trim-lines/index.js
+// ../../../../node_modules/trim-lines/index.js
 var tab = 9;
 var space = 32;
 function trimLines(value) {
@@ -9738,14 +10198,14 @@ function trimLine(value, start2, end) {
   return endIndex > startIndex ? value.slice(startIndex, endIndex) : "";
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/text.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/text.js
 function text5(state, node2) {
   const result = { type: "text", value: trimLines(String(node2.value)) };
   state.patch(node2, result);
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js
 function thematicBreak2(state, node2) {
   const result = {
     type: "element",
@@ -9757,7 +10217,7 @@ function thematicBreak2(state, node2) {
   return state.applyData(node2, result);
 }
 
-// node_modules/mdast-util-to-hast/lib/handlers/index.js
+// ../../../../node_modules/mdast-util-to-hast/lib/handlers/index.js
 var handlers = {
   blockquote,
   break: hardBreak,
@@ -9792,7 +10252,7 @@ function ignore() {
   return void 0;
 }
 
-// node_modules/@ungap/structured-clone/esm/types.js
+// ../../../../node_modules/@ungap/structured-clone/esm/types.js
 var VOID = -1;
 var PRIMITIVE = 0;
 var ARRAY = 1;
@@ -9804,7 +10264,7 @@ var SET = 6;
 var ERROR = 7;
 var BIGINT = 8;
 
-// node_modules/@ungap/structured-clone/esm/deserialize.js
+// ../../../../node_modules/@ungap/structured-clone/esm/deserialize.js
 var { defineProperty } = Object;
 var env = typeof self === "object" ? self : globalThis;
 var guard = (name3, init) => {
@@ -9896,7 +10356,7 @@ var deserializer = ($, _) => {
 };
 var deserialize = (serialized) => deserializer(/* @__PURE__ */ new Map(), serialized)(0);
 
-// node_modules/@ungap/structured-clone/esm/serialize.js
+// ../../../../node_modules/@ungap/structured-clone/esm/serialize.js
 var EMPTY = "";
 var { toString: toString2 } = {};
 var { keys, is } = Object;
@@ -9934,7 +10394,7 @@ var serializer = (strict, json, $, _) => {
     $.set(value, index2);
     return index2;
   };
-  const pair = (value) => {
+  const pair2 = (value) => {
     if ($.has(value))
       return $.get(value);
     let [TYPE, type] = typeOf(value);
@@ -9974,7 +10434,7 @@ var serializer = (strict, json, $, _) => {
         const arr = [];
         const index2 = as([TYPE, arr], value);
         for (const entry of value)
-          arr.push(pair(entry));
+          arr.push(pair2(entry));
         return index2;
       }
       case OBJECT: {
@@ -9989,12 +10449,12 @@ var serializer = (strict, json, $, _) => {
           }
         }
         if (json && "toJSON" in value)
-          return pair(value.toJSON());
+          return pair2(value.toJSON());
         const entries = [];
         const index2 = as([TYPE, entries], value);
         for (const key of keys(value)) {
           if (strict || !shouldSkip(typeOf(value[key])))
-            entries.push([pair(key), pair(value[key])]);
+            entries.push([pair2(key), pair2(value[key])]);
         }
         return index2;
       }
@@ -10009,7 +10469,7 @@ var serializer = (strict, json, $, _) => {
         const index2 = as([TYPE, entries], value);
         for (const [key, entry] of value) {
           if (strict || !(shouldSkip(typeOf(key)) || shouldSkip(typeOf(entry))))
-            entries.push([pair(key), pair(entry)]);
+            entries.push([pair2(key), pair2(entry)]);
         }
         return index2;
       }
@@ -10018,7 +10478,7 @@ var serializer = (strict, json, $, _) => {
         const index2 = as([TYPE, entries], value);
         for (const entry of value) {
           if (strict || !shouldSkip(typeOf(entry)))
-            entries.push(pair(entry));
+            entries.push(pair2(entry));
         }
         return index2;
       }
@@ -10026,20 +10486,20 @@ var serializer = (strict, json, $, _) => {
     const { message } = value;
     return as([TYPE, { name: type, message }], value);
   };
-  return pair;
+  return pair2;
 };
 var serialize = (value, { json, lossy } = {}) => {
   const _ = [];
   return serializer(!(json || lossy), !!json, /* @__PURE__ */ new Map(), _)(value), _;
 };
 
-// node_modules/@ungap/structured-clone/esm/index.js
+// ../../../../node_modules/@ungap/structured-clone/esm/index.js
 var esm_default = typeof structuredClone === "function" ? (
   /* c8 ignore start */
   (any, options) => options && ("json" in options || "lossy" in options) ? deserialize(serialize(any, options)) : structuredClone(any)
 ) : (any, options) => deserialize(serialize(any, options));
 
-// node_modules/mdast-util-to-hast/lib/footer.js
+// ../../../../node_modules/mdast-util-to-hast/lib/footer.js
 function defaultFootnoteBackContent(_, rereferenceIndex) {
   const result = [{ type: "text", value: "\u21A9" }];
   if (rereferenceIndex > 1) {
@@ -10149,7 +10609,7 @@ function footer(state) {
   };
 }
 
-// node_modules/unist-util-is/lib/index.js
+// ../../../../node_modules/unist-util-is/lib/index.js
 var convert = (
   // Note: overloads in JSDoc can’t yet use different `@template`s.
   /**
@@ -10203,10 +10663,10 @@ function anyFactory(tests) {
     return false;
   }
 }
-function propertiesFactory(check) {
+function propertiesFactory(check2) {
   const checkAsRecord = (
     /** @type {Record<string, unknown>} */
-    check
+    check2
   );
   return castFactory(all2);
   function all2(node2) {
@@ -10216,21 +10676,21 @@ function propertiesFactory(check) {
       node2
     );
     let key;
-    for (key in check) {
+    for (key in check2) {
       if (nodeAsRecord[key] !== checkAsRecord[key]) return false;
     }
     return true;
   }
 }
-function typeFactory(check) {
+function typeFactory(check2) {
   return castFactory(type);
   function type(node2) {
-    return node2 && node2.type === check;
+    return node2 && node2.type === check2;
   }
 }
 function castFactory(testFunction) {
-  return check;
-  function check(value, index2, parent) {
+  return check2;
+  function check2(value, index2, parent) {
     return Boolean(
       looksLikeANode(value) && testFunction.call(
         this,
@@ -10248,26 +10708,60 @@ function looksLikeANode(value) {
   return value !== null && typeof value === "object" && "type" in value;
 }
 
-// node_modules/unist-util-visit-parents/lib/color.js
+// ../../../../node_modules/unist-util-visit-parents/lib/color.js
 function color(d) {
   return d;
 }
 
-// node_modules/unist-util-visit-parents/lib/index.js
+// ../../../../node_modules/unist-util-visit-parents/lib/index.js
 var empty2 = [];
 var CONTINUE = true;
 var EXIT = false;
 var SKIP = "skip";
-function visitParents(tree, test, visitor, reverse) {
-  let check;
-  if (typeof test === "function" && typeof visitor !== "function") {
-    reverse = visitor;
-    visitor = test;
-  } else {
-    check = test;
+function visitParents(tree, testOrEnterOrVisitors, enterOrVisitorsOrReverse, reverse) {
+  if (!tree || typeof tree !== "object") {
+    throw new Error("Unexpected value `" + tree + "` for `tree`, expected node");
   }
-  const is3 = convert(check);
-  const step = reverse ? -1 : 1;
+  let preorder = true;
+  let check2;
+  let visitors;
+  let enter;
+  let exit3;
+  if (typeof enterOrVisitorsOrReverse === "function" || enterOrVisitorsOrReverse && typeof enterOrVisitorsOrReverse === "object") {
+    check2 = /** @type {Test} */
+    testOrEnterOrVisitors;
+    visitors = enterOrVisitorsOrReverse;
+    if (reverse) preorder = false;
+  } else {
+    visitors = /** @type {Visitors | Visitor} */
+    testOrEnterOrVisitors;
+    if (enterOrVisitorsOrReverse) preorder = false;
+  }
+  if (typeof visitors === "function") {
+    enter = visitors;
+  } else if (visitors && typeof visitors === "object") {
+    if (visitors.enter === null || visitors.enter === void 0) {
+    } else if (typeof visitors.enter === "function") {
+      enter = visitors.enter;
+    } else {
+      throw new Error(
+        "Unexpected value `" + visitors.enter + "` for `visitors.enter`, expected optional visitor"
+      );
+    }
+    if (typeof visitors.exit === "function") {
+      exit3 = visitors.exit;
+    } else {
+      throw new Error(
+        "Unexpected value `" + visitors.exit + "` for `visitors.exit`, expected visitor (pass a visitor directly if you only want an enter visitor)"
+      );
+    }
+  } else {
+    throw new Error(
+      "Unexpected value `" + visitors + "` for `enter` or `visitors`, expected visitor or object with visitors"
+    );
+  }
+  const is3 = convert(check2);
+  const step = preorder ? 1 : -1;
   factory(tree, void 0, [])();
   function factory(node2, index2, parents) {
     const value = (
@@ -10288,12 +10782,10 @@ function visitParents(tree, test, visitor, reverse) {
     }
     return visit2;
     function visit2() {
+      const matches = !check2 || is3(node2, index2, parents[parents.length - 1] || void 0);
       let result = empty2;
-      let subresult;
-      let offset2;
-      let grandparents;
-      if (!test || is3(node2, index2, parents[parents.length - 1] || void 0)) {
-        result = toResult(visitor(node2, parents));
+      if (enter && matches) {
+        result = toResult(enter(node2, parents, index2));
         if (result[0] === EXIT) {
           return result;
         }
@@ -10304,16 +10796,27 @@ function visitParents(tree, test, visitor, reverse) {
           node2
         );
         if (nodeAsParent.children && result[0] !== SKIP) {
-          offset2 = (reverse ? nodeAsParent.children.length : -1) + step;
-          grandparents = parents.concat(nodeAsParent);
+          let offset2 = (preorder ? -1 : nodeAsParent.children.length) + step;
+          const grandparents = [...parents, nodeAsParent];
           while (offset2 > -1 && offset2 < nodeAsParent.children.length) {
             const child = nodeAsParent.children[offset2];
-            subresult = factory(child, offset2, grandparents)();
+            const subresult = factory(child, offset2, grandparents)();
             if (subresult[0] === EXIT) {
               return subresult;
             }
             offset2 = typeof subresult[1] === "number" ? subresult[1] : offset2 + step;
           }
+        }
+      }
+      if (exit3 && matches) {
+        const exitResult = toResult(exit3(node2, parents, index2));
+        if (exitResult[0] === SKIP) {
+          throw new Error(
+            "Unexpected value `" + exitResult[0] + "` from `exit`, expected `CONTINUE`, `EXIT`, index, or nothing"
+          );
+        }
+        if (exitResult[0] === EXIT || typeof exitResult[1] === "number") {
+          return exitResult;
         }
       }
       return result;
@@ -10330,29 +10833,42 @@ function toResult(value) {
   return value === null || value === void 0 ? empty2 : [value];
 }
 
-// node_modules/unist-util-visit/lib/index.js
-function visit(tree, testOrVisitor, visitorOrReverse, maybeReverse) {
+// ../../../../node_modules/unist-util-visit/lib/index.js
+function visit(tree, testOrEnterOrVisitors, enterOrVisitorsOrReverse, maybeReverse) {
+  let check2;
+  let visitors;
   let reverse;
-  let test;
-  let visitor;
-  if (typeof testOrVisitor === "function" && typeof visitorOrReverse !== "function") {
-    test = void 0;
-    visitor = testOrVisitor;
-    reverse = visitorOrReverse;
-  } else {
-    test = testOrVisitor;
-    visitor = visitorOrReverse;
+  if (typeof enterOrVisitorsOrReverse === "function" || enterOrVisitorsOrReverse && typeof enterOrVisitorsOrReverse === "object") {
+    check2 = /** @type {Test} */
+    testOrEnterOrVisitors;
+    visitors = enterOrVisitorsOrReverse;
     reverse = maybeReverse;
+  } else {
+    visitors = /** @type {Visitor | Visitors} */
+    testOrEnterOrVisitors;
+    reverse = enterOrVisitorsOrReverse;
   }
-  visitParents(tree, test, overload, reverse);
-  function overload(node2, parents) {
-    const parent = parents[parents.length - 1];
-    const index2 = parent ? parent.children.indexOf(node2) : void 0;
-    return visitor(node2, index2, parent);
+  if (typeof visitors === "function") {
+    visitParents(tree, check2, wrap(visitors), reverse);
+  } else {
+    visitParents(tree, check2, wrapVisitors(visitors), reverse);
+  }
+}
+function wrapVisitors(visitors) {
+  if (!visitors || typeof visitors !== "object") return visitors;
+  return {
+    enter: typeof visitors.enter === "function" ? wrap(visitors.enter) : visitors.enter,
+    exit: typeof visitors.exit === "function" ? wrap(visitors.exit) : visitors.exit
+  };
+}
+function wrap(visitor) {
+  return overload;
+  function overload(node2, parents, index2) {
+    return visitor(node2, index2, parents[parents.length - 1]);
   }
 }
 
-// node_modules/mdast-util-to-hast/lib/state.js
+// ../../../../node_modules/mdast-util-to-hast/lib/state.js
 var own3 = {}.hasOwnProperty;
 var emptyOptions3 = {};
 function createState(tree, options) {
@@ -10372,7 +10888,7 @@ function createState(tree, options) {
     one: one3,
     options: settings,
     patch,
-    wrap
+    wrap: wrap2
   };
   visit(tree, function(node2) {
     if (node2.type === "definition" || node2.type === "footnoteDefinition") {
@@ -10469,7 +10985,7 @@ function defaultUnknownHandler(state, node2) {
   state.patch(node2, result);
   return state.applyData(node2, result);
 }
-function wrap(nodes, loose) {
+function wrap2(nodes, loose) {
   const result = [];
   let index2 = -1;
   if (loose) {
@@ -10494,7 +11010,7 @@ function trimMarkdownSpaceStart(value) {
   return value.slice(index2);
 }
 
-// node_modules/mdast-util-to-hast/lib/index.js
+// ../../../../node_modules/mdast-util-to-hast/lib/index.js
 function toHast(tree, options) {
   const state = createState(tree, options);
   const node2 = state.one(tree, void 0);
@@ -10507,7 +11023,7 @@ function toHast(tree, options) {
   return result;
 }
 
-// node_modules/remark-rehype/lib/index.js
+// ../../../../node_modules/remark-rehype/lib/index.js
 function remarkRehype(destination, options) {
   if (destination && "run" in destination) {
     return async function(tree, file) {
@@ -10526,17 +11042,17 @@ function remarkRehype(destination, options) {
   };
 }
 
-// node_modules/bail/index.js
+// ../../../../node_modules/bail/index.js
 function bail(error) {
   if (error) {
     throw error;
   }
 }
 
-// node_modules/unified/lib/index.js
+// ../../../../node_modules/unified/lib/index.js
 var import_extend = __toESM(require_extend(), 1);
 
-// node_modules/is-plain-obj/index.js
+// ../../../../node_modules/is-plain-obj/index.js
 function isPlainObject(value) {
   if (typeof value !== "object" || value === null) {
     return false;
@@ -10545,7 +11061,7 @@ function isPlainObject(value) {
   return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
 }
 
-// node_modules/trough/lib/index.js
+// ../../../../node_modules/trough/lib/index.js
 function trough() {
   const fns = [];
   const pipeline = { run, use };
@@ -10571,7 +11087,7 @@ function trough() {
       }
       values = output;
       if (fn) {
-        wrap2(fn, next)(...output);
+        wrap3(fn, next)(...output);
       } else {
         callback(null, ...output);
       }
@@ -10587,7 +11103,7 @@ function trough() {
     return pipeline;
   }
 }
-function wrap2(middleware, callback) {
+function wrap3(middleware, callback) {
   let called;
   return wrapped;
   function wrapped(...parameters) {
@@ -10629,7 +11145,7 @@ function wrap2(middleware, callback) {
   }
 }
 
-// node_modules/vfile/lib/minpath.browser.js
+// ../../../../node_modules/vfile/lib/minpath.browser.js
 var minpath = { basename, dirname, extname, join, sep: "/" };
 function basename(path2, extname2) {
   if (extname2 !== void 0 && typeof extname2 !== "string") {
@@ -10842,13 +11358,13 @@ function assertPath(path2) {
   }
 }
 
-// node_modules/vfile/lib/minproc.browser.js
+// ../../../../node_modules/vfile/lib/minproc.browser.js
 var minproc = { cwd };
 function cwd() {
   return "/";
 }
 
-// node_modules/vfile/lib/minurl.shared.js
+// ../../../../node_modules/vfile/lib/minurl.shared.js
 function isUrl(fileUrlOrPath) {
   return Boolean(
     fileUrlOrPath !== null && typeof fileUrlOrPath === "object" && "href" in fileUrlOrPath && fileUrlOrPath.href && "protocol" in fileUrlOrPath && fileUrlOrPath.protocol && // @ts-expect-error: indexing is fine.
@@ -10856,7 +11372,7 @@ function isUrl(fileUrlOrPath) {
   );
 }
 
-// node_modules/vfile/lib/minurl.browser.js
+// ../../../../node_modules/vfile/lib/minurl.browser.js
 function urlToPath(path2) {
   if (typeof path2 === "string") {
     path2 = new URL(path2);
@@ -10899,7 +11415,7 @@ function getPathFromURLPosix(url) {
   return decodeURIComponent(pathname);
 }
 
-// node_modules/vfile/lib/index.js
+// ../../../../node_modules/vfile/lib/index.js
 var order = (
   /** @type {const} */
   [
@@ -11355,7 +11871,7 @@ function isUint8Array(value) {
   );
 }
 
-// node_modules/unified/lib/callable-instance.js
+// ../../../../node_modules/unified/lib/callable-instance.js
 var CallableInstance = (
   /**
    * @type {new <Parameters extends Array<unknown>, Result>(property: string | symbol) => (...parameters: Parameters) => Result}
@@ -11384,7 +11900,7 @@ var CallableInstance = (
   })
 );
 
-// node_modules/unified/lib/index.js
+// ../../../../node_modules/unified/lib/index.js
 var own4 = {}.hasOwnProperty;
 var Processor = class _Processor extends CallableInstance {
   /**
@@ -12020,7 +12536,7 @@ function isUint8Array2(value) {
   );
 }
 
-// node_modules/react-markdown/lib/index.js
+// ../../../../node_modules/react-markdown/lib/index.js
 var changelog = "https://github.com/remarkjs/react-markdown/blob/main/changelog.md";
 var emptyPlugins = [];
 var emptyRemarkRehypeOptions = { allowDangerousHtml: true };
@@ -12105,11 +12621,11 @@ function post(tree, options) {
   }
   visit(tree, transform);
   return toJsxRuntime(tree, {
-    Fragment: import_jsx_runtime5.Fragment,
+    Fragment: import_jsx_runtime7.Fragment,
     components,
     ignoreInvalidStyle: true,
-    jsx: import_jsx_runtime5.jsx,
-    jsxs: import_jsx_runtime5.jsxs,
+    jsx: import_jsx_runtime7.jsx,
+    jsxs: import_jsx_runtime7.jsxs,
     passKeys: true,
     passNode: true
   });
@@ -12166,7 +12682,7 @@ function defaultUrlTransform(value) {
   return "";
 }
 
-// node_modules/ccount/index.js
+// ../../../../node_modules/ccount/index.js
 function ccount(value, character) {
   const source = String(value);
   if (typeof character !== "string") {
@@ -12181,7 +12697,7 @@ function ccount(value, character) {
   return count;
 }
 
-// node_modules/escape-string-regexp/index.js
+// ../../../../node_modules/escape-string-regexp/index.js
 function escapeStringRegexp(string3) {
   if (typeof string3 !== "string") {
     throw new TypeError("Expected a string");
@@ -12189,41 +12705,26 @@ function escapeStringRegexp(string3) {
   return string3.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
 }
 
-// node_modules/mdast-util-find-and-replace/lib/index.js
+// ../../../../node_modules/mdast-util-find-and-replace/lib/index.js
 function findAndReplace(tree, list4, options) {
   const settings = options || {};
   const ignored = convert(settings.ignore || []);
   const pairs = toPairs(list4);
   let pairIndex = -1;
   while (++pairIndex < pairs.length) {
-    visitParents(tree, "text", visitor);
+    visitParents(tree, visitor);
   }
-  function visitor(node2, parents) {
-    let index2 = -1;
-    let grandparent;
-    while (++index2 < parents.length) {
-      const parent = parents[index2];
-      const siblings = grandparent ? grandparent.children : void 0;
-      if (ignored(
-        parent,
-        siblings ? siblings.indexOf(parent) : void 0,
-        grandparent
-      )) {
-        return;
-      }
-      grandparent = parent;
+  function visitor(node2, parents, index2) {
+    if (node2.type === "text" && typeof index2 === "number") {
+      return handler(node2, parents, index2);
     }
-    if (grandparent) {
-      return handler(node2, parents);
-    }
+    if (ignored(node2, index2, parents[parents.length - 1])) return SKIP;
   }
-  function handler(node2, parents) {
+  function handler(node2, parents, index2) {
     const parent = parents[parents.length - 1];
     const find2 = pairs[pairIndex][0];
     const replace2 = pairs[pairIndex][1];
     let start2 = 0;
-    const siblings = parent.children;
-    const index2 = siblings.indexOf(node2);
     let change = false;
     let nodes = [];
     find2.lastIndex = 0;
@@ -12282,7 +12783,13 @@ function toPairs(tupleOrList) {
     throw new TypeError("Expected find and replace tuple or list of tuples");
   }
   const result = [];
-  const list4 = !tupleOrList[0] || Array.isArray(tupleOrList[0]) ? tupleOrList : [tupleOrList];
+  const list4 = !tupleOrList[0] || Array.isArray(tupleOrList[0]) ? (
+    /** @type {FindAndReplaceList} */
+    tupleOrList
+  ) : [
+    /** @type {FindAndReplaceTuple} */
+    tupleOrList
+  ];
   let index2 = -1;
   while (++index2 < list4.length) {
     const tuple = list4[index2];
@@ -12299,7 +12806,7 @@ function toFunction(replace2) {
   };
 }
 
-// node_modules/mdast-util-gfm-autolink-literal/lib/index.js
+// ../../../../node_modules/mdast-util-gfm-autolink-literal/lib/index.js
 var inConstruct = "phrasing";
 var notInConstruct = ["autolink", "link", "image", "label"];
 function gfmAutolinkLiteralFromMarkdown() {
@@ -12449,7 +12956,7 @@ function previous2(match, email) {
   (!email || code4 !== 47);
 }
 
-// node_modules/mdast-util-gfm-footnote/lib/index.js
+// ../../../../node_modules/mdast-util-gfm-footnote/lib/index.js
 footnoteReference2.peek = footnoteReferencePeek;
 function enterFootnoteCallString() {
   this.buffer();
@@ -12562,7 +13069,7 @@ function mapAll(line, index2, blank) {
   return (blank ? "" : "    ") + line;
 }
 
-// node_modules/mdast-util-gfm-strikethrough/lib/index.js
+// ../../../../node_modules/mdast-util-gfm-strikethrough/lib/index.js
 var constructsWithoutStrikethrough = [
   "autolink",
   "destinationLiteral",
@@ -12619,7 +13126,7 @@ function peekDelete() {
   return "~";
 }
 
-// node_modules/markdown-table/index.js
+// ../../../../node_modules/markdown-table/index.js
 function defaultStringLength(value) {
   return value.length;
 }
@@ -12760,7 +13267,7 @@ function toAlignment(value) {
   return code4 === 67 || code4 === 99 ? 99 : code4 === 76 || code4 === 108 ? 108 : code4 === 82 || code4 === 114 ? 114 : 0;
 }
 
-// node_modules/mdast-util-phrasing/lib/index.js
+// ../../../../node_modules/mdast-util-phrasing/lib/index.js
 var phrasing = (
   /** @type {(node?: unknown) => node is Exclude<PhrasingContent, Html>} */
   convert([
@@ -12788,7 +13295,7 @@ var phrasing = (
   ])
 );
 
-// node_modules/mdast-util-to-markdown/lib/handle/blockquote.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/blockquote.js
 function blockquote2(node2, _, state, info) {
   const exit3 = state.enter("blockquote");
   const tracker = state.createTracker(info);
@@ -12805,7 +13312,7 @@ function map(line, _, blank) {
   return ">" + (blank ? "" : " ") + line;
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/pattern-in-scope.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/pattern-in-scope.js
 function patternInScope(stack, pattern) {
   return listInScope(stack, pattern.inConstruct, true) && !listInScope(stack, pattern.notInConstruct, false);
 }
@@ -12825,7 +13332,7 @@ function listInScope(stack, list4, none) {
   return false;
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/break.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/break.js
 function hardBreak2(_, _1, state, info) {
   let index2 = -1;
   while (++index2 < state.unsafe.length) {
@@ -12837,7 +13344,7 @@ function hardBreak2(_, _1, state, info) {
   return "\\\n";
 }
 
-// node_modules/longest-streak/index.js
+// ../../../../node_modules/longest-streak/index.js
 function longestStreak(value, substring) {
   const source = String(value);
   let index2 = source.indexOf(substring);
@@ -12861,7 +13368,7 @@ function longestStreak(value, substring) {
   return max;
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/format-code-as-indented.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/format-code-as-indented.js
 function formatCodeAsIndented(node2, state) {
   return Boolean(
     state.options.fences === false && node2.value && // If there’s no info…
@@ -12871,7 +13378,7 @@ function formatCodeAsIndented(node2, state) {
   );
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/check-fence.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-fence.js
 function checkFence(state) {
   const marker = state.options.fence || "`";
   if (marker !== "`" && marker !== "~") {
@@ -12882,7 +13389,7 @@ function checkFence(state) {
   return marker;
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/code.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/code.js
 function code2(node2, _, state, info) {
   const marker = checkFence(state);
   const raw = node2.value || "";
@@ -12934,7 +13441,7 @@ function map2(line, _, blank) {
   return (blank ? "" : "    ") + line;
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/check-quote.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-quote.js
 function checkQuote(state) {
   const marker = state.options.quote || '"';
   if (marker !== '"' && marker !== "'") {
@@ -12945,7 +13452,7 @@ function checkQuote(state) {
   return marker;
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/definition.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/definition.js
 function definition2(node2, _, state, info) {
   const quote = checkQuote(state);
   const suffix = quote === '"' ? "Quote" : "Apostrophe";
@@ -13001,7 +13508,7 @@ function definition2(node2, _, state, info) {
   return value;
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/check-emphasis.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-emphasis.js
 function checkEmphasis(state) {
   const marker = state.options.emphasis || "*";
   if (marker !== "*" && marker !== "_") {
@@ -13012,12 +13519,441 @@ function checkEmphasis(state) {
   return marker;
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/emphasis.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/character.js
+function firstCharacter(value) {
+  const code4 = value.codePointAt(0);
+  return code4 === void 0 ? "" : String.fromCodePoint(code4);
+}
+function lastCharacter(value) {
+  const code4 = value.codePointAt(value.length - 2);
+  return code4 !== void 0 && code4 > 65535 ? value.slice(-2) : value.slice(-1);
+}
+
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/encode-character-reference.js
+function encodeCharacterReference(code4) {
+  return "&#x" + code4.toString(16).toUpperCase() + ";";
+}
+
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/encode-info.js
+function encodeInfo(outside, inside, marker) {
+  const outsideKind = classifyCharacter(outside);
+  const insideKind = classifyCharacter(inside);
+  if (outsideKind === void 0) {
+    return insideKind === void 0 ? (
+      // Letter inside:
+      // we have to encode *both* letters for `_` as it is looser.
+      // it already forms for `*` (and GFMs `~`).
+      marker === "_" ? { inside: true, outside: true } : { inside: false, outside: false }
+    ) : insideKind === 1 ? (
+      // Whitespace inside: encode both (letter, whitespace).
+      { inside: true, outside: true }
+    ) : (
+      // Punctuation inside: encode outer (letter)
+      { inside: false, outside: true }
+    );
+  }
+  if (outsideKind === 1) {
+    return insideKind === void 0 ? (
+      // Letter inside: already forms.
+      { inside: false, outside: false }
+    ) : insideKind === 1 ? (
+      // Whitespace inside: encode both (whitespace).
+      { inside: true, outside: true }
+    ) : (
+      // Punctuation inside: already forms.
+      { inside: false, outside: false }
+    );
+  }
+  return insideKind === void 0 ? (
+    // Letter inside: already forms.
+    { inside: false, outside: false }
+  ) : insideKind === 1 ? (
+    // Whitespace inside: encode inner (whitespace).
+    { inside: true, outside: false }
+  ) : (
+    // Punctuation inside: already forms.
+    { inside: false, outside: false }
+  );
+}
+
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/html-kind.js
+function htmlKind(value) {
+  if (value.charCodeAt(0) !== 60) return;
+  const next = value.charCodeAt(1);
+  if (next === 33) {
+    const code5 = value.charCodeAt(2);
+    if (code5 === 45) return 2;
+    if (code5 === 91) return 5;
+    if (asciiAlpha(code5)) return 4;
+    return;
+  }
+  if (next === 63) return 3;
+  const closing = next === 47;
+  const start2 = closing ? 2 : 1;
+  let end = start2;
+  let code4 = value.charCodeAt(end);
+  if (!asciiAlpha(code4)) return;
+  while (code4 === 45 || asciiAlphanumeric(code4)) {
+    code4 = value.charCodeAt(++end);
+  }
+  const name3 = value.slice(start2, end).toLowerCase();
+  if (!closing && code4 !== 47 && htmlRawNames.includes(name3)) {
+    return 1;
+  }
+  return htmlBlockNames.includes(name3) ? 6 : 7;
+}
+
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/container-phrasing.js
+var builtins = /* @__PURE__ */ new Map([
+  ["*", false],
+  ["_", true]
+]);
+function candidates(tokens, involved, runOf) {
+  const related = /* @__PURE__ */ new Set();
+  for (const token of tokens) {
+    const siblings = runOf.get(token);
+    if (siblings && token.attention && involved.some((d) => d.attention === token.attention)) {
+      for (const sibling2 of siblings.tokens) {
+        related.add(sibling2.attention);
+      }
+    }
+  }
+  const ordered = [];
+  for (const token of tokens) {
+    if (token.attention && related.delete(token.attention)) {
+      ordered.push(token.attention);
+    }
+  }
+  ordered.reverse();
+  return ordered;
+}
+function check(tokens, before, after) {
+  const runs = [];
+  const wrong = /* @__PURE__ */ new Map();
+  const runOf = /* @__PURE__ */ new Map();
+  let index2 = 0;
+  while (index2 < tokens.length) {
+    if (!tokens[index2].attention) {
+      index2++;
+      continue;
+    }
+    const marker = tokens[index2].value.charAt(0);
+    const strict = builtins.get(marker);
+    let end = index2 + 1;
+    while (end < tokens.length && tokens[end].attention && tokens[end].value.charAt(0) === marker) {
+      end++;
+    }
+    const head = index2 ? tokens[index2 - 1].value : before;
+    const previous3 = classifyCharacter(head.charCodeAt(head.length - 1));
+    const next = classifyCharacter(
+      (end < tokens.length ? tokens[end].value : after).charCodeAt(0)
+    );
+    const open = !next || next === 2 && Boolean(previous3);
+    const close = !previous3 || previous3 === 2 && Boolean(next);
+    const run = {
+      tokens: tokens.slice(index2, end),
+      markers: [],
+      start: 0,
+      end: 0,
+      // Underscores are strict, they cannot open or close inside words.
+      open: strict ? open && (Boolean(previous3) || !close) : open,
+      close: strict ? close && (Boolean(next) || !open) : close,
+      // All builtins can split runs.
+      split: strict !== void 0
+    };
+    for (const token of run.tokens) {
+      wrong.set(token, [...run.tokens]);
+      runOf.set(token, run);
+      let size = token.value.length;
+      while (size--) run.markers.push(token);
+    }
+    run.end = run.markers.length;
+    runs.push(run);
+    index2 = end;
+  }
+  pair(runs, wrong);
+  index2 = -1;
+  while (++index2 < tokens.length) {
+    const involved = wrong.get(tokens[index2]);
+    if (involved) return { attention: candidates(tokens, involved, runOf), index: index2 };
+  }
+}
+function encode(tokens, start2) {
+  const token = tokens[start2 ? 0 : tokens.length - 1];
+  if (!token || token.attention) return;
+  const character = start2 ? firstCharacter(token.value) : lastCharacter(token.value);
+  const reference = encodeCharacterReference(
+    /** @type {number} */
+    character.codePointAt(0)
+  );
+  if (start2) {
+    token.value = reference + token.value.slice(character.length);
+  } else {
+    let value = token.value.slice(0, token.value.length - character.length);
+    let escapes = 0;
+    while (value.charCodeAt(value.length - 1 - escapes) === 92) {
+      escapes++;
+    }
+    if (escapes % 2) value += "\\";
+    token.value = value + reference;
+  }
+}
+function improve(items, chosen, mistake, before, after) {
+  for (const attention4 of mistake.attention) {
+    const current2 = chosen.get(attention4) || attention4.sequences[0];
+    for (const sequence of attention4.sequences) {
+      if (sequence === current2) continue;
+      const trial = new Map(chosen);
+      trial.set(attention4, sequence);
+      const tokens = render(items, trial, before, after);
+      const next = check(tokens, before, after);
+      if (!next || next.index > mistake.index) {
+        return { chosen: trial, mistake: next, tokens };
+      }
+    }
+  }
+}
+function pair(runs, wrong) {
+  const openersByMarker = /* @__PURE__ */ new Map();
+  for (const closer of runs) {
+    const marker = closer.tokens[0].value.charAt(0);
+    let openers = openersByMarker.get(marker);
+    if (!openers) {
+      openers = [];
+      openersByMarker.set(marker, openers);
+    }
+    let open = closer.close ? openers.length : 0;
+    while (open-- && closer.start < closer.end) {
+      const opener = openers[open];
+      const openerSize = opener.end - opener.start;
+      const closerSize = closer.end - closer.start;
+      if (closer.split ? (
+        // The rule of 3, on the sizes that are left.
+        (opener.close || closer.open) && closerSize % 3 && !((openerSize + closerSize) % 3)
+      ) : (
+        // Others pair whole runs of the same size.
+        openerSize !== opener.markers.length || openerSize !== closerSize
+      )) {
+        continue;
+      }
+      const size = closer.split ? openerSize > 1 && closerSize > 1 ? 2 : 1 : closerSize;
+      const opening = opener.markers.slice(opener.end - size, opener.end);
+      const closing = closer.markers.slice(closer.start, closer.start + size);
+      const openToken = opening[0];
+      const closeToken = closing[0];
+      if (
+        // Whole sequences:
+        // the markers of a sequence are next to each other,
+        // so if the first and last marker are of one sequence of that size,
+        // all markers are exactly that sequence.
+        openToken === opening[size - 1] && openToken.value.length === size && closeToken === closing[size - 1] && closeToken.value.length === size && // Of the same attention, so its opening and closing sequence.
+        openToken.attention === closeToken.attention
+      ) {
+        wrong.delete(openToken);
+        wrong.delete(closeToken);
+      } else {
+        const involved = [.../* @__PURE__ */ new Set([...opening, ...closing])];
+        for (const token of involved) {
+          const list4 = wrong.get(token);
+          if (list4) list4.push(...involved);
+        }
+      }
+      opener.end -= size;
+      closer.start += size;
+      if (opener.start === opener.end) openers.splice(open, 1);
+      open = openers.length;
+    }
+    if (closer.open && closer.start < closer.end) openers.push(closer);
+  }
+}
+function attentionSequences(type, markers, sizes) {
+  if (markers.length === 0) {
+    throw new Error(
+      "Cannot serialize `" + type + "` as attention without markers, expected one or more markers"
+    );
+  }
+  if (sizes.length === 0) {
+    throw new Error(
+      "Cannot serialize `" + type + "` as attention without sizes, expected one or more sizes"
+    );
+  }
+  for (const size of sizes) {
+    if (!Number.isSafeInteger(size) || size < 1) {
+      throw new Error(
+        "Cannot serialize `" + type + "` as attention with `" + size + "` as size, expected positive integer"
+      );
+    }
+  }
+  const sequences = [];
+  for (const marker of markers) {
+    if (marker.length !== 1) {
+      throw new Error(
+        "Cannot serialize `" + type + "` as attention with `" + marker + "` as marker, expected a single ascii character"
+      );
+    }
+    if (!asciiPunctuation(marker.charCodeAt(0))) {
+      throw new Error(
+        "Cannot serialize `" + type + "` as attention with `" + marker + "` as marker, expected ascii punctuation"
+      );
+    }
+    for (const size of sizes) {
+      sequences.push(marker.repeat(size));
+    }
+  }
+  return sequences;
+}
+function phrasing2(parent, state, info) {
+  const indexStack = state.indexStack;
+  const children = parent.children || [];
+  const results = [];
+  let index2 = -1;
+  let before = info.before;
+  indexStack.push(-1);
+  let tracker = state.createTracker(info);
+  while (++index2 < children.length) {
+    const child = children[index2];
+    let after;
+    indexStack[indexStack.length - 1] = index2;
+    if (index2 + 1 < children.length) {
+      let handle3 = state.handle.handlers[children[index2 + 1].type];
+      if (handle3 && handle3.peek) handle3 = handle3.peek;
+      after = handle3 ? firstCharacter(
+        handle3(children[index2 + 1], parent, state, {
+          before: "",
+          after: "",
+          ...tracker.current()
+        })
+      ) : "";
+    } else {
+      after = info.after;
+    }
+    const previous3 = results[results.length - 1];
+    if (typeof previous3 === "string" && (before === "\r" || before === "\n") && child.type === "html" && htmlKind(child.value) !== 7) {
+      results[results.length - 1] = previous3.replace(/(\r?\n|\r)$/, " ");
+      before = " ";
+      tracker = state.createTracker(info);
+      tracker.move(serialize3(results, info.before, info.after));
+    }
+    const handle2 = state.handle.handlers[child.type];
+    if (handle2 && handle2.attention) {
+      const item = attentionItem(
+        /** @type {PhrasingParents} */
+        child,
+        handle2.attention,
+        state,
+        tracker
+      );
+      results.push(item);
+      before = lastCharacter(item.sequences[0]);
+    } else {
+      const value = state.handle(child, parent, state, {
+        ...tracker.current(),
+        after,
+        before
+      });
+      if (!value) continue;
+      tracker.move(value);
+      results.push(value);
+      before = lastCharacter(value);
+    }
+  }
+  indexStack.pop();
+  return results;
+}
+function attentionItem(node2, attention4, state, tracker) {
+  const { construct, markers, sizes } = attention4(node2, state);
+  const sequences = attentionSequences(node2.type, markers, sizes);
+  const sequence = sequences[0];
+  const exit3 = state.enter(construct);
+  tracker.move(sequence);
+  const children = phrasing2(node2, state, {
+    ...tracker.current(),
+    before: sequence,
+    after: sequence
+  });
+  tracker.move(serialize3(children, sequence, sequence));
+  tracker.move(sequence);
+  exit3();
+  return { children, sequences };
+}
+function render(items, chosen, before, after) {
+  const tokens = [];
+  let encodeAfter;
+  let previous3 = lastCharacter(before);
+  let index2 = -1;
+  while (++index2 < items.length) {
+    const item = items[index2];
+    if (typeof item === "string") {
+      const token = { value: item, attention: void 0 };
+      if (encodeAfter && encodeAfter === firstCharacter(item)) {
+        encode([token], true);
+      }
+      encodeAfter = void 0;
+      tokens.push(token);
+      if (token.value) previous3 = lastCharacter(token.value);
+      continue;
+    }
+    const sequence = chosen.get(item) || item.sequences[0];
+    const marker = sequence.charAt(0);
+    const next = items[index2 + 1];
+    const outsideBefore = previous3;
+    const outsideAfter = firstCharacter(
+      next === void 0 ? after : typeof next === "string" ? next : chosen.get(next) || next.sequences[0]
+    );
+    const inside = render(item.children, chosen, sequence, sequence);
+    const head = inside.length > 0 ? inside[0].value : "";
+    const open = encodeInfo(
+      outsideBefore.charCodeAt(outsideBefore.length - 1),
+      head.charCodeAt(0),
+      marker
+    );
+    if (open.inside) encode(inside, true);
+    const tail = inside.length > 0 ? lastCharacter(inside[inside.length - 1].value) : "";
+    const close = encodeInfo(
+      outsideAfter.charCodeAt(0),
+      tail.charCodeAt(tail.length - 1),
+      marker
+    );
+    if (close.inside) encode(inside, false);
+    if (open.outside && outsideBefore !== "\n" && outsideBefore !== "\r") {
+      encode(tokens, false);
+    }
+    if (close.outside) encodeAfter = outsideAfter;
+    tokens.push({ value: sequence, attention: item }, ...inside, {
+      value: sequence,
+      attention: item
+    });
+    previous3 = sequence.charAt(sequence.length - 1);
+  }
+  return tokens;
+}
+function serialize3(items, before, after) {
+  let chosen = /* @__PURE__ */ new Map();
+  const initial = render(items, chosen, before, after);
+  let tokens = initial;
+  let mistake = check(tokens, before, after);
+  while (mistake) {
+    const next = improve(items, chosen, mistake, before, after);
+    if (!next) {
+      tokens = initial;
+      break;
+    }
+    chosen = next.chosen;
+    tokens = next.tokens;
+    mistake = next.mistake;
+  }
+  let result = "";
+  for (const token of tokens) result += token.value;
+  return result;
+}
+
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/emphasis.js
 emphasis2.attention = attention2;
 emphasis2.peek = peek;
 function emphasis2(node2, _, state, info) {
   const exit3 = state.enter("phrasing");
-  const value = state.containerPhrasing({ type: "root", children: [node2] }, info);
+  const item = attentionItem(node2, attention2, state, state.createTracker(info));
+  const value = serialize3([item], info.before, info.after);
   exit3();
   return value;
 }
@@ -13033,12 +13969,7 @@ function peek(_, _1, state) {
   return state.options.emphasis || "*";
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/encode-character-reference.js
-function encodeCharacterReference(code4) {
-  return "&#x" + code4.toString(16).toUpperCase() + ";";
-}
-
-// node_modules/mdast-util-to-markdown/lib/util/format-heading-as-setext.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/format-heading-as-setext.js
 function formatHeadingAsSetext(node2, state) {
   let literalWithBreak = false;
   visit(node2, function(node3) {
@@ -13052,7 +13983,7 @@ function formatHeadingAsSetext(node2, state) {
   );
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/heading.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/heading.js
 function heading2(node2, _, state, info) {
   const rank = Math.max(Math.min(6, node2.depth || 1), 1);
   const tracker = state.createTracker(info);
@@ -13095,7 +14026,7 @@ function heading2(node2, _, state, info) {
   return value;
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/html.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/html.js
 html4.peek = htmlPeek;
 function html4(node2) {
   return node2.value || "";
@@ -13104,7 +14035,7 @@ function htmlPeek() {
   return "<";
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/image.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/image.js
 image2.peek = imagePeek;
 function image2(node2, _, state, info) {
   const quote = checkQuote(state);
@@ -13161,7 +14092,7 @@ function imagePeek() {
   return "!";
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/image-reference.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/image-reference.js
 imageReference2.peek = imageReferencePeek;
 function imageReference2(node2, _, state, info) {
   const type = node2.referenceType;
@@ -13202,7 +14133,7 @@ function imageReferencePeek() {
   return "!";
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/inline-code.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/inline-code.js
 inlineCode2.peek = inlineCodePeek;
 function inlineCode2(node2, _, state) {
   let value = node2.value || "";
@@ -13233,7 +14164,7 @@ function inlineCodePeek() {
   return "`";
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/format-link-as-autolink.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/format-link-as-autolink.js
 function formatLinkAsAutolink(node2, state) {
   const raw = toString(node2);
   return Boolean(
@@ -13248,7 +14179,7 @@ function formatLinkAsAutolink(node2, state) {
   );
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/link.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/link.js
 link2.peek = linkPeek;
 function link2(node2, _, state, info) {
   const quote = checkQuote(state);
@@ -13276,19 +14207,28 @@ function link2(node2, _, state, info) {
   const exit3 = state.enter("link");
   let subexit = state.enter("label");
   let value = tracker.move("[");
-  value += tracker.move(
-    state.containerPhrasing(node2, {
-      before: value,
-      after: "](",
-      ...tracker.current()
-    })
-  );
-  value += tracker.move("](");
+  const text8 = state.containerPhrasing(node2, {
+    before: value,
+    after: "](",
+    ...tracker.current()
+  });
+  value += tracker.move(text8);
   subexit();
+  value += tracker.move("](");
+  const enclose = /[\0- \u007F]/.test(node2.url);
+  const last = info.before.charAt(info.before.length - 1);
+  let title = node2.title || void 0;
+  if (!title && !enclose && (last === "\n" || last === "\r")) {
+    let index2 = 0;
+    while (index2 < text8.length && text8.charCodeAt(index2) !== 93) {
+      index2 += text8.charCodeAt(index2) === 92 ? 2 : 1;
+    }
+    if (text8.charCodeAt(index2 + 1) === 58) title = "";
+  }
   if (
     // If there’s no url but there is a title…
-    !node2.url && node2.title || // If there are control characters or whitespace.
-    /[\0- \u007F]/.test(node2.url)
+    !node2.url && typeof title === "string" || // If there are control characters or whitespace.
+    enclose
   ) {
     subexit = state.enter("destinationLiteral");
     value += tracker.move("<");
@@ -13301,17 +14241,17 @@ function link2(node2, _, state, info) {
     value += tracker.move(
       state.safe(node2.url, {
         before: value,
-        after: node2.title ? " " : ")",
+        after: typeof title === "string" ? " " : ")",
         ...tracker.current()
       })
     );
   }
   subexit();
-  if (node2.title) {
+  if (typeof title === "string") {
     subexit = state.enter(`title${suffix}`);
     value += tracker.move(" " + quote);
     value += tracker.move(
-      state.safe(node2.title, {
+      state.safe(title, {
         before: value,
         after: quote,
         ...tracker.current()
@@ -13328,7 +14268,7 @@ function linkPeek(node2, _, state) {
   return formatLinkAsAutolink(node2, state) ? "<" : "[";
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/link-reference.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/link-reference.js
 linkReference2.peek = linkReferencePeek;
 function linkReference2(node2, _, state, info) {
   const type = node2.referenceType;
@@ -13369,7 +14309,7 @@ function linkReferencePeek() {
   return "[";
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/check-bullet.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-bullet.js
 function checkBullet(state) {
   const marker = state.options.bullet || "*";
   if (marker !== "*" && marker !== "+" && marker !== "-") {
@@ -13380,7 +14320,7 @@ function checkBullet(state) {
   return marker;
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/check-bullet-other.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-bullet-other.js
 function checkBulletOther(state) {
   const bullet = checkBullet(state);
   const bulletOther = state.options.bulletOther;
@@ -13400,7 +14340,7 @@ function checkBulletOther(state) {
   return bulletOther;
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/check-bullet-ordered.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-bullet-ordered.js
 function checkBulletOrdered(state) {
   const marker = state.options.bulletOrdered || ".";
   if (marker !== "." && marker !== ")") {
@@ -13411,7 +14351,7 @@ function checkBulletOrdered(state) {
   return marker;
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/check-rule.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-rule.js
 function checkRule(state) {
   const marker = state.options.rule || "*";
   if (marker !== "*" && marker !== "-" && marker !== "_") {
@@ -13422,7 +14362,7 @@ function checkRule(state) {
   return marker;
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/list.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/list.js
 function list3(node2, parent, state, info) {
   const exit3 = state.enter("list");
   const bulletCurrent = state.bulletCurrent;
@@ -13462,7 +14402,7 @@ function list3(node2, parent, state, info) {
   return value;
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/check-list-item-indent.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-list-item-indent.js
 function checkListItemIndent(state) {
   const style = state.options.listItemIndent || "one";
   if (style !== "tab" && style !== "one" && style !== "mixed") {
@@ -13473,7 +14413,7 @@ function checkListItemIndent(state) {
   return style;
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/list-item.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/list-item.js
 function listItem2(node2, parent, state, info) {
   const listItemIndent = checkListItemIndent(state);
   let bullet = state.bulletCurrent || checkBullet(state);
@@ -13502,7 +14442,7 @@ function listItem2(node2, parent, state, info) {
   }
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/paragraph.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/paragraph.js
 function paragraph2(node2, _, state, info) {
   const exit3 = state.enter("paragraph");
   const subexit = state.enter("phrasing");
@@ -13512,7 +14452,7 @@ function paragraph2(node2, _, state, info) {
   return value;
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/root.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/root.js
 function root3(node2, _, state, info) {
   const hasPhrasing = node2.children.some(function(d) {
     return phrasing(d);
@@ -13524,7 +14464,7 @@ function root3(node2, _, state, info) {
   return value;
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/check-strong.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-strong.js
 function checkStrong(state) {
   const marker = state.options.strong || "*";
   if (marker !== "*" && marker !== "_") {
@@ -13535,12 +14475,13 @@ function checkStrong(state) {
   return marker;
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/strong.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/strong.js
 strong2.attention = attention3;
 strong2.peek = peek2;
 function strong2(node2, _, state, info) {
   const exit3 = state.enter("phrasing");
-  const value = state.containerPhrasing({ type: "root", children: [node2] }, info);
+  const item = attentionItem(node2, attention3, state, state.createTracker(info));
+  const value = serialize3([item], info.before, info.after);
   exit3();
   return value;
 }
@@ -13556,10 +14497,10 @@ function peek2(_, _1, state) {
   return state.options.strong || "*";
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/text.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/text.js
 function text6(node2, parent, state, info) {
   const siblings = parent ? parent.children : [];
-  const index2 = siblings.indexOf(node2);
+  const index2 = state.indexStack[state.indexStack.length - 1];
   return state.safe(node2.value, {
     ...info,
     afterNode: siblings[index2 + 1],
@@ -13567,7 +14508,7 @@ function text6(node2, parent, state, info) {
   });
 }
 
-// node_modules/mdast-util-to-markdown/lib/util/check-rule-repetition.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/util/check-rule-repetition.js
 function checkRuleRepetition(state) {
   const repetition = state.options.ruleRepetition || 3;
   if (repetition < 3) {
@@ -13578,13 +14519,13 @@ function checkRuleRepetition(state) {
   return repetition;
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/thematic-break.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/thematic-break.js
 function thematicBreak3(_, _1, state) {
   const value = (checkRule(state) + (state.options.ruleSpaces ? " " : "")).repeat(checkRuleRepetition(state));
   return state.options.ruleSpaces ? value.slice(0, -1) : value;
 }
 
-// node_modules/mdast-util-to-markdown/lib/handle/index.js
+// ../../../../node_modules/mdast-util-to-markdown/lib/handle/index.js
 var handle = {
   blockquote: blockquote2,
   break: hardBreak2,
@@ -13608,7 +14549,7 @@ var handle = {
   thematicBreak: thematicBreak3
 };
 
-// node_modules/mdast-util-gfm-table/lib/index.js
+// ../../../../node_modules/mdast-util-gfm-table/lib/index.js
 function gfmTableFromMarkdown() {
   return {
     enter: {
@@ -13761,7 +14702,7 @@ function gfmTableToMarkdown(options) {
   }
 }
 
-// node_modules/mdast-util-gfm-task-list-item/lib/index.js
+// ../../../../node_modules/mdast-util-gfm-task-list-item/lib/index.js
 function gfmTaskListItemFromMarkdown() {
   return {
     exit: {
@@ -13826,15 +14767,15 @@ function listItemWithTaskListItem(node2, parent, state, info) {
     ...tracker.current()
   });
   if (checkable) {
-    value = value.replace(/^(?:[*+-]|\d+\.)([\r\n]| {1,3})/, check);
+    value = value.replace(/^(?:[*+-]|\d+\.)([\r\n]| {1,3})/, check2);
   }
   return value;
-  function check($0) {
+  function check2($0) {
     return $0 + checkbox;
   }
 }
 
-// node_modules/mdast-util-gfm/lib/index.js
+// ../../../../node_modules/mdast-util-gfm/lib/index.js
 function gfmFromMarkdown() {
   return [
     gfmAutolinkLiteralFromMarkdown(),
@@ -13856,7 +14797,7 @@ function gfmToMarkdown(options) {
   };
 }
 
-// node_modules/micromark-extension-gfm-autolink-literal/lib/syntax.js
+// ../../../../node_modules/micromark-extension-gfm-autolink-literal/lib/syntax.js
 var wwwPrefix = {
   tokenize: tokenizeWwwPrefix,
   partial: true
@@ -14198,7 +15139,7 @@ function previousUnbalanced(events) {
   return result;
 }
 
-// node_modules/micromark-extension-gfm-footnote/lib/syntax.js
+// ../../../../node_modules/micromark-extension-gfm-footnote/lib/syntax.js
 var indent = {
   tokenize: tokenizeIndent2,
   partial: true
@@ -14473,7 +15414,7 @@ function tokenizeIndent2(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-extension-gfm-strikethrough/lib/syntax.js
+// ../../../../node_modules/micromark-extension-gfm-strikethrough/lib/syntax.js
 function gfmStrikethrough(options) {
   const options_ = options || {};
   let single = options_.singleTilde;
@@ -14567,7 +15508,7 @@ function gfmStrikethrough(options) {
   }
 }
 
-// node_modules/micromark-extension-gfm-table/lib/edit-map.js
+// ../../../../node_modules/micromark-extension-gfm-table/lib/edit-map.js
 var EditMap2 = class {
   /**
    * Create a new edit map.
@@ -14653,7 +15594,7 @@ function addImplementation2(editMap, at2, remove, add) {
   editMap.index.set(at2, change);
 }
 
-// node_modules/micromark-extension-gfm-table/lib/infer.js
+// ../../../../node_modules/micromark-extension-gfm-table/lib/infer.js
 function gfmTableAlign(events, index2) {
   let inDelimiterRow = false;
   const align = [];
@@ -14680,7 +15621,7 @@ function gfmTableAlign(events, index2) {
   return align;
 }
 
-// node_modules/micromark-extension-gfm-table/lib/syntax.js
+// ../../../../node_modules/micromark-extension-gfm-table/lib/syntax.js
 function gfmTable() {
   return {
     flow: {
@@ -15071,7 +16012,7 @@ function getPoint(events, index2) {
   return event[1][side];
 }
 
-// node_modules/micromark-extension-gfm-task-list-item/lib/syntax.js
+// ../../../../node_modules/micromark-extension-gfm-task-list-item/lib/syntax.js
 var tasklistCheck = {
   name: "tasklistCheck",
   tokenize: tokenizeTasklistCheck
@@ -15145,7 +16086,7 @@ function spaceThenNonSpace(effects, ok3, nok) {
   }
 }
 
-// node_modules/micromark-extension-gfm/index.js
+// ../../../../node_modules/micromark-extension-gfm/index.js
 function gfm(options) {
   return combineExtensions([
     gfmAutolinkLiteral(),
@@ -15156,7 +16097,7 @@ function gfm(options) {
   ]);
 }
 
-// node_modules/remark-gfm/lib/index.js
+// ../../../../node_modules/remark-gfm/lib/index.js
 var emptyOptions4 = {};
 function remarkGfm(options) {
   const self2 = (
@@ -15586,11 +16527,11 @@ function parseDslPreview(source, messageId = "preview") {
   return parseDsl(source, messageId, false, true);
 }
 
-// node_modules/acorn/dist/acorn.mjs
-var astralIdentifierCodes = [509, 0, 227, 0, 150, 4, 294, 9, 1368, 2, 2, 1, 6, 3, 41, 2, 5, 0, 166, 1, 574, 3, 9, 9, 7, 9, 32, 4, 318, 1, 78, 5, 71, 10, 50, 3, 123, 2, 54, 14, 32, 10, 3, 1, 11, 3, 46, 10, 8, 0, 46, 9, 7, 2, 37, 13, 2, 9, 6, 1, 45, 0, 13, 2, 49, 13, 9, 3, 2, 11, 83, 11, 7, 0, 3, 0, 158, 11, 6, 9, 7, 3, 56, 1, 2, 6, 3, 1, 3, 2, 10, 0, 11, 1, 3, 6, 4, 4, 68, 8, 2, 0, 3, 0, 2, 3, 2, 4, 2, 0, 15, 1, 83, 17, 10, 9, 5, 0, 82, 19, 13, 9, 214, 6, 3, 8, 28, 1, 83, 16, 16, 9, 82, 12, 9, 9, 7, 19, 58, 14, 5, 9, 243, 14, 166, 9, 71, 5, 2, 1, 3, 3, 2, 0, 2, 1, 13, 9, 120, 6, 3, 6, 4, 0, 29, 9, 41, 6, 2, 3, 9, 0, 10, 10, 47, 15, 199, 7, 137, 9, 54, 7, 2, 7, 17, 9, 57, 21, 2, 13, 123, 5, 4, 0, 2, 1, 2, 6, 2, 0, 9, 9, 49, 4, 2, 1, 2, 4, 9, 9, 55, 9, 266, 3, 10, 1, 2, 0, 49, 6, 4, 4, 14, 10, 5350, 0, 7, 14, 11465, 27, 2343, 9, 87, 9, 39, 4, 60, 6, 26, 9, 535, 9, 470, 0, 2, 54, 8, 3, 82, 0, 12, 1, 19628, 1, 4178, 9, 519, 45, 3, 22, 543, 4, 4, 5, 9, 7, 3, 6, 31, 3, 149, 2, 1418, 49, 513, 54, 5, 49, 9, 0, 15, 0, 23, 4, 2, 14, 1361, 6, 2, 16, 3, 6, 2, 1, 2, 4, 101, 0, 161, 6, 10, 9, 357, 0, 62, 13, 499, 13, 245, 1, 2, 9, 233, 0, 3, 0, 8, 1, 6, 0, 475, 6, 110, 6, 6, 9, 4759, 9, 787719, 239];
-var astralIdentifierStartCodes = [0, 11, 2, 25, 2, 18, 2, 1, 2, 14, 3, 13, 35, 122, 70, 52, 268, 28, 4, 48, 48, 31, 14, 29, 6, 37, 11, 29, 3, 35, 5, 7, 2, 4, 43, 157, 19, 35, 5, 35, 5, 39, 9, 51, 13, 10, 2, 14, 2, 6, 2, 1, 2, 10, 2, 14, 2, 6, 2, 1, 4, 51, 13, 310, 10, 21, 11, 7, 25, 5, 2, 41, 2, 8, 70, 5, 3, 0, 2, 43, 2, 1, 4, 0, 3, 22, 11, 22, 10, 30, 66, 18, 2, 1, 11, 21, 11, 25, 7, 25, 39, 55, 7, 1, 65, 0, 16, 3, 2, 2, 2, 28, 43, 28, 4, 28, 36, 7, 2, 27, 28, 53, 11, 21, 11, 18, 14, 17, 111, 72, 56, 50, 14, 50, 14, 35, 39, 27, 10, 22, 251, 41, 7, 1, 17, 5, 57, 28, 11, 0, 9, 21, 43, 17, 47, 20, 28, 22, 13, 52, 58, 1, 3, 0, 14, 44, 33, 24, 27, 35, 30, 0, 3, 0, 9, 34, 4, 0, 13, 47, 15, 3, 22, 0, 2, 0, 36, 17, 2, 24, 20, 1, 64, 6, 2, 0, 2, 3, 2, 14, 2, 9, 8, 46, 39, 7, 3, 1, 3, 21, 2, 6, 2, 1, 2, 4, 4, 0, 19, 0, 13, 4, 31, 9, 2, 0, 3, 0, 2, 37, 2, 0, 26, 0, 2, 0, 45, 52, 19, 3, 21, 2, 31, 47, 21, 1, 2, 0, 185, 46, 42, 3, 37, 47, 21, 0, 60, 42, 14, 0, 72, 26, 38, 6, 186, 43, 117, 63, 32, 7, 3, 0, 3, 7, 2, 1, 2, 23, 16, 0, 2, 0, 95, 7, 3, 38, 17, 0, 2, 0, 29, 0, 11, 39, 8, 0, 22, 0, 12, 45, 20, 0, 19, 72, 200, 32, 32, 8, 2, 36, 18, 0, 50, 29, 113, 6, 2, 1, 2, 37, 22, 0, 26, 5, 2, 1, 2, 31, 15, 0, 24, 43, 261, 18, 16, 0, 2, 12, 2, 33, 125, 0, 80, 921, 103, 110, 18, 195, 2637, 96, 16, 1071, 18, 5, 26, 3994, 6, 582, 6842, 29, 1763, 568, 8, 30, 18, 78, 18, 29, 19, 47, 17, 3, 32, 20, 6, 18, 433, 44, 212, 63, 33, 24, 3, 24, 45, 74, 6, 0, 67, 12, 65, 1, 2, 0, 15, 4, 10, 7381, 42, 31, 98, 114, 8702, 3, 2, 6, 2, 1, 2, 290, 16, 0, 30, 2, 3, 0, 15, 3, 9, 395, 2309, 106, 6, 12, 4, 8, 8, 9, 5991, 84, 2, 70, 2, 1, 3, 0, 3, 1, 3, 3, 2, 11, 2, 0, 2, 6, 2, 64, 2, 3, 3, 7, 2, 6, 2, 27, 2, 3, 2, 4, 2, 0, 4, 6, 2, 339, 3, 24, 2, 24, 2, 30, 2, 24, 2, 30, 2, 24, 2, 30, 2, 24, 2, 30, 2, 24, 2, 7, 1845, 30, 7, 5, 262, 61, 147, 44, 11, 6, 17, 0, 322, 29, 19, 43, 485, 27, 229, 29, 3, 0, 208, 30, 2, 2, 2, 1, 2, 6, 3, 4, 10, 1, 225, 6, 2, 3, 2, 1, 2, 14, 2, 196, 60, 67, 8, 0, 1205, 3, 2, 26, 2, 1, 2, 0, 3, 0, 2, 9, 2, 3, 2, 0, 2, 0, 7, 0, 5, 0, 2, 0, 2, 0, 2, 2, 2, 1, 2, 0, 3, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 1, 2, 0, 3, 3, 2, 6, 2, 3, 2, 3, 2, 0, 2, 9, 2, 16, 6, 2, 2, 4, 2, 16, 4421, 42719, 33, 4381, 3, 5773, 3, 7472, 16, 621, 2467, 541, 1507, 4938, 6, 8489];
-var nonASCIIidentifierChars = "\u200C\u200D\xB7\u0300-\u036F\u0387\u0483-\u0487\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7\u0610-\u061A\u064B-\u0669\u0670\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED\u06F0-\u06F9\u0711\u0730-\u074A\u07A6-\u07B0\u07C0-\u07C9\u07EB-\u07F3\u07FD\u0816-\u0819\u081B-\u0823\u0825-\u0827\u0829-\u082D\u0859-\u085B\u0897-\u089F\u08CA-\u08E1\u08E3-\u0903\u093A-\u093C\u093E-\u094F\u0951-\u0957\u0962\u0963\u0966-\u096F\u0981-\u0983\u09BC\u09BE-\u09C4\u09C7\u09C8\u09CB-\u09CD\u09D7\u09E2\u09E3\u09E6-\u09EF\u09FE\u0A01-\u0A03\u0A3C\u0A3E-\u0A42\u0A47\u0A48\u0A4B-\u0A4D\u0A51\u0A66-\u0A71\u0A75\u0A81-\u0A83\u0ABC\u0ABE-\u0AC5\u0AC7-\u0AC9\u0ACB-\u0ACD\u0AE2\u0AE3\u0AE6-\u0AEF\u0AFA-\u0AFF\u0B01-\u0B03\u0B3C\u0B3E-\u0B44\u0B47\u0B48\u0B4B-\u0B4D\u0B55-\u0B57\u0B62\u0B63\u0B66-\u0B6F\u0B82\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCD\u0BD7\u0BE6-\u0BEF\u0C00-\u0C04\u0C3C\u0C3E-\u0C44\u0C46-\u0C48\u0C4A-\u0C4D\u0C55\u0C56\u0C62\u0C63\u0C66-\u0C6F\u0C81-\u0C83\u0CBC\u0CBE-\u0CC4\u0CC6-\u0CC8\u0CCA-\u0CCD\u0CD5\u0CD6\u0CE2\u0CE3\u0CE6-\u0CEF\u0CF3\u0D00-\u0D03\u0D3B\u0D3C\u0D3E-\u0D44\u0D46-\u0D48\u0D4A-\u0D4D\u0D57\u0D62\u0D63\u0D66-\u0D6F\u0D81-\u0D83\u0DCA\u0DCF-\u0DD4\u0DD6\u0DD8-\u0DDF\u0DE6-\u0DEF\u0DF2\u0DF3\u0E31\u0E34-\u0E3A\u0E47-\u0E4E\u0E50-\u0E59\u0EB1\u0EB4-\u0EBC\u0EC8-\u0ECE\u0ED0-\u0ED9\u0F18\u0F19\u0F20-\u0F29\u0F35\u0F37\u0F39\u0F3E\u0F3F\u0F71-\u0F84\u0F86\u0F87\u0F8D-\u0F97\u0F99-\u0FBC\u0FC6\u102B-\u103E\u1040-\u1049\u1056-\u1059\u105E-\u1060\u1062-\u1064\u1067-\u106D\u1071-\u1074\u1082-\u108D\u108F-\u109D\u135D-\u135F\u1369-\u1371\u1712-\u1715\u1732-\u1734\u1752\u1753\u1772\u1773\u17B4-\u17D3\u17DD\u17E0-\u17E9\u180B-\u180D\u180F-\u1819\u18A9\u1920-\u192B\u1930-\u193B\u1946-\u194F\u19D0-\u19DA\u1A17-\u1A1B\u1A55-\u1A5E\u1A60-\u1A7C\u1A7F-\u1A89\u1A90-\u1A99\u1AB0-\u1ABD\u1ABF-\u1ADD\u1AE0-\u1AEB\u1B00-\u1B04\u1B34-\u1B44\u1B50-\u1B59\u1B6B-\u1B73\u1B80-\u1B82\u1BA1-\u1BAD\u1BB0-\u1BB9\u1BE6-\u1BF3\u1C24-\u1C37\u1C40-\u1C49\u1C50-\u1C59\u1CD0-\u1CD2\u1CD4-\u1CE8\u1CED\u1CF4\u1CF7-\u1CF9\u1DC0-\u1DFF\u200C\u200D\u203F\u2040\u2054\u20D0-\u20DC\u20E1\u20E5-\u20F0\u2CEF-\u2CF1\u2D7F\u2DE0-\u2DFF\u302A-\u302F\u3099\u309A\u30FB\uA620-\uA629\uA66F\uA674-\uA67D\uA69E\uA69F\uA6F0\uA6F1\uA802\uA806\uA80B\uA823-\uA827\uA82C\uA880\uA881\uA8B4-\uA8C5\uA8D0-\uA8D9\uA8E0-\uA8F1\uA8FF-\uA909\uA926-\uA92D\uA947-\uA953\uA980-\uA983\uA9B3-\uA9C0\uA9D0-\uA9D9\uA9E5\uA9F0-\uA9F9\uAA29-\uAA36\uAA43\uAA4C\uAA4D\uAA50-\uAA59\uAA7B-\uAA7D\uAAB0\uAAB2-\uAAB4\uAAB7\uAAB8\uAABE\uAABF\uAAC1\uAAEB-\uAAEF\uAAF5\uAAF6\uABE3-\uABEA\uABEC\uABED\uABF0-\uABF9\uFB1E\uFE00-\uFE0F\uFE20-\uFE2F\uFE33\uFE34\uFE4D-\uFE4F\uFF10-\uFF19\uFF3F\uFF65";
-var nonASCIIidentifierStartChars = "\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0559\u0560-\u0588\u05D0-\u05EA\u05EF-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u0860-\u086A\u0870-\u0887\u0889-\u088F\u08A0-\u08C9\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u09FC\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0AF9\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58-\u0C5A\u0C5C\u0C5D\u0C60\u0C61\u0C80\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDC-\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D04-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D54-\u0D56\u0D5F-\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E86-\u0E8A\u0E8C-\u0EA3\u0EA5\u0EA7-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F5\u13F8-\u13FD\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16EE-\u16F8\u1700-\u1711\u171F-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1878\u1880-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19B0-\u19C9\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4C\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1C80-\u1C8A\u1C90-\u1CBA\u1CBD-\u1CBF\u1CE9-\u1CEC\u1CEE-\u1CF3\u1CF5\u1CF6\u1CFA\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u2090-\u209C\u2102\u2107\u210A-\u2113\u2115\u2118-\u211D\u2124\u2126\u2128\u212A-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2160-\u2188\u2C00-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303C\u3041-\u3096\u309B-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312F\u3131-\u318E\u31A0-\u31BF\u31F0-\u31FF\u3400-\u4DBF\u4E00-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6EF\uA717-\uA71F\uA722-\uA788\uA78B-\uA7DC\uA7F1-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA8FD\uA8FE\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB69\uAB70-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC";
+// ../../../../node_modules/acorn/dist/acorn.mjs
+var astralIdentifierCodes = [509, 0, 227, 0, 150, 4, 294, 9, 1368, 2, 2, 1, 6, 3, 41, 2, 5, 0, 166, 1, 574, 3, 9, 9, 7, 9, 32, 4, 318, 1, 31, 4, 33, 15, 71, 10, 50, 3, 123, 2, 54, 14, 32, 10, 3, 1, 11, 3, 46, 10, 8, 0, 46, 9, 7, 2, 37, 13, 2, 9, 6, 1, 45, 0, 13, 2, 49, 13, 9, 3, 2, 11, 83, 11, 7, 0, 3, 0, 158, 11, 6, 9, 7, 3, 56, 1, 2, 6, 3, 1, 3, 2, 10, 0, 11, 1, 3, 6, 4, 4, 68, 8, 2, 0, 3, 0, 2, 3, 2, 4, 2, 0, 15, 1, 83, 17, 10, 9, 5, 0, 82, 19, 13, 9, 214, 6, 3, 8, 28, 1, 83, 16, 16, 9, 82, 12, 9, 9, 7, 19, 58, 14, 5, 9, 243, 14, 166, 9, 71, 5, 2, 1, 3, 3, 2, 0, 2, 1, 13, 9, 120, 6, 3, 6, 4, 0, 29, 9, 41, 6, 2, 3, 9, 0, 10, 10, 47, 15, 199, 7, 137, 9, 54, 7, 2, 7, 17, 9, 57, 21, 2, 13, 123, 5, 4, 0, 2, 1, 2, 6, 2, 0, 9, 9, 49, 4, 2, 1, 2, 4, 9, 9, 55, 9, 7, 0, 259, 3, 10, 1, 2, 0, 49, 6, 4, 4, 14, 10, 5350, 0, 7, 14, 11465, 27, 2343, 9, 87, 9, 39, 4, 60, 6, 26, 9, 535, 9, 470, 0, 2, 54, 8, 3, 82, 0, 12, 1, 19628, 1, 4178, 9, 519, 45, 3, 22, 481, 1, 61, 4, 4, 5, 9, 7, 3, 6, 31, 3, 149, 2, 12, 2, 9, 1, 3, 0, 33, 1, 1357, 49, 513, 54, 5, 49, 9, 0, 15, 0, 23, 4, 2, 14, 1361, 6, 2, 16, 3, 6, 2, 1, 2, 4, 101, 0, 161, 6, 10, 9, 357, 0, 62, 13, 499, 13, 245, 1, 2, 9, 233, 0, 3, 0, 8, 1, 6, 0, 475, 6, 110, 6, 6, 9, 4759, 9, 787719, 239];
+var astralIdentifierStartCodes = [0, 11, 2, 25, 2, 18, 2, 1, 2, 14, 3, 13, 35, 122, 70, 52, 268, 28, 4, 48, 48, 31, 14, 29, 6, 37, 11, 29, 3, 35, 5, 7, 2, 4, 43, 157, 19, 35, 5, 35, 5, 39, 9, 51, 13, 10, 2, 14, 2, 6, 2, 1, 2, 10, 2, 14, 2, 6, 2, 1, 4, 51, 13, 310, 10, 21, 11, 7, 25, 5, 2, 41, 2, 13, 65, 5, 3, 0, 2, 43, 2, 1, 4, 0, 3, 22, 11, 22, 10, 30, 66, 18, 2, 1, 11, 21, 11, 25, 7, 25, 39, 55, 7, 1, 65, 0, 16, 3, 2, 2, 2, 28, 43, 28, 4, 28, 36, 7, 2, 27, 28, 53, 11, 21, 11, 18, 14, 17, 111, 72, 56, 50, 14, 50, 14, 35, 39, 27, 10, 22, 251, 41, 7, 1, 17, 5, 18, 21, 18, 28, 11, 0, 9, 21, 43, 17, 47, 20, 28, 22, 13, 52, 58, 1, 3, 0, 14, 44, 33, 24, 27, 35, 30, 0, 3, 0, 9, 34, 4, 0, 13, 47, 15, 3, 22, 0, 2, 0, 36, 17, 2, 24, 20, 1, 64, 6, 2, 0, 2, 3, 2, 14, 2, 9, 8, 46, 39, 7, 3, 1, 3, 21, 2, 6, 2, 1, 2, 4, 4, 0, 19, 0, 13, 4, 31, 9, 2, 0, 3, 0, 2, 37, 2, 0, 26, 0, 2, 0, 45, 52, 19, 3, 21, 2, 31, 47, 21, 1, 2, 0, 185, 46, 42, 3, 37, 47, 21, 0, 60, 42, 14, 0, 72, 26, 38, 6, 186, 43, 117, 63, 32, 7, 3, 0, 3, 7, 2, 1, 2, 23, 16, 0, 2, 0, 95, 7, 3, 38, 17, 0, 2, 0, 29, 0, 11, 39, 8, 0, 22, 0, 12, 45, 20, 0, 19, 72, 18, 0, 182, 32, 32, 8, 2, 36, 18, 0, 50, 29, 113, 6, 2, 1, 2, 37, 22, 0, 26, 5, 2, 1, 2, 31, 15, 0, 24, 43, 22, 0, 239, 18, 16, 0, 2, 12, 2, 33, 125, 0, 80, 921, 103, 111, 6, 206, 13, 310, 2314, 96, 16, 1071, 18, 5, 26, 3994, 6, 582, 6842, 29, 1763, 568, 8, 30, 18, 78, 18, 29, 19, 47, 17, 3, 32, 20, 6, 18, 433, 44, 212, 63, 33, 24, 3, 24, 45, 74, 6, 0, 67, 12, 65, 1, 2, 0, 15, 4, 10, 7386, 37, 33, 96, 114, 14, 913, 15, 50, 7710, 3, 2, 6, 2, 1, 2, 296, 10, 0, 30, 2, 3, 0, 15, 4, 8, 395, 2309, 106, 6, 12, 4, 8, 8, 9, 5991, 84, 2, 70, 2, 1, 3, 0, 3, 1, 3, 3, 2, 11, 2, 0, 2, 6, 2, 64, 2, 3, 3, 7, 2, 6, 2, 27, 2, 3, 2, 4, 2, 0, 4, 6, 2, 340, 2, 24, 2, 24, 2, 30, 2, 24, 2, 30, 2, 24, 2, 30, 2, 24, 2, 30, 2, 24, 2, 7, 1845, 129, 15, 6, 55, 50, 49, 61, 147, 44, 11, 6, 17, 0, 322, 29, 19, 43, 485, 27, 229, 29, 3, 0, 208, 30, 2, 2, 2, 1, 2, 6, 3, 4, 10, 1, 225, 6, 2, 3, 2, 1, 2, 14, 2, 196, 60, 67, 8, 0, 1205, 3, 2, 26, 2, 1, 2, 0, 3, 0, 2, 9, 2, 3, 2, 0, 2, 0, 7, 0, 5, 0, 2, 0, 2, 0, 2, 2, 2, 1, 2, 0, 3, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 1, 2, 0, 3, 3, 2, 6, 2, 3, 2, 3, 2, 0, 2, 9, 2, 16, 6, 2, 2, 4, 2, 16, 4421, 42719, 33, 4382, 2, 5773, 3, 7472, 16, 621, 2467, 541, 1507, 4938, 6, 8489, 39815, 11327];
+var nonASCIIidentifierChars = "\u200C\u200D\xB7\u0300-\u036F\u0387\u0483-\u0487\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7-\u05C9\u0610-\u061A\u064B-\u0669\u0670\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED\u06F0-\u06F9\u0711\u0730-\u074A\u07A6-\u07B0\u07C0-\u07C9\u07EB-\u07F3\u07FD\u0816-\u0819\u081B-\u0823\u0825-\u0827\u0829-\u082D\u0859-\u085B\u0897-\u089F\u08CA-\u08E1\u08E3-\u0903\u093A-\u093C\u093E-\u094F\u0951-\u0957\u0962\u0963\u0966-\u096F\u0981-\u0983\u09BC\u09BE-\u09C4\u09C7\u09C8\u09CB-\u09CD\u09D7\u09E2\u09E3\u09E6-\u09EF\u09FE\u0A01-\u0A03\u0A3C\u0A3E-\u0A42\u0A47\u0A48\u0A4B-\u0A4D\u0A51\u0A66-\u0A71\u0A75\u0A81-\u0A83\u0ABC\u0ABE-\u0AC5\u0AC7-\u0AC9\u0ACB-\u0ACD\u0AE2\u0AE3\u0AE6-\u0AEF\u0AFA-\u0AFF\u0B01-\u0B03\u0B3C\u0B3E-\u0B44\u0B47\u0B48\u0B4B-\u0B4D\u0B53-\u0B57\u0B62\u0B63\u0B66-\u0B6F\u0B82\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCD\u0BD7\u0BE6-\u0BEF\u0C00-\u0C04\u0C3C\u0C3E-\u0C44\u0C46-\u0C48\u0C4A-\u0C4D\u0C55\u0C56\u0C62\u0C63\u0C66-\u0C6F\u0C81-\u0C83\u0CBC\u0CBE-\u0CC4\u0CC6-\u0CC8\u0CCA-\u0CCD\u0CD5\u0CD6\u0CE2\u0CE3\u0CE6-\u0CEF\u0CF3\u0D00-\u0D03\u0D3B\u0D3C\u0D3E-\u0D44\u0D46-\u0D48\u0D4A-\u0D4D\u0D57\u0D62\u0D63\u0D66-\u0D6F\u0D81-\u0D83\u0DCA\u0DCF-\u0DD4\u0DD6\u0DD8-\u0DDF\u0DE6-\u0DEF\u0DF2\u0DF3\u0E31\u0E34-\u0E3A\u0E47-\u0E4E\u0E50-\u0E59\u0EB1\u0EB4-\u0EBC\u0EC8-\u0ECE\u0ED0-\u0ED9\u0F18\u0F19\u0F20-\u0F29\u0F35\u0F37\u0F39\u0F3E\u0F3F\u0F71-\u0F84\u0F86\u0F87\u0F8D-\u0F97\u0F99-\u0FBC\u0FC6\u102B-\u103E\u1040-\u1049\u1056-\u1059\u105E-\u1060\u1062-\u1064\u1067-\u106D\u1071-\u1074\u1082-\u108D\u108F-\u109D\u135D-\u135F\u1369-\u1371\u1712-\u1715\u1732-\u1734\u1752\u1753\u1772\u1773\u17B4-\u17D3\u17DD\u17E0-\u17E9\u180B-\u180D\u180F-\u1819\u18A9\u1920-\u192B\u1930-\u193B\u1946-\u194F\u19D0-\u19DA\u1A17-\u1A1B\u1A55-\u1A5E\u1A60-\u1A7C\u1A7F-\u1A89\u1A90-\u1A99\u1AB0-\u1ABD\u1ABF-\u1AF0\u1B00-\u1B04\u1B34-\u1B44\u1B50-\u1B59\u1B6B-\u1B73\u1B80-\u1B82\u1BA1-\u1BAD\u1BB0-\u1BB9\u1BE6-\u1BF3\u1C24-\u1C37\u1C40-\u1C49\u1C50-\u1C59\u1CD0-\u1CD2\u1CD4-\u1CE8\u1CED\u1CF4\u1CF7-\u1CF9\u1DC0-\u1DFF\u200C\u200D\u203F\u2040\u2054\u20D0-\u20DC\u20E1\u20E5-\u20F0\u2CEF-\u2CF1\u2D7F\u2DE0-\u2DFF\u302A-\u302F\u3099\u309A\u30FB\uA620-\uA629\uA66F\uA674-\uA67D\uA69E\uA69F\uA6F0\uA6F1\uA802\uA806\uA80B\uA823-\uA827\uA82C\uA880\uA881\uA8B4-\uA8C5\uA8D0-\uA8D9\uA8E0-\uA8F1\uA8FF-\uA909\uA926-\uA92D\uA947-\uA953\uA980-\uA983\uA9B3-\uA9C0\uA9D0-\uA9D9\uA9E5\uA9F0-\uA9F9\uAA29-\uAA36\uAA43\uAA4C\uAA4D\uAA50-\uAA59\uAA7B-\uAA7D\uAAB0\uAAB2-\uAAB4\uAAB7\uAAB8\uAABE\uAABF\uAAC1\uAAEB-\uAAEF\uAAF5\uAAF6\uABE3-\uABEA\uABEC\uABED\uABF0-\uABF9\uFB1E\uFE00-\uFE0F\uFE20-\uFE2F\uFE33\uFE34\uFE4D-\uFE4F\uFF10-\uFF19\uFF3F\uFF65";
+var nonASCIIidentifierStartChars = "\xAA\xB5\xBA\xC0-\xD6\xD8-\xF6\xF8-\u02C1\u02C6-\u02D1\u02E0-\u02E4\u02EC\u02EE\u0370-\u0374\u0376\u0377\u037A-\u037D\u037F\u0386\u0388-\u038A\u038C\u038E-\u03A1\u03A3-\u03F5\u03F7-\u0481\u048A-\u052F\u0531-\u0556\u0558\u0559\u0560-\u0588\u058B\u058C\u05D0-\u05EA\u05EF-\u05F2\u0620-\u064A\u066E\u066F\u0671-\u06D3\u06D5\u06E5\u06E6\u06EE\u06EF\u06FA-\u06FC\u06FF\u0710\u0712-\u072F\u074D-\u07A5\u07B1\u07CA-\u07EA\u07F4\u07F5\u07FA\u0800-\u0815\u081A\u0824\u0828\u0840-\u0858\u0860-\u086A\u0870-\u0887\u0889-\u088F\u08A0-\u08C9\u0904-\u0939\u093D\u0950\u0958-\u0961\u0971-\u0980\u0985-\u098C\u098F\u0990\u0993-\u09A8\u09AA-\u09B0\u09B2\u09B6-\u09B9\u09BD\u09CE\u09DC\u09DD\u09DF-\u09E1\u09F0\u09F1\u09FC\u0A05-\u0A0A\u0A0F\u0A10\u0A13-\u0A28\u0A2A-\u0A30\u0A32\u0A33\u0A35\u0A36\u0A38\u0A39\u0A59-\u0A5C\u0A5E\u0A72-\u0A74\u0A85-\u0A8D\u0A8F-\u0A91\u0A93-\u0AA8\u0AAA-\u0AB0\u0AB2\u0AB3\u0AB5-\u0AB9\u0ABD\u0AD0\u0AE0\u0AE1\u0AF9\u0B05-\u0B0C\u0B0F\u0B10\u0B13-\u0B28\u0B2A-\u0B30\u0B32\u0B33\u0B35-\u0B39\u0B3D\u0B5C\u0B5D\u0B5F-\u0B61\u0B71\u0B83\u0B85-\u0B8A\u0B8E-\u0B90\u0B92-\u0B95\u0B99\u0B9A\u0B9C\u0B9E\u0B9F\u0BA3\u0BA4\u0BA8-\u0BAA\u0BAE-\u0BB9\u0BD0\u0C05-\u0C0C\u0C0E-\u0C10\u0C12-\u0C28\u0C2A-\u0C39\u0C3D\u0C58-\u0C5A\u0C5C\u0C5D\u0C60\u0C61\u0C80\u0C85-\u0C8C\u0C8E-\u0C90\u0C92-\u0CA8\u0CAA-\u0CB3\u0CB5-\u0CB9\u0CBD\u0CDC-\u0CDE\u0CE0\u0CE1\u0CF1\u0CF2\u0D04-\u0D0C\u0D0E-\u0D10\u0D12-\u0D3A\u0D3D\u0D4E\u0D54-\u0D56\u0D5F-\u0D61\u0D7A-\u0D7F\u0D85-\u0D96\u0D9A-\u0DB1\u0DB3-\u0DBB\u0DBD\u0DC0-\u0DC6\u0E01-\u0E30\u0E32\u0E33\u0E40-\u0E46\u0E81\u0E82\u0E84\u0E86-\u0E8A\u0E8C-\u0EA3\u0EA5\u0EA7-\u0EB0\u0EB2\u0EB3\u0EBD\u0EC0-\u0EC4\u0EC6\u0EDC-\u0EDF\u0F00\u0F40-\u0F47\u0F49-\u0F6C\u0F88-\u0F8C\u1000-\u102A\u103F\u1050-\u1055\u105A-\u105D\u1061\u1065\u1066\u106E-\u1070\u1075-\u1081\u108E\u10A0-\u10C5\u10C7\u10CD\u10D0-\u10FA\u10FC-\u1248\u124A-\u124D\u1250-\u1256\u1258\u125A-\u125D\u1260-\u1288\u128A-\u128D\u1290-\u12B0\u12B2-\u12B5\u12B8-\u12BE\u12C0\u12C2-\u12C5\u12C8-\u12D6\u12D8-\u1310\u1312-\u1315\u1318-\u135A\u1380-\u138F\u13A0-\u13F5\u13F8-\u13FD\u1401-\u166C\u166F-\u167F\u1681-\u169A\u16A0-\u16EA\u16EE-\u16F8\u1700-\u1711\u171F-\u1731\u1740-\u1751\u1760-\u176C\u176E-\u1770\u1780-\u17B3\u17D7\u17DC\u1820-\u1878\u1880-\u18A8\u18AA\u18B0-\u18F5\u1900-\u191E\u1950-\u196D\u1970-\u1974\u1980-\u19AB\u19B0-\u19C9\u1A00-\u1A16\u1A20-\u1A54\u1AA7\u1B05-\u1B33\u1B45-\u1B4C\u1B83-\u1BA0\u1BAE\u1BAF\u1BBA-\u1BE5\u1C00-\u1C23\u1C4D-\u1C4F\u1C5A-\u1C7D\u1C80-\u1C8A\u1C90-\u1CBA\u1CBD-\u1CBF\u1CE9-\u1CEC\u1CEE-\u1CF3\u1CF5\u1CF6\u1CFA\u1D00-\u1DBF\u1E00-\u1F15\u1F18-\u1F1D\u1F20-\u1F45\u1F48-\u1F4D\u1F50-\u1F57\u1F59\u1F5B\u1F5D\u1F5F-\u1F7D\u1F80-\u1FB4\u1FB6-\u1FBC\u1FBE\u1FC2-\u1FC4\u1FC6-\u1FCC\u1FD0-\u1FD3\u1FD6-\u1FDB\u1FE0-\u1FEC\u1FF2-\u1FF4\u1FF6-\u1FFC\u2071\u207F\u208F-\u209F\u2102\u2107\u210A-\u2113\u2115\u2118-\u211D\u2124\u2126\u2128\u212A-\u2139\u213C-\u213F\u2145-\u2149\u214E\u2160-\u2188\u2C00-\u2CE4\u2CEB-\u2CEE\u2CF2\u2CF3\u2D00-\u2D25\u2D27\u2D2D\u2D30-\u2D67\u2D6F\u2D80-\u2D96\u2DA0-\u2DA6\u2DA8-\u2DAE\u2DB0-\u2DB6\u2DB8-\u2DBE\u2DC0-\u2DC6\u2DC8-\u2DCE\u2DD0-\u2DD6\u2DD8-\u2DDE\u3005-\u3007\u3021-\u3029\u3031-\u3035\u3038-\u303C\u3041-\u3096\u309B-\u309F\u30A1-\u30FA\u30FC-\u30FF\u3105-\u312F\u3131-\u318E\u31A0-\u31BF\u31F0-\u31FF\u3400-\u4DBF\u4E00-\uA48C\uA4D0-\uA4FD\uA500-\uA60C\uA610-\uA61F\uA62A\uA62B\uA640-\uA66E\uA67F-\uA69D\uA6A0-\uA6EF\uA717-\uA71F\uA722-\uA788\uA78B-\uA7DD\uA7E2\uA7F1-\uA801\uA803-\uA805\uA807-\uA80A\uA80C-\uA822\uA840-\uA873\uA882-\uA8B3\uA8F2-\uA8F7\uA8FB\uA8FD\uA8FE\uA90A-\uA925\uA930-\uA946\uA960-\uA97C\uA984-\uA9B2\uA9CF\uA9E0-\uA9E4\uA9E6-\uA9EF\uA9FA-\uA9FE\uAA00-\uAA28\uAA40-\uAA42\uAA44-\uAA4B\uAA60-\uAA76\uAA7A\uAA7E-\uAAAF\uAAB1\uAAB5\uAAB6\uAAB9-\uAABD\uAAC0\uAAC2\uAADB-\uAADD\uAAE0-\uAAEA\uAAF2-\uAAF4\uAB01-\uAB06\uAB09-\uAB0E\uAB11-\uAB16\uAB20-\uAB26\uAB28-\uAB2E\uAB30-\uAB5A\uAB5C-\uAB69\uAB6C\uAB6D\uAB70-\uABE2\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFA6D\uFA70-\uFAD9\uFB00-\uFB06\uFB13-\uFB17\uFB1D\uFB1F-\uFB28\uFB2A-\uFB36\uFB38-\uFB3C\uFB3E\uFB40\uFB41\uFB43\uFB44\uFB46-\uFBB1\uFBD3-\uFD3D\uFD50-\uFD8F\uFD92-\uFDC7\uFDF0-\uFDFB\uFE70-\uFE74\uFE76-\uFEFC\uFF21-\uFF3A\uFF41-\uFF5A\uFF66-\uFFBE\uFFC2-\uFFC7\uFFCA-\uFFCF\uFFD2-\uFFD7\uFFDA-\uFFDC";
 var reservedWords = {
   3: "abstract boolean byte char class double enum export extends final float goto implements import int interface long native package private protected public short static super synchronized throws transient volatile",
   5: "class enum extends super const export import",
@@ -16197,7 +17138,7 @@ pp$9.strictDirective = function(start2) {
       skipWhiteSpace.lastIndex = start2 + match[0].length;
       var spaceAfter = skipWhiteSpace.exec(this.input), end = spaceAfter.index + spaceAfter[0].length;
       var next = this.input.charAt(end);
-      return next === ";" || next === "}" || lineBreak.test(spaceAfter[0]) && !(/[(`.[+\-/*%<>=,?^&]/.test(next) || next === "!" && this.input.charAt(end + 1) === "=");
+      return next === ";" || next === "}" || lineBreak.test(spaceAfter[0]) && !(/[(`.[+\-/*%<>=,?^&]/.test(next) || next === "!" && this.input.charAt(end + 1) === "=" || next === "i" && keywordOpAt(this, end));
     }
     start2 += match[0].length;
     skipWhiteSpace.lastIndex = start2;
@@ -16207,6 +17148,17 @@ pp$9.strictDirective = function(start2) {
     }
   }
 };
+function keywordOpAt(parser, pos) {
+  var end = pos + 1, stop = Math.min(parser.input.length, pos + 11);
+  while (end < stop) {
+    var ch = parser.fullCharCodeAt(end);
+    if (!isIdentifierChar(ch, true)) {
+      break;
+    }
+    end += ch <= 65535 ? 1 : 2;
+  }
+  return end === pos + 2 && parser.input.slice(pos, end) === "in" || end === pos + 10 && parser.input.slice(pos, end) === "instanceof";
+}
 pp$9.eat = function(type) {
   if (this.type === type) {
     this.next();
@@ -17967,10 +18919,13 @@ pp$5.parseMaybeAssign = function(forInit, refDestructuringErrors, afterLeftParse
       left = this.toAssignable(left, false, refDestructuringErrors);
     }
     if (!ownDestructuringErrors) {
-      refDestructuringErrors.parenthesizedAssign = refDestructuringErrors.trailingComma = refDestructuringErrors.doubleProto = -1;
-    }
-    if (refDestructuringErrors.shorthandAssign >= left.start) {
-      refDestructuringErrors.shorthandAssign = -1;
+      refDestructuringErrors.parenthesizedAssign = refDestructuringErrors.trailingComma = -1;
+      if (refDestructuringErrors.shorthandAssign >= left.start) {
+        refDestructuringErrors.shorthandAssign = -1;
+      }
+      if (refDestructuringErrors.doubleProto >= left.start) {
+        refDestructuringErrors.doubleProto = -1;
+      }
     }
     if (this.type === types$1.eq) {
       this.checkLValPattern(left);
@@ -18116,20 +19071,35 @@ function isPrivateFieldAccess(node2) {
 }
 pp$5.parseExprSubscripts = function(refDestructuringErrors, forInit) {
   var startPos = this.start, startLoc = this.startLoc;
+  var oldDoubleProto = -1, oldShorthandAssign = -1;
+  if (refDestructuringErrors) {
+    oldDoubleProto = refDestructuringErrors.doubleProto;
+    oldShorthandAssign = refDestructuringErrors.shorthandAssign;
+    refDestructuringErrors.doubleProto = refDestructuringErrors.shorthandAssign = -1;
+  }
   var expr = this.parseExprAtom(refDestructuringErrors, forInit);
   if (expr.type === "ArrowFunctionExpression" && this.input.slice(this.lastTokStart, this.lastTokEnd) !== ")") {
     return expr;
   }
   var result = this.parseSubscripts(expr, startPos, startLoc, false, forInit);
-  if (refDestructuringErrors && result.type === "MemberExpression") {
-    if (refDestructuringErrors.parenthesizedAssign >= result.start) {
-      refDestructuringErrors.parenthesizedAssign = -1;
+  if (refDestructuringErrors) {
+    if (result.end > expr.end) {
+      this.checkExpressionErrors(refDestructuringErrors, true);
+      if (refDestructuringErrors.parenthesizedAssign >= result.start) {
+        refDestructuringErrors.parenthesizedAssign = -1;
+      }
+      if (refDestructuringErrors.parenthesizedBind >= result.start) {
+        refDestructuringErrors.parenthesizedBind = -1;
+      }
+      if (refDestructuringErrors.trailingComma >= result.start) {
+        refDestructuringErrors.trailingComma = -1;
+      }
     }
-    if (refDestructuringErrors.parenthesizedBind >= result.start) {
-      refDestructuringErrors.parenthesizedBind = -1;
+    if (oldDoubleProto > -1) {
+      refDestructuringErrors.doubleProto = oldDoubleProto;
     }
-    if (refDestructuringErrors.trailingComma >= result.start) {
-      refDestructuringErrors.trailingComma = -1;
+    if (oldShorthandAssign > -1) {
+      refDestructuringErrors.shorthandAssign = oldShorthandAssign;
     }
   }
   return result;
@@ -18142,7 +19112,7 @@ pp$5.parseSubscripts = function(base, startPos, startLoc, noCalls, forInit) {
     if (element3.optional) {
       optionalChained = true;
     }
-    if (element3 === base || element3.type === "ArrowFunctionExpression") {
+    if (element3.end === base.end || element3.type === "ArrowFunctionExpression") {
       if (optionalChained) {
         var chainNode = this.startNodeAt(startPos, startLoc);
         chainNode.expression = element3;
@@ -18151,6 +19121,7 @@ pp$5.parseSubscripts = function(base, startPos, startLoc, noCalls, forInit) {
       return element3;
     }
     base = element3;
+    maybeAsyncArrow = false;
   }
 };
 pp$5.shouldParseAsyncArrow = function() {
@@ -21257,7 +22228,7 @@ pp.readWord = function() {
   }
   return this.finishToken(type, word);
 };
-var version = "8.18.0";
+var version = "8.19.0";
 Parser.acorn = {
   Parser,
   version,
@@ -21655,12 +22626,12 @@ var documentSchema = {
 };
 
 // vendor/open-intelligent-ui/ui/renderer/Renderer.tsx
-var import_react9 = __toESM(require("react"), 1);
+var import_react10 = __toESM(require("react"), 1);
 var import_react_dom = require("react-dom");
 
 // vendor/open-intelligent-ui/ui/theme/index.tsx
-var import_react3 = require("react");
-var import_jsx_runtime6 = require("react/jsx-runtime");
+var import_react4 = require("react");
+var import_jsx_runtime8 = require("react/jsx-runtime");
 var systemFont = 'ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif';
 var serifFont = "Iowan Old Style,Georgia,serif";
 var themes = {
@@ -21697,7 +22668,7 @@ function mergeTheme(name3, mode, overrides = {}) {
   }
   return out;
 }
-var ThemeContext = (0, import_react3.createContext)(themes.studio.light);
+var ThemeContext = (0, import_react4.createContext)(themes.studio.light);
 function ThemeProvider({ name: name3 = "studio", mode = "light", overrides = {}, children }) {
   const t = mergeTheme(name3, mode, overrides);
   const vars = {
@@ -21719,301 +22690,301 @@ function ThemeProvider({ name: name3 = "studio", mode = "light", overrides = {},
     "--iui-shadow": t.shadow === "none" ? "none" : t.shadow === "lift" ? "0 13px 0 #0000001a" : "0 3px 12px #0000000d",
     ...Object.fromEntries(t.chart.map((c, i) => [`--iui-chart-${i + 1}`, c]))
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(ThemeContext.Provider, { value: t, children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "iui-theme", style: { ...vars, colorScheme: mode }, children }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(ThemeContext.Provider, { value: t, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "iui-theme", style: { ...vars, colorScheme: mode }, children }) });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/text/Text.tsx
-var import_jsx_runtime7 = require("react/jsx-runtime");
+var import_jsx_runtime9 = require("react/jsx-runtime");
 function Text({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "iui-text", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "iui-text", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/title/Title.tsx
-var import_jsx_runtime8 = require("react/jsx-runtime");
+var import_jsx_runtime10 = require("react/jsx-runtime");
 function Title({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h3", { className: "iui-title", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h3", { className: "iui-title", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/caption/Caption.tsx
-var import_jsx_runtime9 = require("react/jsx-runtime");
+var import_jsx_runtime11 = require("react/jsx-runtime");
 function Caption({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("small", { className: "iui-caption", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("small", { className: "iui-caption", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/badge/Badge.tsx
-var import_jsx_runtime10 = require("react/jsx-runtime");
+var import_jsx_runtime12 = require("react/jsx-runtime");
 function Badge({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "iui-badge", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "iui-badge", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/code/Code.tsx
-var import_jsx_runtime11 = require("react/jsx-runtime");
+var import_jsx_runtime13 = require("react/jsx-runtime");
 function Code({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("pre", { className: "iui-code", style, children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("code", { children }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("pre", { className: "iui-code", style, children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("code", { children }) });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/math-text/MathText.tsx
-var import_jsx_runtime12 = require("react/jsx-runtime");
+var import_jsx_runtime14 = require("react/jsx-runtime");
 function MathText({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "iui-math", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "iui-math", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/label/Label.tsx
-var import_jsx_runtime13 = require("react/jsx-runtime");
+var import_jsx_runtime15 = require("react/jsx-runtime");
 function Label({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "iui-label", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "iui-label", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/bold/Bold.tsx
-var import_jsx_runtime14 = require("react/jsx-runtime");
+var import_jsx_runtime16 = require("react/jsx-runtime");
 function Bold({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("strong", { style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("strong", { style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/italic/Italic.tsx
-var import_jsx_runtime15 = require("react/jsx-runtime");
+var import_jsx_runtime17 = require("react/jsx-runtime");
 function Italic({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("em", { style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("em", { style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/underline/Underline.tsx
-var import_jsx_runtime16 = require("react/jsx-runtime");
+var import_jsx_runtime18 = require("react/jsx-runtime");
 function Underline({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("u", { style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("u", { style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/strikethrough/Strikethrough.tsx
-var import_jsx_runtime17 = require("react/jsx-runtime");
+var import_jsx_runtime19 = require("react/jsx-runtime");
 function Strikethrough({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("s", { style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("s", { style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/blockquote/Blockquote.tsx
-var import_jsx_runtime18 = require("react/jsx-runtime");
+var import_jsx_runtime20 = require("react/jsx-runtime");
 function Blockquote({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("blockquote", { style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("blockquote", { style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/code-block/CodeBlock.tsx
-var import_jsx_runtime19 = require("react/jsx-runtime");
+var import_jsx_runtime21 = require("react/jsx-runtime");
 function CodeBlock({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("pre", { className: "iui-code", style, children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)("code", { children }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("pre", { className: "iui-code", style, children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("code", { children }) });
 }
 
 // vendor/open-intelligent-ui/ui/components/text/icon/Icon.tsx
-var import_jsx_runtime20 = require("react/jsx-runtime");
+var import_jsx_runtime22 = require("react/jsx-runtime");
 var glyphs = { check: "\u2713", "check-circle": "\u2713", "alert-triangle": "\u26A0", settings: "\u2699", github: "\u25C6", sparkles: "\u2726", copy: "\u29C9", info: "\u24D8", cpu: "\u25A3", layers: "\u25A4", "arrow-right": "\u2192", "chevron-right": "\u203A", "arrow-down": "\u2193", "arrow-down-up": "\u2195", "chart-no-axes-combined": "\u25A5", "shield-check": "\u2B21" };
 function Icon2({ name: name3, style, inline = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { className: "iui-icon", style: { ...style, display: inline ? "inline-flex" : void 0 }, "aria-label": name3, children: glyphs[name3] ?? "\u2022" });
+  return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("span", { className: "iui-icon", style: { ...style, display: inline ? "inline-flex" : void 0 }, "aria-label": name3, children: glyphs[name3] ?? "\u2022" });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/box/Box.tsx
-var import_jsx_runtime21 = require("react/jsx-runtime");
+var import_jsx_runtime23 = require("react/jsx-runtime");
 function Box({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "iui-box", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "iui-box", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/row/Row.tsx
-var import_jsx_runtime22 = require("react/jsx-runtime");
+var import_jsx_runtime24 = require("react/jsx-runtime");
 function Row({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "iui-row", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "iui-row", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/column/Column.tsx
-var import_jsx_runtime23 = require("react/jsx-runtime");
+var import_jsx_runtime25 = require("react/jsx-runtime");
 function Column({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "iui-col", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "iui-col", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/flow/Flow.tsx
-var import_jsx_runtime24 = require("react/jsx-runtime");
+var import_jsx_runtime26 = require("react/jsx-runtime");
 function Flow({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "iui-flow", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "iui-flow", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/card/Card.tsx
-var import_jsx_runtime25 = require("react/jsx-runtime");
+var import_jsx_runtime27 = require("react/jsx-runtime");
 function Card({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("section", { className: "iui-card", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("section", { className: "iui-card", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/grid/Grid.tsx
-var import_jsx_runtime26 = require("react/jsx-runtime");
+var import_jsx_runtime28 = require("react/jsx-runtime");
 function Grid({ children, style, columns = 2 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime26.jsx)("div", { className: "iui-grid", style: { ...style, gridTemplateColumns: `repeat(${Math.max(1, Math.min(6, columns))},minmax(0,1fr))` }, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "iui-grid", style: { ...style, gridTemplateColumns: `repeat(${Math.max(1, Math.min(6, columns))},minmax(0,1fr))` }, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/grid-item/GridItem.tsx
-var import_jsx_runtime27 = require("react/jsx-runtime");
+var import_jsx_runtime29 = require("react/jsx-runtime");
 function GridItem({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)("div", { className: "iui-grid-item", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "iui-grid-item", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/flow-item/FlowItem.tsx
-var import_jsx_runtime28 = require("react/jsx-runtime");
+var import_jsx_runtime30 = require("react/jsx-runtime");
 function FlowItem({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)("div", { className: "iui-flow-item", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("div", { className: "iui-flow-item", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/carousel-item/CarouselItem.tsx
-var import_jsx_runtime29 = require("react/jsx-runtime");
+var import_jsx_runtime31 = require("react/jsx-runtime");
 function CarouselItem({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)("div", { className: "iui-carousel-item", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("div", { className: "iui-carousel-item", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/divider/Divider.tsx
-var import_jsx_runtime30 = require("react/jsx-runtime");
+var import_jsx_runtime32 = require("react/jsx-runtime");
 function Divider({ style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("hr", { className: "iui-divider", style });
+  return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("hr", { className: "iui-divider", style });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/spacer/Spacer.tsx
-var import_jsx_runtime31 = require("react/jsx-runtime");
+var import_jsx_runtime33 = require("react/jsx-runtime");
 function Spacer({ style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)("span", { className: "iui-spacer", style: { flex: 1, minWidth: 8, ...style } });
+  return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("span", { className: "iui-spacer", style: { flex: 1, minWidth: 8, ...style } });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/table/Table.tsx
-var import_jsx_runtime32 = require("react/jsx-runtime");
+var import_jsx_runtime34 = require("react/jsx-runtime");
 function Table({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)("div", { role: "table", className: "iui-table", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { role: "table", className: "iui-table", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/table-row/TableRow.tsx
-var import_jsx_runtime33 = require("react/jsx-runtime");
+var import_jsx_runtime35 = require("react/jsx-runtime");
 function TableRow({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)("div", { role: "row", className: "iui-table-row", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { role: "row", className: "iui-table-row", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/table-cell/TableCell.tsx
-var import_jsx_runtime34 = require("react/jsx-runtime");
+var import_jsx_runtime36 = require("react/jsx-runtime");
 function TableCell({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { role: "cell", className: "iui-table-cell", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { role: "cell", className: "iui-table-cell", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/list/List.tsx
-var import_jsx_runtime35 = require("react/jsx-runtime");
+var import_jsx_runtime37 = require("react/jsx-runtime");
 function List({ children, style, marker }) {
   const listStyle = { ...style, listStyleType: marker === "none" ? "none" : marker === "disc" ? "disc" : void 0 };
-  return marker === "disc" ? /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("ul", { className: "iui-list", style: listStyle, children }) : /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("ol", { className: "iui-list", style: listStyle, children });
+  return marker === "disc" ? /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("ul", { className: "iui-list", style: listStyle, children }) : /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("ol", { className: "iui-list", style: listStyle, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/list-item/ListItem.tsx
-var import_jsx_runtime36 = require("react/jsx-runtime");
+var import_jsx_runtime38 = require("react/jsx-runtime");
 function ListItem({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("li", { style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("li", { style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/popover/Popover.tsx
-var import_jsx_runtime37 = require("react/jsx-runtime");
+var import_jsx_runtime39 = require("react/jsx-runtime");
 function Popover({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("details", { className: "iui-popover", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("details", { className: "iui-popover", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/popover-trigger/PopoverTrigger.tsx
-var import_jsx_runtime38 = require("react/jsx-runtime");
+var import_jsx_runtime40 = require("react/jsx-runtime");
 function PopoverTrigger({ children }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("summary", { children });
+  return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("summary", { children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/popover-content/PopoverContent.tsx
-var import_jsx_runtime39 = require("react/jsx-runtime");
+var import_jsx_runtime41 = require("react/jsx-runtime");
 function PopoverContent({ children, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("div", { className: "iui-popover-content", style, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("div", { className: "iui-popover-content", style, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/layout/carousel/Carousel.tsx
-var import_react4 = __toESM(require("react"), 1);
-var import_jsx_runtime40 = require("react/jsx-runtime");
+var import_react5 = __toESM(require("react"), 1);
+var import_jsx_runtime42 = require("react/jsx-runtime");
 function Carousel({ children, activeIndex = 0, onChange, style }) {
-  const items = import_react4.default.Children.toArray(children), index2 = Math.max(0, Math.min(items.length - 1, Math.trunc(activeIndex)));
-  return /* @__PURE__ */ (0, import_jsx_runtime40.jsxs)("div", { className: "iui-carousel", style, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("button", { type: "button", "aria-label": "\u4E0A\u4E00\u9879", disabled: index2 <= 0, onClick: () => onChange?.(index2 - 1), children: "\u2039" }),
-    /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("div", { children: items[index2] }),
-    /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("button", { type: "button", "aria-label": "\u4E0B\u4E00\u9879", disabled: index2 >= items.length - 1, onClick: () => onChange?.(index2 + 1), children: "\u203A" })
+  const items = import_react5.default.Children.toArray(children), index2 = Math.max(0, Math.min(items.length - 1, Math.trunc(activeIndex)));
+  return /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)("div", { className: "iui-carousel", style, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("button", { type: "button", "aria-label": "\u4E0A\u4E00\u9879", disabled: index2 <= 0, onClick: () => onChange?.(index2 - 1), children: "\u2039" }),
+    /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("div", { children: items[index2] }),
+    /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("button", { type: "button", "aria-label": "\u4E0B\u4E00\u9879", disabled: index2 >= items.length - 1, onClick: () => onChange?.(index2 + 1), children: "\u203A" })
   ] });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/button/Button.tsx
-var import_jsx_runtime41 = require("react/jsx-runtime");
+var import_jsx_runtime43 = require("react/jsx-runtime");
 function Button({ children, style, onClick, disabled = false, variant, block = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)("button", { type: "button", className: `iui-button${variant === "ghost" || variant === "outline" ? ` iui-${variant}` : ""}`, style: { ...style, width: block ? "100%" : style?.width }, onClick, disabled, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("button", { type: "button", className: `iui-button${variant === "ghost" || variant === "outline" ? ` iui-${variant}` : ""}`, style: { ...style, width: block ? "100%" : style?.width }, onClick, disabled, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/pressable/Pressable.tsx
-var import_jsx_runtime42 = require("react/jsx-runtime");
+var import_jsx_runtime44 = require("react/jsx-runtime");
 function Pressable({ children, style, onClick, disabled = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("button", { type: "button", className: "iui-pressable", style, onClick, disabled, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("button", { type: "button", className: "iui-pressable", style, onClick, disabled, children });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/input/Input.tsx
-var import_jsx_runtime43 = require("react/jsx-runtime");
+var import_jsx_runtime45 = require("react/jsx-runtime");
 function Input({ value, onChange, placeholder = "", style, disabled = false, number: number3 = false, block = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("input", { className: "iui-field", type: number3 ? "number" : "text", value, onChange: (e) => onChange?.(e.target.value), placeholder, style: { ...style, width: block ? "100%" : style?.width }, disabled });
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("input", { className: "iui-field", type: number3 ? "number" : "text", value, onChange: (e) => onChange?.(e.target.value), placeholder, style: { ...style, width: block ? "100%" : style?.width }, disabled });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/textarea/Textarea.tsx
-var import_jsx_runtime44 = require("react/jsx-runtime");
+var import_jsx_runtime46 = require("react/jsx-runtime");
 function Textarea({ value, onChange, placeholder = "", style, disabled = false, rows = 3, block = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("textarea", { className: "iui-field", value, onChange: (e) => onChange?.(e.target.value), placeholder, rows: Math.max(1, Math.min(12, rows)), style: { ...style, width: block ? "100%" : style?.width }, disabled });
+  return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("textarea", { className: "iui-field", value, onChange: (e) => onChange?.(e.target.value), placeholder, rows: Math.max(1, Math.min(12, rows)), style: { ...style, width: block ? "100%" : style?.width }, disabled });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/select/Select.tsx
-var import_jsx_runtime45 = require("react/jsx-runtime");
+var import_jsx_runtime47 = require("react/jsx-runtime");
 function Select({ value, onChange, options = [], style, disabled = false, block = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("select", { className: "iui-field", value, onChange: (e) => onChange?.(e.target.value), style: { ...style, width: block ? "100%" : style?.width }, disabled, children: options.map((o, i) => /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("option", { value: o.value, children: o.label }, `${o.value}-${i}`)) });
+  return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("select", { className: "iui-field", value, onChange: (e) => onChange?.(e.target.value), style: { ...style, width: block ? "100%" : style?.width }, disabled, children: options.map((o, i) => /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("option", { value: o.value, children: o.label }, `${o.value}-${i}`)) });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/checkbox/Checkbox.tsx
-var import_jsx_runtime46 = require("react/jsx-runtime");
+var import_jsx_runtime48 = require("react/jsx-runtime");
 function Checkbox({ children, checked, onChange, disabled = false, lineThrough = false, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("label", { className: "iui-check", style, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("input", { type: "checkbox", checked, onChange: (e) => onChange?.(e.target.checked), disabled }),
-    /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("span", { style: { textDecoration: checked && lineThrough ? "line-through" : void 0 }, children })
+  return /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("label", { className: "iui-check", style, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("input", { type: "checkbox", checked, onChange: (e) => onChange?.(e.target.checked), disabled }),
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("span", { style: { textDecoration: checked && lineThrough ? "line-through" : void 0 }, children })
   ] });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/shared.tsx
-var import_react5 = require("react");
-var RadioContext = (0, import_react5.createContext)({ value: void 0 });
+var import_react6 = require("react");
+var RadioContext = (0, import_react6.createContext)({ value: void 0 });
 
 // vendor/open-intelligent-ui/ui/components/interaction/radio-group/RadioGroup.tsx
-var import_jsx_runtime47 = require("react/jsx-runtime");
+var import_jsx_runtime49 = require("react/jsx-runtime");
 function RadioGroup({ children, value, onChange, direction = "row", style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(RadioContext.Provider, { value: { value, onChange }, children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: `iui-radio-group${direction === "col" ? " vertical" : ""}`, style, children }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(RadioContext.Provider, { value: { value, onChange }, children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: `iui-radio-group${direction === "col" ? " vertical" : ""}`, style, children }) });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/radio/Radio.tsx
-var import_react6 = require("react");
-var import_jsx_runtime48 = require("react/jsx-runtime");
+var import_react7 = require("react");
+var import_jsx_runtime50 = require("react/jsx-runtime");
 function Radio({ children, value, disabled = false, style }) {
-  const group = (0, import_react6.useContext)(RadioContext);
-  return /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("label", { className: "iui-check", style, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("input", { type: "radio", checked: group.value === value, onChange: () => group.onChange?.(value), disabled }),
-    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("span", { children })
+  const group = (0, import_react7.useContext)(RadioContext);
+  return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("label", { className: "iui-check", style, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("input", { type: "radio", checked: group.value === value, onChange: () => group.onChange?.(value), disabled }),
+    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("span", { children })
   ] });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/slider/Slider.tsx
-var import_jsx_runtime49 = require("react/jsx-runtime");
+var import_jsx_runtime51 = require("react/jsx-runtime");
 function Slider({ value, onChange, min = 0, max = 100, step = 1, disabled = false, style }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("input", { className: "iui-slider", type: "range", min, max, step, value, onChange: (e) => onChange?.(Number(e.target.value)), disabled, style });
+  return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("input", { className: "iui-slider", type: "range", min, max, step, value, onChange: (e) => onChange?.(Number(e.target.value)), disabled, style });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/date-picker/DatePicker.tsx
-var import_jsx_runtime50 = require("react/jsx-runtime");
+var import_jsx_runtime52 = require("react/jsx-runtime");
 function DatePicker({ value, onChange, disabled = false, style, block = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("input", { className: "iui-field", type: "date", value, onChange: (e) => onChange?.(e.target.value), disabled, style: { ...style, width: block ? "100%" : style?.width } });
+  return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("input", { className: "iui-field", type: "date", value, onChange: (e) => onChange?.(e.target.value), disabled, style: { ...style, width: block ? "100%" : style?.width } });
 }
 
 // vendor/open-intelligent-ui/ui/components/interaction/segmented-control/SegmentedControl.tsx
-var import_jsx_runtime51 = require("react/jsx-runtime");
+var import_jsx_runtime53 = require("react/jsx-runtime");
 function SegmentedControl({ value, onChange, options = [], disabled = false, style, block = false }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("div", { className: "iui-segments", style: { ...style, width: block ? "100%" : style?.width }, children: options.map((o, i) => /* @__PURE__ */ (0, import_jsx_runtime51.jsx)("button", { type: "button", className: value === o.value ? "active" : "", onClick: () => onChange?.(o.value), disabled, children: o.label }, `${o.value}-${i}`)) });
+  return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("div", { className: "iui-segments", style: { ...style, width: block ? "100%" : style?.width }, children: options.map((o, i) => /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("button", { type: "button", className: value === o.value ? "active" : "", onClick: () => onChange?.(o.value), disabled, children: o.label }, `${o.value}-${i}`)) });
 }
 
 // vendor/open-intelligent-ui/ui/components/visualization/chart/Chart.tsx
-var import_jsx_runtime52 = require("react/jsx-runtime");
+var import_jsx_runtime54 = require("react/jsx-runtime");
 var colors = ["var(--iui-chart-1)", "var(--iui-chart-2)", "var(--iui-chart-3)", "var(--iui-chart-4)"];
 var num = (x) => {
   const v = Number(x);
@@ -22021,24 +22992,24 @@ var num = (x) => {
 };
 function Chart({ content: content3 }) {
   const c = content3;
-  if (!c || !Array.isArray(c.data) || !["line", "bar", "scatter", "pie"].includes(c.chartType)) return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "iui-unavailable", children: "\u56FE\u8868\u914D\u7F6E\u65E0\u6548" });
+  if (!c || !Array.isArray(c.data) || !["line", "bar", "scatter", "pie"].includes(c.chartType)) return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "iui-unavailable", children: "\u56FE\u8868\u914D\u7F6E\u65E0\u6548" });
   const data2 = c.data.slice(0, 100), series = (c.series || []).slice(0, 4);
-  if (!data2.length) return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "iui-unavailable", children: "\u56FE\u8868\u65E0\u6570\u636E" });
+  if (!data2.length) return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "iui-unavailable", children: "\u56FE\u8868\u65E0\u6570\u636E" });
   const width = 600, height = 240, left = 42, right = 18, top = 16, bottom = 40, iw = width - left - right, ih = height - top - bottom;
   if (c.chartType === "pie") {
     const key = c.valueKey || series[0]?.dataKey || "value", vals = data2.map((d) => Math.max(0, num(d[key]))), sum = vals.reduce((a, b) => a + b, 0);
-    if (!sum) return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "iui-unavailable", children: "\u997C\u56FE\u6570\u503C\u65E0\u6548" });
+    if (!sum) return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "iui-unavailable", children: "\u997C\u56FE\u6570\u503C\u65E0\u6548" });
     let angle = -Math.PI / 2;
     const paths2 = vals.map((v, i) => {
       const a = angle, b = angle + v / sum * Math.PI * 2;
       angle = b;
       const x1 = 300 + Math.cos(a) * 90, y1 = 112 + Math.sin(a) * 90, x2 = 300 + Math.cos(b) * 90, y2 = 112 + Math.sin(b) * 90;
-      return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("path", { d: v === sum ? `M 300 22 A 90 90 0 1 1 299.99 22 Z` : `M 300 112 L ${x1} ${y1} A 90 90 0 ${b - a > Math.PI ? 1 : 0} 1 ${x2} ${y2} Z`, fill: colors[i % colors.length] }, i);
+      return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("path", { d: v === sum ? `M 300 22 A 90 90 0 1 1 299.99 22 Z` : `M 300 112 L ${x1} ${y1} A 90 90 0 ${b - a > Math.PI ? 1 : 0} 1 ${x2} ${y2} Z`, fill: colors[i % colors.length] }, i);
     });
-    return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { className: "iui-chart", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("svg", { viewBox: "0 0 600 230", role: "img", "aria-label": "\u997C\u56FE", children: paths2 }),
-      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "iui-legend", children: data2.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("span", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("i", { style: { background: colors[i % colors.length] } }),
+    return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("div", { className: "iui-chart", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("svg", { viewBox: "0 0 600 230", role: "img", "aria-label": "\u997C\u56FE", children: paths2 }),
+      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "iui-legend", children: data2.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("span", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("i", { style: { background: colors[i % colors.length] } }),
         String(d[c.nameKey || "name"] ?? i),
         ": ",
         vals[i]
@@ -22048,9 +23019,9 @@ function Chart({ content: content3 }) {
   const ys = series.flatMap((s) => data2.map((d) => num(d[s.dataKey]))), min = typeof c.yAxisMin === "number" ? c.yAxisMin : Math.min(0, ...ys), max = typeof c.yAxisMax === "number" ? c.yAxisMax : Math.max(1, ...ys), range = Math.max(1, max - min);
   const y = (v) => top + ih - (v - min) / range * ih, x = (i) => left + (data2.length === 1 ? iw / 2 : i * iw / (data2.length - 1));
   const suffix = series.length && series.every((s) => s.valueSuffix === series[0].valueSuffix) ? series[0].valueSuffix || "" : "";
-  const ticks = [0, 0.25, 0.5, 0.75, 1].map((f, i) => /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("g", { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("line", { x1: left, y1: top + ih * (1 - f), x2: width - right, y2: top + ih * (1 - f), stroke: "var(--iui-border)" }),
-    /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("text", { x: left - 7, y: top + ih * (1 - f) + 4, textAnchor: "end", fontSize: "11", fill: "var(--iui-text-muted)", children: [
+  const ticks = [0, 0.25, 0.5, 0.75, 1].map((f, i) => /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("g", { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("line", { x1: left, y1: top + ih * (1 - f), x2: width - right, y2: top + ih * (1 - f), stroke: "var(--iui-border)" }),
+    /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("text", { x: left - 7, y: top + ih * (1 - f) + 4, textAnchor: "end", fontSize: "11", fill: "var(--iui-text-muted)", children: [
       Math.round(min + range * f),
       suffix
     ] })
@@ -22059,23 +23030,23 @@ function Chart({ content: content3 }) {
     const color3 = colors[si % colors.length];
     if (c.chartType === "bar") return data2.map((d, i) => {
       const bw = iw / data2.length / Math.max(1, series.length + 0.5), xx = left + i * iw / data2.length + si * bw + bw * 0.2, yy = y(num(d[s.dataKey]));
-      return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("rect", { x: xx, y: Math.min(yy, y(0)), width: bw * 0.84, height: Math.abs(y(0) - yy), rx: "3", fill: color3 }, `${si}-${i}`);
+      return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("rect", { x: xx, y: Math.min(yy, y(0)), width: bw * 0.84, height: Math.abs(y(0) - yy), rx: "3", fill: color3 }, `${si}-${i}`);
     });
-    if (c.chartType === "scatter") return data2.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("circle", { cx: left + (num(d[c.xKey || "x"]) - Math.min(...data2.map((z) => num(z[c.xKey || "x"])))) / (Math.max(...data2.map((z) => num(z[c.xKey || "x"]))) - Math.min(...data2.map((z) => num(z[c.xKey || "x"]))) || 1) * iw, cy: y(num(d[s.dataKey])), r: "5", fill: color3 }, `${si}-${i}`));
-    return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("g", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("polyline", { points: data2.map((d, i) => `${x(i)},${y(num(d[s.dataKey]))}`).join(" "), fill: "none", stroke: color3, strokeWidth: "3", strokeLinejoin: "round" }),
-      data2.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("circle", { cx: x(i), cy: y(num(d[s.dataKey])), r: "4", fill: color3 }, i))
+    if (c.chartType === "scatter") return data2.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("circle", { cx: left + (num(d[c.xKey || "x"]) - Math.min(...data2.map((z) => num(z[c.xKey || "x"])))) / (Math.max(...data2.map((z) => num(z[c.xKey || "x"]))) - Math.min(...data2.map((z) => num(z[c.xKey || "x"]))) || 1) * iw, cy: y(num(d[s.dataKey])), r: "5", fill: color3 }, `${si}-${i}`));
+    return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("g", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("polyline", { points: data2.map((d, i) => `${x(i)},${y(num(d[s.dataKey]))}`).join(" "), fill: "none", stroke: color3, strokeWidth: "3", strokeLinejoin: "round" }),
+      data2.map((d, i) => /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("circle", { cx: x(i), cy: y(num(d[s.dataKey])), r: "4", fill: color3 }, i))
     ] }, si);
   });
-  return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { className: "iui-chart", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${c.chartType} \u56FE\u8868`, children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("div", { className: "iui-chart", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${c.chartType} \u56FE\u8868`, children: [
       ticks,
       marks,
-      data2.map((d, i) => ({ d, i })).filter(({ i }) => i % Math.max(1, Math.ceil(data2.length / 8)) === 0).map(({ d, i }) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("text", { x: c.chartType === "bar" ? left + (i + 0.5) * iw / data2.length : x(i), y: height - 10, textAnchor: "middle", fontSize: "11", fill: "var(--iui-text-muted)", children: String(d[c.xKey || "x"] ?? "").slice(0, 12) }, i))
+      data2.map((d, i) => ({ d, i })).filter(({ i }) => i % Math.max(1, Math.ceil(data2.length / 8)) === 0).map(({ d, i }) => /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("text", { x: c.chartType === "bar" ? left + (i + 0.5) * iw / data2.length : x(i), y: height - 10, textAnchor: "middle", fontSize: "11", fill: "var(--iui-text-muted)", children: String(d[c.xKey || "x"] ?? "").slice(0, 12) }, i))
     ] }),
-    c.xAxisLabel ? /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "iui-axis-label", children: c.xAxisLabel }) : null,
-    /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("div", { className: "iui-legend", children: series.map((s, i) => /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("span", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("i", { style: { background: colors[i % colors.length] } }),
+    c.xAxisLabel ? /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "iui-axis-label", children: c.xAxisLabel }) : null,
+    /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "iui-legend", children: series.map((s, i) => /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("span", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("i", { style: { background: colors[i % colors.length] } }),
       s.label || s.dataKey,
       s.valueSuffix ? ` (${s.valueSuffix})` : ""
     ] }, i)) })
@@ -22083,25 +23054,25 @@ function Chart({ content: content3 }) {
 }
 
 // vendor/open-intelligent-ui/ui/components/media/unconfigured-host/UnconfiguredHost.tsx
-var import_jsx_runtime53 = require("react/jsx-runtime");
+var import_jsx_runtime55 = require("react/jsx-runtime");
 function UnconfiguredHost({ name: name3 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("div", { className: "iui-unavailable", "data-component": name3, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("strong", { children: name3 }),
+  return /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("div", { className: "iui-unavailable", "data-component": name3, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("strong", { children: name3 }),
     " \xB7 \u5BBF\u4E3B\u672A\u914D\u7F6E\u3002\u9700\u7531\u5BBF\u4E3B\u63D0\u4F9B\u53EF\u4FE1\u8D44\u6E90\u6216\u6388\u6743\u64CD\u4F5C\u3002"
   ] });
 }
 
 // vendor/open-intelligent-ui/ui/components/media/unsupported-component/UnsupportedComponent.tsx
-var import_jsx_runtime54 = require("react/jsx-runtime");
+var import_jsx_runtime56 = require("react/jsx-runtime");
 function UnsupportedComponent({ name: name3 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)("div", { className: "iui-unavailable", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("div", { className: "iui-unavailable", children: [
     name3,
     " \xB7 v0.1 \u672A\u652F\u6301"
   ] });
 }
 
 // vendor/open-intelligent-ui/ui/components/media/app-block/AppBlock.tsx
-var import_react7 = require("react");
+var import_react8 = require("react");
 
 // vendor/open-intelligent-ui/ui/components/media/app-block/sandbox.ts
 var appBlockCsp = "default-src 'none'; base-uri 'none'; form-action 'none'; connect-src 'none'; img-src data:; script-src 'unsafe-inline'; style-src 'unsafe-inline'; font-src 'none'; media-src 'none'; object-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'";
@@ -22125,14 +23096,14 @@ function isolatedAppDocument(approvedHtml) {
 }
 
 // vendor/open-intelligent-ui/ui/components/media/app-block/AppBlock.tsx
-var import_jsx_runtime55 = require("react/jsx-runtime");
+var import_jsx_runtime57 = require("react/jsx-runtime");
 function AppBlock({ request, adapter }) {
   const sourceKey = `${request.messageId}\0${request.id}\0${request.html}`;
-  const latest = (0, import_react7.useRef)(sourceKey);
+  const latest = (0, import_react8.useRef)(sourceKey);
   latest.current = sourceKey;
-  const attempt = (0, import_react7.useRef)(0);
-  const [session, setSession] = (0, import_react7.useState)(null);
-  const [status, setStatus] = (0, import_react7.useState)("\u7B49\u5F85\u660E\u786E\u70B9\u51FB\u8FD0\u884C");
+  const attempt = (0, import_react8.useRef)(0);
+  const [session, setSession] = (0, import_react8.useState)(null);
+  const [status, setStatus] = (0, import_react8.useState)("\u7B49\u5F85\u660E\u786E\u70B9\u51FB\u8FD0\u884C");
   const runLabel = request.id === "tetris-game-2026" ? "\u8FD0\u884C\u4FC4\u7F57\u65AF\u65B9\u5757" : request.id === "paint-demo-01" ? "\u8FD0\u884C\u4EA4\u4E92\u5F0F\u753B\u677F" : "\u8FD0\u884C\u5DF2\u5BA1\u9605\u5185\u5BB9";
   const live = session?.sourceKey === sourceKey ? session : null;
   const run = async () => {
@@ -22171,29 +23142,29 @@ function AppBlock({ request, adapter }) {
     setSession({ ...live, sequence: live.sequence + 1 });
     setStatus("\u5DF2\u91CD\u542F\u9694\u79BB\u5B9E\u4F8B");
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("section", { className: `iui-app-block ${request.id === "paint-demo-01" ? "is-paint" : ""}`, "aria-label": `AppBlock ${request.title || request.id}`, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("div", { className: "iui-app-block-head", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("strong", { children: request.title || "AppBlock" }),
-        /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("small", { children: "\u672C\u5730\u53D7\u9650\u5BBF\u4E3B\u6F14\u793A \xB7 \u9700\u624B\u52A8\u8FD0\u884C" })
+  return /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("section", { className: `iui-app-block ${request.id === "paint-demo-01" ? "is-paint" : ""}`, "aria-label": `AppBlock ${request.title || request.id}`, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("div", { className: "iui-app-block-head", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("strong", { children: request.title || "AppBlock" }),
+        /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("small", { children: "\u672C\u5730\u53D7\u9650\u5BBF\u4E3B\u6F14\u793A \xB7 \u9700\u624B\u52A8\u8FD0\u884C" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("div", { className: "iui-app-block-actions", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("button", { type: "button", onClick: () => void run(), disabled: !request.html, children: live ? "\u91CD\u65B0\u6838\u5BF9\u5E76\u8FD0\u884C" : runLabel }),
-        /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("button", { type: "button", onClick: stop, disabled: !live, children: "\u505C\u6B62" }),
-        /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("button", { type: "button", onClick: restart, disabled: !live, children: "\u91CD\u542F" })
+      /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("div", { className: "iui-app-block-actions", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("button", { type: "button", onClick: () => void run(), disabled: !request.html, children: live ? "\u91CD\u65B0\u6838\u5BF9\u5E76\u8FD0\u884C" : runLabel }),
+        /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("button", { type: "button", onClick: stop, disabled: !live, children: "\u505C\u6B62" }),
+        /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("button", { type: "button", onClick: restart, disabled: !live, children: "\u91CD\u542F" })
       ] })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("p", { className: "iui-app-block-status", role: "status", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("p", { className: "iui-app-block-status", role: "status", children: [
       live ? "\u25CF " : "",
       live ? status : session ? "\u5185\u5BB9\u5DF2\u53D8\u5316\uFF0C\u539F\u5B9E\u4F8B\u5DF2\u9694\u79BB\u505C\u6B62" : status
     ] }),
-    live ? /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("iframe", { title: `${request.title || "AppBlock"} \u9694\u79BB\u5E94\u7528`, sandbox: "allow-scripts", referrerPolicy: "no-referrer", srcDoc: live.document }, `${request.messageId}:${live.sequence}`) : /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("div", { className: "iui-app-block-empty", children: "\u660E\u786E\u70B9\u51FB\u8FD0\u884C\u540E\u624D\u4F1A\u521B\u5EFA\u72EC\u7ACB\u6C99\u7BB1\u3002\u6539\u52A8\u6E90\u7801\u540E\u9700\u91CD\u65B0\u5BA1\u9605\u3002" })
+    live ? /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("iframe", { title: `${request.title || "AppBlock"} \u9694\u79BB\u5E94\u7528`, sandbox: "allow-scripts", referrerPolicy: "no-referrer", srcDoc: live.document }, `${request.messageId}:${live.sequence}`) : /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("div", { className: "iui-app-block-empty", children: "\u660E\u786E\u70B9\u51FB\u8FD0\u884C\u540E\u624D\u4F1A\u521B\u5EFA\u72EC\u7ACB\u6C99\u7BB1\u3002\u6539\u52A8\u6E90\u7801\u540E\u9700\u91CD\u65B0\u5BA1\u9605\u3002" })
   ] });
 }
 
 // vendor/open-intelligent-ui/ui/components/media/async-image/AsyncImage.tsx
-var import_react8 = require("react");
-var import_jsx_runtime56 = require("react/jsx-runtime");
+var import_react9 = require("react");
+var import_jsx_runtime58 = require("react/jsx-runtime");
 function safeImageSource(src) {
   if (/^data:image\/(?:png|jpeg|webp);base64,[a-z0-9+/=]+$/i.test(src) && src.length <= 4e6) return src;
   try {
@@ -22222,8 +23193,8 @@ function ratio(value) {
   return `${Number(match[1])} / ${Number(match[2])}`;
 }
 function AsyncImage({ query, aspectRatio, width, messageId, adapter }) {
-  const [state, setState] = (0, import_react8.useState)({ phase: "resolving" });
-  (0, import_react8.useEffect)(() => {
+  const [state, setState] = (0, import_react9.useState)({ phase: "resolving" });
+  (0, import_react9.useEffect)(() => {
     if (!adapter.resolveResource) return;
     let active = true;
     if (typeof query !== "string" || !query.trim()) {
@@ -22244,10 +23215,10 @@ function AsyncImage({ query, aspectRatio, width, messageId, adapter }) {
       active = false;
     };
   }, [adapter, query, messageId]);
-  if (!adapter.resolveResource) return /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(UnconfiguredHost, { name: "AsyncImage" });
+  if (!adapter.resolveResource) return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(UnconfiguredHost, { name: "AsyncImage" });
   const style = { width: safeCssSize(width) ?? "100%", aspectRatio: ratio(aspectRatio) };
-  return /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("figure", { className: "iui-async-image", style, "data-image-status": state.phase, children: [
-    state.image && /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)("figure", { className: "iui-async-image", style, "data-image-status": state.phase, children: [
+    state.image && /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(
       "img",
       {
         src: state.image.src,
@@ -22258,47 +23229,47 @@ function AsyncImage({ query, aspectRatio, width, messageId, adapter }) {
         onError: () => setState({ phase: "error", message: "\u56FE\u7247\u52A0\u8F7D\u5931\u8D25", image: state.image })
       }
     ),
-    state.phase !== "ready" && /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("div", { className: "iui-image-status", role: "status", children: state.phase === "error" ? `${state.image?.alt ?? String(query ?? "")}\uFF1A${state.message}` : "\u56FE\u7247\u52A0\u8F7D\u4E2D\u2026" })
+    state.phase !== "ready" && /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("div", { className: "iui-image-status", role: "status", children: state.phase === "error" ? `${state.image?.alt ?? String(query ?? "")}\uFF1A${state.message}` : "\u56FE\u7247\u52A0\u8F7D\u4E2D\u2026" })
   ] });
 }
 function AsyncImageGroup({ queries, aspectRatio, layout, messageId, adapter }) {
-  const [index2, setIndex] = (0, import_react8.useState)(0);
-  if (!adapter.resolveResource) return /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(UnconfiguredHost, { name: "AsyncImageGroup" });
+  const [index2, setIndex] = (0, import_react9.useState)(0);
+  if (!adapter.resolveResource) return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(UnconfiguredHost, { name: "AsyncImageGroup" });
   if (!Array.isArray(queries) || !queries.length || queries.length > 8 || queries.some((query) => typeof query !== "string" || !query.trim())) {
-    return /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("div", { className: "iui-unavailable", children: "AsyncImageGroup \xB7 \u56FE\u7247\u67E5\u8BE2\u9700\u4E3A 1\u20138 \u4E2A\u975E\u7A7A\u5B57\u7B26\u4E32" });
+    return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("div", { className: "iui-unavailable", children: "AsyncImageGroup \xB7 \u56FE\u7247\u67E5\u8BE2\u9700\u4E3A 1\u20138 \u4E2A\u975E\u7A7A\u5B57\u7B26\u4E32" });
   }
-  if (layout === "carousel") return /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("div", { className: "iui-image-carousel", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(AsyncImage, { query: queries[index2 % queries.length], aspectRatio, messageId, adapter }, queries[index2 % queries.length]),
-    /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("div", { className: "iui-image-controls", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("button", { type: "button", onClick: () => setIndex((value) => (value + queries.length - 1) % queries.length), "aria-label": "\u4E0A\u4E00\u5F20\u56FE\u7247", children: "\u2039" }),
-      /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("span", { children: [
+  if (layout === "carousel") return /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)("div", { className: "iui-image-carousel", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(AsyncImage, { query: queries[index2 % queries.length], aspectRatio, messageId, adapter }, queries[index2 % queries.length]),
+    /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)("div", { className: "iui-image-controls", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("button", { type: "button", onClick: () => setIndex((value) => (value + queries.length - 1) % queries.length), "aria-label": "\u4E0A\u4E00\u5F20\u56FE\u7247", children: "\u2039" }),
+      /* @__PURE__ */ (0, import_jsx_runtime58.jsxs)("span", { children: [
         index2 % queries.length + 1,
         " / ",
         queries.length
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("button", { type: "button", onClick: () => setIndex((value) => (value + 1) % queries.length), "aria-label": "\u4E0B\u4E00\u5F20\u56FE\u7247", children: "\u203A" })
+      /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("button", { type: "button", onClick: () => setIndex((value) => (value + 1) % queries.length), "aria-label": "\u4E0B\u4E00\u5F20\u56FE\u7247", children: "\u203A" })
     ] })
   ] });
-  return /* @__PURE__ */ (0, import_jsx_runtime56.jsx)("div", { className: "iui-image-group", children: queries.map((query, index3) => /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(AsyncImage, { query, aspectRatio, messageId, adapter }, `${query}:${index3}`)) });
+  return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("div", { className: "iui-image-group", children: queries.map((query, index3) => /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(AsyncImage, { query, aspectRatio, messageId, adapter }, `${query}:${index3}`)) });
 }
 
 // vendor/open-intelligent-ui/ui/renderer/markdown.tsx
-var import_jsx_runtime57 = require("react/jsx-runtime");
+var import_jsx_runtime59 = require("react/jsx-runtime");
 function renderMarkdownText(text8) {
   const result = [], pattern = /(```[\s\S]*?```|~~~[\s\S]*?~~~|\*\*[^*]+\*\*|~~[^~]+~~|`[^`]+`|\*[^*]+\*|\[[^\]]+\]\([^)]+\))/g;
   let last = 0, m, index2 = 0;
   while (m = pattern.exec(text8)) {
     if (m.index > last) result.push(text8.slice(last, m.index));
     const token = m[0], key = index2++;
-    if (token.startsWith("```") || token.startsWith("~~~")) result.push(/* @__PURE__ */ (0, import_jsx_runtime57.jsx)("pre", { className: "iui-code", children: /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("code", { children: token.slice(3, -3).replace(/^[^\n]*\n/, "") }) }, key));
-    else if (token.startsWith("**")) result.push(/* @__PURE__ */ (0, import_jsx_runtime57.jsx)("strong", { children: token.slice(2, -2) }, key));
-    else if (token.startsWith("~~")) result.push(/* @__PURE__ */ (0, import_jsx_runtime57.jsx)("s", { children: token.slice(2, -2) }, key));
-    else if (token.startsWith("`")) result.push(/* @__PURE__ */ (0, import_jsx_runtime57.jsx)("code", { children: token.slice(1, -1) }, key));
-    else if (token.startsWith("*")) result.push(/* @__PURE__ */ (0, import_jsx_runtime57.jsx)("em", { children: token.slice(1, -1) }, key));
+    if (token.startsWith("```") || token.startsWith("~~~")) result.push(/* @__PURE__ */ (0, import_jsx_runtime59.jsx)("pre", { className: "iui-code", children: /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("code", { children: token.slice(3, -3).replace(/^[^\n]*\n/, "") }) }, key));
+    else if (token.startsWith("**")) result.push(/* @__PURE__ */ (0, import_jsx_runtime59.jsx)("strong", { children: token.slice(2, -2) }, key));
+    else if (token.startsWith("~~")) result.push(/* @__PURE__ */ (0, import_jsx_runtime59.jsx)("s", { children: token.slice(2, -2) }, key));
+    else if (token.startsWith("`")) result.push(/* @__PURE__ */ (0, import_jsx_runtime59.jsx)("code", { children: token.slice(1, -1) }, key));
+    else if (token.startsWith("*")) result.push(/* @__PURE__ */ (0, import_jsx_runtime59.jsx)("em", { children: token.slice(1, -1) }, key));
     else {
       const x = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(token);
       const url = x && safeUrl(x[2]);
-      result.push(url ? /* @__PURE__ */ (0, import_jsx_runtime57.jsx)("a", { href: url, target: "_blank", rel: "noopener noreferrer", children: x[1] }, key) : x?.[1] || token);
+      result.push(url ? /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("a", { href: url, target: "_blank", rel: "noopener noreferrer", children: x[1] }, key) : x?.[1] || token);
     }
     last = pattern.lastIndex;
   }
@@ -22307,7 +23278,7 @@ function renderMarkdownText(text8) {
 }
 
 // vendor/open-intelligent-ui/ui/renderer/Renderer.tsx
-var import_jsx_runtime58 = require("react/jsx-runtime");
+var import_jsx_runtime60 = require("react/jsx-runtime");
 var get = (a, scope, runtime) => {
   if (!a) return void 0;
   if (a.kind === "literal") return a.value;
@@ -22357,16 +23328,16 @@ function resolvedStyle(read) {
   return style;
 }
 function UIRenderer({ runtime, showPlainText = false, targets, themeMode = "light" }) {
-  const [, revision] = (0, import_react9.useState)(0), scope = runtime.scope();
+  const [, revision] = (0, import_react10.useState)(0), scope = runtime.scope();
   const force = () => revision((v) => v + 1);
-  const render = (n, key, env2 = scope) => {
-    if (n.kind === "text") return showPlainText || n.text.trim() ? /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(import_react9.default.Fragment, { children: renderMarkdownText(n.text) }, key) : null;
+  const render2 = (n, key, env2 = scope) => {
+    if (n.kind === "text") return showPlainText || n.text.trim() ? /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(import_react10.default.Fragment, { children: renderMarkdownText(n.text) }, key) : null;
     if (n.kind === "expression") {
       try {
         const value = runtime.value(n.source, env2);
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(import_react9.default.Fragment, { children: value == null ? "" : String(value) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(import_react10.default.Fragment, { children: value == null ? "" : String(value) }, key);
       } catch (e) {
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("span", { className: "iui-error", title: String(e), children: "\u8868\u8FBE\u5F0F\u9519\u8BEF" }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("span", { className: "iui-error", title: String(e), children: "\u8868\u8FBE\u5F0F\u9519\u8BEF" }, key);
       }
     }
     if (n.kind === "if") {
@@ -22375,7 +23346,7 @@ function UIRenderer({ runtime, showPlainText = false, targets, themeMode = "ligh
         visible = !!runtime.value(n.test, env2);
       } catch {
       }
-      return visible ? /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(import_react9.default.Fragment, { children: n.children.map((c, i) => render(c, i, env2)) }, key) : null;
+      return visible ? /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(import_react10.default.Fragment, { children: n.children.map((c, i) => render2(c, i, env2)) }, key) : null;
     }
     if (n.kind === "each") {
       let values = [];
@@ -22384,23 +23355,23 @@ function UIRenderer({ runtime, showPlainText = false, targets, themeMode = "ligh
       } catch {
       }
       if (!Array.isArray(values)) return null;
-      return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(import_react9.default.Fragment, { children: values.slice(0, 100).map((v, i) => {
+      return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(import_react10.default.Fragment, { children: values.slice(0, 100).map((v, i) => {
         const local2 = { ...env2, [n.item]: v, ...n.index ? { [n.index]: i } : {} };
         const first = n.children.find((c) => c.kind === "element" && c.attributes.key);
         const stable = first?.kind === "element" ? String(get(first.attributes.key, local2, runtime) ?? i) : i;
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(import_react9.default.Fragment, { children: n.children.map((c, j) => render(c, j, local2)) }, stable);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(import_react10.default.Fragment, { children: n.children.map((c, j) => render2(c, j, local2)) }, stable);
       }) }, key);
     }
     const name3 = n.name, spec = byName.get(name3), p = (name4) => get(n.attributes[name4], env2, runtime), event = (name4) => n.attributes[name4]?.kind === "expression" ? String(n.attributes[name4].value) : void 0;
     const action = (source, value) => {
       if (source) void runtime.event(source, value, env2).then(force);
     };
-    if (!spec || spec.support === "unsupported") return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(UnsupportedComponent, { name: name3 }, key);
+    if (!spec || spec.support === "unsupported") return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(UnsupportedComponent, { name: name3 }, key);
     if (name3 === "AppBlock") {
       const literal2 = (key2) => n.attributes[key2]?.kind === "literal" && typeof n.attributes[key2].value === "string" ? String(n.attributes[key2].value) : void 0;
-      return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(AppBlock, { request: { messageId: runtime.document.messageId, id: literal2("app_block_id") || "", title: literal2("title"), html: n.rawContent || "" }, adapter: runtime.adapter }, key);
+      return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(AppBlock, { request: { messageId: runtime.document.messageId, id: literal2("app_block_id") || "", title: literal2("title"), html: n.rawContent || "" }, adapter: runtime.adapter }, key);
     }
-    if (name3 === "AsyncImage") return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(
+    if (name3 === "AsyncImage") return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
       AsyncImage,
       {
         query: p("query"),
@@ -22412,7 +23383,7 @@ function UIRenderer({ runtime, showPlainText = false, targets, themeMode = "ligh
       key
     );
     if (name3 === "AsyncImageGroup") {
-      return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(
+      return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
         AsyncImageGroup,
         {
           queries: p("query"),
@@ -22424,108 +23395,108 @@ function UIRenderer({ runtime, showPlainText = false, targets, themeMode = "ligh
         key
       );
     }
-    if (spec.support === "host") return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(UnconfiguredHost, { name: name3 }, key);
-    const kids = n.children.map((c, i) => render(c, i, env2));
+    if (spec.support === "host") return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(UnconfiguredHost, { name: name3 }, key);
+    const kids = n.children.map((c, i) => render2(c, i, env2));
     const style = resolvedStyle(p);
     switch (name3) {
       case "text":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Text, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Text, { style, children: kids }, key);
       case "title":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Title, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Title, { style, children: kids }, key);
       case "caption":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Caption, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Caption, { style, children: kids }, key);
       case "badge":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Badge, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Badge, { style, children: kids }, key);
       case "code":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Code, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Code, { style, children: kids }, key);
       case "math":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(MathText, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(MathText, { style, children: kids }, key);
       case "label":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Label, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Label, { style, children: kids }, key);
       case "bold":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Bold, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Bold, { style, children: kids }, key);
       case "italic":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Italic, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Italic, { style, children: kids }, key);
       case "underline":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Underline, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Underline, { style, children: kids }, key);
       case "strikethrough":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Strikethrough, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Strikethrough, { style, children: kids }, key);
       case "icon":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Icon2, { name: String(p("name") ?? "icon"), style, inline: !!p("inline") }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Icon2, { name: String(p("name") ?? "icon"), style, inline: !!p("inline") }, key);
       case "blockquote":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Blockquote, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Blockquote, { style, children: kids }, key);
       case "CodeBlock":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(CodeBlock, { style, children: n.rawContent ?? kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(CodeBlock, { style, children: n.rawContent ?? kids }, key);
       case "box":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Box, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Box, { style, children: kids }, key);
       case "row":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Row, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Row, { style, children: kids }, key);
       case "col":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Column, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Column, { style, children: kids }, key);
       case "flow":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Flow, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Flow, { style, children: kids }, key);
       case "card":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Card, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Card, { style, children: kids }, key);
       case "grid":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Grid, { style, columns: asNumber(p("columns"), 2), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Grid, { style, columns: asNumber(p("columns"), 2), children: kids }, key);
       case "grid-item":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(GridItem, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(GridItem, { style, children: kids }, key);
       case "flow-item":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(FlowItem, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(FlowItem, { style, children: kids }, key);
       case "carousel-item":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(CarouselItem, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(CarouselItem, { style, children: kids }, key);
       case "divider":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Divider, { style }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Divider, { style }, key);
       case "spacer":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Spacer, { style }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Spacer, { style }, key);
       case "table":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Table, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Table, { style, children: kids }, key);
       case "table-row":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(TableRow, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(TableRow, { style, children: kids }, key);
       case "table-cell":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(TableCell, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(TableCell, { style, children: kids }, key);
       case "list":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(List, { style, marker: String(p("marker") ?? ""), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(List, { style, marker: String(p("marker") ?? ""), children: kids }, key);
       case "list-item":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(ListItem, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(ListItem, { style, children: kids }, key);
       case "popover":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Popover, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Popover, { style, children: kids }, key);
       case "popover-trigger":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(PopoverTrigger, { children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(PopoverTrigger, { children: kids }, key);
       case "popover-content":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(PopoverContent, { style, children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(PopoverContent, { style, children: kids }, key);
       case "carousel":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Carousel, { style, activeIndex: asNumber(p("activeIndex"), 0), onChange: (v) => action(event("onChange"), v), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Carousel, { style, activeIndex: asNumber(p("activeIndex"), 0), onChange: (v) => action(event("onChange"), v), children: kids }, key);
       case "button":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Button, { style, variant: String(p("variant") ?? ""), block: !!p("block"), disabled: !!p("disabled"), onClick: () => action(event("onClick")), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Button, { style, variant: String(p("variant") ?? ""), block: !!p("block"), disabled: !!p("disabled"), onClick: () => action(event("onClick")), children: kids }, key);
       case "pressable":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Pressable, { style, disabled: !!p("disabled"), onClick: () => action(event("onClick")), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Pressable, { style, disabled: !!p("disabled"), onClick: () => action(event("onClick")), children: kids }, key);
       case "input":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Input, { style, value: String(p("value") ?? ""), placeholder: String(p("placeholder") ?? ""), number: p("inputType") === "number", block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Input, { style, value: String(p("value") ?? ""), placeholder: String(p("placeholder") ?? ""), number: p("inputType") === "number", block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
       case "textarea":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Textarea, { style, value: String(p("value") ?? ""), placeholder: String(p("placeholder") ?? ""), rows: asNumber(p("rows"), 3), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Textarea, { style, value: String(p("value") ?? ""), placeholder: String(p("placeholder") ?? ""), rows: asNumber(p("rows"), 3), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
       case "select":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Select, { style, value: String(p("value") ?? ""), options: asOptions(p("options")), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Select, { style, value: String(p("value") ?? ""), options: asOptions(p("options")), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
       case "checkbox":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Checkbox, { style, checked: !!p("checked"), lineThrough: !!p("lineThrough"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Checkbox, { style, checked: !!p("checked"), lineThrough: !!p("lineThrough"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v), children: kids }, key);
       case "radio-group":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(RadioGroup, { style, value: p("value"), direction: String(p("direction") ?? "row"), onChange: (v) => action(event("onChange"), v), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(RadioGroup, { style, value: p("value"), direction: String(p("direction") ?? "row"), onChange: (v) => action(event("onChange"), v), children: kids }, key);
       case "radio":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Radio, { style, value: p("value"), disabled: !!p("disabled"), children: kids }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Radio, { style, value: p("value"), disabled: !!p("disabled"), children: kids }, key);
       case "slider":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Slider, { style, min: asNumber(p("min"), 0), max: asNumber(p("max"), 100), step: asNumber(p("step"), 1), value: asNumber(p("value"), 0), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Slider, { style, min: asNumber(p("min"), 0), max: asNumber(p("max"), 100), step: asNumber(p("step"), 1), value: asNumber(p("value"), 0), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
       case "date-picker":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(DatePicker, { style, value: String(p("value") ?? ""), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(DatePicker, { style, value: String(p("value") ?? ""), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
       case "segmented-control":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(SegmentedControl, { style, value: p("value"), options: asOptions(p("options")), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(SegmentedControl, { style, value: p("value"), options: asOptions(p("options")), block: !!p("block"), disabled: !!p("disabled"), onChange: (v) => action(event("onChange"), v) }, key);
       case "Chart":
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(Chart, { content: p("content") }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Chart, { content: p("content") }, key);
       default:
-        return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(UnsupportedComponent, { name: name3 }, key);
+        return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(UnsupportedComponent, { name: name3 }, key);
     }
   };
-  if (targets) return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)(import_jsx_runtime58.Fragment, { children: runtime.document.children.map((node2, index2) => targets[index2] ? (0, import_react_dom.createPortal)(/* @__PURE__ */ (0, import_jsx_runtime58.jsx)(ThemeProvider, { name: "studio", mode: themeMode, children: /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("div", { className: "iui-root", children: render(node2, index2) }) }), targets[index2], index2) : null) });
-  return /* @__PURE__ */ (0, import_jsx_runtime58.jsx)("div", { className: "iui-root", children: runtime.document.children.map((n, i) => render(n, i)) });
+  if (targets) return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(import_jsx_runtime60.Fragment, { children: runtime.document.children.map((node2, index2) => targets[index2] ? (0, import_react_dom.createPortal)(/* @__PURE__ */ (0, import_jsx_runtime60.jsx)(ThemeProvider, { name: "studio", mode: themeMode, children: /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("div", { className: "iui-root", children: render2(node2, index2) }) }), targets[index2], index2) : null) });
+  return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("div", { className: "iui-root", children: runtime.document.children.map((n, i) => render2(n, i)) });
 }
 
 // src/adapters/iui.ts
@@ -22541,7 +23512,7 @@ var mixedRoots = /* @__PURE__ */ new Set([
   "carousel",
   "Chart"
 ]);
-var builtins = ["Math", "JSON", "GenUI", "Number", "String"];
+var builtins2 = ["Math", "JSON", "GenUI", "Number", "String"];
 var unfinished = /* @__PURE__ */ new Set([
   "unclosed_tag",
   "incomplete_tag",
@@ -22582,8 +23553,8 @@ function referencesReady(source, available) {
   return visit2(ast, available);
 }
 function validateRoot(node2, runtime, scope) {
-  const check = (source, env2, evaluate = true) => {
-    if (!referencesReady(source, /* @__PURE__ */ new Set([...Object.keys(env2), ...builtins])))
+  const check2 = (source, env2, evaluate = true) => {
+    if (!referencesReady(source, /* @__PURE__ */ new Set([...Object.keys(env2), ...builtins2])))
       throw new Error("\u8868\u8FBE\u5F0F\u5F15\u7528\u5C1A\u672A\u5B9A\u4E49\u7684\u503C\u6216\u5305\u542B\u4E0D\u652F\u6301\u7684\u8BED\u6CD5");
     return evaluate ? runtime.value(source, env2) : void 0;
   };
@@ -22591,15 +23562,15 @@ function validateRoot(node2, runtime, scope) {
     for (const item of nodes) {
       if (item.kind === "text") continue;
       if (item.kind === "expression") {
-        check(item.source, env2);
+        check2(item.source, env2);
         continue;
       }
       if (item.kind === "if") {
-        if (check(item.test, env2)) visit2(item.children, env2);
+        if (check2(item.test, env2)) visit2(item.children, env2);
         continue;
       }
       if (item.kind === "each") {
-        const values = check(item.source, env2);
+        const values = check2(item.source, env2);
         if (!Array.isArray(values)) throw new Error("\u5FAA\u73AF\u8868\u8FBE\u5F0F\u9700\u8981\u6570\u7EC4");
         for (const [index2, value] of values.slice(0, 100).entries())
           visit2(item.children, {
@@ -22611,7 +23582,7 @@ function validateRoot(node2, runtime, scope) {
       }
       for (const [name3, attribute] of Object.entries(item.attributes))
         if (attribute.kind === "expression")
-          check(String(attribute.value), env2, !/^on[A-Z]/.test(name3));
+          check2(String(attribute.value), env2, !/^on[A-Z]/.test(name3));
       visit2(item.children, env2);
     }
   };
@@ -22648,7 +23619,7 @@ function splitCanvasReply(source, messageId, streaming, recoveryDepth = 0) {
   });
   const declarations = [];
   const declarationErrors = /* @__PURE__ */ new Map();
-  const names = new Set(builtins);
+  const names = new Set(builtins2);
   const env2 = {
     Math: Object.freeze({}),
     JSON: Object.freeze({}),
@@ -22822,7 +23793,7 @@ function splitCanvasReply(source, messageId, streaming, recoveryDepth = 0) {
 var iui_styles_default = "/* Component styles: import from open-intelligent-ui/styles.css alongside the React UI package. */\n.iui-theme{min-height:100vh;background:var(--iui-background);color:var(--iui-text);font-family:var(--iui-font)}\n.iui-root{font-size:14px;line-height:1.55;white-space:pre-wrap}.iui-box,.iui-col,.iui-card,.iui-grid-item,.iui-flow-item,.iui-WritingBlock,.iui-carousel-item{display:flex;flex-direction:column;gap:8px;min-width:0}.iui-row,.iui-flow{display:flex;align-items:center;gap:8px;min-width:0}.iui-grid{display:grid;gap:8px}.iui-card{border:1px solid var(--iui-border);border-radius:12px;padding:14px}.iui-title{font-size:19px;line-height:1.2;letter-spacing:-.025em;margin:0;font-weight:750}.iui-caption{color:var(--iui-text-muted);font-size:12px}.iui-badge{display:inline-flex;background:var(--iui-surface-muted);border-radius:99px;padding:3px 9px;font-size:11px;font-weight:700;white-space:nowrap}.iui-label{font-size:12px;font-weight:700;color:var(--iui-text-muted)}.iui-icon{display:inline-block;min-width:1em;text-align:center;color:var(--iui-primary)}.iui-divider{border:0;border-top:1px solid var(--iui-border);width:100%;margin:5px 0}.iui-field{border:1px solid var(--iui-border);border-radius:8px;padding:9px 11px;min-width:0;max-width:100%;background:var(--iui-surface);color:var(--iui-text-muted);outline:none}.iui-field:focus{border-color:var(--iui-primary);box-shadow:0 0 0 3px color-mix(in srgb,var(--iui-primary) 18%,transparent)}.iui-slider{width:100%;accent-color:var(--iui-primary)}.iui-check{display:inline-flex;align-items:center;gap:6px;cursor:pointer}.iui-check input{accent-color:var(--iui-primary)}.iui-radio-group{display:flex;gap:12px;flex-wrap:wrap}.iui-radio-group.vertical{flex-direction:column}.iui-button,.iui-pressable{border:0;border-radius:8px;padding:9px 13px;background:var(--iui-primary);color:var(--iui-surface);font-weight:700;font-size:12px;text-align:left}.iui-pressable{background:transparent;color:inherit}.iui-pressable:hover{background:var(--iui-surface-muted)}.iui-segments{display:flex;border:1px solid var(--iui-border);border-radius:9px;padding:3px;gap:3px}.iui-segments button{border:0;background:transparent;padding:6px 10px;border-radius:6px;color:var(--iui-text-muted);font-size:11px;font-weight:700}.iui-segments button.active{color:var(--iui-text-muted);background:var(--iui-surface-muted)}.iui-table{display:table;width:100%;border-collapse:collapse}.iui-table-row{display:table-row}.iui-table-cell{display:table-cell;border-bottom:1px solid var(--iui-border);padding:8px}.iui-list{padding-left:24px}.iui-code{overflow:auto;background:var(--iui-surface-muted);border-radius:9px;padding:12px}.iui-popover{position:relative}.iui-popover summary{cursor:pointer;list-style:none}.iui-popover-content{position:relative;z-index:2;background:var(--iui-surface-muted);border:1px solid var(--iui-border);border-radius:10px;box-shadow:0 12px 25px var(--iui-shadow);padding:10px;margin-top:8px}.iui-carousel{display:flex;align-items:center;gap:8px}.iui-carousel>div{flex:1;min-width:0}.iui-carousel>button{border:1px solid var(--iui-border);background:var(--iui-background);border-radius:7px;font-size:20px;color:var(--iui-primary)}.iui-chart svg{width:100%;height:auto;display:block}.iui-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--iui-text-muted)}.iui-legend span{display:flex;align-items:center;gap:4px}.iui-legend i{width:8px;height:8px;border-radius:2px}.iui-unavailable{padding:12px;border:1px dashed var(--iui-border);border-radius:8px;background:var(--iui-surface-muted);color:var(--iui-text-muted);font-size:12px}.iui-error{color:var(--iui-danger)}\n.iui-card,.iui-field,.iui-button,.iui-pressable,.iui-badge{border-radius:var(--iui-radius)}\n.iui-root :disabled{cursor:not-allowed;opacity:.55}\n.iui-box,.iui-col,.iui-card,.iui-grid-item,.iui-flow-item,.iui-carousel-item{gap:var(--iui-spacing)}\n@media(max-width:850px){.iui-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}\n@media(max-width:480px){.iui-grid{grid-template-columns:1fr!important}.iui-row{flex-wrap:wrap}}\n.iui-button.iui-outline{background:transparent;color:var(--iui-primary);border:1px solid var(--iui-primary)}\n.iui-button.iui-ghost{background:transparent;color:var(--iui-primary)}\n.iui-button:hover:not(:disabled){filter:brightness(.95)}\n.iui-app-block{border:1px solid var(--iui-border);border-radius:13px;overflow:hidden;background:var(--iui-surface)}\n.iui-app-block-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border-bottom:1px solid var(--iui-border)}\n.iui-app-block-head>div:first-child{display:flex;flex-direction:column;gap:2px}.iui-app-block-head strong{font-size:13px}.iui-app-block-head small{font-size:10px;color:var(--iui-text-muted)}\n.iui-app-block-actions{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}.iui-app-block-actions button{border:1px solid var(--iui-border);border-radius:7px;background:var(--iui-surface-muted);color:var(--iui-text);padding:6px 8px;font-size:10px;font-weight:700}.iui-app-block-actions button:first-child{background:var(--iui-primary);border-color:var(--iui-primary);color:var(--iui-surface)}.iui-app-block-actions button:disabled{opacity:.4;cursor:default}\n.iui-app-block-status{margin:0;padding:8px 12px;background:var(--iui-surface-muted);color:var(--iui-text-muted);font-size:10px}.iui-app-block-empty{padding:36px 18px;text-align:center;color:var(--iui-text-muted);font-size:12px}\n.iui-app-block iframe{display:block;width:100%;height:770px;border:0;background:#111b2a}.iui-app-block.is-paint iframe{height:440px}\n@media(max-width:520px){.iui-app-block-head{align-items:flex-start;flex-direction:column}.iui-app-block-actions{justify-content:flex-start}}\n.iui-async-image{position:relative;display:block;max-width:100%;min-height:120px;margin:0;overflow:hidden;border:1px solid var(--iui-border);border-radius:var(--iui-radius);background:var(--iui-surface-muted)}\n.iui-async-image img{display:block;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .18s ease}\n.iui-async-image[data-image-status=ready] img{opacity:1}\n.iui-image-status{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;text-align:center;color:var(--iui-text-muted);font-size:12px;background:var(--iui-surface-muted)}\n.iui-async-image[data-image-status=error] .iui-image-status{color:var(--iui-danger)}\n.iui-image-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}\n.iui-image-carousel{min-width:0}.iui-image-controls{display:flex;align-items:center;justify-content:center;gap:18px;padding:6px;color:var(--iui-text-muted);font-size:12px}\n.iui-image-controls button{border:1px solid var(--iui-border);background:var(--iui-surface);color:var(--iui-primary);border-radius:7px;min-width:30px;height:28px;cursor:pointer}\n@media(max-width:520px){.iui-image-group{grid-template-columns:1fr}}\n\n/* Default component language: measured from the user's static ChatGPT UI capture.\n   Theme tokens stay on ThemeProvider so Studio and Citrus share the same geometry. */\n.iui-theme{min-width:0;min-height:0}\n.iui-root{min-width:0;container-type:inline-size;color:var(--iui-text);font-size:16px;line-height:1.625;overflow-wrap:break-word}\n.iui-root,.iui-root *,.iui-root *::before,.iui-root *::after{box-sizing:border-box}\n.iui-root :where(button,input,textarea,select){font-family:inherit}\n.iui-root :disabled{opacity:.42;cursor:not-allowed}\n.iui-root :where(button,input,textarea,select,summary):focus-visible{\n  outline:2px solid var(--iui-info);outline-offset:2px\n}\n\n/* Type is led by the 16/26 body, 18/28 heading and 14px secondary text. */\n.iui-text{min-width:0}\n.iui-title{margin:0;color:var(--iui-text);font-size:18px;line-height:1.55;letter-spacing:-.01em;font-weight:600}\n.iui-caption{color:var(--iui-text-muted);font-size:14px;line-height:1.3;font-weight:400}\n.iui-label{color:var(--iui-text);font-size:14px;line-height:1.45;font-weight:500}\n.iui-badge{\n  display:inline-flex;align-items:center;min-height:20px;width:max-content;max-width:100%;\n  padding:1px 8px;border-radius:999px;background:color-mix(in srgb,currentColor 11%,transparent);\n  color:var(--iui-text-muted);font-size:12px;line-height:18px;font-weight:500;letter-spacing:.015em\n}\n.iui-icon{color:var(--iui-primary)}\n.iui-code{\n  max-width:100%;margin:0;padding:12px 14px;overflow:auto;white-space:pre-wrap;\n  border:1px solid var(--iui-border);border-radius:10px;background:var(--iui-surface-muted);\n  color:var(--iui-text);font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace\n}\n.iui-root :not(pre)>code{\n  padding:2px 5px;border-radius:5px;background:var(--iui-surface-muted);\n  font: .86em/1.45 ui-monospace,SFMono-Regular,Menlo,monospace\n}\n.iui-root a{color:var(--iui-text);text-decoration-color:var(--iui-text-muted);text-underline-offset:3px}\n.iui-root a:hover{text-decoration-color:currentColor}\n.iui-root blockquote{\n  margin:2px 0;padding:5px 0 5px 16px;border-left:3px solid var(--iui-border);\n  color:var(--iui-text-muted)\n}\n.iui-list{margin:0;padding-left:24px}\n.iui-list li{padding-left:2px}\n\n/* Structure uses an eight-pixel default gap; explicit DSL gaps use the 4px theme unit. */\n.iui-box,.iui-col,.iui-card,.iui-grid-item,.iui-flow-item,.iui-WritingBlock,.iui-carousel-item{\n  gap:calc(var(--iui-spacing) * 2);min-width:0\n}\n.iui-row,.iui-flow,.iui-grid{gap:calc(var(--iui-spacing) * 2);min-width:0}\n.iui-card{\n  padding:16px;border:1px solid var(--iui-border);\n  border-radius:calc(var(--iui-radius) + 8px);background:var(--iui-surface);\n  box-shadow:none\n}\n.iui-divider{margin:4px 0;border-top-color:var(--iui-border)}\n\n/* Native form controls keep their semantics while matching the captured 40px fields. */\n.iui-field{\n  min-width:0;min-height:40px;max-width:100%;padding:8px 14px;\n  border:1px solid var(--iui-border);border-radius:10px;background:var(--iui-surface);\n  color:var(--iui-text);font-size:16px;line-height:22px;box-shadow:none;\n  transition:border-color .15s ease,box-shadow .15s ease\n}\n.iui-field::placeholder{color:var(--iui-text-muted);opacity:.7}\n.iui-field:hover:not(:disabled){border-color:color-mix(in srgb,var(--iui-text) 24%,var(--iui-border))}\n.iui-field:focus{border-color:var(--iui-info);box-shadow:0 0 0 3px color-mix(in srgb,var(--iui-info) 12%,transparent)}\n.iui-root textarea.iui-field{min-height:64px;padding:10px 14px;line-height:1.5;resize:vertical}\n.iui-root select.iui-field{padding-right:28px}\n.iui-check{min-height:24px;gap:9px;color:var(--iui-text);font-size:16px;line-height:24px}\n.iui-check input{width:20px;height:20px;flex:none;margin:0;accent-color:var(--iui-primary);cursor:pointer}\n.iui-radio-group{gap:12px 16px}\n.iui-radio-group.vertical{gap:8px}\n.iui-slider{display:block;width:100%;height:24px;margin:0;accent-color:var(--iui-primary);cursor:pointer}\n.iui-slider::-webkit-slider-runnable-track{height:8px;border-radius:999px;background:var(--iui-surface-tertiary)}\n.iui-slider::-webkit-slider-thumb{\n  appearance:none;width:20px;height:20px;margin-top:-6px;border:1px solid var(--iui-border);\n  border-radius:50%;background:var(--iui-surface);box-shadow:0 1px 3px #0000001c\n}\n.iui-slider:focus-visible{outline:2px solid var(--iui-info);outline-offset:3px;border-radius:999px}\n\n/* Buttons and selectable rows use quiet surfaces with a visible keyboard ring. */\n.iui-button{\n  display:inline-flex;align-items:center;justify-content:center;min-height:36px;max-width:100%;\n  padding:7px 16px;border:1px solid var(--iui-primary);border-radius:999px;\n  background:var(--iui-primary);color:var(--iui-surface);\n  font-size:14px;line-height:20px;font-weight:500;text-align:center;cursor:pointer;\n  transition:background-color .15s ease,border-color .15s ease,box-shadow .15s ease\n}\n.iui-button:hover:not(:disabled){filter:none;background:color-mix(in srgb,var(--iui-primary) 84%,var(--iui-surface))}\n.iui-button.iui-outline{border-color:var(--iui-border);background:var(--iui-surface);color:var(--iui-text)}\n.iui-button.iui-outline:hover:not(:disabled){background:var(--iui-surface-muted);border-color:var(--iui-text-muted)}\n.iui-button.iui-ghost{border-color:transparent;background:transparent;color:var(--iui-text)}\n.iui-button.iui-ghost:hover:not(:disabled){background:var(--iui-surface-muted)}\n.iui-pressable{\n  max-width:100%;padding:8px;border:0;border-radius:8px;background:transparent;\n  color:var(--iui-text);font-size:inherit;line-height:inherit;font-weight:inherit;\n  text-align:inherit;cursor:pointer;transition:background-color .15s ease\n}\n.iui-pressable:hover:not(:disabled){background:var(--iui-surface-muted)}\n.iui-segments{max-width:100%;gap:2px;padding:3px;border:0;border-radius:999px;background:var(--iui-surface-muted)}\n.iui-segments button{\n  min-height:30px;padding:5px 12px;border:0;border-radius:999px;background:transparent;\n  color:var(--iui-text-muted);font-size:14px;line-height:20px;font-weight:500;cursor:pointer\n}\n.iui-segments button:hover:not(:disabled){color:var(--iui-text);background:color-mix(in srgb,var(--iui-surface) 55%,transparent)}\n.iui-segments button.active{color:var(--iui-text);background:var(--iui-surface);box-shadow:0 1px 3px #00000014}\n\n/* Data and overlays rely on borders and spacing instead of deep shadows. */\n.iui-table{max-width:100%;border-collapse:collapse;font-size:14px;line-height:20px}\n.iui-table-cell{padding:10px 12px;border-bottom:1px solid var(--iui-border);vertical-align:top}\n.iui-table-cell:first-child{padding-left:0}\n.iui-table-cell:last-child{padding-right:0}\n.iui-popover summary{border-radius:8px}\n.iui-popover-content{\n  margin-top:8px;padding:12px;border:1px solid var(--iui-border);\n  border-radius:var(--iui-radius);background:var(--iui-surface);box-shadow:var(--iui-shadow)\n}\n.iui-carousel>button,.iui-image-controls button{\n  display:grid;place-items:center;min-width:32px;height:32px;border:1px solid var(--iui-border);\n  border-radius:50%;background:var(--iui-surface);color:var(--iui-text);cursor:pointer\n}\n.iui-carousel>button:hover:not(:disabled),.iui-image-controls button:hover:not(:disabled){background:var(--iui-surface-muted)}\n.iui-legend{font-size:12px;line-height:1.4}\n.iui-axis-label{color:var(--iui-text-muted);font-size:12px}\n.iui-unavailable{\n  padding:12px 14px;border:1px dashed var(--iui-border);border-radius:10px;\n  background:var(--iui-surface-muted);color:var(--iui-text-muted);font-size:14px;line-height:1.5\n}\n\n/* Media preserves the restricted host behavior while sharing the same surface. */\n.iui-app-block{border-radius:var(--iui-radius);box-shadow:none}\n.iui-app-block-head{padding:14px 16px}\n.iui-app-block-head strong{font-size:14px;font-weight:600}\n.iui-app-block-head small{font-size:12px}\n.iui-app-block-actions button{min-height:30px;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:500}\n.iui-app-block-status{padding:9px 16px;font-size:12px}\n.iui-app-block-empty{font-size:14px}\n.iui-async-image{border-color:var(--iui-border);border-radius:var(--iui-radius);background:var(--iui-surface-muted)}\n.iui-image-status{font-size:14px}\n.iui-image-group{gap:calc(var(--iui-spacing) * 2)}\n\n@container (max-width:520px){\n  .iui-grid,.iui-image-group{grid-template-columns:1fr!important}\n  .iui-row{flex-wrap:wrap}\n}\n@media(max-width:480px){\n  .iui-root{font-size:16px}\n  .iui-segments{flex-wrap:wrap;border-radius:16px}\n  .iui-segments button{flex:1 1 auto}\n}\n";
 
 // src/ui/ReplyContent.tsx
-var import_jsx_runtime59 = require("react/jsx-runtime");
+var import_jsx_runtime61 = require("react/jsx-runtime");
 var runtimeSequence = 0;
 function MarkdownBody({
   text: text8,
@@ -22830,26 +23801,26 @@ function MarkdownBody({
   renderMarkdown,
   sessionId
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("div", { className: "chat-markdown", children: renderMarkdown ? renderMarkdown(text8, streaming, sessionId) : /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(Markdown, { remarkPlugins: [remarkGfm], children: text8 }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("div", { className: "chat-markdown", children: renderMarkdown ? renderMarkdown(text8, streaming, sessionId) : /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(Markdown, { remarkPlugins: [remarkGfm], children: text8 }) });
 }
 function SourceFallback({
   text: text8,
   reason,
   pending = false
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime59.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)(
     "div",
     {
       className: "chat-iui-fallback",
       "data-iui-state": pending ? "pending" : "error",
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("p", { role: "status", children: reason }),
-        /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("pre", { "aria-label": "\u4FDD\u7559\u7684\u56DE\u590D\u539F\u6587", children: text8 })
+        /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("p", { role: "status", children: reason }),
+        /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("pre", { "aria-label": "\u4FDD\u7559\u7684\u56DE\u590D\u539F\u6587", children: text8 })
       ]
     }
   );
 }
-var ReplyBoundary = class extends import_react10.Component {
+var ReplyBoundary = class extends import_react11.Component {
   state = { error: false, resetKey: this.props.resetKey };
   static getDerivedStateFromError() {
     return { error: true };
@@ -22859,15 +23830,15 @@ var ReplyBoundary = class extends import_react10.Component {
   }
   render() {
     if (!this.state.error) return this.props.children;
-    return /* @__PURE__ */ (0, import_jsx_runtime59.jsxs)("div", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)("div", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
         SourceFallback,
         {
           text: this.props.text,
           reason: "\u56DE\u590D\u6E32\u67D3\u5931\u8D25\uFF0C\u539F\u6587\u5DF2\u4FDD\u7559\u3002\u53EF\u4EE5\u91CD\u8BD5\u6216\u7EE7\u7EED\u5BF9\u8BDD\u3002"
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("button", { type: "button", onClick: () => this.setState({ error: false }), children: "\u91CD\u8BD5\u6E32\u67D3" })
+      /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("button", { type: "button", onClick: () => this.setState({ error: false }), children: "\u91CD\u8BD5\u6E32\u67D3" })
     ] });
   }
 };
@@ -22893,15 +23864,15 @@ function IuiTarget({
   resourceScopeKey,
   renderImagePreview
 }) {
-  const ref2 = (0, import_react10.useRef)(null);
-  const [target, setTarget] = (0, import_react10.useState)(null);
-  const [imagePreview, setImagePreview] = (0, import_react10.useState)(null);
-  const [, revision] = (0, import_react10.useState)(0);
-  (0, import_react10.useLayoutEffect)(
+  const ref2 = (0, import_react11.useRef)(null);
+  const [target, setTarget] = (0, import_react11.useState)(null);
+  const [imagePreview, setImagePreview] = (0, import_react11.useState)(null);
+  const [, revision] = (0, import_react11.useState)(0);
+  (0, import_react11.useLayoutEffect)(
     () => runtime.subscribe(() => revision((value) => value + 1)),
     [runtime]
   );
-  (0, import_react10.useLayoutEffect)(() => {
+  (0, import_react11.useLayoutEffect)(() => {
     const host2 = ref2.current;
     if (!host2) return;
     const shadow = host2.shadowRoot ?? host2.attachShadow({ mode: "open" });
@@ -22916,7 +23887,7 @@ function IuiTarget({
       element3.remove();
     };
   }, []);
-  (0, import_react10.useLayoutEffect)(() => {
+  (0, import_react11.useLayoutEffect)(() => {
     if (!renderImagePreview || !target) return;
     const shadow = target.getRootNode();
     const imageFrom = (event) => event.composedPath().find(
@@ -22964,8 +23935,8 @@ function IuiTarget({
       shadow.removeEventListener("keydown", onKey);
     };
   }, [target, renderImagePreview]);
-  (0, import_react10.useLayoutEffect)(() => setImagePreview(null), [resourceScopeKey]);
-  const localRuntime = (0, import_react10.useMemo)(
+  (0, import_react11.useLayoutEffect)(() => setImagePreview(null), [resourceScopeKey]);
+  const localRuntime = (0, import_react11.useMemo)(
     () => new RootRuntime(runtime, index2),
     [runtime, index2, resourceScopeKey]
   );
@@ -22973,9 +23944,9 @@ function IuiTarget({
     ...runtime.document,
     children: [runtime.document.children[index2]]
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime59.jsxs)(import_jsx_runtime59.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("div", { ref: ref2, "data-canvas-iui-root": "" }),
-    target && /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)(import_jsx_runtime61.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("div", { ref: ref2, "data-canvas-iui-root": "" }),
+    target && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
       UIRenderer,
       {
         runtime: localRuntime,
@@ -22991,10 +23962,10 @@ function IuiTarget({
   ] });
 }
 function useHostTheme() {
-  const [mode, setMode] = (0, import_react10.useState)(
+  const [mode, setMode] = (0, import_react11.useState)(
     () => typeof document !== "undefined" && document.body.hasAttribute("data-ds-dark-theme") ? "dark" : "light"
   );
-  (0, import_react10.useLayoutEffect)(() => {
+  (0, import_react11.useLayoutEffect)(() => {
     const observer = new MutationObserver(
       () => setMode(
         document.body.hasAttribute("data-ds-dark-theme") ? "dark" : "light"
@@ -23038,19 +24009,19 @@ function IuiReply({
   resourceScopeKey,
   preview
 }) {
-  const action = (0, import_react10.useRef)(onIuiAction);
+  const action = (0, import_react11.useRef)(onIuiAction);
   action.current = onIuiAction;
-  const resource = (0, import_react10.useRef)(onIuiResource);
+  const resource = (0, import_react11.useRef)(onIuiResource);
   resource.current = onIuiResource;
-  const active = (0, import_react10.useRef)(true);
-  const [feedback, setFeedback] = (0, import_react10.useState)("");
-  (0, import_react10.useLayoutEffect)(() => {
+  const active = (0, import_react11.useRef)(true);
+  const [feedback, setFeedback] = (0, import_react11.useState)("");
+  (0, import_react11.useLayoutEffect)(() => {
     active.current = true;
     return () => {
       active.current = false;
     };
   }, []);
-  const [runtime] = (0, import_react10.useState)(() => {
+  const [runtime] = (0, import_react11.useState)(() => {
     const instance = ++runtimeSequence;
     return new CanvasRuntime(
       parsed.document,
@@ -23071,7 +24042,7 @@ function IuiReply({
   });
   runtime.update(parsed.document);
   const mode = useHostTheme();
-  return /* @__PURE__ */ (0, import_jsx_runtime59.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)(
     "div",
     {
       className: "chat-iui-content",
@@ -23080,12 +24051,12 @@ function IuiReply({
         (segment) => segment.kind === "markdown" && segment.text.trim()
       ) ? "mixed" : "standalone",
       children: [
-        parsed.segments.filter((segment) => segment.kind !== "markdown" || segment.text.trim()).map((segment) => /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+        parsed.segments.filter((segment) => segment.kind !== "markdown" || segment.text.trim()).map((segment) => /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
           ReplyBoundary,
           {
             text: segment.text,
             resetKey: `${segment.kind}\0${segment.text}\0${streaming}`,
-            children: segment.kind === "markdown" ? /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+            children: segment.kind === "markdown" ? /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
               MarkdownBody,
               {
                 text: segment.text,
@@ -23093,14 +24064,14 @@ function IuiReply({
                 renderMarkdown,
                 sessionId
               }
-            ) : segment.kind === "error" ? /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+            ) : segment.kind === "error" ? /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
               SourceFallback,
               {
                 text: segment.text,
                 pending: streaming,
                 reason: `${streaming ? "\u8FD9\u6BB5 IUI \u6682\u65F6\u65E0\u6CD5\u5B89\u5168\u663E\u793A" : "\u8FD9\u6BB5 IUI \u672A\u901A\u8FC7\u5B89\u5168\u89E3\u6790"}\uFF0C\u539F\u6587\u5DF2\u4FDD\u7559\u3002\uFF08${segment.reason}\uFF09`
               }
-            ) : /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+            ) : /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
               IuiTarget,
               {
                 index: segment.index,
@@ -23113,8 +24084,8 @@ function IuiReply({
           },
           `${segment.kind}-${segment.start}`
         )),
-        preview && /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("p", { role: "status", children: "IUI \u6B63\u5728\u751F\u6210\uFF0C\u5F53\u524D\u663E\u793A\u5DF2\u901A\u8FC7\u5B89\u5168\u89E3\u6790\u7684\u90E8\u5206\u3002" }),
-        feedback && /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("p", { className: "chat-iui-feedback", role: "status", children: feedback })
+        preview && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("p", { role: "status", children: "IUI \u6B63\u5728\u751F\u6210\uFF0C\u5F53\u524D\u663E\u793A\u5DF2\u901A\u8FC7\u5B89\u5168\u89E3\u6790\u7684\u90E8\u5206\u3002" }),
+        feedback && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("p", { className: "chat-iui-feedback", role: "status", children: feedback })
       ]
     }
   );
@@ -23132,10 +24103,10 @@ function ReplyBody({
   onIuiAction,
   onIuiResource
 }) {
-  const [open, setOpen] = (0, import_react10.useState)(null);
-  const sourceId = (0, import_react10.useId)();
-  const reasoningId = (0, import_react10.useId)();
-  const result = (0, import_react10.useMemo)(() => {
+  const [open, setOpen] = (0, import_react11.useState)(null);
+  const sourceId = (0, import_react11.useId)();
+  const reasoningId = (0, import_react11.useId)();
+  const result = (0, import_react11.useMemo)(() => {
     if (!iuiEnabled) return null;
     try {
       return splitCanvasReply(text8, messageId, streaming);
@@ -23145,7 +24116,7 @@ function ReplyBody({
   }, [text8, messageId, streaming, iuiEnabled]);
   const hasSource = Boolean(result?.document && result.segments);
   const hasReasoning = Boolean(reasoning?.trim()) && !streaming;
-  const body = hasSource && result?.document && result.segments ? /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+  const body = hasSource && result?.document && result.segments ? /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
     IuiReply,
     {
       resourceScopeKey,
@@ -23161,14 +24132,14 @@ function ReplyBody({
         (segment) => segment.kind === "ui" && !segment.complete
       )
     }
-  ) : result ? /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+  ) : result ? /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
     SourceFallback,
     {
       text: text8,
       pending: streaming,
       reason: "\u89E3\u6790\u5668\u65E0\u6CD5\u5904\u7406\u8FD9\u6BB5\u5185\u5BB9\uFF0C\u539F\u6587\u5DF2\u4FDD\u7559\u3002"
     }
-  ) : /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+  ) : /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
     MarkdownBody,
     {
       text: text8,
@@ -23177,11 +24148,11 @@ function ReplyBody({
       sessionId
     }
   );
-  return /* @__PURE__ */ (0, import_jsx_runtime59.jsxs)(import_jsx_runtime59.Fragment, { children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)(import_jsx_runtime61.Fragment, { children: [
     body,
-    (hasSource || hasReasoning) && /* @__PURE__ */ (0, import_jsx_runtime59.jsxs)("div", { className: "chat-reply-disclosures", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime59.jsxs)("div", { className: "chat-reply-disclosure-actions", children: [
-        hasSource && /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+    (hasSource || hasReasoning) && /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)("div", { className: "chat-reply-disclosures", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)("div", { className: "chat-reply-disclosure-actions", children: [
+        hasSource && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
           "button",
           {
             type: "button",
@@ -23192,7 +24163,7 @@ function ReplyBody({
             children: "\u67E5\u770B\u539F\u6587"
           }
         ),
-        hasReasoning && /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+        hasReasoning && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
           "button",
           {
             type: "button",
@@ -23203,41 +24174,41 @@ function ReplyBody({
           }
         )
       ] }),
-      hasSource && /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+      hasSource && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
         "div",
         {
           id: sourceId,
           className: "chat-iui-source",
           hidden: open !== "source",
-          children: /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("pre", { children: text8 })
+          children: /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("pre", { children: text8 })
         }
       ),
-      hasReasoning && /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+      hasReasoning && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
         "div",
         {
           id: reasoningId,
           className: "chat-reasoning-done",
           hidden: open !== "reasoning",
-          children: /* @__PURE__ */ (0, import_jsx_runtime59.jsx)("pre", { children: reasoning })
+          children: /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("pre", { children: reasoning })
         }
       )
     ] })
   ] });
 }
 function ReplyContent(props) {
-  return /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
     ReplyBoundary,
     {
       text: props.text,
       resetKey: `${props.messageId}\0${props.iuiEnabled}\0${props.text}`,
-      children: /* @__PURE__ */ (0, import_jsx_runtime59.jsx)(ReplyBody, { ...props }, props.messageId)
+      children: /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(ReplyBody, { ...props }, props.messageId)
     }
   );
 }
 
 // src/ui/UserMessageMedia.tsx
-var import_react11 = require("react");
-var import_jsx_runtime60 = require("react/jsx-runtime");
+var import_react12 = require("react");
+var import_jsx_runtime62 = require("react/jsx-runtime");
 function nativeSingleImageFit(attachment) {
   const width = attachment.width;
   const height = attachment.height;
@@ -23263,14 +24234,14 @@ function ImageTile({
 }) {
   const attachment = image3.image.attachment;
   const fit = nativeSingleImageFit(attachment);
-  const loader = (0, import_react11.useRef)(loadImage);
+  const loader = (0, import_react12.useRef)(loadImage);
   loader.current = loadImage;
-  const [retry, setRetry] = (0, import_react11.useState)(0);
-  const [url, setUrl] = (0, import_react11.useState)();
-  const [failed, setFailed] = (0, import_react11.useState)(false);
-  const [open, setOpen] = (0, import_react11.useState)(false);
+  const [retry, setRetry] = (0, import_react12.useState)(0);
+  const [url, setUrl] = (0, import_react12.useState)();
+  const [failed, setFailed] = (0, import_react12.useState)(false);
+  const [open, setOpen] = (0, import_react12.useState)(false);
   const alt = attachment.name || `\u56FE\u7247 ${index2 + 1}`;
-  (0, import_react11.useEffect)(() => {
+  (0, import_react12.useEffect)(() => {
     let active = true;
     setUrl(void 0);
     setFailed(false);
@@ -23287,8 +24258,8 @@ function ImageTile({
       active = false;
     };
   }, [attachment.attachmentId, sessionId, retry]);
-  return /* @__PURE__ */ (0, import_jsx_runtime60.jsxs)(import_jsx_runtime60.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(import_jsx_runtime62.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
       "button",
       {
         className: "chat-user-image-tile",
@@ -23303,7 +24274,7 @@ function ImageTile({
           else if (url) setOpen(true);
         },
         onKeyDown: (event) => event.stopPropagation(),
-        children: url ? /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
+        children: url ? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
           "img",
           {
             src: url,
@@ -23312,7 +24283,7 @@ function ImageTile({
             draggable: false,
             style: compact ? void 0 : { objectPosition: fit.objectPosition }
           }
-        ) : /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("span", { children: failed ? "\u91CD\u8BD5\u56FE\u7247" : "\u56FE\u7247\u52A0\u8F7D\u4E2D" })
+        ) : /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { children: failed ? "\u91CD\u8BD5\u56FE\u7247" : "\u56FE\u7247\u52A0\u8F7D\u4E2D" })
       }
     ),
     open && url && renderPreview?.(url, alt, () => setOpen(false))
@@ -23331,22 +24302,22 @@ function UserMessageMedia({
   );
   if (!items?.length) return null;
   const compact = items.length > 1;
-  return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("div", { className: "chat-user-media", "data-message-attachments": "", children: items.map(
-    (item, index2) => item.type === "file" ? /* @__PURE__ */ (0, import_jsx_runtime60.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { className: "chat-user-media", "data-message-attachments": "", children: items.map(
+    (item, index2) => item.type === "file" ? /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
       "span",
       {
         className: "chat-user-file-card",
         title: item.file.name,
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("span", { className: "chat-user-file-icon", children: renderFileIcon?.(item.file.name) ?? /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(Icon, { name: "artifact", size: 28 }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime60.jsxs)("span", { className: "chat-user-file-content", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("span", { className: "chat-user-file-name", children: item.file.name }),
-            /* @__PURE__ */ (0, import_jsx_runtime60.jsx)("span", { className: "chat-user-file-meta", children: formatFileMeta?.(item.file.name, item.file.bytes) ?? `${item.file.bytes}B` })
+          /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { className: "chat-user-file-icon", children: renderFileIcon?.(item.file.name) ?? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "artifact", size: 28 }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("span", { className: "chat-user-file-content", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { className: "chat-user-file-name", children: item.file.name }),
+            /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { className: "chat-user-file-meta", children: formatFileMeta?.(item.file.name, item.file.bytes) ?? `${item.file.bytes}B` })
           ] })
         ]
       },
       `file:${item.file.attachmentId}`
-    ) : /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
+    ) : /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
       ImageTile,
       {
         image: item,
@@ -23362,8 +24333,8 @@ function UserMessageMedia({
 }
 
 // src/ui/UserMessageActions.tsx
-var import_react12 = require("react");
-var import_jsx_runtime61 = require("react/jsx-runtime");
+var import_react13 = require("react");
+var import_jsx_runtime63 = require("react/jsx-runtime");
 function UserMessageActions({
   text: text8,
   time,
@@ -23371,11 +24342,11 @@ function UserMessageActions({
   renderCopyIcon,
   wrapCopyButton
 }) {
-  const [copied, setCopied] = (0, import_react12.useState)(false);
-  const pending = (0, import_react12.useRef)(false);
-  const timer = (0, import_react12.useRef)(null);
-  const alive = (0, import_react12.useRef)(true);
-  (0, import_react12.useEffect)(() => {
+  const [copied, setCopied] = (0, import_react13.useState)(false);
+  const pending = (0, import_react13.useRef)(false);
+  const timer = (0, import_react13.useRef)(null);
+  const alive = (0, import_react13.useRef)(true);
+  (0, import_react13.useEffect)(() => {
     alive.current = true;
     return () => {
       alive.current = false;
@@ -23404,11 +24375,11 @@ function UserMessageActions({
       if (alive.current) setCopied(false);
     }, 1e3);
   }
-  return /* @__PURE__ */ (0, import_jsx_runtime61.jsxs)("div", { className: "chat-user-message-actions", "data-chat-user-actions": "", children: [
-    time && /* @__PURE__ */ (0, import_jsx_runtime61.jsx)("time", { className: "chat-user-message-time", title: time.full, children: time.short }),
+  return /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)("div", { className: "chat-user-message-actions", "data-chat-user-actions": "", children: [
+    time && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("time", { className: "chat-user-message-time", title: time.full, children: time.short }),
     text8 && (() => {
       const label = copied ? "\u5DF2\u590D\u5236" : "\u590D\u5236";
-      const button = /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(
+      const button = /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
         "button",
         {
           className: "chat-user-message-copy",
@@ -23421,7 +24392,7 @@ function UserMessageActions({
             event.stopPropagation();
             void copy();
           },
-          children: renderCopyIcon?.(copied) ?? /* @__PURE__ */ (0, import_jsx_runtime61.jsx)(Icon, { name: copied ? "check" : "copy", size: 15 })
+          children: renderCopyIcon?.(copied) ?? /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(Icon, { name: copied ? "check" : "copy", size: 15 })
         }
       );
       return wrapCopyButton?.(button, label) ?? button;
@@ -23430,7 +24401,7 @@ function UserMessageActions({
 }
 
 // src/ui/ChatCanvas.tsx
-var import_jsx_runtime62 = require("react/jsx-runtime");
+var import_jsx_runtime64 = require("react/jsx-runtime");
 var KEY = "dsh-canvas-conversation:v1";
 var sessionKey = (mode, id) => `${KEY}:${mode}:session:${encodeURIComponent(id)}`;
 var fresh = (sessionId) => ({
@@ -23481,19 +24452,19 @@ function isPanControl(event) {
 }
 var clamp2 = (value) => Math.max(0.25, Math.min(2, value));
 function ReasoningView({ text: text8, running }) {
-  const live = (0, import_react13.useRef)(null);
-  (0, import_react13.useEffect)(() => {
+  const live = (0, import_react14.useRef)(null);
+  (0, import_react14.useEffect)(() => {
     if (live.current) live.current.scrollTop = live.current.scrollHeight;
   }, [text8]);
   if (!text8.trim()) return null;
-  return running ? /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-reasoning-live", role: "status", "aria-live": "polite", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { "aria-hidden": "true", children: "\u601D\u8003\u4E2D" }),
-    /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { ref: live, "aria-label": "\u6700\u65B0\u601D\u8003\u5185\u5BB9", children: text8 })
+  return running ? /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-reasoning-live", role: "status", "aria-live": "polite", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { "aria-hidden": "true", children: "\u601D\u8003\u4E2D" }),
+    /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { ref: live, "aria-label": "\u6700\u65B0\u601D\u8003\u5185\u5BB9", children: text8 })
   ] }) : null;
 }
 function useCalendarNow() {
-  const [now, setNow] = (0, import_react13.useState)(() => Date.now());
-  (0, import_react13.useEffect)(() => {
+  const [now, setNow] = (0, import_react14.useState)(() => Date.now());
+  (0, import_react14.useEffect)(() => {
     let timer;
     function schedule() {
       const midnight = /* @__PURE__ */ new Date();
@@ -23547,34 +24518,35 @@ function ChatCanvas({
   onSessionChange,
   requestedSession,
   onRequestHandled,
-  accountActions
+  accountActions,
+  sidebarIcons,
+  onSchedules
 }) {
-  const [initial] = (0, import_react13.useState)(() => restore(mode));
+  const [initial] = (0, import_react14.useState)(() => restore(mode));
   const calendarNow = useCalendarNow();
-  const [state, setState] = (0, import_react13.useState)(initial.state);
-  const stateRef = (0, import_react13.useRef)(state);
+  const [state, setState] = (0, import_react14.useState)(initial.state);
+  const stateRef = (0, import_react14.useRef)(state);
   stateRef.current = state;
-  const [storageError, setStorageError] = (0, import_react13.useState)(initial.error);
-  const storageErrorRef = (0, import_react13.useRef)(storageError);
+  const [storageError, setStorageError] = (0, import_react14.useState)(initial.error);
+  const storageErrorRef = (0, import_react14.useRef)(storageError);
   storageErrorRef.current = storageError;
-  const [draft, setDraft] = (0, import_react13.useState)("");
-  const [iuiEnabled, setIuiEnabled] = (0, import_react13.useState)(true);
-  const [menu, setMenu] = (0, import_react13.useState)(null);
-  const [search2, setSearch] = (0, import_react13.useState)("");
-  const [navError, setNavError] = (0, import_react13.useState)("");
-  const [busy, setBusy] = (0, import_react13.useState)(false);
-  const [runError, setRunError] = (0, import_react13.useState)("");
-  const [historyNotice, setHistoryNotice] = (0, import_react13.useState)("");
-  const [sessionAttempt, setSessionAttempt] = (0, import_react13.useState)(0);
-  const creatingSession = (0, import_react13.useRef)(false);
-  const creatingNewSession = (0, import_react13.useRef)(false);
-  const [newSessionPending, setNewSessionPending] = (0, import_react13.useState)(false);
-  const sessionStates = (0, import_react13.useRef)(/* @__PURE__ */ new Map());
-  const sessionDrafts = (0, import_react13.useRef)(/* @__PURE__ */ new Map());
-  const handledRequest = (0, import_react13.useRef)(0);
-  const [hoveredPair, setHoveredPair] = (0, import_react13.useState)(null);
-  const [focusedPair, setFocusedPair] = (0, import_react13.useState)(null);
-  const keyboardPairing = (0, import_react13.useRef)(true);
+  const [draft, setDraft] = (0, import_react14.useState)("");
+  const [iuiEnabled, setIuiEnabled] = (0, import_react14.useState)(true);
+  const [menu, setMenu] = (0, import_react14.useState)(null);
+  const [navError, setNavError] = (0, import_react14.useState)("");
+  const [busy, setBusy] = (0, import_react14.useState)(false);
+  const [runError, setRunError] = (0, import_react14.useState)("");
+  const [historyNotice, setHistoryNotice] = (0, import_react14.useState)("");
+  const [sessionAttempt, setSessionAttempt] = (0, import_react14.useState)(0);
+  const creatingSession = (0, import_react14.useRef)(false);
+  const creatingNewSession = (0, import_react14.useRef)(false);
+  const [newSessionPending, setNewSessionPending] = (0, import_react14.useState)(false);
+  const sessionStates = (0, import_react14.useRef)(/* @__PURE__ */ new Map());
+  const sessionDrafts = (0, import_react14.useRef)(/* @__PURE__ */ new Map());
+  const handledRequest = (0, import_react14.useRef)(0);
+  const [hoveredPair, setHoveredPair] = (0, import_react14.useState)(null);
+  const [focusedPair, setFocusedPair] = (0, import_react14.useState)(null);
+  const keyboardPairing = (0, import_react14.useRef)(true);
   const workspaceId = hostWorkspaces.find(
     (workspace) => workspace.sessionIds.includes(state.sessionId ?? "")
   )?.id;
@@ -23583,11 +24555,11 @@ function ChatCanvas({
     workspaceId ?? null,
     state.sessionId ?? null
   ]);
-  const pairs = (0, import_react13.useMemo)(
+  const pairs = (0, import_react14.useMemo)(
     () => buildReplyPairs(state.replies, pairScope),
     [state.replies, pairScope]
   );
-  const userGroups = (0, import_react13.useMemo)(() => {
+  const userGroups = (0, import_react14.useMemo)(() => {
     const groups = [];
     pairs.userMessages.forEach((message) => {
       const last = groups.at(-1);
@@ -23601,11 +24573,11 @@ function ChatCanvas({
     return groups;
   }, [pairs]);
   const activePair = activeReplyPair(pairs, hoveredPair) ?? activeReplyPair(pairs, focusedPair);
-  const clearPairing = (0, import_react13.useCallback)(() => {
+  const clearPairing = (0, import_react14.useCallback)(() => {
     setHoveredPair(null);
     setFocusedPair(null);
   }, []);
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => {
     setHoveredPair(
       (target) => activeReplyPair(pairs, target) ? target : null
     );
@@ -23613,7 +24585,7 @@ function ChatCanvas({
       (target) => activeReplyPair(pairs, target) ? target : null
     );
   }, [pairs]);
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => {
     const keyboard = () => {
       keyboardPairing.current = true;
     };
@@ -23642,20 +24614,20 @@ function ChatCanvas({
       }
     };
   };
-  const mounted = (0, import_react13.useRef)(true);
-  const running = (0, import_react13.useRef)(null);
-  const stage = (0, import_react13.useRef)(null);
-  const dock = (0, import_react13.useRef)(null);
-  const userRail = (0, import_react13.useRef)(null);
-  const seenRailMessages = (0, import_react13.useRef)(null);
-  const railScrollAnimating = (0, import_react13.useRef)(false);
-  const railFollowTail = (0, import_react13.useRef)(null);
-  const userPress = (0, import_react13.useRef)(null);
-  const previousReplyCount = (0, import_react13.useRef)(state.replies.length);
-  const newReplyIds = (0, import_react13.useRef)(/* @__PURE__ */ new Set());
-  const measuredReplyHeights = (0, import_react13.useRef)(/* @__PURE__ */ new Map());
-  const composerInput = (0, import_react13.useRef)(null);
-  const iuiActions = (0, import_react13.useRef)(/* @__PURE__ */ new Map());
+  const mounted = (0, import_react14.useRef)(true);
+  const running = (0, import_react14.useRef)(null);
+  const stage = (0, import_react14.useRef)(null);
+  const dock = (0, import_react14.useRef)(null);
+  const userRail = (0, import_react14.useRef)(null);
+  const seenRailMessages = (0, import_react14.useRef)(null);
+  const railScrollAnimating = (0, import_react14.useRef)(false);
+  const railFollowTail = (0, import_react14.useRef)(null);
+  const userPress = (0, import_react14.useRef)(null);
+  const previousReplyCount = (0, import_react14.useRef)(state.replies.length);
+  const newReplyIds = (0, import_react14.useRef)(/* @__PURE__ */ new Set());
+  const measuredReplyHeights = (0, import_react14.useRef)(/* @__PURE__ */ new Map());
+  const composerInput = (0, import_react14.useRef)(null);
+  const iuiActions = (0, import_react14.useRef)(/* @__PURE__ */ new Map());
   const userMessageIds = JSON.stringify(
     pairs.userMessages.map((message) => message.id)
   );
@@ -23668,7 +24640,7 @@ function ChatCanvas({
     if (rail && typeof window.requestAnimationFrame === "function")
       rail.scrollTo({ top: rail.scrollTop, behavior: "instant" });
   };
-  (0, import_react13.useLayoutEffect)(() => {
+  (0, import_react14.useLayoutEffect)(() => {
     const ids = pairs.userMessages.map((message) => message.id);
     const previous3 = seenRailMessages.current;
     seenRailMessages.current = {
@@ -23695,7 +24667,7 @@ function ChatCanvas({
       rail.scrollTo({ top: bottom, behavior: "smooth" });
     }
   }, [pairScope, userMessageIds]);
-  (0, import_react13.useLayoutEffect)(() => {
+  (0, import_react14.useLayoutEffect)(() => {
     const rail = userRail.current;
     const last = rail?.lastElementChild;
     if (!rail || !last || typeof ResizeObserver === "undefined") return;
@@ -23722,33 +24694,33 @@ function ChatCanvas({
     observer.observe(last);
     return () => observer.disconnect();
   }, [pairScope, userMessageIds]);
-  (0, import_react13.useEffect)(() => () => stopRailScroll(), []);
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => () => stopRailScroll(), []);
+  (0, import_react14.useEffect)(() => {
     const input = composerInput.current;
     if (input) {
       input.style.height = "36px";
       input.style.height = `${Math.min(176, Math.max(36, input.scrollHeight))}px`;
     }
   }, [draft]);
-  const menuRoot = (0, import_react13.useRef)(null);
-  const navButton = (0, import_react13.useRef)(null);
-  const accountButton = (0, import_react13.useRef)(null);
-  const [spacePressed, setSpacePressed] = (0, import_react13.useState)(false);
-  const [panArmed, setPanArmed] = (0, import_react13.useState)(false);
-  const [isPanning, setIsPanning] = (0, import_react13.useState)(false);
-  const [isMovingReply, setIsMovingReply] = (0, import_react13.useState)(false);
-  const spaceHeld = (0, import_react13.useRef)(false);
-  const suppressPanClick = (0, import_react13.useRef)(false);
-  const dragging = (0, import_react13.useRef)(null);
-  const update = (0, import_react13.useCallback)((fn) => {
+  const menuRoot = (0, import_react14.useRef)(null);
+  const navButton = (0, import_react14.useRef)(null);
+  const accountButton = (0, import_react14.useRef)(null);
+  const [spacePressed, setSpacePressed] = (0, import_react14.useState)(false);
+  const [panArmed, setPanArmed] = (0, import_react14.useState)(false);
+  const [isPanning, setIsPanning] = (0, import_react14.useState)(false);
+  const [isMovingReply, setIsMovingReply] = (0, import_react14.useState)(false);
+  const spaceHeld = (0, import_react14.useRef)(false);
+  const suppressPanClick = (0, import_react14.useRef)(false);
+  const dragging = (0, import_react14.useRef)(null);
+  const update = (0, import_react14.useCallback)((fn) => {
     const next = fn(stateRef.current);
     stateRef.current = next;
     if (mounted.current) setState(next);
   }, []);
-  (0, import_react13.useLayoutEffect)(() => {
+  (0, import_react14.useLayoutEffect)(() => {
     onSessionChange?.(state.sessionId);
   }, [onSessionChange, state.sessionId]);
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => {
     if (!useNativeComposer || mode !== "dsh" || state.sessionId || creatingSession.current)
       return;
     creatingSession.current = true;
@@ -23774,9 +24746,9 @@ function ChatCanvas({
     update,
     useNativeComposer
   ]);
-  const cameraFrame = (0, import_react13.useRef)(null);
-  const cameraRun = (0, import_react13.useRef)(0);
-  const stopCamera = (0, import_react13.useCallback)(() => {
+  const cameraFrame = (0, import_react14.useRef)(null);
+  const cameraRun = (0, import_react14.useRef)(0);
+  const stopCamera = (0, import_react14.useCallback)(() => {
     cameraRun.current++;
     if (cameraFrame.current !== null)
       window.cancelAnimationFrame?.(cameraFrame.current);
@@ -23868,7 +24840,7 @@ function ChatCanvas({
     );
     setMenu(null);
   };
-  (0, import_react13.useLayoutEffect)(() => {
+  (0, import_react14.useLayoutEffect)(() => {
     if (!newReplyIds.current.size) return;
     const positions = /* @__PURE__ */ new Map();
     for (const [index2, reply] of state.replies.entries()) {
@@ -23894,7 +24866,7 @@ function ChatCanvas({
       )
     }));
   }, [state.replies, update]);
-  (0, import_react13.useLayoutEffect)(() => {
+  (0, import_react14.useLayoutEffect)(() => {
     const canvas = stage.current;
     if (!canvas || typeof ResizeObserver === "undefined") return;
     measuredReplyHeights.current.clear();
@@ -24054,7 +25026,7 @@ function ChatCanvas({
     };
     cameraFrame.current = window.requestAnimationFrame(frame);
   };
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => {
     const added = state.replies.length > previousReplyCount.current;
     previousReplyCount.current = state.replies.length;
     if (!added || !running.current || !stage.current) return;
@@ -24075,7 +25047,7 @@ function ChatCanvas({
       }));
     }
   }, [state.replies.length, stopCamera, update]);
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => {
     if (!state.sessionId || !adapter.observeSession) return;
     return adapter.observeSession(state.sessionId, (snapshot) => {
       if (!mounted.current || snapshot.sessionId !== stateRef.current.sessionId)
@@ -24098,7 +25070,7 @@ function ChatCanvas({
       });
     });
   }, [adapter, state.sessionId, update]);
-  const persist = (0, import_react13.useCallback)(
+  const persist = (0, import_react14.useCallback)(
     (snapshot) => {
       if (storageErrorRef.current) return;
       try {
@@ -24114,7 +25086,7 @@ function ChatCanvas({
     },
     [mode]
   );
-  const save = (0, import_react13.useCallback)(() => persist(stateRef.current), [persist]);
+  const save = (0, import_react14.useCallback)(() => persist(stateRef.current), [persist]);
   const switchSession = (id) => {
     if (id === stateRef.current.sessionId) {
       setMenu(null);
@@ -24177,14 +25149,14 @@ function ChatCanvas({
       if (mounted.current) setNewSessionPending(false);
     }
   };
-  (0, import_react13.useLayoutEffect)(() => {
+  (0, import_react14.useLayoutEffect)(() => {
     if (!requestedSession || handledRequest.current === requestedSession.token)
       return;
     handledRequest.current = requestedSession.token;
     switchSession(requestedSession.sessionId);
     onRequestHandled?.();
   }, [requestedSession?.token]);
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => {
     const flush = () => save();
     const hidden = () => {
       if (document.visibilityState === "hidden") flush();
@@ -24196,7 +25168,7 @@ function ChatCanvas({
       document.removeEventListener("visibilitychange", hidden);
     };
   }, [save]);
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => {
     mounted.current = true;
     return () => {
       mounted.current = false;
@@ -24211,11 +25183,11 @@ function ChatCanvas({
       persist(stateRef.current);
     };
   }, [adapter, persist, stopCamera]);
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => {
     const timer = setTimeout(save, 180);
     return () => clearTimeout(timer);
   }, [state, save]);
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => {
     if (!menu) return;
     const dialog = menuRoot.current?.querySelector('[role="dialog"]');
     const controls = () => [
@@ -24253,7 +25225,7 @@ function ChatCanvas({
       document.removeEventListener("keydown", escape, true);
     };
   }, [menu]);
-  const zoom = (0, import_react13.useCallback)(
+  const zoom = (0, import_react14.useCallback)(
     (next, x, y) => {
       stopCamera();
       update((current2) => {
@@ -24271,7 +25243,7 @@ function ChatCanvas({
     },
     [stopCamera, update]
   );
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => {
     const element3 = stage.current;
     if (!element3) return;
     const wheel = (event) => {
@@ -24290,7 +25262,7 @@ function ChatCanvas({
     element3.addEventListener("wheel", wheel, { passive: false });
     return () => element3.removeEventListener("wheel", wheel);
   }, [zoom]);
-  const finishPan = (0, import_react13.useCallback)(() => {
+  const finishPan = (0, import_react14.useCallback)(() => {
     const drag = dragging.current;
     dragging.current = null;
     if (drag && (drag.active || drag.explicit)) suppressPanClick.current = true;
@@ -24300,7 +25272,7 @@ function ChatCanvas({
     if (drag?.captureTarget.hasPointerCapture(drag.pointerId))
       drag.captureTarget.releasePointerCapture(drag.pointerId);
   }, []);
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => {
     const keydown = (event) => {
       suppressPanClick.current = false;
       if (event.key === "Escape") {
@@ -24605,7 +25577,7 @@ function ChatCanvas({
     }
   };
   const v = state.viewport;
-  return /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
     "div",
     {
       className: "canvas-app chat-canvas",
@@ -24640,9 +25612,9 @@ function ChatCanvas({
       onClickCapture: suppressPanActivation,
       onAuxClickCapture: suppressPanActivation,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-topbar", ref: menuRoot, onClickCapture: clearPairing, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { className: "chat-brand", "aria-label": "DeepSeek Harness", children: NativeBrand2 ?? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Brand, {}) }),
-          /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-topbar", ref: menuRoot, onClickCapture: clearPairing, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { className: "chat-brand", "aria-label": "DeepSeek Harness", children: NativeBrand2 ?? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(Brand, {}) }),
+          /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
             "button",
             {
               ref: navButton,
@@ -24651,10 +25623,26 @@ function ChatCanvas({
               "aria-haspopup": "dialog",
               "aria-expanded": menu === "nav",
               onClick: () => setMenu(menu === "nav" ? null : "nav"),
-              children: navIcon ?? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "grid", size: 18 })
+              children: navIcon ?? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(Icon, { name: "grid", size: 18 })
             }
           ),
-          onNewSession && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+          onExit && /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
+            "button",
+            {
+              type: "button",
+              className: "chat-canvas-switch",
+              role: "switch",
+              "aria-checked": "true",
+              "aria-label": "\u753B\u5E03\u6A21\u5F0F",
+              title: "\u753B\u5E03\u6A21\u5F0F\u5DF2\u5F00\u542F\uFF1B\u70B9\u51FB\u8FD4\u56DE\u539F\u751F\u5BF9\u8BDD",
+              onClick: onExit,
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { className: "chat-canvas-switch-track", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { className: "chat-canvas-switch-thumb" }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { className: "chat-canvas-switch-label", children: "\u753B\u5E03" })
+              ]
+            }
+          ),
+          onNewSession && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
             "button",
             {
               type: "button",
@@ -24663,10 +25651,10 @@ function ChatCanvas({
               title: "\u65B0\u5EFA\u753B\u5E03\u4F1A\u8BDD",
               disabled: newSessionPending,
               onClick: () => void createNewSession(),
-              children: /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "plus", size: 18 })
+              children: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(Icon, { name: "plus", size: 18 })
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
             "button",
             {
               ref: accountButton,
@@ -24675,237 +25663,88 @@ function ChatCanvas({
               "aria-haspopup": "dialog",
               "aria-expanded": menu === "account",
               onClick: () => setMenu(menu === "account" ? null : "account"),
-              children: avatar ?? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "user", size: 18 })
+              children: avatar ?? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(Icon, { name: "user", size: 18 })
             }
           ),
-          mode === "mock" && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { className: "chat-mode mock", title: "\u672C\u5730\u6A21\u62DF\uFF0C\u4E0D\u53D1\u9001\u6A21\u578B\u8BF7\u6C42", children: "MOCK" }),
-          menu === "nav" && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-menu", role: "dialog", "aria-label": "\u5BFC\u822A\u4E0E\u5DE5\u4F5C\u533A", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { className: "chat-menu-title", children: "\u5BFC\u822A" }),
-            onNewSession && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
-              "button",
-              {
-                disabled: newSessionPending,
-                onClick: () => void createNewSession(),
-                children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "plus", size: 15 }),
-                  "\u65B0\u5EFA\u753B\u5E03\u4F1A\u8BDD"
-                ]
-              }
-            ),
-            onExit && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("button", { onClick: onExit, "aria-pressed": "true", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "grid", size: 15 }),
-              "\u753B\u5E03\u6A21\u5F0F ",
-              /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { className: "chat-switch-on", children: "\u5F00\u542F" })
-            ] }),
-            onPlugins && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("button", { onClick: onPlugins, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "artifact", size: 15 }),
-              "\u63D2\u4EF6"
-            ] }),
-            (onCreateWorkspace || hostWorkspaces.length > 0 || hostSessions.length > 0) && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(import_jsx_runtime62.Fragment, { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { className: "chat-menu-title divider", children: "\u5DE5\u4F5C\u533A" }),
-              /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-nav-tools", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
-                  "input",
-                  {
-                    "aria-label": "\u641C\u7D22\u4F1A\u8BDD",
-                    placeholder: "\u641C\u7D22\u4F1A\u8BDD",
-                    value: search2,
-                    onChange: (event) => setSearch(event.target.value)
-                  }
-                ),
-                onCreateWorkspace && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
-                  "button",
-                  {
-                    "aria-label": "\u6DFB\u52A0\u5DE5\u4F5C\u533A",
-                    title: "\u6DFB\u52A0\u5DE5\u4F5C\u533A",
-                    onClick: () => void onCreateWorkspace().catch(
-                      (error) => setNavError(
-                        error instanceof Error ? error.message : String(error)
-                      )
-                    ),
-                    children: /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "plus", size: 16 })
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-session-list", children: [
-                hostWorkspaces.map((workspace) => {
-                  const sessions = workspace.sessionIds.map(
-                    (id) => hostSessions.find((session) => session.id === id)
-                  ).filter(
-                    (session) => Boolean(session)
-                  );
-                  const matching = sessions.filter(
-                    (session) => session.title.toLocaleLowerCase().includes(search2.toLocaleLowerCase())
-                  );
-                  if (search2 && !matching.length && !workspace.title.toLocaleLowerCase().includes(search2.toLocaleLowerCase()))
-                    return null;
-                  return /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-workspace-group", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
-                      "button",
-                      {
-                        onClick: () => void onOpenWorkspace?.(workspace.id).catch(
-                          (error) => setNavError(
-                            error instanceof Error ? error.message : String(error)
-                          )
-                        ),
-                        children: [
-                          /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "home", size: 15 }),
-                          /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { children: workspace.title })
-                        ]
-                      }
-                    ),
-                    onNewSession && !search2 && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
-                      "button",
-                      {
-                        className: "chat-session-row",
-                        disabled: newSessionPending,
-                        onClick: () => void createNewSession(workspace.id),
-                        children: [
-                          /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "plus", size: 14 }),
-                          /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { children: "\u5728\u6B64\u5DE5\u4F5C\u533A\u65B0\u5EFA\u753B\u5E03\u4F1A\u8BDD" })
-                        ]
-                      }
-                    ),
-                    (search2 ? matching : sessions).map((session) => /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
-                      "button",
-                      {
-                        className: "chat-session-row",
-                        "aria-current": state.sessionId === session.id ? "page" : void 0,
-                        onClick: () => switchSession(session.id),
-                        children: /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { children: session.title })
-                      },
-                      session.id
-                    ))
-                  ] }, workspace.id);
-                }),
-                hostSessions.filter(
-                  (session) => !hostWorkspaces.some(
-                    (workspace) => workspace.sessionIds.includes(session.id)
-                  ) && session.title.toLocaleLowerCase().includes(search2.toLocaleLowerCase())
-                ).map((session) => /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
-                  "button",
-                  {
-                    "aria-current": state.sessionId === session.id ? "page" : void 0,
-                    onClick: () => switchSession(session.id),
-                    children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "agent", size: 15 }),
-                      /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { children: session.title })
-                    ]
-                  },
-                  session.id
-                ))
-              ] })
-            ] }),
-            navError && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("p", { className: "chat-nav-error", role: "alert", children: navError }),
-            onLegacy && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(import_jsx_runtime62.Fragment, { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { className: "chat-menu-title divider", children: "\u65E7\u753B\u5E03" }),
-              /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("button", { onClick: onLegacy, children: "\u6253\u5F00\u8282\u70B9\u753B\u5E03" })
-            ] }),
-            state.legacyReplies?.length ? /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
-              "button",
-              {
-                onClick: () => {
-                  const blob = new Blob(
-                    [JSON.stringify(state.legacyReplies, null, 2)],
-                    { type: "application/json" }
-                  );
-                  const url = URL.createObjectURL(blob);
-                  const link3 = document.createElement("a");
-                  link3.href = url;
-                  link3.download = "canvas-before-history-repair.json";
-                  link3.click();
-                  setTimeout(() => URL.revokeObjectURL(url), 1e3);
-                },
-                children: [
-                  "\u5BFC\u51FA\u5347\u7EA7\u524D\u539F\u6587\uFF08",
-                  state.legacyReplies.length,
-                  " \u6761\uFF09"
-                ]
-              }
-            ) : null,
-            /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { className: "chat-menu-title divider", children: "\u89C6\u56FE" }),
-            /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
-              "button",
-              {
-                "aria-pressed": iuiEnabled,
-                onClick: () => setIuiEnabled((value) => !value),
-                children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "artifact", size: 15 }),
-                  "\u753B\u5E03 IUI \u6E32\u67D3",
-                  " ",
-                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { className: "chat-switch-on", children: iuiEnabled ? "\u5F00\u542F" : "\u5173\u95ED" })
-                ]
-              }
-            ),
-            /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-zoom", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
-                "button",
-                {
-                  "aria-label": "\u7F29\u5C0F",
-                  onClick: () => zoom(
-                    v.zoom / 1.2,
-                    stage.current?.clientWidth ?? 600,
-                    stage.current?.clientHeight ?? 400
-                  ),
-                  children: /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "minus", size: 15 })
-                }
+          mode === "mock" && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { className: "chat-mode mock", title: "\u672C\u5730\u6A21\u62DF\uFF0C\u4E0D\u53D1\u9001\u6A21\u578B\u8BF7\u6C42", children: "MOCK" }),
+          menu === "nav" && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+            CanvasSidebar,
+            {
+              icons: sidebarIcons,
+              sessions: hostSessions,
+              workspaces: hostWorkspaces,
+              currentSessionId: state.sessionId,
+              newSessionPending,
+              navError,
+              iuiEnabled,
+              zoom: v.zoom,
+              legacyReplies: state.legacyReplies,
+              onNewSession: () => void createNewSession(),
+              onNewSessionInWorkspace: onNewSession ? (workspaceId2) => void createNewSession(workspaceId2) : void 0,
+              onSwitchSession: switchSession,
+              onOpenWorkspace: onOpenWorkspace ? (workspaceId2) => {
+                setNavError("");
+                void onOpenWorkspace(workspaceId2).catch(
+                  (error) => setNavError(
+                    error instanceof Error ? error.message : String(error)
+                  )
+                );
+              } : void 0,
+              onCreateWorkspace: onCreateWorkspace ? () => {
+                setNavError("");
+                void onCreateWorkspace().catch(
+                  (error) => setNavError(
+                    error instanceof Error ? error.message : String(error)
+                  )
+                );
+              } : void 0,
+              onClose: () => setMenu(null),
+              onPlugins,
+              onSchedules,
+              onLegacy,
+              onToggleIui: () => setIuiEnabled((value) => !value),
+              onZoomOut: () => zoom(
+                v.zoom / 1.2,
+                stage.current?.clientWidth ?? 600,
+                stage.current?.clientHeight ?? 400
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("span", { children: [
-                Math.round(v.zoom * 100),
-                "%"
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
-                "button",
-                {
-                  "aria-label": "\u653E\u5927",
-                  onClick: () => zoom(
-                    v.zoom * 1.2,
-                    stage.current?.clientWidth ?? 600,
-                    stage.current?.clientHeight ?? 400
-                  ),
-                  children: /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "plus", size: 15 })
-                }
-              )
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
-              "button",
-              {
-                disabled: !state.replies.length,
-                title: "\u6309\u5F53\u524D\u53EF\u7528\u5BBD\u5EA6\u6574\u7406\u5168\u90E8\u81EA\u52A8\u56DE\u590D\uFF1B\u4FDD\u7559\u624B\u52A8\u4F4D\u7F6E\uFF0C\u5185\u5BB9\u8D85\u51FA\u65F6\u5411\u4E0B\u5EF6\u4F38",
-                onClick: arrangeViewport,
-                children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "fit", size: 15 }),
-                  "\u6309\u89C6\u53E3\u81EA\u52A8\u6392\u5E03"
-                ]
-              }
-            ),
-            /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
-              "button",
-              {
-                onClick: () => {
-                  stopCamera();
-                  update((current2) => ({
-                    ...current2,
-                    viewport: { x: 64, y: 104, zoom: 1 }
-                  }));
-                },
-                children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "fit", size: 15 }),
-                  "\u91CD\u7F6E\u89C6\u56FE"
-                ]
-              }
-            )
-          ] }),
-          menu === "account" && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
+              onZoomIn: () => zoom(
+                v.zoom * 1.2,
+                stage.current?.clientWidth ?? 600,
+                stage.current?.clientHeight ?? 400
+              ),
+              onArrangeReplies: state.replies.length ? arrangeViewport : void 0,
+              onResetView: () => {
+                stopCamera();
+                update((current2) => ({
+                  ...current2,
+                  viewport: { x: 64, y: 104, zoom: 1 }
+                }));
+              },
+              onExportLegacy: state.legacyReplies?.length ? () => {
+                const blob = new Blob(
+                  [JSON.stringify(state.legacyReplies, null, 2)],
+                  { type: "application/json" }
+                );
+                const url = URL.createObjectURL(blob);
+                const link3 = document.createElement("a");
+                link3.href = url;
+                link3.download = "canvas-before-history-repair.json";
+                link3.click();
+                setTimeout(() => URL.revokeObjectURL(url), 1e3);
+              } : void 0
+            }
+          ),
+          menu === "account" && /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
             "div",
             {
               className: "chat-menu account",
               role: "dialog",
               "aria-label": "\u8D26\u6237\u4E0E\u7248\u672C",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { className: "chat-menu-title", children: "\u8D26\u6237" }),
-                accountActions ? /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(import_jsx_runtime62.Fragment, { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { className: "chat-menu-title", children: "\u8D26\u6237" }),
+                accountActions ? /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(import_jsx_runtime64.Fragment, { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                     "button",
                     {
                       onClick: accountActions.settings.run,
@@ -24913,7 +25752,7 @@ function ChatCanvas({
                       children: accountActions.settings.label
                     }
                   ),
-                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                     "button",
                     {
                       onClick: accountActions.version.run,
@@ -24921,14 +25760,14 @@ function ChatCanvas({
                       children: accountActions.version.label
                     }
                   ),
-                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("p", { className: "chat-menu-note", children: "\u8D26\u6237\u4FE1\u606F\u548C\u5E94\u7528\u7248\u672C\u7531 DSH \u539F\u751F\u8BBE\u7F6E\u7BA1\u7406\u3002" })
-                ] }) : /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("p", { className: "chat-menu-note", children: "MOCK \u6F14\u793A\u6CA1\u6709\u8D26\u6237\uFF0C\u4E0D\u4F1A\u8BFB\u53D6\u6216\u914D\u7F6E\u4EFB\u4F55\u5BC6\u94A5\u3002" }),
-                /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { className: "chat-menu-title divider", children: "Canvas 0.2.4-experimental.1" })
+                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-menu-note", children: "\u8D26\u6237\u4FE1\u606F\u548C\u5E94\u7528\u7248\u672C\u7531 DSH \u539F\u751F\u8BBE\u7F6E\u7BA1\u7406\u3002" })
+                ] }) : /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-menu-note", children: "MOCK \u6F14\u793A\u6CA1\u6709\u8D26\u6237\uFF0C\u4E0D\u4F1A\u8BFB\u53D6\u6216\u914D\u7F6E\u4EFB\u4F55\u5BC6\u94A5\u3002" }),
+                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { className: "chat-menu-title divider", children: "Canvas 0.2.4-experimental.2" })
               ]
             }
           )
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
           "div",
           {
             ref: stage,
@@ -24947,7 +25786,7 @@ function ChatCanvas({
               "--chat-grid-x": `${v.x}px`,
               "--chat-grid-y": `${v.y}px`
             },
-            children: /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+            children: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
               "div",
               {
                 className: "chat-world",
@@ -24956,12 +25795,12 @@ function ChatCanvas({
                 },
                 children: state.replies.map((reply, index2) => {
                   const replyTime = formatReplyTime(reply.timestamp, calendarNow);
-                  return /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                  return /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                     "div",
                     {
                       className: "chat-reply-slot",
                       style: reply.position ? { height: reply.position.slotHeight } : void 0,
-                      children: /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
+                      children: /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
                         "article",
                         {
                           className: "chat-reply",
@@ -24977,13 +25816,13 @@ function ChatCanvas({
                           tabIndex: 0,
                           "aria-label": replyTime ? `\u56DE\u590D \xB7 ${replyTime.full}` : "\u56DE\u590D",
                           children: [
-                            /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
+                            /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
                               "div",
                               {
                                 className: "chat-reply-meta",
                                 title: "\u4F7F\u7528\u56DE\u590D\u624B\u67C4\u79FB\u52A8\uFF1B\u6309\u4F4F\u7A7A\u683C\u6216\u4F7F\u7528\u9F20\u6807\u4E2D\u952E\u53EF\u5E73\u79FB\u753B\u5E03",
                                 children: [
-                                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                                     "button",
                                     {
                                       type: "button",
@@ -25007,7 +25846,7 @@ function ChatCanvas({
                                           direction[1] * step / v.zoom
                                         );
                                       },
-                                      children: /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
+                                      children: /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
                                         "svg",
                                         {
                                           width: "12",
@@ -25016,18 +25855,18 @@ function ChatCanvas({
                                           fill: "currentColor",
                                           "aria-hidden": "true",
                                           children: [
-                                            /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("circle", { cx: "4", cy: "2", r: "1" }),
-                                            /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("circle", { cx: "8", cy: "2", r: "1" }),
-                                            /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("circle", { cx: "4", cy: "6", r: "1" }),
-                                            /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("circle", { cx: "8", cy: "6", r: "1" }),
-                                            /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("circle", { cx: "4", cy: "10", r: "1" }),
-                                            /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("circle", { cx: "8", cy: "10", r: "1" })
+                                            /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("circle", { cx: "4", cy: "2", r: "1" }),
+                                            /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("circle", { cx: "8", cy: "2", r: "1" }),
+                                            /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("circle", { cx: "4", cy: "6", r: "1" }),
+                                            /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("circle", { cx: "8", cy: "6", r: "1" }),
+                                            /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("circle", { cx: "4", cy: "10", r: "1" }),
+                                            /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("circle", { cx: "8", cy: "10", r: "1" })
                                           ]
                                         }
                                       )
                                     }
                                   ),
-                                  replyTime && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                                  replyTime && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                                     "time",
                                     {
                                       dateTime: new Date(reply.timestamp).toISOString(),
@@ -25035,13 +25874,13 @@ function ChatCanvas({
                                       children: replyTime.short
                                     }
                                   ),
-                                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { className: `chat-reply-status ${reply.status}`, children: reply.status === "running" ? "\u751F\u6210\u4E2D" : reply.status === "done" ? "\u5B8C\u6210" : reply.status === "stopped" ? mode === "dsh" ? "\u5DF2\u4E2D\u65AD\u89C2\u5BDF" : "\u5DF2\u505C\u6B62" : "\u5931\u8D25" })
+                                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { className: `chat-reply-status ${reply.status}`, children: reply.status === "running" ? "\u751F\u6210\u4E2D" : reply.status === "done" ? "\u5B8C\u6210" : reply.status === "stopped" ? mode === "dsh" ? "\u5DF2\u4E2D\u65AD\u89C2\u5BDF" : "\u5DF2\u505C\u6B62" : "\u5931\u8D25" })
                                 ]
                               }
                             ),
-                            /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-reply-surface", children: [
-                              reply.status === "running" && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(ReasoningView, { text: reply.reasoning ?? "", running: true }),
-                              (reply.body || reply.status !== "running" && reply.reasoning) && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                            /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-reply-surface", children: [
+                              reply.status === "running" && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(ReasoningView, { text: reply.reasoning ?? "", running: true }),
+                              (reply.body || reply.status !== "running" && reply.reasoning) && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                                 ReplyContent,
                                 {
                                   text: reply.body,
@@ -25062,14 +25901,14 @@ function ChatCanvas({
                                   onIuiResource: resolveImage ? (request) => resolveImage(request, state.sessionId) : void 0
                                 }
                               ),
-                              reply.status === "running" && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                              reply.status === "running" && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                                 "div",
                                 {
                                   className: "chat-stream-indicator",
                                   "aria-label": "\u6B63\u5728\u6D41\u5F0F\u8F93\u51FA"
                                 }
                               ),
-                              reply.error && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("p", { className: "chat-reply-error", role: "alert", children: reply.error })
+                              reply.error && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-reply-error", role: "alert", children: reply.error })
                             ] })
                           ]
                         }
@@ -25082,15 +25921,15 @@ function ChatCanvas({
             )
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
           "div",
           {
             className: `chat-dock${useNativeComposer ? " is-native" : ""}`,
             ref: dock,
             children: [
-              state.replies.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-user-history-frame", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { className: "chat-user-history-glass", "aria-hidden": "true" }),
-                /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+              state.replies.length > 0 && /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-user-history-frame", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { className: "chat-user-history-glass", "aria-hidden": "true" }),
+                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                   "aside",
                   {
                     ref: userRail,
@@ -25117,7 +25956,7 @@ function ChatCanvas({
                     onPointerUp: panEnd,
                     onPointerCancel: panEnd,
                     onLostPointerCapture: panEnd,
-                    children: userGroups.map((group) => /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                    children: userGroups.map((group) => /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                       "div",
                       {
                         className: "chat-user-message-group",
@@ -25128,7 +25967,7 @@ function ChatCanvas({
                             message.timestamp,
                             calendarNow
                           );
-                          return /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)(
+                          return /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
                             "div",
                             {
                               className: "chat-user-message",
@@ -25162,8 +26001,8 @@ function ChatCanvas({
                                 locatePair(message.pairKey);
                               },
                               children: [
-                                /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-user-message-stack", children: [
-                                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                                /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-user-message-stack", children: [
+                                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                                     UserMessageMedia,
                                     {
                                       attachments: message.attachments,
@@ -25174,9 +26013,9 @@ function ChatCanvas({
                                       formatFileMeta: userChrome?.formatFileMeta
                                     }
                                   ),
-                                  message.text && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("div", { className: "chat-user-message-bubble", children: message.text })
+                                  message.text && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { className: "chat-user-message-bubble", children: message.text })
                                 ] }),
-                                /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                                   UserMessageActions,
                                   {
                                     text: message.text,
@@ -25200,10 +26039,10 @@ function ChatCanvas({
                   }
                 )
               ] }),
-              useNativeComposer ? /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-native-composer", "aria-label": "\u753B\u5E03\u8F93\u5165", children: [
-                nativeComposer ?? /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-native-composer-wait", role: "status", children: [
+              useNativeComposer ? /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-native-composer", "aria-label": "\u753B\u5E03\u8F93\u5165", children: [
+                nativeComposer ?? /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-native-composer-wait", role: "status", children: [
                   runError || "\u6B63\u5728\u51C6\u5907 DSH \u8F93\u5165\u2026",
-                  runError && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                  runError && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                     "button",
                     {
                       type: "button",
@@ -25212,10 +26051,10 @@ function ChatCanvas({
                     }
                   )
                 ] }),
-                storageError && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("p", { className: "chat-composer-error", role: "alert", children: storageError }),
-                historyNotice && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("p", { className: "chat-composer-notice", role: "status", children: historyNotice })
-              ] }) : /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-composer", "aria-label": "\u753B\u5E03\u8F93\u5165", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                storageError && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-composer-error", role: "alert", children: storageError }),
+                historyNotice && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-composer-notice", role: "status", children: historyNotice })
+              ] }) : /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-composer", "aria-label": "\u753B\u5E03\u8F93\u5165", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                   "textarea",
                   {
                     ref: composerInput,
@@ -25232,18 +26071,18 @@ function ChatCanvas({
                     }
                   }
                 ),
-                /* @__PURE__ */ (0, import_jsx_runtime62.jsxs)("div", { className: "chat-composer-footer", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("span", { children: mode === "mock" ? "\u4E0D\u53D1\u9001\u6A21\u578B\u8BF7\u6C42" : state.sessionId ? "" : "\u9996\u6B21\u53D1\u9001\u5C06\u521B\u5EFA DSH \u4F1A\u8BDD" }),
-                  busy ? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)("div", { className: "chat-composer-footer", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("span", { children: mode === "mock" ? "\u4E0D\u53D1\u9001\u6A21\u578B\u8BF7\u6C42" : state.sessionId ? "" : "\u9996\u6B21\u53D1\u9001\u5C06\u521B\u5EFA DSH \u4F1A\u8BDD" }),
+                  busy ? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                     "button",
                     {
                       className: "chat-stop",
                       "aria-label": "\u505C\u6B62\u751F\u6210",
                       title: "\u505C\u6B62\u751F\u6210",
                       onClick: () => void stop(),
-                      children: /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "stop", size: 16 })
+                      children: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(Icon, { name: "stop", size: 16 })
                     }
-                  ) : /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(
+                  ) : /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
                     "button",
                     {
                       className: "chat-send",
@@ -25251,13 +26090,13 @@ function ChatCanvas({
                       title: "\u53D1\u9001 \xB7 \u2318/Ctrl + Enter",
                       disabled: !draft.trim(),
                       onClick: () => void send(),
-                      children: sendIcon ?? /* @__PURE__ */ (0, import_jsx_runtime62.jsx)(Icon, { name: "arrow-up", size: 18 })
+                      children: sendIcon ?? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(Icon, { name: "arrow-up", size: 18 })
                     }
                   )
                 ] }),
-                runError && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("p", { className: "chat-composer-error", role: "alert", children: runError }),
-                historyNotice && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("p", { className: "chat-composer-notice", role: "status", children: historyNotice }),
-                storageError && /* @__PURE__ */ (0, import_jsx_runtime62.jsx)("p", { className: "chat-composer-error", role: "alert", children: storageError })
+                runError && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-composer-error", role: "alert", children: runError }),
+                historyNotice && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-composer-notice", role: "status", children: historyNotice }),
+                storageError && /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("p", { className: "chat-composer-error", role: "alert", children: storageError })
               ] })
             ]
           }
@@ -25267,8 +26106,28 @@ function ChatCanvas({
   );
 }
 
+// src/host/native-sidebar-icons.tsx
+var import_dsh_client_ui_primitives = require("@deepseek-ai/dsh-client-ui-primitives");
+var import_jsx_runtime65 = require("react/jsx-runtime");
+function createNativeSidebarIcons() {
+  return {
+    newSession: /* @__PURE__ */ (0, import_jsx_runtime65.jsx)(import_dsh_client_ui_primitives.IconNewChatOutlineMedium, { size: 14 }),
+    canvas: /* @__PURE__ */ (0, import_jsx_runtime65.jsx)(CanvasIcon, { size: 16 }),
+    plugins: /* @__PURE__ */ (0, import_jsx_runtime65.jsx)(import_dsh_client_ui_primitives.IconSparkleRegular, { size: 16 }),
+    schedules: /* @__PURE__ */ (0, import_jsx_runtime65.jsx)(import_dsh_client_ui_primitives.IconAlarmClockOutlineRegular, { size: 16 }),
+    more: /* @__PURE__ */ (0, import_jsx_runtime65.jsx)(import_dsh_client_ui_primitives.IconAppsAddOutlineRegular, { size: 16 }),
+    search: /* @__PURE__ */ (0, import_jsx_runtime65.jsx)(import_dsh_client_ui_primitives.IconSearchOutlineRegular, { size: 16 }),
+    view: /* @__PURE__ */ (0, import_jsx_runtime65.jsx)(import_dsh_client_ui_primitives.IconSlidersTwoOutlineRegular, { size: 16 }),
+    addWorkspace: /* @__PURE__ */ (0, import_jsx_runtime65.jsx)(import_dsh_client_ui_primitives.IconProjectAddOutlineRegular, { size: 16 }),
+    folder: /* @__PURE__ */ (0, import_jsx_runtime65.jsx)(import_dsh_client_ui_primitives.IconFolderCloseRegular, { size: 16 }),
+    folderOpen: /* @__PURE__ */ (0, import_jsx_runtime65.jsx)(import_dsh_client_ui_primitives.IconFolderOpenRegular, { size: 16 }),
+    plus: /* @__PURE__ */ (0, import_jsx_runtime65.jsx)(import_dsh_client_ui_primitives.IconPlusOutlineRegular, { size: 14 }),
+    close: /* @__PURE__ */ (0, import_jsx_runtime65.jsx)(import_dsh_client_ui_primitives.IconCloseOutlineRegular, { size: 14 })
+  };
+}
+
 // src/client.tsx
-var import_react14 = require("react");
+var import_react15 = require("react");
 
 // src/adapters/dsh.ts
 var emptyStep = () => ({
@@ -28618,6 +29477,49 @@ var styles_default = `.canvas-app {
   letter-spacing: 0.08em;
   margin-left: 6px;
 }
+.canvas-app .chat-canvas-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 8px 0 6px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--dsw-alias-label-secondary, var(--cw-muted));
+  font-size: 12px;
+  line-height: 16px;
+}
+.canvas-app .chat-canvas-switch:hover {
+  background: var(--cw-hover);
+  color: var(--cw-text);
+}
+.canvas-app .chat-canvas-switch:focus-visible {
+  outline: var(--dsw-focus-ring-width, 2px) solid
+    var(--dsw-focus-ring-color, var(--cw-accent));
+  outline-offset: 2px;
+}
+.canvas-app .chat-canvas-switch-track {
+  position: relative;
+  width: 26px;
+  height: 16px;
+  flex: none;
+  border-radius: 999px;
+  background: var(--dsw-alias-state-business-primary, var(--cw-accent));
+}
+.canvas-app .chat-canvas-switch-thumb {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 18%);
+}
+.canvas-app .chat-canvas-switch-label {
+  white-space: nowrap;
+}
 .canvas-app .chat-menu {
   position: absolute;
   top: calc(100% + 10px);
@@ -29272,11 +30174,355 @@ var styles_default = `.canvas-app {
   font-size: 11px;
   line-height: 1.5;
 }
+
+/* Canvas navigation: the DSH sidebar shell and workspace browser geometry,
+   rendered as the canvas popover so it floats over (never shrinks) the stage. */
+.canvas-app .chat-menu.chat-sidebar {
+  width: min(280px, calc(100vw - 44px));
+  height: calc(100dvh - var(--dsh-frame-top-clearance, 0px) - 88px);
+  max-height: none;
+  padding: 8px 10px 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-color: var(--dsw-alias-border-l2, var(--cw-border));
+  background: var(
+    --dsw-specific-sidebar-fill,
+    var(--dsw-alias-bg-layer-1, var(--cw-surface))
+  );
+  color: var(--dsw-alias-label-primary, var(--cw-text));
+  font-size: 14px;
+}
+.canvas-app .chat-sidebar button svg {
+  color: currentColor;
+}
+.canvas-app .chat-menu.chat-sidebar > .chat-sidebar-new {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: calc(100% - 4px);
+  min-height: 38px;
+  margin: 0 2px 12px;
+  padding: 8px 12px;
+  border: 0.5px solid var(--dsw-alias-border-l3, var(--cw-border));
+  border-radius: var(--dsw-radius-md, 8px);
+  background: var(--dsw-alias-button-elevated-fill, var(--cw-bg));
+  color: var(--dsw-alias-label-primary, var(--cw-text));
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+}
+.canvas-app .chat-menu.chat-sidebar > .chat-sidebar-new:hover:not(:disabled) {
+  background: var(--dsw-alias-button-floating-hover, var(--cw-hover));
+}
+.canvas-app .chat-sidebar-new-icon {
+  display: inline-flex;
+  flex: none;
+}
+.canvas-app .chat-sidebar-nav {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 0 8px;
+}
+.canvas-app .chat-sidebar-nav-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: calc(100% - 4px);
+  min-height: 36px;
+  margin: 0 2px;
+  padding: 7px 8px;
+  border-radius: var(--dsw-radius-md, 8px);
+  color: var(--dsw-alias-label-primary, var(--cw-text));
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+}
+.canvas-app .chat-sidebar-nav-row:hover,
+.canvas-app .chat-sidebar-nav-row.is-active,
+.canvas-app .chat-sidebar-nav-row[aria-expanded="true"] {
+  background: var(--dsw-alias-interactive-bg-hover, var(--cw-hover));
+}
+.canvas-app .chat-sidebar-nav-icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--dsw-alias-label-primary, var(--cw-text));
+}
+.canvas-app .chat-sidebar-nav-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.canvas-app .chat-sidebar-more {
+  flex: none;
+  max-height: 42%;
+  margin: 0 2px 8px;
+  padding: 4px 0 0;
+  overflow-y: auto;
+  border-top: 1px solid var(--dsw-alias-border-l3, var(--cw-border));
+  scrollbar-width: thin;
+}
+.canvas-app .chat-sidebar-more-title {
+  padding: 6px 8px 2px;
+  color: var(--dsw-alias-label-caption, var(--cw-faint));
+  font-size: 11px;
+  line-height: 16px;
+}
+.canvas-app .chat-sidebar-more > button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 32px;
+  padding: 5px 8px;
+  border-radius: var(--dsw-radius-sm, 6px);
+  color: var(--dsw-alias-label-secondary, var(--cw-muted));
+  font-size: 13px;
+  line-height: 20px;
+  text-align: left;
+}
+.canvas-app .chat-sidebar-more > button:hover {
+  background: var(--dsw-alias-interactive-bg-hover, var(--cw-hover));
+}
+.canvas-app .chat-sidebar-switch {
+  margin-left: auto;
+  color: var(--dsw-alias-state-business-primary, var(--cw-accent));
+  font-size: 11px;
+}
+.canvas-app .chat-sidebar-region {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+.canvas-app .chat-sidebar-section {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 4px;
+  height: 36px;
+  margin: 2px 0 4px;
+  padding-left: 4px;
+  color: var(--dsw-alias-label-tertiary, var(--cw-faint));
+}
+.canvas-app .chat-sidebar-section-label {
+  flex: none;
+  padding-left: 4px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.canvas-app .chat-sidebar-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+}
+.canvas-app .chat-sidebar-head-actions > button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border-radius: var(--dsw-radius-sm, 6px);
+  color: var(--dsw-alias-label-secondary, var(--cw-muted));
+}
+.canvas-app .chat-sidebar-head-actions > button:hover,
+.canvas-app .chat-sidebar-head-actions > button[aria-expanded="true"] {
+  background: var(--dsw-alias-interactive-bg-hover, var(--cw-hover));
+  color: var(--dsw-alias-label-primary, var(--cw-text));
+}
+.canvas-app .chat-sidebar-search {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 0;
+  height: 30px;
+  margin-right: 2px;
+  padding: 0 2px 0 6px;
+  border: 0.5px solid var(--dsw-alias-border-l4, var(--cw-border));
+  border-radius: var(--dsw-radius-md, 8px);
+  color: var(--dsw-alias-label-caption, var(--cw-faint));
+}
+.canvas-app .chat-sidebar-search-icon {
+  display: inline-flex;
+  flex: none;
+}
+.canvas-app .chat-sidebar-search input {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  height: 100%;
+  margin-left: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--dsw-alias-label-primary, var(--cw-text));
+  font-size: 13px;
+  line-height: 18px;
+  outline: none;
+}
+.canvas-app .chat-sidebar-search input::placeholder {
+  color: var(--dsw-alias-label-tertiary, var(--cw-faint));
+}
+.canvas-app .chat-sidebar-search > button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: var(--dsw-radius-sm, 6px);
+  color: var(--dsw-alias-label-secondary, var(--cw-muted));
+}
+.canvas-app .chat-sidebar-search > button:hover {
+  background: var(--dsw-alias-interactive-bg-hover, var(--cw-hover));
+}
+.canvas-app .chat-sidebar-view-menu {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 2px 4px;
+  padding: 4px;
+  border: 1px solid var(--dsw-alias-border-l3, var(--cw-border));
+  border-radius: var(--dsw-radius-md, 8px);
+  background: var(--dsw-alias-bg-layer-1, var(--cw-surface));
+  box-shadow: var(--dsw-elevation-soft, 0 8px 24px #0000001a);
+}
+.canvas-app .chat-sidebar-view-menu > button {
+  min-height: 28px;
+  padding: 4px 8px;
+  border-radius: var(--dsw-radius-sm, 6px);
+  color: var(--dsw-alias-label-secondary, var(--cw-muted));
+  font-size: 13px;
+  line-height: 20px;
+  text-align: left;
+}
+.canvas-app .chat-sidebar-view-menu > button:hover,
+.canvas-app .chat-sidebar-view-menu > button[aria-checked="true"] {
+  background: var(--dsw-alias-interactive-bg-hover, var(--cw-hover));
+  color: var(--dsw-alias-label-primary, var(--cw-text));
+}
+.canvas-app .chat-sidebar-list {
+  flex: 1;
+  min-height: 0;
+  margin-right: -2px;
+  padding: 0 2px 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.canvas-app .chat-sidebar-list .chat-workspace-group + .chat-workspace-group {
+  margin-top: 4px;
+}
+.canvas-app .chat-sidebar-project {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 34px;
+  padding: 0 8px;
+  border-radius: var(--dsw-radius-md, 8px);
+  color: var(--dsw-alias-label-primary, var(--cw-text));
+  font-size: 14px;
+  line-height: 20px;
+  text-align: left;
+}
+.canvas-app .chat-sidebar-project:hover {
+  background: var(--dsw-alias-interactive-bg-hover, var(--cw-hover));
+}
+.canvas-app .chat-sidebar-project-icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--dsw-alias-label-tertiary, var(--cw-faint));
+}
+.canvas-app .chat-sidebar-project-icon[data-current="true"] {
+  color: var(--dsw-alias-state-business-primary, var(--cw-accent));
+}
+.canvas-app .chat-sidebar-project-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.canvas-app .chat-sidebar-project-label {
+  cursor: default;
+  color: var(--dsw-alias-label-tertiary, var(--cw-faint));
+}
+.canvas-app .chat-sidebar-project-label:hover {
+  background: transparent;
+}
+.canvas-app .chat-sidebar .chat-workspace-group .chat-session-row {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  height: 32px;
+  padding: 0 8px 0 34px;
+  border-radius: var(--dsw-radius-md, 8px);
+  color: var(--dsw-alias-label-primary, var(--cw-text));
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+}
+.canvas-app .chat-sidebar .chat-workspace-group .chat-session-row:hover,
+.canvas-app
+  .chat-sidebar
+  .chat-workspace-group
+  .chat-session-row[aria-current="page"] {
+  background: var(--dsw-alias-interactive-bg-hover, var(--cw-hover));
+  color: var(--dsw-alias-label-primary, var(--cw-text));
+}
+.canvas-app .chat-sidebar-session-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.canvas-app .chat-sidebar-session-meta {
+  flex: none;
+  max-width: 42%;
+  overflow: hidden;
+  color: var(--dsw-alias-label-tertiary, var(--cw-faint));
+  font-size: 12px;
+  line-height: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.canvas-app .chat-sidebar .chat-workspace-group .chat-sidebar-session-create {
+  gap: 4px;
+  color: var(--dsw-alias-label-tertiary, var(--cw-faint));
+}
+.canvas-app .chat-sidebar-session-plus {
+  display: inline-flex;
+  flex: none;
+}
+.canvas-app .chat-sidebar-empty {
+  margin: 10px 12px;
+  color: var(--dsw-alias-label-tertiary, var(--cw-faint));
+  font-size: 13px;
+  line-height: 18px;
+}
 `;
 
 // src/host/native-ui.tsx
-var import_dsh_client_ui_primitives = require("@deepseek-ai/dsh-client-ui-primitives");
-var import_jsx_runtime63 = require("react/jsx-runtime");
+var import_dsh_client_ui_primitives2 = require("@deepseek-ai/dsh-client-ui-primitives");
+var import_jsx_runtime66 = require("react/jsx-runtime");
 var markdownLabels = {
   code: { copyLabel: "\u590D\u5236", copiedLabel: "\u5DF2\u590D\u5236" },
   footnotes: "\u811A\u6CE8"
@@ -29289,31 +30535,31 @@ var imageLabels = {
   close: "\u5173\u95ED\u56FE\u7247\u9884\u89C8"
 };
 function renderNativeImagePreview(src, alt, onClose) {
-  return /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(import_dsh_client_ui_primitives.ImageLightbox, { src, alt, labels: imageLabels, onClose });
+  return /* @__PURE__ */ (0, import_jsx_runtime66.jsx)(import_dsh_client_ui_primitives2.ImageLightbox, { src, alt, labels: imageLabels, onClose });
 }
 function NativeBrand() {
-  return /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(import_dsh_client_ui_primitives.BrandWordmark, { size: 24 });
+  return /* @__PURE__ */ (0, import_jsx_runtime66.jsx)(import_dsh_client_ui_primitives2.BrandWordmark, { size: 24 });
 }
 function NativeAvatar() {
-  return /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(import_dsh_client_ui_primitives.IconUserOutlineMedium, { size: 16 });
+  return /* @__PURE__ */ (0, import_jsx_runtime66.jsx)(import_dsh_client_ui_primitives2.IconUserOutlineMedium, { size: 16 });
 }
 function NativeNavigationIcon() {
-  return /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(import_dsh_client_ui_primitives.IconPanelLeftOutlineRegular, { size: 18 });
+  return /* @__PURE__ */ (0, import_jsx_runtime66.jsx)(import_dsh_client_ui_primitives2.IconPanelLeftOutlineRegular, { size: 18 });
 }
 function NativeSendIcon() {
-  return /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(import_dsh_client_ui_primitives.IconSendOutlineMedium, { size: 16 });
+  return /* @__PURE__ */ (0, import_jsx_runtime66.jsx)(import_dsh_client_ui_primitives2.IconSendOutlineMedium, { size: 16 });
 }
 function renderNativeMarkdown(text8, streaming = false, cwd2) {
   const pathImages = typeof document === "undefined" ? void 0 : createNativePathImages(document.baseURI, cwd2);
-  return /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
-    import_dsh_client_ui_primitives.MarkdownDelegateProvider,
+  return /* @__PURE__ */ (0, import_jsx_runtime66.jsx)(
+    import_dsh_client_ui_primitives2.MarkdownDelegateProvider,
     {
       fileImages: pathImages ? {
         resolve: pathImages.resolve,
         labels: imageLabels
       } : void 0,
-      children: /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
-        import_dsh_client_ui_primitives.MarkdownText,
+      children: /* @__PURE__ */ (0, import_jsx_runtime66.jsx)(
+        import_dsh_client_ui_primitives2.MarkdownText,
         {
           text: text8,
           streaming,
@@ -29343,7 +30589,7 @@ function createNativeAccountActions(returnToNative) {
 }
 
 // src/client.tsx
-var import_jsx_runtime64 = require("react/jsx-runtime");
+var import_jsx_runtime67 = require("react/jsx-runtime");
 var name2 = "dsh-canvas-workspace";
 var inject = [
   "slots",
@@ -29357,6 +30603,7 @@ var inject = [
   "uiConversation"
 ];
 var PANEL_ID = "canvas-workspace";
+var NATIVE_SIDEBAR_ICONS = createNativeSidebarIcons();
 var openRequest = null;
 var openRequestToken = 0;
 var openRequestListeners = /* @__PURE__ */ new Set();
@@ -29383,15 +30630,15 @@ function CanvasOverlay(props) {
   const active = props.usePanelInfo((info) => info.activePanelId === PANEL_ID);
   const sessionList = props.useSessions((state) => state);
   const workspaceList = props.useWorkspaces((state) => state);
-  const requestedSession = (0, import_react14.useSyncExternalStore)(
+  const requestedSession = (0, import_react15.useSyncExternalStore)(
     subscribeOpenRequest,
     getOpenRequest
   );
-  const [legacy, setLegacy] = (0, import_react14.useState)(false);
-  const [canvasSessionId, setCanvasSessionId] = (0, import_react14.useState)();
-  const [composerReference, setComposerReference] = (0, import_react14.useState)();
-  const retained = (0, import_react14.useRef)(/* @__PURE__ */ new Map());
-  (0, import_react14.useEffect)(() => {
+  const [legacy, setLegacy] = (0, import_react15.useState)(false);
+  const [canvasSessionId, setCanvasSessionId] = (0, import_react15.useState)();
+  const [composerReference, setComposerReference] = (0, import_react15.useState)();
+  const retained = (0, import_react15.useRef)(/* @__PURE__ */ new Map());
+  (0, import_react15.useEffect)(() => {
     if (!active || legacy || !canvasSessionId) {
       setComposerReference(void 0);
       return;
@@ -29405,12 +30652,12 @@ function CanvasOverlay(props) {
     }
     setComposerReference(reference);
   }, [active, legacy, canvasSessionId, props.retainSession]);
-  (0, import_react14.useEffect)(() => {
+  (0, import_react15.useEffect)(() => {
     if (active) return;
     for (const reference of retained.current.values()) reference.release();
     retained.current.clear();
   }, [active]);
-  (0, import_react14.useEffect)(
+  (0, import_react15.useEffect)(
     () => () => {
       for (const reference of retained.current.values()) reference.release();
       retained.current.clear();
@@ -29429,17 +30676,18 @@ function CanvasOverlay(props) {
     title: workspace.title,
     sessionIds: [...workspace.sessionIds]
   }));
-  return /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("div", { className: "canvas-frame-overlay", children: legacy ? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime67.jsx)("div", { className: "canvas-frame-overlay", children: legacy ? /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(
     CanvasWorkspace,
     {
       ...props,
       hostSessions,
       onBackToChat: () => setLegacy(false)
     }
-  ) : /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
+  ) : /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(
     ChatCanvas,
     {
       ...props,
+      sidebarIcons: NATIVE_SIDEBAR_ICONS,
       onNewSession: props.createCanvasSession,
       requestedSession,
       onRequestHandled: () => {
@@ -29447,10 +30695,10 @@ function CanvasOverlay(props) {
       },
       hostSessions,
       hostWorkspaces,
-      NativeBrand: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(NativeBrand, {}),
-      avatar: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(NativeAvatar, {}),
-      navIcon: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(NativeNavigationIcon, {}),
-      sendIcon: /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(NativeSendIcon, {}),
+      NativeBrand: /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(NativeBrand, {}),
+      avatar: /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(NativeAvatar, {}),
+      navIcon: /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(NativeNavigationIcon, {}),
+      sendIcon: /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(NativeSendIcon, {}),
       renderMarkdown: (text8, streaming, sessionId) => renderNativeMarkdown(
         text8,
         streaming,
@@ -29459,14 +30707,14 @@ function CanvasOverlay(props) {
       renderImagePreview: renderNativeImagePreview,
       loadUserImage: (attachment, sessionId) => props.loadUserImage(sessionId, attachment),
       userChrome: {
-        renderFileIcon: (name3) => /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(import_dsh_client_ui_primitives2.FileTypeIcon, { path: name3, className: "chat-user-file-icon-glyph" }),
+        renderFileIcon: (name3) => /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(import_dsh_client_ui_primitives3.FileTypeIcon, { path: name3, className: "chat-user-file-icon-glyph" }),
         formatFileMeta: (name3, bytes) => [
-          (0, import_dsh_client_ui_primitives2.fileExtension)(name3).toUpperCase().slice(0, 8),
-          (0, import_dsh_client_ui_primitives2.fileSizeText)(bytes)
+          (0, import_dsh_client_ui_primitives3.fileExtension)(name3).toUpperCase().slice(0, 8),
+          (0, import_dsh_client_ui_primitives3.fileSizeText)(bytes)
         ].filter(Boolean).join(" "),
-        copyText: import_dsh_client_ui_primitives2.writeClipboard,
-        renderCopyIcon: (copied) => copied ? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(import_dsh_client_ui_primitives2.IconCheckOutlineRegular, {}) : /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(import_dsh_client_ui_primitives2.IconCopyOutlineRegular, {}),
-        wrapCopyButton: (button, label) => /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(import_dsh_client_ui_primitives2.Tooltip, { label, side: "bottom", children: button })
+        copyText: import_dsh_client_ui_primitives3.writeClipboard,
+        renderCopyIcon: (copied) => copied ? /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(import_dsh_client_ui_primitives3.IconCheckOutlineRegular, {}) : /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(import_dsh_client_ui_primitives3.IconCopyOutlineRegular, {}),
+        wrapCopyButton: (button, label) => /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(import_dsh_client_ui_primitives3.Tooltip, { label, side: "bottom", children: button })
       },
       resolveImage: (request, sessionId) => resolveNativeImageResource(
         document.baseURI,
@@ -29475,30 +30723,13 @@ function CanvasOverlay(props) {
       ),
       useNativeComposer: props.mode === "dsh",
       onSessionChange: setCanvasSessionId,
-      nativeComposer: props.mode === "dsh" && composerReference?.sessionId === canvasSessionId ? /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(SessionProvider, { session: composerReference, children: props.renderSlot("canvas.composer.native", {}) }) : null,
+      nativeComposer: props.mode === "dsh" && composerReference?.sessionId === canvasSessionId ? /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(SessionProvider, { session: composerReference, children: props.renderSlot("canvas.composer.native", {}) }) : null,
       onLegacy: () => setLegacy(true)
     }
   ) });
 }
-function CanvasIcon({ size }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime64.jsxs)(
-    "svg",
-    {
-      width: size,
-      height: size,
-      viewBox: "0 0 24 24",
-      fill: "none",
-      stroke: "currentColor",
-      strokeWidth: "1.7",
-      "aria-hidden": "true",
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("rect", { x: "3", y: "3", width: "8", height: "8", rx: "2" }),
-        /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("rect", { x: "14", y: "4", width: "7", height: "5", rx: "1.5" }),
-        /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("rect", { x: "13", y: "13", width: "8", height: "8", rx: "2" }),
-        /* @__PURE__ */ (0, import_jsx_runtime64.jsx)("path", { d: "M7 14v4a1 1 0 0 0 1 1h2M16 10v1" })
-      ]
-    }
-  );
+function CanvasPanelIcon({ size }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(CanvasIcon, { size });
 }
 function apply(ctx) {
   const adapter = createDshAdapter(ctx);
@@ -29556,7 +30787,13 @@ function apply(ctx) {
             const path2 = await ctx.uiWorkspace.pickDirectory();
             if (path2) await ctx.workspaces.create({ path: path2 });
           },
-          onPlugins: () => ctx.layout.selectPanel("plugins")
+          onPlugins: () => ctx.layout.selectPanel("plugins"),
+          onSchedules: () => {
+            try {
+              ctx.layout.selectPanel("schedules");
+            } catch {
+            }
+          }
         })
       },
       CanvasOverlay
@@ -29578,7 +30815,7 @@ function apply(ctx) {
         order: -5,
         label: "Canvas \xB7 \u753B\u5E03"
       },
-      CanvasIcon
+      CanvasPanelIcon
     )
   );
   ctx.slots.inject(
@@ -29591,8 +30828,8 @@ function apply(ctx) {
       },
       ({ sessionId, useMenuOpenState }) => {
         const [, setMenuOpen] = useMenuOpenState();
-        return /* @__PURE__ */ (0, import_jsx_runtime64.jsx)(
-          import_dsh_client_ui_primitives2.MenuItemButton,
+        return /* @__PURE__ */ (0, import_jsx_runtime67.jsx)(
+          import_dsh_client_ui_primitives3.MenuItemButton,
           {
             onSelect: () => {
               setMenuOpen(false);
