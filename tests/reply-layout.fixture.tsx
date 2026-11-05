@@ -5,10 +5,32 @@ import { createMockAdapter } from "../src/adapters/mock";
 import "../vendor/deepseek-harness/base.css";
 import "../vendor/deepseek-harness/design-platform.css";
 import "../src/styles.css";
+import type { AgentAdapter, AgentSessionSnapshot } from "../src/core/types";
+declare global {
+  interface Window {
+    __emitCanvasSnapshot?: (snapshot: AgentSessionSnapshot) => void;
+  }
+}
+const mock = createMockAdapter();
+const adapter: AgentAdapter = new URLSearchParams(location.search).has(
+  "stability",
+)
+  ? {
+      ...mock,
+      observeSession(_id, listener) {
+        const emit = (snapshot: AgentSessionSnapshot) => listener(snapshot);
+        window.__emitCanvasSnapshot = emit;
+        return () => {
+          if (window.__emitCanvasSnapshot === emit)
+            delete window.__emitCanvasSnapshot;
+        };
+      },
+    }
+  : mock;
 
 createRoot(document.getElementById("root")!).render(
   <ChatCanvas
-    adapter={createMockAdapter()}
+    adapter={adapter}
     mode="mock"
     hostSessions={[
       { id: "layout-fixture", title: "图片布局测试" },

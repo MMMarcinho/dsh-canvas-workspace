@@ -554,6 +554,14 @@ try {
     .locator(".chat-reply")
     .first()
     .evaluate((node) => node.style.left);
+  await page.locator(".chat-reply .chat-pin-reply").first().click();
+  assert.equal(
+    await page
+      .locator(".chat-reply .chat-pin-reply")
+      .first()
+      .getAttribute("aria-pressed"),
+    "true",
+  );
 
   await page.getByRole("tab", { name: "对话", exact: true }).click();
   await page
@@ -619,16 +627,72 @@ try {
       .first()
       .evaluate((node) => node.style.left),
     manualLeft,
-    "automatic layout preserves manual positions",
+    "automatic layout preserves explicitly pinned positions",
   );
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.waitForTimeout(300);
   await page.screenshot({ path: "artifacts/native-canvas-single-sidebar.png" });
+  for (const [width, height, lines] of [
+    [1440, 1000, 1],
+    [620, 700, 8],
+    [375, 600, 3],
+    [620, 420, 1],
+  ]) {
+    await page.setViewportSize({ width, height });
+    await editor.fill(
+      Array.from({ length: lines }, (_, i) => `输入行 ${i}`).join("\n"),
+    );
+    await page.waitForTimeout(250);
+    const layout = await page.evaluate(() => {
+      const rail = document.querySelector(".chat-user-history");
+      const frame = document.querySelector(".chat-user-history-frame");
+      const seat = document.querySelector("[data-composer-seat]");
+      const r = rail.getBoundingClientRect(),
+        f = frame.getBoundingClientRect(),
+        c = seat.getBoundingClientRect();
+      return {
+        gap: c.top - r.bottom,
+        top: r.top,
+        height: r.height,
+        frameBottom: f.bottom,
+        bottom: r.bottom,
+        padding: getComputedStyle(rail).paddingBottom,
+        bubbleGap:
+          c.top -
+          document
+            .querySelector(".chat-user-message-stack")
+            .getBoundingClientRect().bottom,
+      };
+    });
+    assert.ok(
+      layout.gap >= 3 && layout.gap <= 6,
+      JSON.stringify({ width, height, layout }),
+    );
+    assert.ok(
+      layout.top >= 70 && layout.height > 0,
+      JSON.stringify({ width, height, layout }),
+    );
+    assert.equal(layout.padding, "0px");
+    assert.ok(
+      layout.bubbleGap >= 3 && layout.bubbleGap <= 6,
+      JSON.stringify({ width, height, layout }),
+    );
+  }
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.screenshot({ path: "artifacts/native-rail-gap-fixed.png" });
   await page.reload();
   await canvasTab.waitFor();
   if ((await canvasTab.getAttribute("aria-selected")) !== "true")
     await canvasTab.click();
   await page.locator(".chat-reply").first().waitFor();
+  assert.equal(
+    await page
+      .locator(".chat-reply .chat-pin-reply")
+      .first()
+      .getAttribute("aria-pressed"),
+    "true",
+    "pin survives native host refresh",
+  );
   await menu.click();
   const refreshedDefault = page
     .locator(".chat-sidebar-project")

@@ -319,18 +319,18 @@ try {
         bubbleBottom: lastRect.bottom,
         blurCoreLeft: glassRect.left + 8,
         blurCoreRight: glassRect.right - 8,
-        blurCoreBottom: glassRect.bottom - 8,
+        glassBottom: glassRect.bottom,
       };
     });
     assert.ok(
-      bottom.inset >= 11,
-      `last bubble needs breathing room: ${JSON.stringify(bottom)}`,
+      Math.abs(bottom.inset) <= 1,
+      `last message reaches the list bottom without extra padding: ${JSON.stringify(bottom)}`,
     );
     assert.ok(
       bottom.centerX > bottom.blurCoreLeft &&
         bottom.centerX < bottom.blurCoreRight &&
-        bottom.bubbleBottom < bottom.blurCoreBottom,
-      `last bubble must sit in the blur's solid area: ${JSON.stringify(bottom)}`,
+        bottom.bubbleBottom <= bottom.glassBottom + 1,
+      `last message stays inside its background: ${JSON.stringify(bottom)}`,
     );
     if (count === 3 && width === 1200 && process.env.RAIL_SCREENSHOT) {
       const coverage = await page.evaluate(() => {
@@ -515,7 +515,97 @@ try {
   assert.equal(reducedGlass.filter, "none");
   assert.ok(!reducedGlass.background.includes(" / "));
   assert.deepEqual(errors, []);
-  console.log("rail hit area, three-row scroll, glass and click locate: OK");
+  for (const width of [1200, 620]) {
+    await page.setViewportSize({ width, height: 780 });
+    await page.goto("http://127.0.0.1:5198/?railCount=12&long=1");
+    const target = page.locator('.chat-user-message[data-reply-id="reply-7"]');
+    await target.click();
+    await page.waitForTimeout(350);
+    await page.mouse.move(50, 400);
+    await page.mouse.wheel(0, -70);
+    await page.waitForTimeout(80);
+    if (width === 620) {
+      await page.mouse.move(200, 360);
+      await page.mouse.down({ button: "middle" });
+      await page.mouse.move(80, 360, { steps: 6 });
+      await page.mouse.up({ button: "middle" });
+    }
+    const rail = page.locator(".chat-user-history");
+    await rail.evaluate((node) => {
+      node.scrollTop = 0;
+    });
+    const camera = await page
+      .locator(".chat-world")
+      .evaluate((node) => node.style.transform);
+    const button = page.locator(
+      '.chat-reply[data-reply-id="reply-7"] .chat-locate-message',
+    );
+    await button.focus();
+    await page.keyboard.press("Enter");
+    await page.waitForFunction(
+      () =>
+        document.activeElement?.getAttribute("data-reply-id") === "reply-7" &&
+        document.activeElement?.classList.contains("chat-user-message"),
+    );
+    await page.waitForFunction(() => {
+      const rail = document
+        .querySelector(".chat-user-history")
+        .getBoundingClientRect();
+      const row = document
+        .querySelector('.chat-user-message[data-reply-id="reply-7"]')
+        .getBoundingClientRect();
+      return row.top >= rail.top - 2 && row.top < rail.bottom;
+    });
+    const bounds = await rail.evaluate((node) => {
+      const target = node.querySelector('[data-reply-id="reply-7"]');
+      return {
+        rail: node.getBoundingClientRect().toJSON(),
+        row: target.getBoundingClientRect().toJSON(),
+        scroll: node.scrollTop,
+      };
+    });
+    assert.ok(
+      bounds.scroll > 0 &&
+        bounds.row.top >= bounds.rail.top - 2 &&
+        bounds.row.top < bounds.rail.bottom,
+      JSON.stringify(bounds),
+    );
+    assert.equal(
+      await page
+        .locator(".chat-world")
+        .evaluate((node) => node.style.transform),
+      camera,
+    );
+    assert.equal(await page.evaluate(() => window.scrollY), 0);
+    // A temporarily hidden list resumes the pending request when it reappears.
+    await rail.evaluate((node) => {
+      node.style.display = "none";
+    });
+    await button.click();
+    assert.ok(
+      (await page.locator(".chat-locate-status").innerText()).includes(
+        "空间不足",
+      ),
+    );
+    await rail.evaluate((node) => {
+      node.style.display = "";
+    });
+    await page.waitForFunction(
+      () =>
+        document.querySelector(".chat-locate-status").textContent ===
+        "已定位到对应消息。",
+    );
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await rail.evaluate((node) => {
+      node.scrollTop = 0;
+    });
+    await button.click();
+    assert.ok(await rail.evaluate((node) => node.scrollTop > 0));
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+  }
+  console.log(
+    "rail hit area, three-row scroll, glass, bidirectional locate, hidden-list recovery and zoom: OK",
+  );
 } finally {
   await browser?.close();
   server.kill("SIGTERM");
