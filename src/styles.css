@@ -2903,8 +2903,8 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
-  padding: 0 12px 12px;
-  scroll-padding-block: 0 12px;
+  padding: 0 12px;
+  scroll-padding-block: 0;
   border-radius: inherit;
   background: transparent;
   /* This is only the narrow three-row rail; its gaps handle canvas pan. */
@@ -3680,7 +3680,7 @@
   --dsh-composer-card-max-width: 100%;
 }
 .canvas-conversation-view .chat-dock {
-  bottom: calc(var(--dsh-composer-height, 160px) + 34px);
+  bottom: calc(var(--dsh-composer-height, 160px) + 26px);
 }
 @media (max-width: 640px) {
   [data-conversation-content]:has([data-canvas-conversation-view])
@@ -3691,7 +3691,7 @@
     width: calc(100% - 24px);
   }
   .canvas-conversation-view .chat-dock {
-    bottom: calc(var(--dsh-composer-height, 160px) + 24px);
+    bottom: calc(var(--dsh-composer-height, 160px) + 16px);
   }
 }
 .canvas-conversation-view .chat-external-notices {
@@ -3759,4 +3759,166 @@ html[data-platform="darwin"]
 }
 .canvas-app .chat-layout-action:hover:not(:disabled) {
   background: var(--cw-hover);
+}
+
+/* A valid background/handle press must block selection before React's next paint.
+   Reply text presses never arm this attribute, so selecting and copying still work. */
+.canvas-app .chat-stage[data-canvas-dragging],
+.canvas-app .chat-stage[data-canvas-dragging] * {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+/* Let the native row measure the model's full width and choose its compact
+   presentation; its default 45cqw cap otherwise clips the effort badge first. */
+[data-conversation-content]:has([data-canvas-conversation-view])
+  [data-composer-seat]
+  [data-slot="conversation.input.model"]
+  button[aria-haspopup="menu"] {
+  max-width: none;
+}
+
+.canvas-app .chat-workspace-group {
+  position: relative;
+}
+.canvas-app .chat-sidebar-workspace-create {
+  position: absolute;
+  top: 7px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--cw-muted);
+  cursor: pointer;
+}
+.canvas-app .chat-sidebar-project-title {
+  padding-right: 22px;
+}
+.canvas-app .chat-sidebar-workspace-create:hover {
+  background: var(--cw-hover);
+}
+
+.canvas-conversation-view .chat-user-history-frame {
+  max-height: min(
+    152px,
+    28vh,
+    max(
+      0px,
+      calc(
+        var(--dsh-conversation-viewport-height, 100dvh) -
+          var(--dsh-composer-height, 160px) - 90px
+      )
+    )
+  );
+}
+
+.canvas-app .chat-reply-actions {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  gap: 2px;
+  height: 18px;
+  margin-left: auto;
+}
+.canvas-app .chat-locate-message {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 20px;
+  margin: -1px 0;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--cw-muted);
+  cursor: pointer;
+}
+.canvas-app .chat-locate-message:hover {
+  background: var(--cw-hover);
+  color: var(--cw-text);
+}
+.canvas-app .chat-locate-message:focus-visible {
+  outline: 2px solid var(--cw-accent);
+  outline-offset: 2px;
+}
+.canvas-app .chat-locate-status {
+  position: absolute;
+  z-index: 45;
+  top: 78px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--cw-surface);
+  color: var(--cw-text);
+  font-size: 12px;
+  pointer-events: none;
+}
+.canvas-app .chat-locate-status[data-quiet],
+.canvas-app .chat-locate-status:empty {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/* Keep metadata and Copy in the existing left gutter, instead of reserving an
+   invisible action row beneath every bubble. The bubble's width is unchanged. */
+.canvas-app .chat-user-message {
+  position: relative;
+  gap: 0;
+  min-height: calc(46px + var(--dsh-content-font-delta, 0px));
+  justify-content: flex-end;
+}
+.canvas-app .chat-user-message-actions {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-width: calc(18% - 8px);
+  height: auto;
+  flex-direction: column;
+  gap: 0;
+  justify-content: flex-end;
+}
+.canvas-app .chat-user-message-time {
+  padding-right: 0;
+  line-height: calc(18px + var(--dsh-content-font-delta, 0px));
+}
+
+.canvas-app .chat-pin-reply {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: -1px 0;
+  width: 24px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--cw-muted);
+  cursor: pointer;
+}
+.canvas-app .chat-pin-reply:hover {
+  background: var(--cw-hover);
+  color: var(--cw-text);
+}
+.canvas-app .chat-pin-reply[aria-pressed="true"] {
+  color: var(--cw-accent);
+  background: color-mix(in srgb, var(--cw-accent) 10%, transparent);
+}
+.canvas-app .chat-pin-reply:focus-visible {
+  outline: 2px solid var(--cw-accent);
+  outline-offset: 2px;
+}
+.canvas-app .chat-pan-handle:disabled {
+  cursor: default;
+  opacity: 0.3;
 }

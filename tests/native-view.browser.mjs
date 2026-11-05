@@ -21,6 +21,7 @@ const env = {
   XDG_CONFIG_HOME: resolve(root, "xdg-config"),
   ELECTRON_RUN_AS_NODE: "1",
 };
+await rm(root, { recursive: true, force: true });
 await Promise.all(
   [cwd, env.HOME, env.DSH_HOME, "artifacts"].map((path) =>
     mkdir(path, { recursive: true }),
@@ -126,6 +127,50 @@ await writeFile(
     ),
   ]),
 );
+const archiveId = `session-${randomUUID()}`;
+const childId = `session-${randomUUID()}`;
+const blankId = `session-${randomUUID()}`;
+const extraId = `session-${randomUUID()}`;
+for (const [extra, blank, child] of [
+  [archiveId, false, false],
+  [childId, false, true],
+  [extraId, false, false],
+]) {
+  const extraCwd = extra === extraId ? resolve(root, "other-workdir") : cwd;
+  const dir = resolve(
+    env.DSH_HOME,
+    "sessions",
+    `--${extraCwd.slice(1).replaceAll("/", "-")}--`,
+    extra,
+  );
+  await mkdir(dir, { recursive: true });
+  const header = {
+    ...rows[0],
+    id: extra,
+    ...(extra === extraId ? { cwd: resolve(root, "other-workdir") } : {}),
+    ...(child
+      ? { parentSession: id, delegationDepth: 1, origin: "subagent" }
+      : {}),
+  };
+  await writeFile(
+    resolve(dir, "session.v4.jsonl.zstd"),
+    Buffer.concat([
+      compress(JSON.stringify(header) + "\n"),
+      ...(blank
+        ? []
+        : [
+            compress(
+              rows
+                .slice(1)
+                .map((row) => JSON.stringify(row))
+                .join("\n") + "\n",
+            ),
+          ]),
+    ]),
+  );
+}
+await mkdir(resolve(root, "other-workdir"), { recursive: true });
+const extraWorkspaceId = randomUUID();
 const workspaceId = randomUUID();
 await mkdir(resolve(env.DSH_HOME, "storages"), { recursive: true });
 await writeFile(
@@ -134,17 +179,24 @@ await writeFile(
     unit: { name: "workspace", version: 2 },
     global: {
       initialized: true,
-      workspaceIds: [workspaceId],
-      archivedSessionIds: [],
+      workspaceIds: [workspaceId, extraWorkspaceId],
+      archivedSessionIds: [archiveId],
       pinnedSessionIds: [],
       defaultWorkspaceId: workspaceId,
     },
     tables: {
       workspaces: {
+        [extraWorkspaceId]: {
+          path: resolve(root, "other-workdir"),
+          title: "default-workspace",
+          sessionIds: [extraId],
+          createdAt: new Date(time).toISOString(),
+          updatedAt: new Date(time).toISOString(),
+        },
         [workspaceId]: {
           path: cwd,
           title: "隔离测试工作区",
-          sessionIds: [id],
+          sessionIds: [id, archiveId, childId],
           createdAt: new Date(time).toISOString(),
           updatedAt: new Date(time).toISOString(),
         },
@@ -167,6 +219,8 @@ const server = spawn(
   { env, cwd, stdio: ["ignore", "pipe", "pipe"] },
 );
 let browser;
+let diagnostics = "";
+server.stderr.on("data", (chunk) => (diagnostics += chunk));
 try {
   const url = await new Promise((resolve, reject) => {
     let output = "";
@@ -252,6 +306,20 @@ try {
         columns: frame.style.gridTemplateColumns,
       };
     });
+  const defaultGroup = page.locator(
+    `[data-row-key="workspace:${extraWorkspaceId}"]`,
+  );
+  await defaultGroup.click();
+  const nativeSessionIds = await page
+    .locator('[data-row-key^="session:"]')
+    .evaluateAll((nodes) =>
+      nodes.map((n) => n.getAttribute("data-row-key").slice(8)).sort(),
+    );
+  assert.deepEqual(
+    nativeSessionIds,
+    [id, extraId].sort(),
+    "native filters archive, subagent and inactive blank fixtures",
+  );
   const before = await readFrame();
   assert.equal(
     await page
@@ -282,6 +350,62 @@ try {
     before.columns,
     "host preferences are untouched",
   );
+  // Native text selection must remain available; a background drag must never
+  // start a browser selection, including the first sub-threshold frame.
+  const paragraph = page.locator(".chat-reply .chat-markdown p").first();
+  await paragraph.click({ clickCount: 3 });
+  assert.ok(
+    await page.evaluate(() => window.getSelection()?.toString().length > 0),
+  );
+  await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.keyboard.press("ControlOrMeta+C");
+  assert.ok(
+    (await page.evaluate(() => navigator.clipboard.readText())).includes(
+      "历史回复",
+    ),
+  );
+  await page.evaluate(() => window.getSelection()?.removeAllRanges());
+  const stage = page.locator(".chat-stage");
+  const stageBox = await stage.boundingBox();
+  const point = {
+    x: stageBox.x + stageBox.width / 2,
+    y: stageBox.y + stageBox.height - 55,
+  };
+  await page.evaluate(() => {
+    window.__selectionFlashes = [];
+    window.__recordSelection = () => {
+      const stage = document.querySelector(".chat-stage");
+      if (
+        stage?.hasAttribute("data-canvas-dragging") &&
+        window.getSelection()?.toString()
+      )
+        window.__selectionFlashes.push(window.getSelection().toString());
+    };
+    document.addEventListener("selectionchange", window.__recordSelection);
+  });
+  for (const interrupt of ["up", "Escape", "blur", "cancel"]) {
+    await page.mouse.move(point.x, point.y);
+    await page.mouse.down();
+    assert.equal(await stage.getAttribute("data-canvas-dragging"), "");
+    await page.mouse.move(point.x + 1, point.y + 1);
+    assert.equal(
+      await page.evaluate(() => window.getSelection()?.toString()),
+      "",
+    );
+    await page.mouse.move(point.x + 65, point.y - 25, { steps: 12 });
+    if (interrupt === "Escape") await page.keyboard.press("Escape");
+    if (interrupt === "blur")
+      await page.evaluate(() => window.dispatchEvent(new Event("blur")));
+    if (interrupt === "cancel")
+      await stage.dispatchEvent("pointercancel", { pointerId: 1 });
+    await page.mouse.up();
+    assert.equal(await stage.getAttribute("data-canvas-dragging"), null);
+  }
+  assert.deepEqual(await page.evaluate(() => window.__selectionFlashes), []);
+  // Return camera to its original position using the existing reset control.
+  await page.evaluate(() =>
+    document.removeEventListener("selectionchange", window.__recordSelection),
+  );
   const menu = page.getByRole("button", { name: "导航与工作区", exact: true });
   await menu.click();
   await page
@@ -297,6 +421,22 @@ try {
       .getByRole("button", { name: "Canvas · 画布", exact: true })
       .count(),
     0,
+  );
+  const canvasDefault = page
+    .locator(".chat-sidebar-project")
+    .filter({ hasText: "默认工作区" });
+  await canvasDefault.click();
+  assert.deepEqual(
+    await page
+      .locator(".chat-sidebar-session")
+      .evaluateAll((nodes) =>
+        nodes.map((n) => n.getAttribute("data-session-id")).sort(),
+      ),
+    nativeSessionIds,
+  );
+  assert.deepEqual(
+    await page.locator(".chat-sidebar-session").allTextContents(),
+    ["未命名", "未命名"],
   );
   await page.keyboard.press("Escape");
   assert.equal(
@@ -359,16 +499,69 @@ try {
   await checkAccount(1440, 1000, true);
   assert.equal(await page.locator(".chat-native-composer").count(), 0);
   assert.equal(await page.locator("[data-composer-seat]").count(), 1);
+  const model = page
+    .locator(
+      '[data-composer-seat] [data-slot="conversation.input.model"] button[aria-haspopup="menu"]',
+    )
+    .first();
+  await model.waitFor();
+  await model.evaluate((button) => {
+    const label = [...button.children].find((n) => n.tagName === "SPAN");
+    label.innerHTML =
+      '<span style="display:inline-flex;align-items:center;gap:4px;white-space:nowrap"><span>DeepSeek-V4.1-Flash</span><span style="font-size:12px;padding:0 5px;border-radius:8px;background:#e7edff">1017</span></span>';
+  });
+  for (const width of [1440, 620, 375, 320, 1440]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.waitForTimeout(250);
+    const layout = await model.evaluate((button) => {
+      const rect = button.getBoundingClientRect();
+      const label = [...button.children].find((n) => n.tagName === "SPAN");
+      const seat = button
+        .closest("[data-composer-seat]")
+        .getBoundingClientRect();
+      return {
+        hidden: getComputedStyle(label).display === "none",
+        clipped: label.scrollWidth > label.clientWidth + 1,
+        left: rect.left,
+        right: rect.right,
+        seatLeft: seat.left,
+        seatRight: seat.right,
+      };
+    });
+    assert.ok(
+      layout.hidden || !layout.clipped,
+      JSON.stringify({ width, ...layout }),
+    );
+    assert.ok(
+      layout.left >= layout.seatLeft && layout.right <= layout.seatRight,
+      JSON.stringify({ width, ...layout }),
+    );
+  }
   const editor = page
     .locator('[data-composer-seat] [contenteditable="true"]')
     .first();
   await editor.fill("未发送的草稿，用于验证视图切换");
+  await page.locator('[data-composer-seat] input[type="file"]').setInputFiles({
+    name: "canvas-fixture.txt",
+    mimeType: "text/plain",
+    buffer: Buffer.from("isolated attachment fixture"),
+  });
+  await page.getByText("canvas-fixture.txt", { exact: true }).first().waitFor();
+
   await page.locator(".chat-reply [data-canvas-reply-handle]").first().focus();
   await page.keyboard.press("ArrowRight");
   const manualLeft = await page
     .locator(".chat-reply")
     .first()
     .evaluate((node) => node.style.left);
+  await page.locator(".chat-reply .chat-pin-reply").first().click();
+  assert.equal(
+    await page
+      .locator(".chat-reply .chat-pin-reply")
+      .first()
+      .getAttribute("aria-pressed"),
+    "true",
+  );
 
   await page.getByRole("tab", { name: "对话", exact: true }).click();
   await page
@@ -434,11 +627,88 @@ try {
       .first()
       .evaluate((node) => node.style.left),
     manualLeft,
-    "automatic layout preserves manual positions",
+    "automatic layout preserves explicitly pinned positions",
   );
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.waitForTimeout(300);
   await page.screenshot({ path: "artifacts/native-canvas-single-sidebar.png" });
+  for (const [width, height, lines] of [
+    [1440, 1000, 1],
+    [620, 700, 8],
+    [375, 600, 3],
+    [620, 420, 1],
+  ]) {
+    await page.setViewportSize({ width, height });
+    await editor.fill(
+      Array.from({ length: lines }, (_, i) => `输入行 ${i}`).join("\n"),
+    );
+    await page.waitForTimeout(250);
+    const layout = await page.evaluate(() => {
+      const rail = document.querySelector(".chat-user-history");
+      const frame = document.querySelector(".chat-user-history-frame");
+      const seat = document.querySelector("[data-composer-seat]");
+      const r = rail.getBoundingClientRect(),
+        f = frame.getBoundingClientRect(),
+        c = seat.getBoundingClientRect();
+      return {
+        gap: c.top - r.bottom,
+        top: r.top,
+        height: r.height,
+        frameBottom: f.bottom,
+        bottom: r.bottom,
+        padding: getComputedStyle(rail).paddingBottom,
+        bubbleGap:
+          c.top -
+          document
+            .querySelector(".chat-user-message-stack")
+            .getBoundingClientRect().bottom,
+      };
+    });
+    assert.ok(
+      layout.gap >= 3 && layout.gap <= 6,
+      JSON.stringify({ width, height, layout }),
+    );
+    assert.ok(
+      layout.top >= 70 && layout.height > 0,
+      JSON.stringify({ width, height, layout }),
+    );
+    assert.equal(layout.padding, "0px");
+    assert.ok(
+      layout.bubbleGap >= 3 && layout.bubbleGap <= 6,
+      JSON.stringify({ width, height, layout }),
+    );
+  }
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.screenshot({ path: "artifacts/native-rail-gap-fixed.png" });
+  await page.reload();
+  await canvasTab.waitFor();
+  if ((await canvasTab.getAttribute("aria-selected")) !== "true")
+    await canvasTab.click();
+  await page.locator(".chat-reply").first().waitFor();
+  assert.equal(
+    await page
+      .locator(".chat-reply .chat-pin-reply")
+      .first()
+      .getAttribute("aria-pressed"),
+    "true",
+    "pin survives native host refresh",
+  );
+  await menu.click();
+  const refreshedDefault = page
+    .locator(".chat-sidebar-project")
+    .filter({ hasText: "默认工作区" });
+  if ((await refreshedDefault.getAttribute("aria-expanded")) !== "true")
+    await refreshedDefault.click();
+  assert.deepEqual(
+    await page
+      .locator(".chat-sidebar-session")
+      .evaluateAll((nodes) =>
+        nodes.map((n) => n.getAttribute("data-session-id")).sort(),
+      ),
+    nativeSessionIds,
+    "refresh keeps native membership",
+  );
+  await page.keyboard.press("Escape");
   await page.getByRole("tab", { name: "对话", exact: true }).click();
   const actions = page.locator(`[data-row-key="session:${id}"]`);
   await actions.hover();
@@ -452,6 +722,7 @@ try {
     "native View, account actions in viewport, visible layout button, single sidebar, draft and positions: OK",
   );
 } finally {
+  if (diagnostics) console.log(redact(diagnostics).slice(-8000));
   await browser?.close();
   server.kill("SIGTERM");
 }

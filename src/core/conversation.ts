@@ -8,6 +8,8 @@ export type ConversationReply = {
   body: string;
   /** Only reasoning supplied by the DSH session; never part of prompt. */
   reasoning?: string;
+  /** Explicit user pin; absent in old archives means unpinned. */
+  pinned?: boolean;
   /** World coordinates after the user moves this reply by its stable ID. */
   position?: {
     x: number;
@@ -148,6 +150,7 @@ export function reconcileConversation(
       reasoning:
         turn.reasoning ?? (turn.durable ? undefined : previous?.reasoning),
       position: previous?.position,
+      pinned: previous?.pinned === true || undefined,
       hostTurnId: turn.turnId,
       requestId:
         previous?.requestId ??

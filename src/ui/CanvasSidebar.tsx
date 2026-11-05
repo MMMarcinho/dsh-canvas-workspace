@@ -86,6 +86,7 @@ export function CanvasSidebar({
   const [searchOpen, setSearchOpen] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
   const [flat, setFlat] = useState(false);
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [moreOpen, setMoreOpen] = useState(false);
   const searchInput = useRef<HTMLInputElement>(null);
 
@@ -158,6 +159,7 @@ export function CanvasSidebar({
         key={session.id}
         aria-current={currentSessionId === session.id ? "page" : undefined}
         title={session.title}
+        data-session-id={session.id}
         onClick={() => onSwitchSession(session.id)}
       >
         <span className="chat-sidebar-session-title">{session.title}</span>
@@ -404,7 +406,20 @@ export function CanvasSidebar({
                   <button
                     type="button"
                     className="chat-sidebar-project"
-                    onClick={() => onOpenWorkspace?.(workspace.id)}
+                    aria-expanded={
+                      Boolean(query) ||
+                      (expanded[workspace.id] ??
+                        workspace.id === currentWorkspaceId)
+                    }
+                    onClick={() =>
+                      setExpanded((value) => ({
+                        ...value,
+                        [workspace.id]: !(
+                          value[workspace.id] ??
+                          workspace.id === currentWorkspaceId
+                        ),
+                      }))
+                    }
                   >
                     <span
                       className="chat-sidebar-project-icon"
@@ -422,20 +437,22 @@ export function CanvasSidebar({
                       {workspace.title}
                     </span>
                   </button>
+                  {(Boolean(query) ||
+                    (expanded[workspace.id] ??
+                      workspace.id === currentWorkspaceId)) && (
+                    <>{visible.map((session) => sessionRow(session))}</>
+                  )}
                   {onNewSessionInWorkspace && !query && (
                     <button
                       type="button"
-                      className="chat-session-row chat-sidebar-session chat-sidebar-session-create"
+                      className="chat-sidebar-workspace-create"
+                      aria-label={`在${workspace.title}中新建会话`}
                       disabled={newSessionPending}
                       onClick={() => onNewSessionInWorkspace(workspace.id)}
                     >
-                      <span className="chat-sidebar-session-plus">
-                        {icons?.plus ?? <Icon name="plus" size={14} />}
-                      </span>
-                      <span>在此工作区新建画布会话</span>
+                      {icons?.plus ?? <Icon name="plus" size={14} />}
                     </button>
                   )}
-                  {visible.map((session) => sessionRow(session))}
                 </div>
               ))}
               {ungrouped.length > 0 && (

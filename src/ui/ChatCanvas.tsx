@@ -22,7 +22,7 @@ import {
   type PairTarget,
 } from "./reply-pairing";
 import { Icon } from "./icons";
-import { arrangeReplies } from "./reply-layout";
+import { arrangeReplies, repairReplyGrowth } from "./reply-layout";
 import { Brand } from "./brand";
 import { CanvasSidebar, type SidebarIcons } from "./CanvasSidebar";
 import { formatReplyTime } from "./reply-time";
@@ -85,6 +85,7 @@ function restore(
         ...value,
         replies: value.replies.map((reply) => ({
           ...reply,
+          pinned: reply.pinned === true || undefined,
           ...(reply.position &&
           (!Number.isFinite(reply.position.x) ||
             !Number.isFinite(reply.position.y) ||
@@ -359,6 +360,16 @@ export function ChatCanvas({
   const stage = useRef<HTMLDivElement>(null);
   const dock = useRef<HTMLDivElement>(null);
   const userRail = useRef<HTMLElement>(null);
+  const [railLocate, setRailLocate] = useState<{
+    scope: string;
+    replyId: string;
+  } | null>(null);
+  const [railLocateRevision, setRailLocateRevision] = useState(0);
+  const [railLocateStatus, setRailLocateStatus] = useState({
+    text: "",
+    quiet: true,
+  });
+
   const seenRailMessages = useRef<{
     scope: string;
     ids: Set<string>;
@@ -375,6 +386,7 @@ export function ChatCanvas({
   const previousReplyCount = useRef(state.replies.length);
   const newReplyIds = useRef(new Set<string>());
   const measuredReplyHeights = useRef(new Map<string, number>());
+  const flushReplyResize = useRef<(() => void) | null>(null);
   const composerInput = useRef<HTMLTextAreaElement>(null);
   const iuiActions = useRef(new Map<string, ReturnType<IuiActionHandler>>());
   const userMessageIds = JSON.stringify(
@@ -456,6 +468,74 @@ export function ChatCanvas({
     return () => observer.disconnect();
   }, [pairScope, userMessageIds]);
   useEffect(() => () => stopRailScroll(), []);
+  useLayoutEffect(() => {
+    if (!railLocate) return;
+    if (railLocate.scope !== pairScope) {
+      setRailLocate(null);
+      setRailLocateStatus({ text: "", quiet: true });
+      return;
+    }
+    const pairKey = pairs.replyPairs.get(railLocate.replyId);
+    const message =
+      pairs.userMessages.find((item) => item.replyId === railLocate.replyId) ??
+      pairs.userMessages.find((item) => pairKey && item.pairKey === pairKey);
+    const rail = userRail.current;
+    const row =
+      message &&
+      [
+        ...(rail?.querySelectorAll<HTMLElement>("[data-user-message-id]") ??
+          []),
+      ].find((node) => node.dataset.userMessageId === message.messageId);
+    if (!row || !rail) {
+      setRailLocateStatus({
+        text: "对应消息尚未加载，加载后会自动定位。",
+        quiet: false,
+      });
+      return;
+    }
+    if (
+      !rail.clientHeight ||
+      !rail.clientWidth ||
+      rail.getClientRects().length === 0
+    ) {
+      setRailLocateStatus({
+        text: "消息列表空间不足，请收起输入框或增大窗口；恢复显示后会自动定位。",
+        quiet: false,
+      });
+      return;
+    }
+    stopRailScroll();
+    const bounds = rail.getBoundingClientRect();
+    const target = row.getBoundingClientRect();
+    const top = Math.max(
+      0,
+      rail.scrollTop +
+        target.top -
+        bounds.top -
+        Math.max(0, (rail.clientHeight - target.height) / 2),
+    );
+    railScrollAnimating.current = true;
+    rail.scrollTo({
+      top,
+      behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
+    });
+    row.focus({ preventScroll: true });
+    setFocusedPair({ scope: pairScope, source: "user", id: message!.id });
+    setRailLocateStatus({ text: "已定位到对应消息。", quiet: true });
+    setRailLocate(null);
+  }, [railLocate, railLocateRevision, pairScope, pairs]);
+  useEffect(() => {
+    const rail = userRail.current;
+    if (!railLocate || !rail || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(() =>
+      setRailLocateRevision((value) => value + 1),
+    );
+    observer.observe(rail);
+    return () => observer.disconnect();
+  }, [railLocate]);
+
   useEffect(() => {
     const input = composerInput.current;
     if (input) {
@@ -528,14 +608,65 @@ export function ChatCanvas({
     update,
     useNativeComposer,
   ]);
+  const layoutAnimations = useRef(new Set<Animation>());
+  const pendingLayoutRects = useRef<Map<string, DOMRect> | null>(null);
+  const [layoutRequest, setLayoutRequest] = useState(0);
+  const cancelLayoutMotion = useCallback(() => {
+    pendingLayoutRects.current = null;
+    for (const animation of layoutAnimations.current) animation.cancel();
+    layoutAnimations.current.clear();
+  }, []);
+  useLayoutEffect(() => {
+    const previous = pendingLayoutRects.current;
+    pendingLayoutRects.current = null;
+    if (
+      !previous ||
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+    const zoom = stateRef.current.viewport.zoom;
+    for (const card of stage.current?.querySelectorAll<HTMLElement>(
+      ".chat-reply",
+    ) ?? []) {
+      const before = previous.get(card.dataset.replyId!);
+      if (!before || typeof card.animate !== "function") continue;
+      const after = card.getBoundingClientRect();
+      const dx = (before.left - after.left) / zoom;
+      const dy = (before.top - after.top) / zoom;
+      if (Math.hypot(dx, dy) < 0.5) continue;
+      const animation = card.animate(
+        [
+          { transform: `translate(${dx}px, ${dy}px)` },
+          { transform: "translate(0, 0)" },
+        ],
+        { duration: 320, easing: "cubic-bezier(0.2, 0.75, 0.25, 1)" },
+      );
+      layoutAnimations.current.add(animation);
+      const settle = () => layoutAnimations.current.delete(animation);
+      animation.onfinish = settle;
+      animation.oncancel = settle;
+    }
+  }, [layoutRequest]);
+  useEffect(() => {
+    const media = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    const change = () => {
+      if (media?.matches) cancelLayoutMotion();
+    };
+    media?.addEventListener?.("change", change);
+    return () => {
+      media?.removeEventListener?.("change", change);
+      cancelLayoutMotion();
+    };
+  }, [cancelLayoutMotion]);
   const cameraFrame = useRef<number | null>(null);
   const cameraRun = useRef(0);
   const stopCamera = useCallback(() => {
+    cancelLayoutMotion();
     cameraRun.current++;
     if (cameraFrame.current !== null)
       window.cancelAnimationFrame?.(cameraFrame.current);
     cameraFrame.current = null;
-  }, []);
+  }, [cancelLayoutMotion]);
   const replyGeometry = (replyId: string) => {
     const reply = stateRef.current.replies.find((item) => item.id === replyId);
     const canvas = stage.current;
@@ -557,11 +688,11 @@ export function ChatCanvas({
     return {
       x: reply?.position?.x ?? (bounds.left - view.left - x) / zoom,
       y: reply?.position?.y ?? (bounds.top - view.top - y) / zoom,
-      width: bounds.width / zoom || card.offsetWidth || 600,
+      width: card.offsetWidth || bounds.width / zoom || 600,
       height: Math.max(
         24,
-        bounds.height / zoom ||
-          card.offsetHeight ||
+        card.offsetHeight ||
+          bounds.height / zoom ||
           reply?.position?.slotHeight ||
           0,
       ),
@@ -575,9 +706,43 @@ export function ChatCanvas({
       ? { x: geometry.x, y: geometry.y, slotHeight: geometry.height }
       : null;
   };
+  const togglePin = (replyId: string) => {
+    const canvas = stage.current;
+    const card = [
+      ...(canvas?.querySelectorAll<HTMLElement>(".chat-reply") ?? []),
+    ].find((node) => node.dataset.replyId === replyId);
+    const geometry = replyGeometry(replyId);
+    if (!canvas || !card || !geometry) return;
+    // Pin the visible presentation, including an in-flight layout animation.
+    const rect = card.getBoundingClientRect();
+    const view = canvas.getBoundingClientRect();
+    const camera = stateRef.current.viewport;
+    const moving = card
+      .getAnimations?.()
+      .some((animation) => layoutAnimations.current.has(animation));
+    const position = {
+      x: moving ? (rect.left - view.left - camera.x) / camera.zoom : geometry.x,
+      y: moving ? (rect.top - view.top - camera.y) / camera.zoom : geometry.y,
+      slotHeight: geometry.height,
+      kind: "manual" as const,
+    };
+    stopCamera();
+    update((current) => ({
+      ...current,
+      replies: current.replies.map((reply) =>
+        reply.id === replyId
+          ? {
+              ...reply,
+              pinned: reply.pinned ? undefined : true,
+              position,
+            }
+          : reply,
+      ),
+    }));
+  };
   const layoutReplies = (
     current: State,
-    area?: { x: number; y: number; width: number },
+    area: { x: number; y: number; width: number },
   ) => {
     const cards = current.replies.flatMap((reply) => {
       const geometry = replyGeometry(reply.id);
@@ -586,9 +751,7 @@ export function ChatCanvas({
             {
               id: reply.id,
               ...geometry,
-              fixed: area
-                ? reply.position?.kind === "manual"
-                : reply.position?.kind !== "viewport",
+              fixed: reply.pinned === true,
             },
           ]
         : [];
@@ -599,7 +762,21 @@ export function ChatCanvas({
     let changed = false;
     const replies = current.replies.map((reply) => {
       const card = positions.get(reply.id);
-      if (!card || card.fixed) return reply;
+      if (!card) return reply;
+      if (card.fixed) {
+        if (
+          reply.pinned &&
+          reply.position &&
+          Math.abs(reply.position.slotHeight - card.height) > 1
+        ) {
+          changed = true;
+          return {
+            ...reply,
+            position: { ...reply.position, slotHeight: card.height },
+          };
+        }
+        return reply;
+      }
       const old = reply.position;
       if (
         old?.kind === "viewport" &&
@@ -625,18 +802,29 @@ export function ChatCanvas({
     const canvas = stage.current;
     if (!canvas) return;
     const bounds = canvas.getBoundingClientRect();
-    const overlay = dock.current?.getBoundingClientRect();
     const { x, y, zoom } = stateRef.current.viewport;
-    const left = bounds.left + 24;
-    let right = bounds.right - 24;
-    if (overlay && overlay.left - left > 360)
-      right = Math.min(right, overlay.left - 24);
+    // Floating messages and input may cover cards; packing uses the full stage.
+    const width = Math.max(80, bounds.width - 48) / zoom;
+    // Measure the current presentation before cancelling an earlier animation;
+    // repeated clicks then continue from the visible position without jumping.
+    const previous = new Map<string, DOMRect>();
+    const pinned = new Set(
+      stateRef.current.replies
+        .filter((reply) => reply.pinned === true)
+        .map((reply) => reply.id),
+    );
+    for (const card of canvas.querySelectorAll<HTMLElement>(".chat-reply")) {
+      if (!pinned.has(card.dataset.replyId!))
+        previous.set(card.dataset.replyId!, card.getBoundingClientRect());
+    }
     stopCamera();
+    pendingLayoutRects.current = previous;
+    setLayoutRequest((value) => value + 1);
     update((current) =>
       layoutReplies(current, {
         x: (24 - x) / zoom,
         y: (88 - y) / zoom,
-        width: Math.max(80, right - left) / zoom,
+        width,
       }),
     );
     setMenu(null);
@@ -655,10 +843,40 @@ export function ChatCanvas({
       if (!anchor) continue;
       const anchorHeight =
         "height" in anchor ? anchor.height : anchor.slotHeight;
+      const size = replyGeometry(reply.id);
+      const obstacles = state.replies.flatMap((candidate) => {
+        if (candidate.id === reply.id || newReplyIds.current.has(candidate.id))
+          return [];
+        const rect = replyGeometry(candidate.id),
+          placed = positions.get(candidate.id);
+        return rect
+          ? [
+              {
+                id: candidate.id,
+                ...rect,
+                ...(placed
+                  ? { x: placed.x, y: placed.y, height: placed.slotHeight }
+                  : {}),
+                fixed: true,
+              },
+            ]
+          : [];
+      });
+      const placed = arrangeReplies([
+        ...obstacles,
+        {
+          id: reply.id,
+          x: anchor.x,
+          y: anchor.y + anchorHeight + 30,
+          width: size?.width ?? 600,
+          height: Math.max(24, size?.height ?? 24),
+          fixed: false,
+        },
+      ]).at(-1)!;
       positions.set(reply.id, {
-        x: anchor.x,
-        y: anchor.y + anchorHeight + 30,
-        slotHeight: Math.max(24, replyGeometry(reply.id)?.height ?? 24),
+        x: placed.x,
+        y: placed.y,
+        slotHeight: placed.height,
         kind: state.replies.some((item) => item.position?.kind === "viewport")
           ? "viewport"
           : "auto",
@@ -678,108 +896,149 @@ export function ChatCanvas({
   useLayoutEffect(() => {
     const canvas = stage.current;
     if (!canvas || typeof ResizeObserver === "undefined") return;
+    const sessionId = state.sessionId;
+    let disposed = false;
     measuredReplyHeights.current.clear();
-    const cards = [...canvas.querySelectorAll<HTMLElement>(".chat-reply")];
-    const observer = new ResizeObserver((entries) => {
-      const current = stateRef.current;
+    const queued = new Map<HTMLElement, ResizeObserverEntry>();
+    const process = () => {
       if (
-        current.replies.some((reply) => reply.position?.kind === "viewport")
-      ) {
-        update((value) => layoutReplies(value));
+        disposed ||
+        stateRef.current.sessionId !== sessionId ||
+        !queued.size ||
+        dragging.current
+      )
         return;
-      }
-      const cardById = new Map(
-        cards.map((card) => [card.dataset.replyId, card]),
+      const current = stateRef.current;
+      const entries = [...queued.values()];
+      queued.clear();
+      const nodes = [...canvas.querySelectorAll<HTMLElement>(".chat-reply")];
+      const geometry = new Map(
+        nodes.flatMap((node) => {
+          const id = node.dataset.replyId;
+          const value = id && replyGeometry(id);
+          return id && value ? [[id, value] as const] : [];
+        }),
       );
       const inferredAuto = new Map<number, number>();
-      // Old archives did not label automatic placement. Repair only an aligned
-      // next card that still has the old auto gap or now overlaps a grown card.
       for (let index = 1; index < current.replies.length; index++) {
-        const previous = current.replies[index - 1];
-        const reply = current.replies[index];
-        if (!reply.position || reply.position.kind) continue;
-        const anchor = replyGeometry(previous.id);
-        if (!anchor || Math.abs(reply.position.x - anchor.x) > 2) continue;
+        const previous = current.replies[index - 1],
+          reply = current.replies[index];
+        if (!reply.position || reply.position.kind || reply.pinned) continue;
+        const anchor = geometry.get(previous.id);
+        if (!anchor || Math.abs(reply.position.x - anchor.x) > 1) continue;
         const oldHeight = previous.position?.slotHeight;
-        if (
-          oldHeight !== undefined &&
-          Math.abs(reply.position.y - (anchor.y + oldHeight + 30)) < 2
-        )
+        const gapHeight = reply.position.y - anchor.y - 30;
+        if (oldHeight !== undefined && Math.abs(gapHeight - oldHeight) <= 1)
           inferredAuto.set(index, oldHeight);
-        else if (oldHeight === undefined) {
-          const initialHeight = reply.position.y - anchor.y - 30;
-          if (
-            initialHeight >= 24 &&
-            reply.position.y < anchor.y + anchor.height - 16 &&
-            anchor.height - initialHeight >= 80
-          )
-            inferredAuto.set(index, initialHeight);
-        }
+        else if (
+          oldHeight === undefined &&
+          gapHeight >= 24 &&
+          anchor.height - gapHeight >= 80
+        )
+          inferredAuto.set(index, gapHeight);
       }
-      const changes = new Map<number, { height: number; delta: number }>();
+      const measured = new Map<string, number>();
+      const grown = new Set<string>();
       for (const entry of entries) {
-        const id = (entry.target as HTMLElement).dataset.replyId;
+        const node = entry.target as HTMLElement;
+        const id = node.dataset.replyId;
         const index = current.replies.findIndex((reply) => reply.id === id);
-        const card = id && cardById.get(id);
-        if (index < 0 || !card) continue;
-        const height =
-          card.getBoundingClientRect().height / current.viewport.zoom;
-        if (!Number.isFinite(height) || height < 1) continue;
-        const actual = Math.max(24, height);
+        if (!id || index < 0 || !node.isConnected || !canvas.contains(node))
+          continue;
+        const height = geometry.get(id)?.height;
+        if (!height || !Number.isFinite(height)) continue;
         const following = current.replies[index + 1]?.position;
         const baseline =
+          measuredReplyHeights.current.get(id) ??
           current.replies[index].position?.slotHeight ??
           inferredAuto.get(index + 1) ??
-          measuredReplyHeights.current.get(id) ??
           (following?.kind === "auto" ? following.anchorHeight : undefined) ??
-          actual;
-        measuredReplyHeights.current.set(id, actual);
-        if (Math.abs(actual - baseline) > 1)
-          changes.set(index, { height: actual, delta: actual - baseline });
+          height;
+        measuredReplyHeights.current.set(id, height);
+        measured.set(id, height);
+        if (height > baseline + 0.5) grown.add(id);
       }
-      if (!changes.size && !inferredAuto.size) return;
-      update((value) => {
-        let shift = 0;
-        let changed = false;
-        const replies = value.replies.map((reply, index) => {
-          let position = reply.position;
-          const inferredHeight = inferredAuto.get(index);
-          if (position && !position.kind && inferredHeight !== undefined) {
-            position = {
-              ...position,
-              kind: "auto",
-              anchorHeight: inferredHeight,
-            };
-            changed = true;
-          }
-          if (position?.kind === "manual") shift = 0;
-          if (position?.kind === "auto" && shift) {
-            position = {
-              ...position,
-              y: position.y + shift,
-              anchorHeight:
-                position.anchorHeight === undefined
-                  ? undefined
-                  : position.anchorHeight +
-                    (changes.get(index - 1)?.delta ?? 0),
-            };
-            changed = true;
-          }
-          const resized = changes.get(index);
-          if (position && resized && position.slotHeight !== resized.height) {
-            position = { ...position, slotHeight: resized.height };
-            changed = true;
-          }
-          if (resized) shift += resized.delta;
-          return position === reply.position ? reply : { ...reply, position };
-        });
-        return changed ? { ...value, replies } : value;
+      if (!measured.size) return;
+      const cards = current.replies.flatMap((reply, index) => {
+        const rect = geometry.get(reply.id);
+        return rect
+          ? [
+              {
+                id: reply.id,
+                ...rect,
+                fixed:
+                  reply.pinned === true ||
+                  !(
+                    reply.position?.kind === "viewport" ||
+                    reply.position?.kind === "auto" ||
+                    inferredAuto.has(index)
+                  ),
+              },
+            ]
+          : [];
       });
+      const repaired = new Map(
+        repairReplyGrowth(cards, grown).map((card) => [card.id, card]),
+      );
+      let moved = false,
+        changed = false;
+      const replies = current.replies.map((reply, index) => {
+        const old = reply.position,
+          card = repaired.get(reply.id);
+        if (!old || !card) return reply;
+        const shifted = card.y > old.y + 0.5;
+        const height = measured.get(reply.id) ?? old.slotHeight;
+        const anchorHeight =
+          old.kind === "auto" && index > 0
+            ? (measured.get(current.replies[index - 1].id) ?? old.anchorHeight)
+            : old.anchorHeight;
+        if (
+          !shifted &&
+          Math.abs(height - old.slotHeight) <= 0.5 &&
+          anchorHeight === old.anchorHeight
+        )
+          return reply;
+        changed = true;
+        moved ||= shifted;
+        return {
+          ...reply,
+          position: {
+            ...old,
+            y: shifted ? card.y : old.y,
+            slotHeight: height,
+            ...(shifted && inferredAuto.has(index)
+              ? {
+                  kind: "auto" as const,
+                  anchorHeight: geometry.get(current.replies[index - 1].id)
+                    ?.height,
+                }
+              : { anchorHeight }),
+          },
+        };
+      });
+      if (changed) {
+        if (moved) cancelLayoutMotion();
+        update((value) => ({ ...value, replies }));
+      }
+    };
+    flushReplyResize.current = process;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries)
+        queued.set(entry.target as HTMLElement, entry);
+      process();
     });
-    for (const card of cards) observer.observe(card);
-    return () => observer.disconnect();
+    for (const node of canvas.querySelectorAll<HTMLElement>(".chat-reply"))
+      observer.observe(node);
+    return () => {
+      disposed = true;
+      queued.clear();
+      if (flushReplyResize.current === process) flushReplyResize.current = null;
+      observer.disconnect();
+    };
   }, [state.sessionId, replyIds, update]);
   const moveReply = (replyId: string, dx: number, dy: number) => {
+    if (stateRef.current.replies.find((reply) => reply.id === replyId)?.pinned)
+      return;
     const origin = replyPosition(replyId);
     if (!origin) return;
     stopCamera();
@@ -1125,17 +1384,21 @@ export function ChatCanvas({
   const finishPan = useCallback(() => {
     const drag = dragging.current;
     dragging.current = null;
+    stage.current?.removeAttribute("data-canvas-dragging");
     if (drag && (drag.active || drag.explicit)) suppressPanClick.current = true;
     setIsPanning(false);
     setIsMovingReply(false);
     setPanArmed(false);
     if (drag?.captureTarget.hasPointerCapture(drag.pointerId))
       drag.captureTarget.releasePointerCapture(drag.pointerId);
+    flushReplyResize.current?.();
   }, []);
   useEffect(() => {
     const keydown = (event: KeyboardEvent) => {
       suppressPanClick.current = false;
       if (event.key === "Escape") {
+        setRailLocate(null);
+        setRailLocateStatus({ text: "", quiet: true });
         stopCamera();
         finishPan();
         spaceHeld.current = false;
@@ -1170,7 +1433,7 @@ export function ChatCanvas({
     };
     const selectstart = (event: Event) => {
       const drag = dragging.current;
-      if (drag && (drag.active || drag.explicit)) event.preventDefault();
+      if (drag) event.preventDefault();
     };
     document.addEventListener("keydown", keydown);
     document.addEventListener("keyup", keyup);
@@ -1183,6 +1446,7 @@ export function ChatCanvas({
       window.removeEventListener("blur", blur);
       const drag = dragging.current;
       dragging.current = null;
+      stage.current?.removeAttribute("data-canvas-dragging");
       if (drag?.captureTarget.hasPointerCapture(drag.pointerId))
         drag.captureTarget.releasePointerCapture(drag.pointerId);
     };
@@ -1202,11 +1466,42 @@ export function ChatCanvas({
     )
       return;
     if (replyHandle && event.button === 0 && !spaceHeld.current) {
+      if (
+        stateRef.current.replies.find(
+          (reply) =>
+            reply.id ===
+            replyHandle.closest<HTMLElement>(".chat-reply")?.dataset.replyId,
+        )?.pinned
+      )
+        return;
       const replyId =
         replyHandle.closest<HTMLElement>(".chat-reply")?.dataset.replyId;
       const position = replyId && replyPosition(replyId);
       if (!replyId || !position) return;
+      const card = replyHandle.closest<HTMLElement>(".chat-reply");
+      const moving = card
+        ?.getAnimations?.()
+        .some((animation) => layoutAnimations.current.has(animation));
+      let origin = position;
+      if (moving && card) {
+        const rect = card.getBoundingClientRect();
+        const view = stage.current!.getBoundingClientRect();
+        const camera = stateRef.current.viewport;
+        origin = {
+          ...position,
+          x: (rect.left - view.left - camera.x) / camera.zoom,
+          y: (rect.top - view.top - camera.y) / camera.zoom,
+          kind: "manual",
+        };
+      }
       stopCamera();
+      if (moving)
+        update((current) => ({
+          ...current,
+          replies: current.replies.map((reply) =>
+            reply.id === replyId ? { ...reply, position: origin } : reply,
+          ),
+        }));
       event.preventDefault();
       event.stopPropagation();
       suppressPanClick.current = true;
@@ -1218,11 +1513,12 @@ export function ChatCanvas({
         captureTarget: event.currentTarget,
         x: event.clientX,
         y: event.clientY,
-        originX: position.x,
-        originY: position.y,
+        originX: origin.x,
+        originY: origin.y,
         active: false,
         explicit: true,
       };
+      stage.current?.setAttribute("data-canvas-dragging", "");
       setPanArmed(true);
       event.currentTarget.setPointerCapture(event.pointerId);
       return;
@@ -1235,7 +1531,10 @@ export function ChatCanvas({
     const background =
       blankRail || target.matches(".chat-stage,.chat-world,.chat-reply-slot");
     if (!explicit && !background) return;
-    if (blankRail) event.preventDefault();
+    // This press is already a canvas gesture, even below the movement threshold.
+    // Cancel native selection synchronously, before React commits drag classes.
+    event.preventDefault();
+    stage.current?.setAttribute("data-canvas-dragging", "");
     stopCamera();
     const { x, y } = stateRef.current.viewport;
     dragging.current = {
@@ -1268,7 +1567,7 @@ export function ChatCanvas({
       if (drag.kind === "reply") setIsMovingReply(true);
       else setIsPanning(true);
       suppressPanClick.current = true;
-      // A background press may have begun native selection before the threshold.
+      // Clear any selection that existed before this deliberate drag.
       window.getSelection()?.removeAllRanges();
     }
     event.preventDefault();
@@ -1779,6 +2078,7 @@ export function ChatCanvas({
                 <article
                   className="chat-reply"
                   data-positioned={reply.position ? "true" : undefined}
+                  data-pinned={reply.pinned || undefined}
                   data-testid={`chat-reply-${index}`}
                   data-reply-id={reply.id}
                   {...pairingProps(
@@ -1803,7 +2103,12 @@ export function ChatCanvas({
                       className="chat-pan-handle"
                       data-canvas-reply-handle
                       aria-label="移动这条回复"
-                      title="拖动移动这条回复；方向键微调，Shift + 方向键加速"
+                      disabled={reply.pinned === true}
+                      title={
+                        reply.pinned
+                          ? "已固定，取消固定后可移动"
+                          : "拖动移动这条回复；方向键微调，Shift + 方向键加速"
+                      }
                       onKeyDown={(event) => {
                         const direction = {
                           ArrowLeft: [-1, 0],
@@ -1855,6 +2160,49 @@ export function ChatCanvas({
                               : "已停止"
                             : "失败"}
                     </span>
+                    <div className="chat-reply-actions">
+                      <button
+                        type="button"
+                        className="chat-locate-message"
+                        aria-label="在消息列表中定位对应消息"
+                        title="定位对应消息"
+                        aria-busy={
+                          railLocate?.replyId === reply.id || undefined
+                        }
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          stopRailScroll();
+                          setRailLocate({
+                            scope: pairScope,
+                            replyId: reply.id,
+                          });
+                        }}
+                      >
+                        <Icon name="locate" size={16} />
+                      </button>
+                      <button
+                        type="button"
+                        className="chat-pin-reply"
+                        aria-pressed={reply.pinned === true}
+                        aria-label={
+                          reply.pinned ? "取消固定这条回复" : "固定这条回复"
+                        }
+                        title={
+                          reply.pinned
+                            ? "取消固定后可移动并参与自动排布"
+                            : "固定位置，不参与自动排布"
+                        }
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          togglePin(reply.id);
+                        }}
+                      >
+                        <Icon
+                          name={reply.pinned ? "pin" : "pin-off"}
+                          size={16}
+                        />
+                      </button>
+                    </div>
                   </div>
                   <div className="chat-reply-surface">
                     {reply.status === "running" && (
@@ -1904,6 +2252,13 @@ export function ChatCanvas({
           })}
         </div>
       </div>
+      <p
+        className="chat-locate-status"
+        role="status"
+        data-quiet={railLocateStatus.quiet || undefined}
+      >
+        {railLocateStatus.text}
+      </p>
       <div
         className={`chat-dock${useNativeComposer ? " is-native" : ""}`}
         ref={dock}
