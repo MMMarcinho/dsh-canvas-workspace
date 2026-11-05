@@ -19,6 +19,7 @@ import type {
   UserMessageAttachment,
 } from "../core/types";
 import { composePrompt } from "../core/workspace";
+import { questionAnswers } from "./question-answers";
 
 declare module "@deepseek-ai/dsh-api-session-controller/client" {
   interface SessionReferenceSourceMap {
@@ -543,6 +544,10 @@ function conversationTurns(
   };
   const turns = new Map<number, Turn>();
   const seen = new Set<string>();
+  const questions = new Map<
+    string,
+    { turn: number; step: number; arguments: string }
+  >();
   let currentTurn: number | undefined;
   // Successful settlement can be appended after later journal records. Sorting
   // restores the user-message turn context without dropping late durable text.
@@ -604,6 +609,40 @@ function conversationTurns(
           ...(media.length ? { attachments: media } : {}),
           timestamp: event.time,
         });
+      }
+      continue;
+    }
+    if (event.type === "tool/call") {
+      if (event.data.name === "ask_user_question")
+        questions.set(event.data.callId, {
+          turn: event.data.turn,
+          step: event.data.step,
+          arguments: event.data.arguments,
+        });
+      continue;
+    }
+    if (event.type === "tool/result") {
+      const callId = event.data.message.toolCallId;
+      const question = questions.get(callId);
+      const turn = turns.get(event.data.turn);
+      if (
+        question &&
+        turn &&
+        question.turn === event.data.turn &&
+        question.step === event.data.step &&
+        event.surfaceOp === "append" &&
+        !event.data.message.isError
+      ) {
+        const text = event.data.message.content
+          .flatMap((block) => (block.type === "text" ? [block.text] : []))
+          .join("\n");
+        for (const answer of questionAnswers(question.arguments, text))
+          turn.value.userMessages.push({
+            id: `ask:${callId}:${answer.id}`,
+            text: answer.text,
+            source: "user",
+            timestamp: event.time,
+          });
       }
       continue;
     }

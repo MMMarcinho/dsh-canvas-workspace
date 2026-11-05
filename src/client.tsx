@@ -1,3 +1,4 @@
+import { projectSidebar } from "./host/sidebar-projection";
 import { resolveNativeImageResource } from "./host/native-images";
 import type { SessionId } from "@deepseek-ai/dsh-session/types";
 import type { WorkspaceId } from "@deepseek-ai/dsh-api-workspace-controller/client";
@@ -26,9 +27,15 @@ import type {
 } from "@deepseek-ai/dsh-client-ui-slots";
 import { CanvasWorkspace } from "./ui/CanvasWorkspace";
 import { ChatCanvas } from "./ui/ChatCanvas";
-import { CanvasIcon } from "./ui/CanvasIcon";
 import { createNativeSidebarIcons } from "./host/native-sidebar-icons";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type ComponentProps,
+} from "react";
 import { createDshAdapter } from "./adapters/dsh";
 import { createMockAdapter } from "./adapters/mock";
 import type { AgentAdapter } from "./core/types";
@@ -91,6 +98,7 @@ interface CanvasFace {
   onSchedules: () => void;
   accountActions: NativeAccountActions;
   retainSession: (id: string) => SessionReference;
+  sendNativeTurn: (id: string, text: string) => Promise<void>;
   loadUserImage: (
     sessionId: string,
     attachment: Parameters<MessageImageLoader>[0],
@@ -154,16 +162,11 @@ function CanvasOverlay(
   );
   if (!active) return null;
   const SessionProvider = props.SessionProvider;
-  const hostSessions = sessionList.ids.map((id) => ({
-    id,
-    title: sessionList.byId[id]?.displayTitle ?? String(id),
-    cwd: sessionList.byId[id]?.cwd,
-  }));
-  const hostWorkspaces = workspaceList.items.map((workspace) => ({
-    id: workspace.workspaceId,
-    title: workspace.title,
-    sessionIds: [...workspace.sessionIds],
-  }));
+  const { sessions: hostSessions, workspaces: hostWorkspaces } = projectSidebar(
+    sessionList,
+    workspaceList,
+    canvasSessionId ?? undefined,
+  );
   return (
     <div className="canvas-frame-overlay">
       {legacy ? (
@@ -173,63 +176,14 @@ function CanvasOverlay(
           onBackToChat={() => setLegacy(false)}
         />
       ) : (
-        <ChatCanvas
+        <CanvasChat
           {...props}
-          sidebarIcons={NATIVE_SIDEBAR_ICONS}
-          onNewSession={props.createCanvasSession}
+          hostSessions={hostSessions}
+          hostWorkspaces={hostWorkspaces}
           requestedSession={requestedSession}
           onRequestHandled={() => {
             if (openRequest === requestedSession) publishOpenRequest(null);
           }}
-          hostSessions={hostSessions}
-          hostWorkspaces={hostWorkspaces}
-          NativeBrand={<NativeBrand />}
-          avatar={<NativeAvatar />}
-          navIcon={<NativeNavigationIcon />}
-          sendIcon={<NativeSendIcon />}
-          renderMarkdown={(text, streaming, sessionId) =>
-            renderNativeMarkdown(
-              text,
-              streaming,
-              sessionId
-                ? sessionList.byId[sessionId as SessionId]?.cwd
-                : undefined,
-            )
-          }
-          renderImagePreview={renderNativeImagePreview}
-          loadUserImage={(attachment, sessionId) =>
-            props.loadUserImage(sessionId, attachment)
-          }
-          userChrome={{
-            renderFileIcon: (name) => (
-              <FileTypeIcon path={name} className="chat-user-file-icon-glyph" />
-            ),
-            formatFileMeta: (name, bytes) =>
-              [
-                fileExtension(name).toUpperCase().slice(0, 8),
-                fileSizeText(bytes),
-              ]
-                .filter(Boolean)
-                .join(" "),
-            copyText: writeClipboard,
-            renderCopyIcon: (copied) =>
-              copied ? <IconCheckOutlineRegular /> : <IconCopyOutlineRegular />,
-            wrapCopyButton: (button, label) => (
-              <Tooltip label={label} side="bottom">
-                {button}
-              </Tooltip>
-            ),
-          }}
-          resolveImage={(request, sessionId) =>
-            resolveNativeImageResource(
-              document.baseURI,
-              sessionId
-                ? sessionList.byId[sessionId as SessionId]?.cwd
-                : undefined,
-              request,
-            )
-          }
-          useNativeComposer={props.mode === "dsh"}
           onSessionChange={setCanvasSessionId}
           nativeComposer={
             props.mode === "dsh" &&
@@ -245,8 +199,107 @@ function CanvasOverlay(
     </div>
   );
 }
-function CanvasPanelIcon({ size }: PropsRuntime<"sidebar.panellist">) {
-  return <CanvasIcon size={size} />;
+type CanvasChatProps = CanvasFace &
+  Pick<
+    ComponentProps<typeof ChatCanvas>,
+    | "hostSessions"
+    | "hostWorkspaces"
+    | "requestedSession"
+    | "onRequestHandled"
+    | "onSessionChange"
+    | "nativeComposer"
+    | "externalComposer"
+    | "onLegacy"
+  >;
+function CanvasChat(props: CanvasChatProps) {
+  const { hostSessions = [], hostWorkspaces = [], requestedSession } = props;
+  return (
+    <ChatCanvas
+      {...props}
+      sidebarIcons={NATIVE_SIDEBAR_ICONS}
+      onNewSession={props.createCanvasSession}
+      requestedSession={requestedSession}
+      onRequestHandled={props.onRequestHandled}
+      hostSessions={hostSessions}
+      hostWorkspaces={hostWorkspaces}
+      NativeBrand={<NativeBrand />}
+      avatar={<NativeAvatar />}
+      navIcon={<NativeNavigationIcon />}
+      sendIcon={<NativeSendIcon />}
+      renderMarkdown={(text, streaming, sessionId) =>
+        renderNativeMarkdown(
+          text,
+          streaming,
+          sessionId
+            ? hostSessions.find((session) => session.id === sessionId)?.cwd
+            : undefined,
+        )
+      }
+      renderImagePreview={renderNativeImagePreview}
+      loadUserImage={(attachment, sessionId) =>
+        props.loadUserImage(sessionId, attachment)
+      }
+      userChrome={{
+        renderFileIcon: (name) => (
+          <FileTypeIcon path={name} className="chat-user-file-icon-glyph" />
+        ),
+        formatFileMeta: (name, bytes) =>
+          [fileExtension(name).toUpperCase().slice(0, 8), fileSizeText(bytes)]
+            .filter(Boolean)
+            .join(" "),
+        copyText: writeClipboard,
+        renderCopyIcon: (copied) =>
+          copied ? <IconCheckOutlineRegular /> : <IconCopyOutlineRegular />,
+        wrapCopyButton: (button, label) => (
+          <Tooltip label={label} side="bottom">
+            {button}
+          </Tooltip>
+        ),
+      }}
+      resolveImage={(request, sessionId) =>
+        resolveNativeImageResource(
+          document.baseURI,
+          sessionId
+            ? hostSessions.find((session) => session.id === sessionId)?.cwd
+            : undefined,
+          request,
+        )
+      }
+      useNativeComposer={props.mode === "dsh"}
+      onSessionChange={props.onSessionChange}
+      nativeComposer={props.nativeComposer}
+      externalComposer={props.externalComposer}
+      onNativeTurn={props.externalComposer ? props.sendNativeTurn : undefined}
+      onLegacy={props.onLegacy}
+    />
+  );
+}
+
+/** A genuine session-scoped View: native tabs and the existing input stay mounted. */
+export function CanvasConversationView(
+  props: PropsRuntime<"conversation.view"> & CanvasFace,
+) {
+  const sessionList = props.useSessions((state) => state);
+  const workspaceList = props.useWorkspaces((state) => state);
+  const request = useMemo(
+    () => ({ sessionId: props.sessionId, token: ++openRequestToken }),
+    [props.sessionId],
+  );
+  const sidebar = projectSidebar(sessionList, workspaceList, props.sessionId);
+  const exit = () => props.openView("chat", "");
+  return (
+    <div className="canvas-conversation-view" data-canvas-conversation-view>
+      <CanvasChat
+        {...props}
+        onExit={exit}
+        accountActions={createNativeAccountActions(exit)}
+        requestedSession={request}
+        hostSessions={sidebar.sessions}
+        hostWorkspaces={sidebar.workspaces}
+        externalComposer
+      />
+    </div>
+  );
 }
 /** Selects a keyed panel and draws the canvas in the supported frame-wide overlay. */
 export function apply(ctx: Context): void {
@@ -256,6 +309,52 @@ export function apply(ctx: Context): void {
   const selected = demo ? createMockAdapter() : adapter;
   const returnToNative = () => ctx.layout.selectPanel(null);
   const accountActions = createNativeAccountActions(returnToNative);
+  const canvasFace = (): CanvasFace => ({
+    adapter: selected,
+    mode: selected.kind,
+    onExit: returnToNative,
+    accountActions,
+    retainSession: (id) =>
+      ctx.sessions.retain(id as SessionId, { source: "canvas" }),
+    sendNativeTurn: async (id, text) => {
+      const reference = ctx.sessions.retain(id as SessionId, {
+        source: "canvas",
+      });
+      try {
+        const binding = await reference.ready;
+        await binding.ctx.conversation.send(text);
+      } finally {
+        reference.release();
+      }
+    },
+    loadUserImage: (id, attachment) =>
+      ctx.uiConversation.imageUrl(id as SessionId, attachment),
+    onOpenSession: (id) =>
+      ctx.uiWorkspace.openSession(
+        id as Parameters<typeof ctx.uiWorkspace.openSession>[0],
+      ),
+    onNewSession: () => ctx.uiWorkspace.startSession(),
+    createCanvasSession: (workspaceId) =>
+      ctx.sessions.create(
+        workspaceId ? { workspaceId: workspaceId as WorkspaceId } : undefined,
+      ),
+    onOpenWorkspace: (id) =>
+      ctx.uiWorkspace.openWorkspace(
+        id as Parameters<typeof ctx.uiWorkspace.openWorkspace>[0],
+      ),
+    onCreateWorkspace: async () => {
+      const path = await ctx.uiWorkspace.pickDirectory();
+      if (path) await ctx.workspaces.create({ path });
+    },
+    onPlugins: () => ctx.layout.selectPanel("plugins" as MainPanelId),
+    onSchedules: () => {
+      try {
+        ctx.layout.selectPanel("schedules" as MainPanelId);
+      } catch {
+        // Older hosts may not register the Automation tasks panel.
+      }
+    },
+  });
   ctx.effect(() => {
     const style = document.createElement("style");
     style.dataset.plugin = name;
@@ -283,43 +382,7 @@ export function apply(ctx: Context): void {
         children: {
           "canvas.composer.native": { kind: "single", scope: "session-maybe" },
         },
-        inject: (): CanvasFace => ({
-          adapter: selected,
-          mode: selected.kind,
-          onExit: returnToNative,
-          accountActions,
-          retainSession: (id) =>
-            ctx.sessions.retain(id as SessionId, { source: "canvas" }),
-          loadUserImage: (id, attachment) =>
-            ctx.uiConversation.imageUrl(id as SessionId, attachment),
-          onOpenSession: (id) =>
-            ctx.uiWorkspace.openSession(
-              id as Parameters<typeof ctx.uiWorkspace.openSession>[0],
-            ),
-          onNewSession: () => ctx.uiWorkspace.startSession(),
-          createCanvasSession: (workspaceId) =>
-            ctx.sessions.create(
-              workspaceId
-                ? { workspaceId: workspaceId as WorkspaceId }
-                : undefined,
-            ),
-          onOpenWorkspace: (id) =>
-            ctx.uiWorkspace.openWorkspace(
-              id as Parameters<typeof ctx.uiWorkspace.openWorkspace>[0],
-            ),
-          onCreateWorkspace: async () => {
-            const path = await ctx.uiWorkspace.pickDirectory();
-            if (path) await ctx.workspaces.create({ path });
-          },
-          onPlugins: () => ctx.layout.selectPanel("plugins" as MainPanelId),
-          onSchedules: () => {
-            try {
-              ctx.layout.selectPanel("schedules" as MainPanelId);
-            } catch {
-              // Older hosts may not register the Automation tasks panel.
-            }
-          },
-        }),
+        inject: canvasFace,
       },
       CanvasOverlay,
     ),
@@ -330,15 +393,16 @@ export function apply(ctx: Context): void {
       CanvasNativeComposer,
     ),
   );
-  ctx.slots.inject("sidebar.panellist", () =>
+  ctx.slots.inject("conversation.view", () =>
     ctx.slots.register(
       {
-        name: "sidebar.panellist",
-        id: PANEL_ID,
-        order: -5,
-        label: "Canvas · 画布",
+        name: "conversation.view",
+        id: "canvas",
+        label: "画布",
+        order: 50,
+        inject: canvasFace,
       },
-      CanvasPanelIcon,
+      CanvasConversationView,
     ),
   );
   ctx.slots.inject("sidebar.workspaces.session.menu.item", () =>

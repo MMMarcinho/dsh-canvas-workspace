@@ -329,8 +329,9 @@ test("new canvas sessions use a real workspace session and restore each canvas w
     ...document.querySelectorAll<HTMLElement>(".chat-workspace-group"),
   ].find((group) => group.textContent?.includes("项目二"));
   assert.ok(otherWorkspace);
-  const createInOther =
-    otherWorkspace.querySelector<HTMLButtonElement>(".chat-session-row");
+  const createInOther = otherWorkspace.querySelector<HTMLButtonElement>(
+    ".chat-sidebar-workspace-create",
+  );
   assert.ok(createInOther);
   await act(async () => createInOther.click());
   assert.equal(createdIn.at(-1), "project-two");
@@ -1115,14 +1116,15 @@ function selectionStart() {
   return event;
 }
 
-test("background and world-gap pan wait for threshold and suppress only active selection", async () => {
+test("background pan blocks selection immediately but waits for movement threshold", async () => {
   const control = await mountPanFixture();
   const stage = element(".chat-stage");
   const before = viewportTransform();
-  assert.equal((await pointer(stage, "pointerdown")).defaultPrevented, false);
+  assert.equal((await pointer(stage, "pointerdown")).defaultPrevented, true);
   await pointer(stage, "pointermove", 102, 101);
   assert.equal(viewportTransform(), before);
-  assert.equal(selectionStart().defaultPrevented, false);
+  assert.equal(selectionStart().defaultPrevented, true);
+  assert.ok(stage.hasAttribute("data-canvas-dragging"));
   assert.equal(stage.classList.contains("is-chat-panning"), false);
   selectReplyText();
   await pointer(stage, "pointermove", 140, 120);
@@ -1133,6 +1135,7 @@ test("background and world-gap pan wait for threshold and suppress only active s
   await pointer(stage, "pointerup", 140, 120);
   assert.equal(stage.classList.contains("is-chat-panning"), false);
   assert.equal(stage.hasPointerCapture(1), false);
+  assert.equal(stage.hasAttribute("data-canvas-dragging"), false);
   assert.equal(selectionStart().defaultPrevented, false);
   await pointer(element(".chat-world"), "pointerdown");
   await pointer(stage, "pointermove", 110, 110);
@@ -2285,7 +2288,10 @@ test("canvas sidebar reuses the DSH shell while keeping canvas navigation", asyn
   const dialog = element('[role="dialog"][aria-label="导航与工作区"]');
   assert.ok(dialog.classList.contains("chat-sidebar"));
   assert.ok(dialog.textContent?.includes("新会话"));
-  assert.ok(dialog.textContent?.includes("Canvas · 画布"));
+  assert.ok(
+    !dialog.textContent?.includes("Canvas · 画布"),
+    "the View tab owns the Canvas entry",
+  );
   assert.ok(dialog.textContent?.includes("插件"));
   assert.ok(dialog.textContent?.includes("自动化任务"));
   assert.equal(
@@ -2300,10 +2306,15 @@ test("canvas sidebar reuses the DSH shell while keeping canvas navigation", asyn
     "true",
   );
   assert.equal(dialog.querySelectorAll(".chat-workspace-group").length, 3);
+  await act(async () =>
+    (
+      dialog.querySelector(".chat-sidebar-project") as HTMLButtonElement
+    ).click(),
+  );
   assert.equal(
     dialog.querySelectorAll(".chat-session-row").length,
     3,
-    "two create rows and the grouped sessions; ungrouped sessions stay listed",
+    "only real grouped and ungrouped sessions are listed",
   );
   assert.equal(
     dialog.querySelector('.chat-session-row[aria-current="page"]'),
@@ -2360,4 +2371,274 @@ test("canvas sidebar reuses the DSH shell while keeping canvas navigation", asyn
   assert.equal(exits, 1);
   if (root) await act(async () => root!.unmount());
   root = undefined;
+});
+
+test("native View binds its requested Session immediately and reuses the resident composer", async () => {
+  const control = deferredAdapter();
+  await mount(control.adapter);
+  localStorage.setItem(
+    `${key.replace(":mock", ":dsh")}:session:native-view-session`,
+    JSON.stringify({
+      version: 1,
+      sessionId: "native-view-session",
+      viewport: { x: 25, y: 40, zoom: 0.75 },
+      replies: [
+        {
+          id: "native-view-reply",
+          prompt: "同一会话",
+          body: "恢复既有画布位置",
+          status: "done",
+          position: { x: 700, y: 250, slotHeight: 90, kind: "manual" },
+        },
+      ],
+    }),
+  );
+  await act(async () =>
+    root!.render(
+      <ChatCanvas
+        key="native-view-test"
+        adapter={control.adapter}
+        mode="dsh"
+        useNativeComposer
+        externalComposer
+        requestedSession={{ sessionId: "native-view-session", token: 9800 }}
+      />,
+    ),
+  );
+  assert.equal(
+    control.creates,
+    0,
+    "selecting an existing Session View cannot create another Session",
+  );
+  assert.equal(document.querySelector(".chat-native-composer"), null);
+  assert.equal(document.querySelector("textarea"), null);
+  assert.equal(element(".chat-reply").style.left, "700px");
+  assert.equal(
+    element(".chat-world").style.transform,
+    "translate(25px, 40px) scale(0.75)",
+  );
+  assert.match(element(".chat-user-history").textContent ?? "", /同一会话/);
+  if (root) await act(async () => root!.unmount());
+  root = undefined;
+});
+
+test("IUI turns in the native View use host dispatch and survive View unmount", async () => {
+  const control = deferredAdapter();
+  await mount(control.adapter);
+  localStorage.setItem(
+    `${key.replace(":mock", ":dsh")}:session:host-owned`,
+    JSON.stringify({
+      version: 1,
+      sessionId: "host-owned",
+      viewport: { x: 0, y: 0, zoom: 1 },
+      replies: [
+        {
+          id: "native-iui",
+          prompt: "IUI",
+          body: '<card><button onClick={() => GenUI.issueNewTurn("native follow-up")}>Continue native</button></card>',
+          status: "done",
+        },
+      ],
+    }),
+  );
+  const calls: { id: string; text: string }[] = [];
+  let finish!: () => void;
+  await act(async () =>
+    root!.render(
+      <ChatCanvas
+        key="host-owned"
+        adapter={control.adapter}
+        mode="dsh"
+        useNativeComposer
+        externalComposer
+        requestedSession={{ sessionId: "host-owned", token: 9900 }}
+        onNativeTurn={(id, text) => {
+          calls.push({ id, text });
+          return new Promise<void>((resolve) => {
+            finish = resolve;
+          });
+        }}
+      />,
+    ),
+  );
+  const button = element(
+    "[data-canvas-iui-root]",
+  ).shadowRoot?.querySelector<HTMLButtonElement>("button");
+  assert.ok(button);
+  await act(async () => {
+    button.click();
+    button.click();
+  });
+  assert.deepEqual(calls, [{ id: "host-owned", text: "native follow-up" }]);
+  assert.equal(control.runs.length, 0);
+  await act(async () => root!.unmount());
+  root = undefined;
+  assert.equal(
+    control.cancels,
+    0,
+    "switching native Views must not cancel host execution",
+  );
+  await act(async () => finish());
+});
+
+test("reply locate uses stable message identity, focuses the rail and never moves camera", async () => {
+  await mountPairingFixture();
+  const rail = element(".chat-user-history");
+  Object.defineProperties(rail, {
+    clientHeight: { configurable: true, value: 120 },
+    clientWidth: { configurable: true, value: 400 },
+  });
+  rail.getClientRects = () => [{ height: 120 }] as unknown as DOMRectList;
+  mockRect(rail, 850, 100, 400, 120);
+  mockRect(userNode("message-a"), 860, 50, 300, 60);
+  mockRect(userNode("message-b"), 860, 400, 300, 60);
+  const scrolls: number[] = [];
+  Object.defineProperty(rail, "scrollTo", {
+    configurable: true,
+    value: ({ top }: ScrollToOptions) => {
+      rail.scrollTop = top ?? 0;
+      scrolls.push(rail.scrollTop);
+    },
+  });
+  rail.scrollTop = 100;
+  const camera = viewportTransform();
+  await click('.chat-reply[data-reply-id="pair-b"] .chat-locate-message');
+  assert.equal(document.activeElement, userNode("message-b"));
+  assert.equal(scrolls.at(-1), 370);
+  assert.equal(viewportTransform(), camera);
+  await click('.chat-reply[data-reply-id="pair-a-extra"] .chat-locate-message');
+  assert.equal(
+    document.activeElement,
+    userNode("message-a"),
+    "multiple outputs locate their original native input",
+  );
+  assert.equal(
+    element(".chat-locate-status").textContent,
+    "已定位到对应消息。",
+  );
+});
+
+test("locate waits for late input metadata before revealing the exact row", async () => {
+  const control = await mountPairingFixture();
+  const turn = {
+    turnId: 44,
+    userMessages: [],
+    body: "Input metadata pending",
+    durable: true,
+    status: "done" as const,
+  };
+  await control.snapshot({
+    sessionId: "pair-session",
+    turns: [turn],
+    hasMore: true,
+  });
+  const reply = element('.chat-reply[data-reply-id="host:pair-session:44"]');
+  await act(async () =>
+    reply.querySelector<HTMLButtonElement>(".chat-locate-message")!.click(),
+  );
+  assert.ok(element(".chat-locate-status").textContent?.includes("尚未加载"));
+  const rail = element(".chat-user-history");
+  Object.defineProperties(rail, {
+    clientHeight: { configurable: true, value: 120 },
+    clientWidth: { configurable: true, value: 400 },
+  });
+  rail.getClientRects = () => [{}] as unknown as DOMRectList;
+  rail.scrollTo = () => {};
+  await control.snapshot({
+    sessionId: "pair-session",
+    turns: [
+      {
+        ...turn,
+        userMessages: [
+          {
+            id: "late-user",
+            text: "Arrived later",
+            source: "user",
+            timestamp: 1000,
+          },
+        ],
+      },
+    ],
+    hasMore: false,
+  });
+  assert.equal(document.activeElement, userNode("late-user"));
+  assert.equal(
+    element(".chat-locate-status").textContent,
+    "已定位到对应消息。",
+  );
+  const cancelled = { ...turn, turnId: 45 };
+  await control.snapshot({
+    sessionId: "pair-session",
+    turns: [cancelled],
+    hasMore: true,
+  });
+  await click(
+    '.chat-reply[data-reply-id="host:pair-session:45"] .chat-locate-message',
+  );
+  await keyEvent(element(".chat-stage"), "keydown", "Escape");
+  assert.equal(element(".chat-locate-status").textContent, "");
+  await control.snapshot({
+    sessionId: "pair-session",
+    turns: [
+      {
+        ...cancelled,
+        userMessages: [
+          {
+            id: "cancelled-user",
+            text: "After Escape",
+            timestamp: 2000,
+            source: "user",
+          },
+        ],
+      },
+    ],
+    hasMore: false,
+  });
+  assert.notEqual(
+    document.activeElement,
+    userNode("cancelled-user"),
+    "cancelled pending navigation must not steal focus later",
+  );
+});
+
+test("explicit pin locks movement, persists per session and unpin keeps coordinates", async () => {
+  await mountPairingFixture();
+  mockLocateGeometry();
+  await click('.chat-reply[data-reply-id="pair-a"] .chat-pin-reply');
+  const card = replyNode("pair-a");
+  const position = { left: card.style.left, top: card.style.top };
+  const handle = card.querySelector<HTMLButtonElement>(
+    "[data-canvas-reply-handle]",
+  )!;
+  assert.equal(handle.disabled, true);
+  assert.equal(card.dataset.pinned, "true");
+  await pointer(handle, "pointerdown", 100, 100);
+  await pointer(element(".chat-stage"), "pointermove", 160, 150);
+  await pointer(element(".chat-stage"), "pointerup", 160, 150);
+  await keyEvent(handle, "keydown", "ArrowRight");
+  assert.deepEqual({ left: card.style.left, top: card.style.top }, position);
+  await act(async () => new Promise((resolve) => setTimeout(resolve, 220)));
+  const saved = JSON.parse(localStorage.getItem(key)!);
+  assert.equal(
+    saved.replies.find((reply: ConversationReply) => reply.id === "pair-a")
+      .pinned,
+    true,
+  );
+  const before = saved.replies.find(
+    (reply: ConversationReply) => reply.id === "pair-a",
+  ).position;
+  await act(async () => root!.unmount());
+  root = undefined;
+  await mount(deferredAdapter().adapter, false);
+  assert.equal(replyNode("pair-a").dataset.pinned, "true");
+  await click('.chat-reply[data-reply-id="pair-a"] .chat-pin-reply');
+  assert.equal(replyNode("pair-a").dataset.pinned, undefined);
+  assert.equal(replyNode("pair-a").style.left, `${before.x}px`);
+  assert.equal(replyNode("pair-a").style.top, `${before.y}px`);
+  assert.equal(
+    replyNode("pair-a").querySelector<HTMLButtonElement>(
+      "[data-canvas-reply-handle]",
+    )!.disabled,
+    false,
+  );
 });

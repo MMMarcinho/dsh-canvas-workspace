@@ -30,8 +30,28 @@ export type IconName =
   | "clock"
   | "sparkle"
   | "apps-add"
-  | "panel-left";
+  | "panel-left"
+  | "locate"
+  | "pin"
+  | "pin-off";
 const paths: Record<IconName, ReactNode> = {
+  "pin-off": (
+    <>
+      <path d="M8 3h8l-1 7 3 4v2H6v-2l3-4-1-7ZM12 16v6M3 3l18 18" />
+    </>
+  ),
+  pin: (
+    <>
+      <path d="M8 3h8l-1 7 3 4v2H6v-2l3-4-1-7ZM12 16v6" />
+    </>
+  ),
+  locate: (
+    <>
+      <circle cx="12" cy="12" r="6" />
+      <circle cx="12" cy="12" r="2" />
+      <path d="M12 2v3m0 14v3M2 12h3m14 0h3" />
+    </>
+  ),
   user: (
     <>
       <circle cx="12" cy="8" r="3.5" />
