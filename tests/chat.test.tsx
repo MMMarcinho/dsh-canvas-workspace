@@ -2480,3 +2480,165 @@ test("IUI turns in the native View use host dispatch and survive View unmount", 
   );
   await act(async () => finish());
 });
+
+test("reply locate uses stable message identity, focuses the rail and never moves camera", async () => {
+  await mountPairingFixture();
+  const rail = element(".chat-user-history");
+  Object.defineProperties(rail, {
+    clientHeight: { configurable: true, value: 120 },
+    clientWidth: { configurable: true, value: 400 },
+  });
+  rail.getClientRects = () => [{ height: 120 }] as unknown as DOMRectList;
+  mockRect(rail, 850, 100, 400, 120);
+  mockRect(userNode("message-a"), 860, 50, 300, 60);
+  mockRect(userNode("message-b"), 860, 400, 300, 60);
+  const scrolls: number[] = [];
+  Object.defineProperty(rail, "scrollTo", {
+    configurable: true,
+    value: ({ top }: ScrollToOptions) => {
+      rail.scrollTop = top ?? 0;
+      scrolls.push(rail.scrollTop);
+    },
+  });
+  rail.scrollTop = 100;
+  const camera = viewportTransform();
+  await click('.chat-reply[data-reply-id="pair-b"] .chat-locate-message');
+  assert.equal(document.activeElement, userNode("message-b"));
+  assert.equal(scrolls.at(-1), 370);
+  assert.equal(viewportTransform(), camera);
+  await click('.chat-reply[data-reply-id="pair-a-extra"] .chat-locate-message');
+  assert.equal(
+    document.activeElement,
+    userNode("message-a"),
+    "multiple outputs locate their original native input",
+  );
+  assert.equal(
+    element(".chat-locate-status").textContent,
+    "已定位到对应消息。",
+  );
+});
+
+test("locate waits for late input metadata before revealing the exact row", async () => {
+  const control = await mountPairingFixture();
+  const turn = {
+    turnId: 44,
+    userMessages: [],
+    body: "Input metadata pending",
+    durable: true,
+    status: "done" as const,
+  };
+  await control.snapshot({
+    sessionId: "pair-session",
+    turns: [turn],
+    hasMore: true,
+  });
+  const reply = element('.chat-reply[data-reply-id="host:pair-session:44"]');
+  await act(async () =>
+    reply.querySelector<HTMLButtonElement>(".chat-locate-message")!.click(),
+  );
+  assert.ok(element(".chat-locate-status").textContent?.includes("尚未加载"));
+  const rail = element(".chat-user-history");
+  Object.defineProperties(rail, {
+    clientHeight: { configurable: true, value: 120 },
+    clientWidth: { configurable: true, value: 400 },
+  });
+  rail.getClientRects = () => [{}] as unknown as DOMRectList;
+  rail.scrollTo = () => {};
+  await control.snapshot({
+    sessionId: "pair-session",
+    turns: [
+      {
+        ...turn,
+        userMessages: [
+          {
+            id: "late-user",
+            text: "Arrived later",
+            source: "user",
+            timestamp: 1000,
+          },
+        ],
+      },
+    ],
+    hasMore: false,
+  });
+  assert.equal(document.activeElement, userNode("late-user"));
+  assert.equal(
+    element(".chat-locate-status").textContent,
+    "已定位到对应消息。",
+  );
+  const cancelled = { ...turn, turnId: 45 };
+  await control.snapshot({
+    sessionId: "pair-session",
+    turns: [cancelled],
+    hasMore: true,
+  });
+  await click(
+    '.chat-reply[data-reply-id="host:pair-session:45"] .chat-locate-message',
+  );
+  await keyEvent(element(".chat-stage"), "keydown", "Escape");
+  assert.equal(element(".chat-locate-status").textContent, "");
+  await control.snapshot({
+    sessionId: "pair-session",
+    turns: [
+      {
+        ...cancelled,
+        userMessages: [
+          {
+            id: "cancelled-user",
+            text: "After Escape",
+            timestamp: 2000,
+            source: "user",
+          },
+        ],
+      },
+    ],
+    hasMore: false,
+  });
+  assert.notEqual(
+    document.activeElement,
+    userNode("cancelled-user"),
+    "cancelled pending navigation must not steal focus later",
+  );
+});
+
+test("explicit pin locks movement, persists per session and unpin keeps coordinates", async () => {
+  await mountPairingFixture();
+  mockLocateGeometry();
+  await click('.chat-reply[data-reply-id="pair-a"] .chat-pin-reply');
+  const card = replyNode("pair-a");
+  const position = { left: card.style.left, top: card.style.top };
+  const handle = card.querySelector<HTMLButtonElement>(
+    "[data-canvas-reply-handle]",
+  )!;
+  assert.equal(handle.disabled, true);
+  assert.equal(card.dataset.pinned, "true");
+  await pointer(handle, "pointerdown", 100, 100);
+  await pointer(element(".chat-stage"), "pointermove", 160, 150);
+  await pointer(element(".chat-stage"), "pointerup", 160, 150);
+  await keyEvent(handle, "keydown", "ArrowRight");
+  assert.deepEqual({ left: card.style.left, top: card.style.top }, position);
+  await act(async () => new Promise((resolve) => setTimeout(resolve, 220)));
+  const saved = JSON.parse(localStorage.getItem(key)!);
+  assert.equal(
+    saved.replies.find((reply: ConversationReply) => reply.id === "pair-a")
+      .pinned,
+    true,
+  );
+  const before = saved.replies.find(
+    (reply: ConversationReply) => reply.id === "pair-a",
+  ).position;
+  await act(async () => root!.unmount());
+  root = undefined;
+  await mount(deferredAdapter().adapter, false);
+  assert.equal(replyNode("pair-a").dataset.pinned, "true");
+  await click('.chat-reply[data-reply-id="pair-a"] .chat-pin-reply');
+  assert.equal(replyNode("pair-a").dataset.pinned, undefined);
+  assert.equal(replyNode("pair-a").style.left, `${before.x}px`);
+  assert.equal(replyNode("pair-a").style.top, `${before.y}px`);
+  assert.equal(
+    replyNode("pair-a").querySelector<HTMLButtonElement>(
+      "[data-canvas-reply-handle]",
+    )!.disabled,
+    false,
+  );
+});

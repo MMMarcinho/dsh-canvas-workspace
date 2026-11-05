@@ -675,6 +675,13 @@ function composePrompt(prompt, nodes) {
 // src/ui/icons.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
 var paths = {
+  "pin-off": /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M8 3h8l-1 7 3 4v2H6v-2l3-4-1-7ZM12 16v6M3 3l18 18" }) }),
+  pin: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M8 3h8l-1 7 3 4v2H6v-2l3-4-1-7ZM12 16v6" }) }),
+  locate: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "12", cy: "12", r: "6" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "12", cy: "12", r: "2" }),
+    /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M12 2v3m0 14v3M2 12h3m14 0h3" })
+  ] }),
   user: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("circle", { cx: "12", cy: "8", r: "3.5" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M5 21v-2a7 7 0 0 1 14 0v2" })
@@ -2232,6 +2239,7 @@ function reconcileConversation(state, snapshot, activeReplyId) {
       body: turn.body,
       reasoning: turn.reasoning ?? (turn.durable ? void 0 : previous3?.reasoning),
       position: previous3?.position,
+      pinned: previous3?.pinned === true || void 0,
       hostTurnId: turn.turnId,
       requestId: previous3?.requestId ?? turn.userMessages.find((message) => message.requestId)?.requestId,
       timestamp: turn.timestamp ?? previous3?.timestamp,
@@ -2319,12 +2327,14 @@ function activeReplyPair(pairs, target) {
 
 // src/ui/reply-layout.ts
 var GAP = 30;
+var EPSILON = 0.5;
+function collides(card, other) {
+  return card.x < other.x + other.width + GAP - EPSILON && card.x + card.width + GAP - EPSILON > other.x && card.y < other.y + other.height + GAP - EPSILON && card.y + card.height + GAP - EPSILON > other.y;
+}
 function avoid(card, occupied) {
   let y = card.y;
   for (; ; ) {
-    const hits = occupied.filter(
-      (other) => card.x < other.x + other.width + GAP && card.x + card.width + GAP > other.x && y < other.y + other.height + GAP && y + card.height + GAP > other.y
-    );
+    const hits = occupied.filter((other) => collides({ ...card, y }, other));
     if (!hits.length) return { ...card, y };
     y = Math.max(...hits.map((other) => other.y + other.height + GAP));
   }
@@ -2336,7 +2346,7 @@ function arrangeReplies(cards, area) {
   let rowBottom = y;
   return cards.map((card) => {
     if (card.fixed) return card;
-    if (area && x > area.x && x + card.width > area.x + area.width) {
+    if (area && x > area.x && x + card.width > area.x + area.width + EPSILON) {
       x = area.x;
       y = rowBottom + GAP;
     }
@@ -2349,6 +2359,27 @@ function arrangeReplies(cards, area) {
     }
     return placed;
   });
+}
+function repairReplyGrowth(cards, grown) {
+  if (!grown.size) return cards;
+  const result = new Map(cards.map((card) => [card.id, card]));
+  const occupied = cards.filter((card) => card.fixed);
+  const active = cards.filter((card) => card.fixed && grown.has(card.id)).map((card) => ({ card, originY: card.y }));
+  const ordered = cards.map((card, index2) => ({ card, index: index2 })).sort(
+    (a, b) => a.card.y - b.card.y || a.card.x - b.card.x || a.index - b.index
+  );
+  for (const { card } of ordered) {
+    if (card.fixed) continue;
+    const affected = active.some(
+      (blocker) => blocker.originY <= card.y + EPSILON && collides(card, blocker.card)
+    ) || grown.has(card.id) && occupied.some((other) => other.fixed && collides(card, other));
+    const placed = affected ? avoid(card, occupied) : card;
+    result.set(card.id, placed);
+    occupied.push(placed);
+    if (grown.has(card.id) || placed.y > card.y + EPSILON)
+      active.push({ card: placed, originY: card.y });
+  }
+  return cards.map((card) => result.get(card.id));
 }
 
 // vendor/deepseek-harness/ui-primitives/BrandWordmark.tsx
@@ -24440,6 +24471,7 @@ function restore(mode, sessionId) {
         ...value,
         replies: value.replies.map((reply) => ({
           ...reply,
+          pinned: reply.pinned === true || void 0,
           ...reply.position && (!Number.isFinite(reply.position.x) || !Number.isFinite(reply.position.y) || !Number.isFinite(reply.position.slotHeight) || reply.position.slotHeight < 0) ? { position: void 0 } : {},
           ...reply.status === "running" ? {
             status: "error",
@@ -24635,6 +24667,12 @@ function ChatCanvas({
   const stage = (0, import_react14.useRef)(null);
   const dock = (0, import_react14.useRef)(null);
   const userRail = (0, import_react14.useRef)(null);
+  const [railLocate, setRailLocate] = (0, import_react14.useState)(null);
+  const [railLocateRevision, setRailLocateRevision] = (0, import_react14.useState)(0);
+  const [railLocateStatus, setRailLocateStatus] = (0, import_react14.useState)({
+    text: "",
+    quiet: true
+  });
   const seenRailMessages = (0, import_react14.useRef)(null);
   const railScrollAnimating = (0, import_react14.useRef)(false);
   const railFollowTail = (0, import_react14.useRef)(null);
@@ -24642,6 +24680,7 @@ function ChatCanvas({
   const previousReplyCount = (0, import_react14.useRef)(state.replies.length);
   const newReplyIds = (0, import_react14.useRef)(/* @__PURE__ */ new Set());
   const measuredReplyHeights = (0, import_react14.useRef)(/* @__PURE__ */ new Map());
+  const flushReplyResize = (0, import_react14.useRef)(null);
   const composerInput = (0, import_react14.useRef)(null);
   const iuiActions = (0, import_react14.useRef)(/* @__PURE__ */ new Map());
   const userMessageIds = JSON.stringify(
@@ -24711,6 +24750,59 @@ function ChatCanvas({
     return () => observer.disconnect();
   }, [pairScope, userMessageIds]);
   (0, import_react14.useEffect)(() => () => stopRailScroll(), []);
+  (0, import_react14.useLayoutEffect)(() => {
+    if (!railLocate) return;
+    if (railLocate.scope !== pairScope) {
+      setRailLocate(null);
+      setRailLocateStatus({ text: "", quiet: true });
+      return;
+    }
+    const pairKey = pairs.replyPairs.get(railLocate.replyId);
+    const message = pairs.userMessages.find((item) => item.replyId === railLocate.replyId) ?? pairs.userMessages.find((item) => pairKey && item.pairKey === pairKey);
+    const rail = userRail.current;
+    const row = message && [
+      ...rail?.querySelectorAll("[data-user-message-id]") ?? []
+    ].find((node2) => node2.dataset.userMessageId === message.messageId);
+    if (!row || !rail) {
+      setRailLocateStatus({
+        text: "\u5BF9\u5E94\u6D88\u606F\u5C1A\u672A\u52A0\u8F7D\uFF0C\u52A0\u8F7D\u540E\u4F1A\u81EA\u52A8\u5B9A\u4F4D\u3002",
+        quiet: false
+      });
+      return;
+    }
+    if (!rail.clientHeight || !rail.clientWidth || rail.getClientRects().length === 0) {
+      setRailLocateStatus({
+        text: "\u6D88\u606F\u5217\u8868\u7A7A\u95F4\u4E0D\u8DB3\uFF0C\u8BF7\u6536\u8D77\u8F93\u5165\u6846\u6216\u589E\u5927\u7A97\u53E3\uFF1B\u6062\u590D\u663E\u793A\u540E\u4F1A\u81EA\u52A8\u5B9A\u4F4D\u3002",
+        quiet: false
+      });
+      return;
+    }
+    stopRailScroll();
+    const bounds = rail.getBoundingClientRect();
+    const target = row.getBoundingClientRect();
+    const top = Math.max(
+      0,
+      rail.scrollTop + target.top - bounds.top - Math.max(0, (rail.clientHeight - target.height) / 2)
+    );
+    railScrollAnimating.current = true;
+    rail.scrollTo({
+      top,
+      behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth"
+    });
+    row.focus({ preventScroll: true });
+    setFocusedPair({ scope: pairScope, source: "user", id: message.id });
+    setRailLocateStatus({ text: "\u5DF2\u5B9A\u4F4D\u5230\u5BF9\u5E94\u6D88\u606F\u3002", quiet: true });
+    setRailLocate(null);
+  }, [railLocate, railLocateRevision, pairScope, pairs]);
+  (0, import_react14.useEffect)(() => {
+    const rail = userRail.current;
+    if (!railLocate || !rail || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(
+      () => setRailLocateRevision((value) => value + 1)
+    );
+    observer.observe(rail);
+    return () => observer.disconnect();
+  }, [railLocate]);
   (0, import_react14.useEffect)(() => {
     const input = composerInput.current;
     if (input) {
@@ -24837,10 +24929,10 @@ function ChatCanvas({
     return {
       x: reply?.position?.x ?? (bounds.left - view.left - x) / zoom2,
       y: reply?.position?.y ?? (bounds.top - view.top - y) / zoom2,
-      width: bounds.width / zoom2 || card.offsetWidth || 600,
+      width: card.offsetWidth || bounds.width / zoom2 || 600,
       height: Math.max(
         24,
-        bounds.height / zoom2 || card.offsetHeight || reply?.position?.slotHeight || 0
+        card.offsetHeight || bounds.height / zoom2 || reply?.position?.slotHeight || 0
       )
     };
   };
@@ -24850,6 +24942,35 @@ function ChatCanvas({
     const geometry = replyGeometry(replyId);
     return geometry ? { x: geometry.x, y: geometry.y, slotHeight: geometry.height } : null;
   };
+  const togglePin = (replyId) => {
+    const canvas = stage.current;
+    const card = [
+      ...canvas?.querySelectorAll(".chat-reply") ?? []
+    ].find((node2) => node2.dataset.replyId === replyId);
+    const geometry = replyGeometry(replyId);
+    if (!canvas || !card || !geometry) return;
+    const rect = card.getBoundingClientRect();
+    const view = canvas.getBoundingClientRect();
+    const camera = stateRef.current.viewport;
+    const moving = card.getAnimations?.().some((animation) => layoutAnimations.current.has(animation));
+    const position3 = {
+      x: moving ? (rect.left - view.left - camera.x) / camera.zoom : geometry.x,
+      y: moving ? (rect.top - view.top - camera.y) / camera.zoom : geometry.y,
+      slotHeight: geometry.height,
+      kind: "manual"
+    };
+    stopCamera();
+    update((current2) => ({
+      ...current2,
+      replies: current2.replies.map(
+        (reply) => reply.id === replyId ? {
+          ...reply,
+          pinned: reply.pinned ? void 0 : true,
+          position: position3
+        } : reply
+      )
+    }));
+  };
   const layoutReplies = (current2, area) => {
     const cards = current2.replies.flatMap((reply) => {
       const geometry = replyGeometry(reply.id);
@@ -24857,7 +24978,7 @@ function ChatCanvas({
         {
           id: reply.id,
           ...geometry,
-          fixed: area ? reply.position?.kind === "manual" : reply.position?.kind !== "viewport"
+          fixed: reply.pinned === true
         }
       ] : [];
     });
@@ -24867,7 +24988,17 @@ function ChatCanvas({
     let changed = false;
     const replies = current2.replies.map((reply) => {
       const card = positions.get(reply.id);
-      if (!card || card.fixed) return reply;
+      if (!card) return reply;
+      if (card.fixed) {
+        if (reply.pinned && reply.position && Math.abs(reply.position.slotHeight - card.height) > 1) {
+          changed = true;
+          return {
+            ...reply,
+            position: { ...reply.position, slotHeight: card.height }
+          };
+        }
+        return reply;
+      }
       const old = reply.position;
       if (old?.kind === "viewport" && Math.abs(old.x - card.x) < 0.5 && Math.abs(old.y - card.y) < 0.5 && Math.abs(old.slotHeight - card.height) < 0.5)
         return reply;
@@ -24888,18 +25019,14 @@ function ChatCanvas({
     const canvas = stage.current;
     if (!canvas) return;
     const bounds = canvas.getBoundingClientRect();
-    const overlay = dock.current?.getBoundingClientRect();
     const { x, y, zoom: zoom2 } = stateRef.current.viewport;
-    const left = bounds.left + 24;
-    let right = bounds.right - 24;
-    if (overlay && overlay.left - left > 360)
-      right = Math.min(right, overlay.left - 24);
+    const width = Math.max(80, bounds.width - 48) / zoom2;
     const previous3 = /* @__PURE__ */ new Map();
-    const manual = new Set(
-      stateRef.current.replies.filter((reply) => reply.position?.kind === "manual").map((reply) => reply.id)
+    const pinned = new Set(
+      stateRef.current.replies.filter((reply) => reply.pinned === true).map((reply) => reply.id)
     );
     for (const card of canvas.querySelectorAll(".chat-reply")) {
-      if (!manual.has(card.dataset.replyId))
+      if (!pinned.has(card.dataset.replyId))
         previous3.set(card.dataset.replyId, card.getBoundingClientRect());
     }
     stopCamera();
@@ -24909,7 +25036,7 @@ function ChatCanvas({
       (current2) => layoutReplies(current2, {
         x: (24 - x) / zoom2,
         y: (88 - y) / zoom2,
-        width: Math.max(80, right - left) / zoom2
+        width
       })
     );
     setMenu(null);
@@ -24924,10 +25051,35 @@ function ChatCanvas({
       const anchor = positions.get(previous3.id) ?? replyGeometry(previous3.id);
       if (!anchor) continue;
       const anchorHeight = "height" in anchor ? anchor.height : anchor.slotHeight;
+      const size = replyGeometry(reply.id);
+      const obstacles = state.replies.flatMap((candidate) => {
+        if (candidate.id === reply.id || newReplyIds.current.has(candidate.id))
+          return [];
+        const rect = replyGeometry(candidate.id), placed2 = positions.get(candidate.id);
+        return rect ? [
+          {
+            id: candidate.id,
+            ...rect,
+            ...placed2 ? { x: placed2.x, y: placed2.y, height: placed2.slotHeight } : {},
+            fixed: true
+          }
+        ] : [];
+      });
+      const placed = arrangeReplies([
+        ...obstacles,
+        {
+          id: reply.id,
+          x: anchor.x,
+          y: anchor.y + anchorHeight + 30,
+          width: size?.width ?? 600,
+          height: Math.max(24, size?.height ?? 24),
+          fixed: false
+        }
+      ]).at(-1);
       positions.set(reply.id, {
-        x: anchor.x,
-        y: anchor.y + anchorHeight + 30,
-        slotHeight: Math.max(24, replyGeometry(reply.id)?.height ?? 24),
+        x: placed.x,
+        y: placed.y,
+        slotHeight: placed.height,
         kind: state.replies.some((item) => item.position?.kind === "viewport") ? "viewport" : "auto",
         anchorHeight
       });
@@ -24943,88 +25095,114 @@ function ChatCanvas({
   (0, import_react14.useLayoutEffect)(() => {
     const canvas = stage.current;
     if (!canvas || typeof ResizeObserver === "undefined") return;
+    const sessionId = state.sessionId;
+    let disposed = false;
     measuredReplyHeights.current.clear();
-    const cards = [...canvas.querySelectorAll(".chat-reply")];
-    const observer = new ResizeObserver((entries) => {
-      const current2 = stateRef.current;
-      if (current2.replies.some((reply) => reply.position?.kind === "viewport")) {
-        cancelLayoutMotion();
-        update((value) => layoutReplies(value));
+    const queued = /* @__PURE__ */ new Map();
+    const process = () => {
+      if (disposed || stateRef.current.sessionId !== sessionId || !queued.size || dragging.current)
         return;
-      }
-      const cardById = new Map(
-        cards.map((card) => [card.dataset.replyId, card])
+      const current2 = stateRef.current;
+      const entries = [...queued.values()];
+      queued.clear();
+      const nodes = [...canvas.querySelectorAll(".chat-reply")];
+      const geometry = new Map(
+        nodes.flatMap((node2) => {
+          const id = node2.dataset.replyId;
+          const value = id && replyGeometry(id);
+          return id && value ? [[id, value]] : [];
+        })
       );
       const inferredAuto = /* @__PURE__ */ new Map();
       for (let index2 = 1; index2 < current2.replies.length; index2++) {
-        const previous3 = current2.replies[index2 - 1];
-        const reply = current2.replies[index2];
-        if (!reply.position || reply.position.kind) continue;
-        const anchor = replyGeometry(previous3.id);
-        if (!anchor || Math.abs(reply.position.x - anchor.x) > 2) continue;
+        const previous3 = current2.replies[index2 - 1], reply = current2.replies[index2];
+        if (!reply.position || reply.position.kind || reply.pinned) continue;
+        const anchor = geometry.get(previous3.id);
+        if (!anchor || Math.abs(reply.position.x - anchor.x) > 1) continue;
         const oldHeight = previous3.position?.slotHeight;
-        if (oldHeight !== void 0 && Math.abs(reply.position.y - (anchor.y + oldHeight + 30)) < 2)
+        const gapHeight = reply.position.y - anchor.y - 30;
+        if (oldHeight !== void 0 && Math.abs(gapHeight - oldHeight) <= 1)
           inferredAuto.set(index2, oldHeight);
-        else if (oldHeight === void 0) {
-          const initialHeight = reply.position.y - anchor.y - 30;
-          if (initialHeight >= 24 && reply.position.y < anchor.y + anchor.height - 16 && anchor.height - initialHeight >= 80)
-            inferredAuto.set(index2, initialHeight);
-        }
+        else if (oldHeight === void 0 && gapHeight >= 24 && anchor.height - gapHeight >= 80)
+          inferredAuto.set(index2, gapHeight);
       }
-      const changes = /* @__PURE__ */ new Map();
+      const measured = /* @__PURE__ */ new Map();
+      const grown = /* @__PURE__ */ new Set();
       for (const entry of entries) {
-        const id = entry.target.dataset.replyId;
+        const node2 = entry.target;
+        const id = node2.dataset.replyId;
         const index2 = current2.replies.findIndex((reply) => reply.id === id);
-        const card = id && cardById.get(id);
-        if (index2 < 0 || !card) continue;
-        const height = card.getBoundingClientRect().height / current2.viewport.zoom;
-        if (!Number.isFinite(height) || height < 1) continue;
-        const actual = Math.max(24, height);
+        if (!id || index2 < 0 || !node2.isConnected || !canvas.contains(node2))
+          continue;
+        const height = geometry.get(id)?.height;
+        if (!height || !Number.isFinite(height)) continue;
         const following = current2.replies[index2 + 1]?.position;
-        const baseline = current2.replies[index2].position?.slotHeight ?? inferredAuto.get(index2 + 1) ?? measuredReplyHeights.current.get(id) ?? (following?.kind === "auto" ? following.anchorHeight : void 0) ?? actual;
-        measuredReplyHeights.current.set(id, actual);
-        if (Math.abs(actual - baseline) > 1)
-          changes.set(index2, { height: actual, delta: actual - baseline });
+        const baseline = measuredReplyHeights.current.get(id) ?? current2.replies[index2].position?.slotHeight ?? inferredAuto.get(index2 + 1) ?? (following?.kind === "auto" ? following.anchorHeight : void 0) ?? height;
+        measuredReplyHeights.current.set(id, height);
+        measured.set(id, height);
+        if (height > baseline + 0.5) grown.add(id);
       }
-      if (!changes.size && !inferredAuto.size) return;
-      update((value) => {
-        let shift = 0;
-        let changed = false;
-        const replies = value.replies.map((reply, index2) => {
-          let position3 = reply.position;
-          const inferredHeight = inferredAuto.get(index2);
-          if (position3 && !position3.kind && inferredHeight !== void 0) {
-            position3 = {
-              ...position3,
-              kind: "auto",
-              anchorHeight: inferredHeight
-            };
-            changed = true;
+      if (!measured.size) return;
+      const cards = current2.replies.flatMap((reply, index2) => {
+        const rect = geometry.get(reply.id);
+        return rect ? [
+          {
+            id: reply.id,
+            ...rect,
+            fixed: reply.pinned === true || !(reply.position?.kind === "viewport" || reply.position?.kind === "auto" || inferredAuto.has(index2))
           }
-          if (position3?.kind === "manual") shift = 0;
-          if (position3?.kind === "auto" && shift) {
-            position3 = {
-              ...position3,
-              y: position3.y + shift,
-              anchorHeight: position3.anchorHeight === void 0 ? void 0 : position3.anchorHeight + (changes.get(index2 - 1)?.delta ?? 0)
-            };
-            changed = true;
-          }
-          const resized = changes.get(index2);
-          if (position3 && resized && position3.slotHeight !== resized.height) {
-            position3 = { ...position3, slotHeight: resized.height };
-            changed = true;
-          }
-          if (resized) shift += resized.delta;
-          return position3 === reply.position ? reply : { ...reply, position: position3 };
-        });
-        return changed ? { ...value, replies } : value;
+        ] : [];
       });
+      const repaired = new Map(
+        repairReplyGrowth(cards, grown).map((card) => [card.id, card])
+      );
+      let moved = false, changed = false;
+      const replies = current2.replies.map((reply, index2) => {
+        const old = reply.position, card = repaired.get(reply.id);
+        if (!old || !card) return reply;
+        const shifted = card.y > old.y + 0.5;
+        const height = measured.get(reply.id) ?? old.slotHeight;
+        const anchorHeight = old.kind === "auto" && index2 > 0 ? measured.get(current2.replies[index2 - 1].id) ?? old.anchorHeight : old.anchorHeight;
+        if (!shifted && Math.abs(height - old.slotHeight) <= 0.5 && anchorHeight === old.anchorHeight)
+          return reply;
+        changed = true;
+        moved ||= shifted;
+        return {
+          ...reply,
+          position: {
+            ...old,
+            y: shifted ? card.y : old.y,
+            slotHeight: height,
+            ...shifted && inferredAuto.has(index2) ? {
+              kind: "auto",
+              anchorHeight: geometry.get(current2.replies[index2 - 1].id)?.height
+            } : { anchorHeight }
+          }
+        };
+      });
+      if (changed) {
+        if (moved) cancelLayoutMotion();
+        update((value) => ({ ...value, replies }));
+      }
+    };
+    flushReplyResize.current = process;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries)
+        queued.set(entry.target, entry);
+      process();
     });
-    for (const card of cards) observer.observe(card);
-    return () => observer.disconnect();
+    for (const node2 of canvas.querySelectorAll(".chat-reply"))
+      observer.observe(node2);
+    return () => {
+      disposed = true;
+      queued.clear();
+      if (flushReplyResize.current === process) flushReplyResize.current = null;
+      observer.disconnect();
+    };
   }, [state.sessionId, replyIds, update]);
   const moveReply = (replyId, dx, dy) => {
+    if (stateRef.current.replies.find((reply) => reply.id === replyId)?.pinned)
+      return;
     const origin = replyPosition(replyId);
     if (!origin) return;
     stopCamera();
@@ -25347,11 +25525,14 @@ function ChatCanvas({
     setPanArmed(false);
     if (drag?.captureTarget.hasPointerCapture(drag.pointerId))
       drag.captureTarget.releasePointerCapture(drag.pointerId);
+    flushReplyResize.current?.();
   }, []);
   (0, import_react14.useEffect)(() => {
     const keydown = (event) => {
       suppressPanClick.current = false;
       if (event.key === "Escape") {
+        setRailLocate(null);
+        setRailLocateStatus({ text: "", quiet: true });
         stopCamera();
         finishPan();
         spaceHeld.current = false;
@@ -25405,6 +25586,10 @@ function ChatCanvas({
     if (dragging.current || event.button !== 0 && event.button !== 1 || !replyHandle && isPanControl(event.nativeEvent))
       return;
     if (replyHandle && event.button === 0 && !spaceHeld.current) {
+      if (stateRef.current.replies.find(
+        (reply) => reply.id === replyHandle.closest(".chat-reply")?.dataset.replyId
+      )?.pinned)
+        return;
       const replyId = replyHandle.closest(".chat-reply")?.dataset.replyId;
       const position3 = replyId && replyPosition(replyId);
       if (!replyId || !position3) return;
@@ -25938,6 +26123,7 @@ function ChatCanvas({
                         {
                           className: "chat-reply",
                           "data-positioned": reply.position ? "true" : void 0,
+                          "data-pinned": reply.pinned || void 0,
                           "data-testid": `chat-reply-${index2}`,
                           "data-reply-id": reply.id,
                           ...pairingProps(
@@ -25962,7 +26148,8 @@ function ChatCanvas({
                                       className: "chat-pan-handle",
                                       "data-canvas-reply-handle": true,
                                       "aria-label": "\u79FB\u52A8\u8FD9\u6761\u56DE\u590D",
-                                      title: "\u62D6\u52A8\u79FB\u52A8\u8FD9\u6761\u56DE\u590D\uFF1B\u65B9\u5411\u952E\u5FAE\u8C03\uFF0CShift + \u65B9\u5411\u952E\u52A0\u901F",
+                                      disabled: reply.pinned === true,
+                                      title: reply.pinned ? "\u5DF2\u56FA\u5B9A\uFF0C\u53D6\u6D88\u56FA\u5B9A\u540E\u53EF\u79FB\u52A8" : "\u62D6\u52A8\u79FB\u52A8\u8FD9\u6761\u56DE\u590D\uFF1B\u65B9\u5411\u952E\u5FAE\u8C03\uFF0CShift + \u65B9\u5411\u952E\u52A0\u901F",
                                       onKeyDown: (event) => {
                                         const direction = {
                                           ArrowLeft: [-1, 0],
@@ -26007,7 +26194,49 @@ function ChatCanvas({
                                       children: replyTime.short
                                     }
                                   ),
-                                  /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("span", { className: `chat-reply-status ${reply.status}`, children: reply.status === "running" ? "\u751F\u6210\u4E2D" : reply.status === "done" ? "\u5B8C\u6210" : reply.status === "stopped" ? mode === "dsh" ? "\u5DF2\u4E2D\u65AD\u89C2\u5BDF" : "\u5DF2\u505C\u6B62" : "\u5931\u8D25" })
+                                  /* @__PURE__ */ (0, import_jsx_runtime63.jsx)("span", { className: `chat-reply-status ${reply.status}`, children: reply.status === "running" ? "\u751F\u6210\u4E2D" : reply.status === "done" ? "\u5B8C\u6210" : reply.status === "stopped" ? mode === "dsh" ? "\u5DF2\u4E2D\u65AD\u89C2\u5BDF" : "\u5DF2\u505C\u6B62" : "\u5931\u8D25" }),
+                                  /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)("div", { className: "chat-reply-actions", children: [
+                                    /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
+                                      "button",
+                                      {
+                                        type: "button",
+                                        className: "chat-locate-message",
+                                        "aria-label": "\u5728\u6D88\u606F\u5217\u8868\u4E2D\u5B9A\u4F4D\u5BF9\u5E94\u6D88\u606F",
+                                        title: "\u5B9A\u4F4D\u5BF9\u5E94\u6D88\u606F",
+                                        "aria-busy": railLocate?.replyId === reply.id || void 0,
+                                        onClick: (event) => {
+                                          event.stopPropagation();
+                                          stopRailScroll();
+                                          setRailLocate({
+                                            scope: pairScope,
+                                            replyId: reply.id
+                                          });
+                                        },
+                                        children: /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(Icon, { name: "locate", size: 16 })
+                                      }
+                                    ),
+                                    /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
+                                      "button",
+                                      {
+                                        type: "button",
+                                        className: "chat-pin-reply",
+                                        "aria-pressed": reply.pinned === true,
+                                        "aria-label": reply.pinned ? "\u53D6\u6D88\u56FA\u5B9A\u8FD9\u6761\u56DE\u590D" : "\u56FA\u5B9A\u8FD9\u6761\u56DE\u590D",
+                                        title: reply.pinned ? "\u53D6\u6D88\u56FA\u5B9A\u540E\u53EF\u79FB\u52A8\u5E76\u53C2\u4E0E\u81EA\u52A8\u6392\u5E03" : "\u56FA\u5B9A\u4F4D\u7F6E\uFF0C\u4E0D\u53C2\u4E0E\u81EA\u52A8\u6392\u5E03",
+                                        onClick: (event) => {
+                                          event.stopPropagation();
+                                          togglePin(reply.id);
+                                        },
+                                        children: /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
+                                          Icon,
+                                          {
+                                            name: reply.pinned ? "pin" : "pin-off",
+                                            size: 16
+                                          }
+                                        )
+                                      }
+                                    )
+                                  ] })
                                 ]
                               }
                             ),
@@ -26052,6 +26281,15 @@ function ChatCanvas({
                 })
               }
             )
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(
+          "p",
+          {
+            className: "chat-locate-status",
+            role: "status",
+            "data-quiet": railLocateStatus.quiet || void 0,
+            children: railLocateStatus.text
           }
         ),
         /* @__PURE__ */ (0, import_jsx_runtime63.jsxs)(
@@ -29996,8 +30234,8 @@ var styles_default = `.canvas-app {
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
-  padding: 0 12px 12px;
-  scroll-padding-block: 0 12px;
+  padding: 0 12px;
+  scroll-padding-block: 0;
   border-radius: inherit;
   background: transparent;
   /* This is only the narrow three-row rail; its gaps handle canvas pan. */
@@ -30773,7 +31011,7 @@ var styles_default = `.canvas-app {
   --dsh-composer-card-max-width: 100%;
 }
 .canvas-conversation-view .chat-dock {
-  bottom: calc(var(--dsh-composer-height, 160px) + 34px);
+  bottom: calc(var(--dsh-composer-height, 160px) + 26px);
 }
 @media (max-width: 640px) {
   [data-conversation-content]:has([data-canvas-conversation-view])
@@ -30784,7 +31022,7 @@ var styles_default = `.canvas-app {
     width: calc(100% - 24px);
   }
   .canvas-conversation-view .chat-dock {
-    bottom: calc(var(--dsh-composer-height, 160px) + 24px);
+    bottom: calc(var(--dsh-composer-height, 160px) + 16px);
   }
 }
 .canvas-conversation-view .chat-external-notices {
@@ -30892,6 +31130,128 @@ html[data-platform="darwin"]
 }
 .canvas-app .chat-sidebar-workspace-create:hover {
   background: var(--cw-hover);
+}
+
+.canvas-conversation-view .chat-user-history-frame {
+  max-height: min(
+    152px,
+    28vh,
+    max(
+      0px,
+      calc(
+        var(--dsh-conversation-viewport-height, 100dvh) -
+          var(--dsh-composer-height, 160px) - 90px
+      )
+    )
+  );
+}
+
+.canvas-app .chat-reply-actions {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  gap: 2px;
+  height: 18px;
+  margin-left: auto;
+}
+.canvas-app .chat-locate-message {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 20px;
+  margin: -1px 0;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--cw-muted);
+  cursor: pointer;
+}
+.canvas-app .chat-locate-message:hover {
+  background: var(--cw-hover);
+  color: var(--cw-text);
+}
+.canvas-app .chat-locate-message:focus-visible {
+  outline: 2px solid var(--cw-accent);
+  outline-offset: 2px;
+}
+.canvas-app .chat-locate-status {
+  position: absolute;
+  z-index: 45;
+  top: 78px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--cw-surface);
+  color: var(--cw-text);
+  font-size: 12px;
+  pointer-events: none;
+}
+.canvas-app .chat-locate-status[data-quiet],
+.canvas-app .chat-locate-status:empty {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/* Keep metadata and Copy in the existing left gutter, instead of reserving an
+   invisible action row beneath every bubble. The bubble's width is unchanged. */
+.canvas-app .chat-user-message {
+  position: relative;
+  gap: 0;
+  min-height: calc(46px + var(--dsh-content-font-delta, 0px));
+  justify-content: flex-end;
+}
+.canvas-app .chat-user-message-actions {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  max-width: calc(18% - 8px);
+  height: auto;
+  flex-direction: column;
+  gap: 0;
+  justify-content: flex-end;
+}
+.canvas-app .chat-user-message-time {
+  padding-right: 0;
+  line-height: calc(18px + var(--dsh-content-font-delta, 0px));
+}
+
+.canvas-app .chat-pin-reply {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: -1px 0;
+  width: 24px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--cw-muted);
+  cursor: pointer;
+}
+.canvas-app .chat-pin-reply:hover {
+  background: var(--cw-hover);
+  color: var(--cw-text);
+}
+.canvas-app .chat-pin-reply[aria-pressed="true"] {
+  color: var(--cw-accent);
+  background: color-mix(in srgb, var(--cw-accent) 10%, transparent);
+}
+.canvas-app .chat-pin-reply:focus-visible {
+  outline: 2px solid var(--cw-accent);
+  outline-offset: 2px;
+}
+.canvas-app .chat-pan-handle:disabled {
+  cursor: default;
+  opacity: 0.3;
 }
 `;
 

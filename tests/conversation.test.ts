@@ -46,6 +46,7 @@ test("durable snapshot repairs the same spatial card and timestamp without dupli
       body: "Hello!",
       reasoning: "live thought",
       position: { x: 320, y: 180, slotHeight: 128 },
+      pinned: true,
       timestamp: 900,
       status: "running",
     },
@@ -62,6 +63,11 @@ test("durable snapshot repairs the same spatial card and timestamp without dupli
     y: 180,
     slotHeight: 128,
   });
+  assert.equal(
+    next.replies[0].pinned,
+    true,
+    "host projection preserves local pin state",
+  );
   assert.equal(next.replies[0].timestamp, 1760000000000);
   assert.equal(next.replies[0].status, "done");
   assert.equal(s.replies[0].body, "Hello!");
