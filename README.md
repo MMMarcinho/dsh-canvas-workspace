@@ -46,6 +46,14 @@ npm run build
 
 ## DSH 安装与兼容验证
 
+可直接安装实验版：
+
+```bash
+dsh plugin --profile desktop add dsh-canvas-workspace@0.2.4-experimental.2
+```
+
+也可以使用 `dsh-canvas-workspace@experimental` 获取实验版标签指向的版本。npm 包包含构建后的 `dist/`，安装后重启对应的 DSH profile，无需下载源码或手动构建。
+
 在插件仓库目录执行：
 
 ```bash

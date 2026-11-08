@@ -1,7 +1,19 @@
 {
   "name": "dsh-canvas-workspace",
   "version": "0.2.4-experimental.2",
-  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MMMarcinho/dsh-canvas-workspace.git"
+  },
+  "homepage": "https://github.com/MMMarcinho/dsh-canvas-workspace#readme",
+  "bugs": {
+    "url": "https://github.com/MMMarcinho/dsh-canvas-workspace/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "tag": "experimental"
+  },
   "description": "An experimental spatial workspace for DeepSeek Harness",
   "type": "module",
   "license": "MIT",
@@ -39,6 +51,7 @@
     "THIRD_PARTY_NOTICES.md"
   ],
   "scripts": {
+    "prepack": "npm run build",
     "dev": "vite --host 127.0.0.1",
     "build": "node scripts/build.mjs",
     "typecheck": "tsc --noEmit",

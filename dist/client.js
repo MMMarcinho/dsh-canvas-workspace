@@ -31,9 +31,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/inline-style-parser/cjs/index.js
+// node_modules/inline-style-parser/cjs/index.js
 var require_cjs = __commonJS({
-  "../../../../../github/dsh-canvas-workspace/node_modules/inline-style-parser/cjs/index.js"(exports, module2) {
+  "node_modules/inline-style-parser/cjs/index.js"(exports, module2) {
     "use strict";
     var COMMENT_REGEX = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g;
     var NEWLINE_REGEX = /\n/g;
@@ -170,9 +170,9 @@ var require_cjs = __commonJS({
   }
 });
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/style-to-object/cjs/index.js
+// node_modules/style-to-object/cjs/index.js
 var require_cjs2 = __commonJS({
-  "../../../../../github/dsh-canvas-workspace/node_modules/style-to-object/cjs/index.js"(exports) {
+  "node_modules/style-to-object/cjs/index.js"(exports) {
     "use strict";
     var __importDefault = exports && exports.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : { "default": mod };
@@ -204,9 +204,9 @@ var require_cjs2 = __commonJS({
   }
 });
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/style-to-js/cjs/utilities.js
+// node_modules/style-to-js/cjs/utilities.js
 var require_utilities = __commonJS({
-  "../../../../../github/dsh-canvas-workspace/node_modules/style-to-js/cjs/utilities.js"(exports) {
+  "node_modules/style-to-js/cjs/utilities.js"(exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.camelCase = void 0;
@@ -243,9 +243,9 @@ var require_utilities = __commonJS({
   }
 });
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/style-to-js/cjs/index.js
+// node_modules/style-to-js/cjs/index.js
 var require_cjs3 = __commonJS({
-  "../../../../../github/dsh-canvas-workspace/node_modules/style-to-js/cjs/index.js"(exports, module2) {
+  "node_modules/style-to-js/cjs/index.js"(exports, module2) {
     "use strict";
     var __importDefault = exports && exports.__importDefault || function(mod) {
       return mod && mod.__esModule ? mod : { "default": mod };
@@ -269,9 +269,9 @@ var require_cjs3 = __commonJS({
   }
 });
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/extend/index.js
+// node_modules/extend/index.js
 var require_extend = __commonJS({
-  "../../../../../github/dsh-canvas-workspace/node_modules/extend/index.js"(exports, module2) {
+  "node_modules/extend/index.js"(exports, module2) {
     "use strict";
     var hasOwn2 = Object.prototype.hasOwnProperty;
     var toStr = Object.prototype.toString;
@@ -407,7 +407,7 @@ function projectSidebar(list4, workspaces, selected) {
   return { sessions, workspaces: groups };
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/@deepseek-ai/dsh-util-workspace-path/lib/index.js
+// node_modules/@deepseek-ai/dsh-util-workspace-path/lib/index.js
 function isWindowsStylePath(value) {
   return /^[A-Za-z]:[/\\]/.test(value) || value.startsWith("\\\\");
 }
@@ -2854,13 +2854,13 @@ function formatReplyTime(value, now = Date.now()) {
 // src/ui/ReplyContent.tsx
 var import_react11 = require("react");
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/devlop/lib/default.js
+// node_modules/devlop/lib/default.js
 function ok() {
 }
 function unreachable() {
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/comma-separated-tokens/index.js
+// node_modules/comma-separated-tokens/index.js
 function stringify(values, options) {
   const settings = options || {};
   const input = values[values.length - 1] === "" ? [...values, ""] : values;
@@ -2869,7 +2869,7 @@ function stringify(values, options) {
   ).trim();
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/estree-util-is-identifier-name/lib/index.js
+// node_modules/estree-util-is-identifier-name/lib/index.js
 var nameRe = /^[$_\p{ID_Start}][$_\u{200C}\u{200D}\p{ID_Continue}]*$/u;
 var nameReJsx = /^[$_\p{ID_Start}][-$_\u{200C}\u{200D}\p{ID_Continue}]*$/u;
 var emptyOptions = {};
@@ -2879,7 +2879,7 @@ function name(name3, options) {
   return re2.test(name3);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/hast-util-whitespace/lib/index.js
+// node_modules/hast-util-whitespace/lib/index.js
 var re = /[ \t\n\f\r]/g;
 function whitespace(thing) {
   return typeof thing === "object" ? thing.type === "text" ? empty(thing.value) : false : empty(thing);
@@ -2888,7 +2888,7 @@ function empty(value) {
   return value.replace(re, "") === "";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/schema.js
+// node_modules/property-information/lib/util/schema.js
 var Schema = class {
   /**
    * @param {SchemaType['property']} property
@@ -2912,7 +2912,7 @@ Schema.prototype.normal = {};
 Schema.prototype.property = {};
 Schema.prototype.space = void 0;
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/merge.js
+// node_modules/property-information/lib/util/merge.js
 function merge(definitions, space2) {
   const property = {};
   const normal = {};
@@ -2923,12 +2923,12 @@ function merge(definitions, space2) {
   return new Schema(property, normal, space2);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/normalize.js
+// node_modules/property-information/lib/normalize.js
 function normalize(value) {
   return value.toLowerCase();
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/info.js
+// node_modules/property-information/lib/util/info.js
 var Info = class {
   /**
    * @param {string} property
@@ -2956,7 +2956,7 @@ Info.prototype.property = "";
 Info.prototype.spaceSeparated = false;
 Info.prototype.space = void 0;
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/types.js
+// node_modules/property-information/lib/util/types.js
 var types_exports = {};
 __export(types_exports, {
   boolean: () => boolean,
@@ -2979,7 +2979,7 @@ function increment() {
   return 2 ** ++powers;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/defined-info.js
+// node_modules/property-information/lib/util/defined-info.js
 var checks = (
   /** @type {ReadonlyArray<keyof typeof types>} */
   Object.keys(types_exports)
@@ -3017,7 +3017,7 @@ function mark(values, key, value) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/create.js
+// node_modules/property-information/lib/util/create.js
 function create(definition3) {
   const properties = {};
   const normals = {};
@@ -3038,7 +3038,7 @@ function create(definition3) {
   return new Schema(properties, normals, definition3.space);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/aria.js
+// node_modules/property-information/lib/aria.js
 var aria = create({
   properties: {
     ariaActiveDescendant: null,
@@ -3096,17 +3096,17 @@ var aria = create({
   }
 });
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/case-sensitive-transform.js
+// node_modules/property-information/lib/util/case-sensitive-transform.js
 function caseSensitiveTransform(attributes, attribute) {
   return attribute in attributes ? attributes[attribute] : attribute;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/util/case-insensitive-transform.js
+// node_modules/property-information/lib/util/case-insensitive-transform.js
 function caseInsensitiveTransform(attributes, property) {
   return caseSensitiveTransform(attributes, property.toLowerCase());
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/html.js
+// node_modules/property-information/lib/html.js
 var html = create({
   attributes: {
     acceptcharset: "accept-charset",
@@ -3480,7 +3480,7 @@ var html = create({
   transform: caseInsensitiveTransform
 });
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/svg.js
+// node_modules/property-information/lib/svg.js
 var svg = create({
   attributes: {
     accentHeight: "accent-height",
@@ -4044,7 +4044,7 @@ var svg = create({
   transform: caseSensitiveTransform
 });
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/xlink.js
+// node_modules/property-information/lib/xlink.js
 var xlink = create({
   properties: {
     xLinkActuate: null,
@@ -4061,7 +4061,7 @@ var xlink = create({
   }
 });
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/xmlns.js
+// node_modules/property-information/lib/xmlns.js
 var xmlns = create({
   attributes: { xmlnsxlink: "xmlns:xlink" },
   properties: { xmlnsXLink: null, xmlns: null },
@@ -4069,7 +4069,7 @@ var xmlns = create({
   transform: caseInsensitiveTransform
 });
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/xml.js
+// node_modules/property-information/lib/xml.js
 var xml = create({
   properties: { xmlBase: null, xmlLang: null, xmlSpace: null },
   space: "xml",
@@ -4078,7 +4078,7 @@ var xml = create({
   }
 });
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/hast-to-react.js
+// node_modules/property-information/lib/hast-to-react.js
 var hastToReact = {
   classId: "classID",
   dataType: "datatype",
@@ -4099,7 +4099,7 @@ var hastToReact = {
   xmlnsXLink: "xmlnsXlink"
 };
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/lib/find.js
+// node_modules/property-information/lib/find.js
 var cap = /[A-Z]/g;
 var dash = /-[a-z]/g;
 var valid = /^data[-\w.:]+$/i;
@@ -4135,19 +4135,19 @@ function camelcase($0) {
   return $0.charAt(1).toUpperCase();
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/property-information/index.js
+// node_modules/property-information/index.js
 var html2 = merge([aria, html, xlink, xmlns, xml], "html");
 var svg2 = merge([aria, svg, xlink, xmlns, xml], "svg");
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/space-separated-tokens/index.js
+// node_modules/space-separated-tokens/index.js
 function stringify2(values) {
   return values.join(" ").trim();
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/hast-util-to-jsx-runtime/lib/index.js
+// node_modules/hast-util-to-jsx-runtime/lib/index.js
 var import_style_to_js = __toESM(require_cjs3(), 1);
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/unist-util-position/lib/index.js
+// node_modules/unist-util-position/lib/index.js
 var pointEnd = point("end");
 var pointStart = point("start");
 function point(type) {
@@ -4171,7 +4171,7 @@ function position(node2) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/unist-util-stringify-position/lib/index.js
+// node_modules/unist-util-stringify-position/lib/index.js
 function stringifyPosition(value) {
   if (!value || typeof value !== "object") {
     return "";
@@ -4197,7 +4197,7 @@ function index(value) {
   return value && typeof value === "number" ? value : 1;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/vfile-message/lib/index.js
+// node_modules/vfile-message/lib/index.js
 var VFileMessage = class extends Error {
   /**
    * Create a message for `reason`.
@@ -4333,7 +4333,7 @@ VFileMessage.prototype.place = void 0;
 VFileMessage.prototype.ruleId = void 0;
 VFileMessage.prototype.source = void 0;
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/hast-util-to-jsx-runtime/lib/index.js
+// node_modules/hast-util-to-jsx-runtime/lib/index.js
 var own = {}.hasOwnProperty;
 var emptyMap = /* @__PURE__ */ new Map();
 var cap2 = /[A-Z]/g;
@@ -4712,7 +4712,7 @@ function toDash($0) {
   return "-" + $0.toLowerCase();
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/html-url-attributes/lib/index.js
+// node_modules/html-url-attributes/lib/index.js
 var urlAttributes = {
   action: ["form"],
   cite: ["blockquote", "del", "ins", "q"],
@@ -4737,11 +4737,11 @@ var urlAttributes = {
   ]
 };
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/react-markdown/lib/index.js
+// node_modules/react-markdown/lib/index.js
 var import_jsx_runtime6 = require("react/jsx-runtime");
 var import_react3 = require("react");
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-string/lib/index.js
+// node_modules/mdast-util-to-string/lib/index.js
 var emptyOptions2 = {};
 function toString(value, options) {
   const settings = options || emptyOptions2;
@@ -4778,7 +4778,7 @@ function node(value) {
   return Boolean(value && typeof value === "object");
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/decode-named-character-reference/index.dom.js
+// node_modules/decode-named-character-reference/index.dom.js
 var element2 = document.createElement("i");
 function decodeNamedCharacterReference(value) {
   const characterReference2 = "&" + value + ";";
@@ -4790,7 +4790,7 @@ function decodeNamedCharacterReference(value) {
   return character === characterReference2 ? false : character;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-chunked/index.js
+// node_modules/micromark-util-chunked/index.js
 function splice(list4, start2, remove, items) {
   const end = list4.length;
   let chunkStart = 0;
@@ -4824,7 +4824,7 @@ function push(list4, items) {
   return items;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-combine-extensions/index.js
+// node_modules/micromark-util-combine-extensions/index.js
 var hasOwnProperty = {}.hasOwnProperty;
 function combineExtensions(extensions) {
   const all2 = {};
@@ -4864,7 +4864,7 @@ function constructs(existing, list4) {
   splice(existing, 0, 0, before);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-decode-numeric-character-reference/index.js
+// node_modules/micromark-util-decode-numeric-character-reference/index.js
 function decodeNumericCharacterReference(value, base) {
   const code4 = Number.parseInt(value, base);
   if (
@@ -4882,12 +4882,12 @@ function decodeNumericCharacterReference(value, base) {
   return String.fromCodePoint(code4);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-normalize-identifier/index.js
+// node_modules/micromark-util-normalize-identifier/index.js
 function normalizeIdentifier(value) {
   return value.replace(/[\t\n\r ]+/g, " ").replace(/^ | $/g, "").toLowerCase().toUpperCase();
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-character/index.js
+// node_modules/micromark-util-character/index.js
 var asciiAlpha = regexCheck(/[A-Za-z]/);
 var asciiAlphanumeric = regexCheck(/[\dA-Za-z]/);
 var asciiAtext = regexCheck(/[#-'*+\--9=?A-Z^-~]/);
@@ -4919,7 +4919,7 @@ function regexCheck(regex) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-sanitize-uri/index.js
+// node_modules/micromark-util-sanitize-uri/index.js
 function normalizeUri(value) {
   const result = [];
   let index2 = -1;
@@ -4958,7 +4958,7 @@ function normalizeUri(value) {
   return result.join("") + value.slice(start2);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-factory-space/index.js
+// node_modules/micromark-factory-space/index.js
 function factorySpace(effects, ok3, type, max) {
   const limit = max ? max - 1 : Infinity;
   let size = 0;
@@ -5003,7 +5003,7 @@ function factorySpaceMinMax(effects, ok3, nok, type, min, max) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/initialize/content.js
+// node_modules/micromark/lib/initialize/content.js
 var content = {
   tokenize: initializeContent
 };
@@ -5053,7 +5053,7 @@ function initializeContent(effects) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-edit-map/index.js
+// node_modules/micromark-util-edit-map/index.js
 var EditMap = class {
   /**
    * Create a new edit map.
@@ -5151,7 +5151,7 @@ function addImplementation(editMap, at2, remove, add, before) {
   editMap.index.set(at2, change);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/initialize/document.js
+// node_modules/micromark/lib/initialize/document.js
 var document2 = {
   tokenize: initializeDocument
 };
@@ -5345,7 +5345,7 @@ function tokenizeContainer(effects, ok3, nok) {
   return factorySpace(effects, effects.attempt(this.parser.constructs.document, ok3, nok), "linePrefix", this.parser.constructs.disable.null.includes("codeIndented") ? void 0 : 4);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-classify-character/index.js
+// node_modules/micromark-util-classify-character/index.js
 function classifyCharacter(code4) {
   if (code4 === null || markdownLineEndingOrSpace(code4) || unicodeWhitespace(code4)) {
     return 1;
@@ -5355,7 +5355,7 @@ function classifyCharacter(code4) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-resolve-all/index.js
+// node_modules/micromark-util-resolve-all/index.js
 function resolveAll(constructs2, events, context) {
   const called = [];
   let index2 = -1;
@@ -5369,7 +5369,7 @@ function resolveAll(constructs2, events, context) {
   return events;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/attention.js
+// node_modules/micromark-core-commonmark/lib/attention.js
 var attention = {
   name: "attention",
   resolveAll: resolveAllAttention,
@@ -5492,7 +5492,7 @@ function movePoint(point4, offset2) {
   point4._bufferIndex += offset2;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/autolink.js
+// node_modules/micromark-core-commonmark/lib/autolink.js
 var autolink = {
   name: "autolink",
   tokenize: tokenizeAutolink
@@ -5593,7 +5593,7 @@ function tokenizeAutolink(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/blank-line.js
+// node_modules/micromark-core-commonmark/lib/blank-line.js
 var blankLine = {
   partial: true,
   tokenize: tokenizeBlankLine
@@ -5608,7 +5608,7 @@ function tokenizeBlankLine(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/block-quote.js
+// node_modules/micromark-core-commonmark/lib/block-quote.js
 var blockQuote = {
   continuation: {
     tokenize: tokenizeBlockQuoteContinuation
@@ -5666,7 +5666,7 @@ function exit(effects) {
   effects.exit("blockQuote");
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/character-escape.js
+// node_modules/micromark-core-commonmark/lib/character-escape.js
 var characterEscape = {
   name: "characterEscape",
   tokenize: tokenizeCharacterEscape
@@ -5692,7 +5692,7 @@ function tokenizeCharacterEscape(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/character-reference.js
+// node_modules/micromark-core-commonmark/lib/character-reference.js
 var characterReference = {
   name: "characterReference",
   tokenize: tokenizeCharacterReference
@@ -5757,7 +5757,7 @@ function tokenizeCharacterReference(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/partial-non-lazy-continuation.js
+// node_modules/micromark-core-commonmark/lib/partial-non-lazy-continuation.js
 var nonLazyContinuation = {
   partial: true,
   tokenize: tokenizeNonLazyContinuation
@@ -5779,7 +5779,7 @@ function tokenizeNonLazyContinuation(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/code-fenced.js
+// node_modules/micromark-core-commonmark/lib/code-fenced.js
 var codeFenced = {
   concrete: true,
   name: "codeFenced",
@@ -5942,7 +5942,7 @@ function tokenizeCodeFenced(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/code-indented.js
+// node_modules/micromark-core-commonmark/lib/code-indented.js
 var codeIndented = {
   name: "codeIndented",
   tokenize: tokenizeCodeIndented
@@ -6000,7 +6000,7 @@ function tokenizeFurtherStart(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/code-text.js
+// node_modules/micromark-core-commonmark/lib/code-text.js
 var codeText = {
   name: "codeText",
   previous,
@@ -6115,7 +6115,7 @@ function tokenizeCodeText(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-subtokenize/lib/splice-buffer.js
+// node_modules/micromark-util-subtokenize/lib/splice-buffer.js
 var SpliceBuffer = class {
   /**
    * @param {ReadonlyArray<T> | null | undefined} [initial]
@@ -6308,7 +6308,7 @@ function chunkedPush(list4, right) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-subtokenize/index.js
+// node_modules/micromark-util-subtokenize/index.js
 function subtokenize(eventsArray) {
   const jumps = {};
   let index2 = -1;
@@ -6461,7 +6461,7 @@ function subcontent(events, eventIndex) {
   return gaps;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/content.js
+// node_modules/micromark-core-commonmark/lib/content.js
 var content2 = {
   resolve: resolveContent,
   tokenize: tokenizeContent
@@ -6532,7 +6532,7 @@ function tokenizeContinuation(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-factory-destination/index.js
+// node_modules/micromark-factory-destination/index.js
 function factoryDestination(effects, ok3, nok, type, literalType, literalMarkerType, rawType, stringType, max) {
   const limit = max || Number.POSITIVE_INFINITY;
   let balance = 0;
@@ -6624,7 +6624,7 @@ function factoryDestination(effects, ok3, nok, type, literalType, literalMarkerT
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-factory-label/index.js
+// node_modules/micromark-factory-label/index.js
 function factoryLabel(effects, ok3, nok, type, markerType, stringType) {
   const self2 = this;
   let size = 0;
@@ -6685,7 +6685,7 @@ function factoryLabel(effects, ok3, nok, type, markerType, stringType) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-factory-title/index.js
+// node_modules/micromark-factory-title/index.js
 function factoryTitle(effects, ok3, nok, type, markerType, stringType) {
   let marker;
   return start2;
@@ -6747,7 +6747,7 @@ function factoryTitle(effects, ok3, nok, type, markerType, stringType) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-factory-whitespace/index.js
+// node_modules/micromark-factory-whitespace/index.js
 function factoryWhitespace(effects, ok3) {
   let seen;
   return start2;
@@ -6766,7 +6766,7 @@ function factoryWhitespace(effects, ok3) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/definition.js
+// node_modules/micromark-core-commonmark/lib/definition.js
 var definition = {
   name: "definition",
   tokenize: tokenizeDefinition
@@ -6852,7 +6852,7 @@ function tokenizeTitleBefore(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/hard-break-escape.js
+// node_modules/micromark-core-commonmark/lib/hard-break-escape.js
 var hardBreakEscape = {
   name: "hardBreakEscape",
   tokenize: tokenizeHardBreakEscape
@@ -6873,7 +6873,7 @@ function tokenizeHardBreakEscape(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/heading-atx.js
+// node_modules/micromark-core-commonmark/lib/heading-atx.js
 var headingAtx = {
   name: "headingAtx",
   resolve: resolveHeadingAtx,
@@ -6962,7 +6962,7 @@ function tokenizeHeadingAtx(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-html-tag-name/index.js
+// node_modules/micromark-util-html-tag-name/index.js
 var htmlBlockNames = [
   "address",
   "article",
@@ -7029,7 +7029,7 @@ var htmlBlockNames = [
 ];
 var htmlRawNames = ["pre", "script", "style", "textarea"];
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/html-flow.js
+// node_modules/micromark-core-commonmark/lib/html-flow.js
 var htmlFlow = {
   concrete: true,
   name: "htmlFlow",
@@ -7388,7 +7388,7 @@ function tokenizeBlankLineBefore(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/html-text.js
+// node_modules/micromark-core-commonmark/lib/html-text.js
 var htmlText = {
   name: "htmlText",
   tokenize: tokenizeHtmlText
@@ -7694,7 +7694,7 @@ function tokenizeHtmlText(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/label-end.js
+// node_modules/micromark-core-commonmark/lib/label-end.js
 var labelEnd = {
   name: "labelEnd",
   resolveAll: resolveAllLabelEnd,
@@ -7920,7 +7920,7 @@ function tokenizeReferenceCollapsed(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/label-start-image.js
+// node_modules/micromark-core-commonmark/lib/label-start-image.js
 var labelStartImage = {
   name: "labelStartImage",
   resolveAll: labelEnd.resolveAll,
@@ -7957,7 +7957,7 @@ function tokenizeLabelStartImage(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/label-start-link.js
+// node_modules/micromark-core-commonmark/lib/label-start-link.js
 var labelStartLink = {
   name: "labelStartLink",
   resolveAll: labelEnd.resolveAll,
@@ -7985,7 +7985,7 @@ function tokenizeLabelStartLink(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/line-ending.js
+// node_modules/micromark-core-commonmark/lib/line-ending.js
 var lineEnding = {
   name: "lineEnding",
   tokenize: tokenizeLineEnding
@@ -8000,7 +8000,7 @@ function tokenizeLineEnding(effects, ok3) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/thematic-break.js
+// node_modules/micromark-core-commonmark/lib/thematic-break.js
 var thematicBreak = {
   name: "thematicBreak",
   tokenize: tokenizeThematicBreak
@@ -8039,7 +8039,7 @@ function tokenizeThematicBreak(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/list.js
+// node_modules/micromark-core-commonmark/lib/list.js
 var list = {
   continuation: {
     tokenize: tokenizeListContinuation
@@ -8169,7 +8169,7 @@ function tokenizeListItemPrefixWhitespace(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-core-commonmark/lib/setext-underline.js
+// node_modules/micromark-core-commonmark/lib/setext-underline.js
 var setextUnderline = {
   name: "setextUnderline",
   resolveTo: resolveToSetextUnderline,
@@ -8263,7 +8263,7 @@ function tokenizeSetextUnderline(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/initialize/flow.js
+// node_modules/micromark/lib/initialize/flow.js
 var flow = {
   tokenize: initializeFlow
 };
@@ -8301,7 +8301,7 @@ function initializeFlow(effects) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/initialize/text.js
+// node_modules/micromark/lib/initialize/text.js
 var resolver = {
   resolveAll: createResolver()
 };
@@ -8443,7 +8443,7 @@ function resolveAllLineSuffixes(events, context) {
   return events;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/constructs.js
+// node_modules/micromark/lib/constructs.js
 var constructs_exports = {};
 __export(constructs_exports, {
   attentionMarkers: () => attentionMarkers,
@@ -8518,7 +8518,7 @@ var disable = {
   null: []
 };
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/create-tokenizer.js
+// node_modules/micromark/lib/create-tokenizer.js
 function createTokenizer(parser, initialize, from) {
   let point4 = {
     _bufferIndex: -1,
@@ -8844,7 +8844,7 @@ function serializeChunks(chunks, expandTabs) {
   return result.join("");
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/parse.js
+// node_modules/micromark/lib/parse.js
 function parse(options) {
   const settings = options || {};
   const constructs2 = (
@@ -8870,14 +8870,14 @@ function parse(options) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/postprocess.js
+// node_modules/micromark/lib/postprocess.js
 function postprocess(events) {
   while (!subtokenize(events)) {
   }
   return events;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark/lib/preprocess.js
+// node_modules/micromark/lib/preprocess.js
 var search = /[\0\t\n\r]/g;
 function preprocess() {
   let column = 1;
@@ -8957,7 +8957,7 @@ function preprocess() {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-util-decode-string/index.js
+// node_modules/micromark-util-decode-string/index.js
 var characterEscapeOrReference = /\\([!-/:-@[-`{-~])|&(#(?:\d{1,7}|x[\da-f]{1,6})|[\da-z]{1,31});/gi;
 function decodeString(value) {
   return value.replace(characterEscapeOrReference, decode);
@@ -8975,7 +8975,7 @@ function decode($0, $1, $2) {
   return decodeNamedCharacterReference($2) || $0;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-from-markdown/lib/index.js
+// node_modules/mdast-util-from-markdown/lib/index.js
 var own2 = {}.hasOwnProperty;
 function fromMarkdown(value, encoding, options) {
   if (encoding && typeof encoding === "object") {
@@ -9745,7 +9745,7 @@ function defaultOnError(left, right) {
   }) + ") is still open");
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/remark-parse/lib/index.js
+// node_modules/remark-parse/lib/index.js
 function remarkParse(options) {
   const self2 = this;
   self2.parser = parser;
@@ -9762,7 +9762,7 @@ function remarkParse(options) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/blockquote.js
+// node_modules/mdast-util-to-hast/lib/handlers/blockquote.js
 function blockquote(state, node2) {
   const result = {
     type: "element",
@@ -9774,14 +9774,14 @@ function blockquote(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/break.js
+// node_modules/mdast-util-to-hast/lib/handlers/break.js
 function hardBreak(state, node2) {
   const result = { type: "element", tagName: "br", properties: {}, children: [] };
   state.patch(node2, result);
   return [state.applyData(node2, result), { type: "text", value: "\n" }];
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/code.js
+// node_modules/mdast-util-to-hast/lib/handlers/code.js
 function code(state, node2) {
   const value = node2.value ? node2.value + "\n" : "";
   const properties = {};
@@ -9805,7 +9805,7 @@ function code(state, node2) {
   return result;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/delete.js
+// node_modules/mdast-util-to-hast/lib/handlers/delete.js
 function strikethrough(state, node2) {
   const result = {
     type: "element",
@@ -9817,7 +9817,7 @@ function strikethrough(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/emphasis.js
+// node_modules/mdast-util-to-hast/lib/handlers/emphasis.js
 function emphasis(state, node2) {
   const result = {
     type: "element",
@@ -9829,7 +9829,7 @@ function emphasis(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/footnote-reference.js
+// node_modules/mdast-util-to-hast/lib/handlers/footnote-reference.js
 function footnoteReference(state, node2) {
   const clobberPrefix = typeof state.options.clobberPrefix === "string" ? state.options.clobberPrefix : "user-content-";
   const id = String(node2.identifier).toUpperCase();
@@ -9868,7 +9868,7 @@ function footnoteReference(state, node2) {
   return state.applyData(node2, sup);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/heading.js
+// node_modules/mdast-util-to-hast/lib/handlers/heading.js
 function heading(state, node2) {
   const result = {
     type: "element",
@@ -9880,7 +9880,7 @@ function heading(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/html.js
+// node_modules/mdast-util-to-hast/lib/handlers/html.js
 function html3(state, node2) {
   if (state.options.allowDangerousHtml) {
     const result = { type: "raw", value: node2.value };
@@ -9890,7 +9890,7 @@ function html3(state, node2) {
   return void 0;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/revert.js
+// node_modules/mdast-util-to-hast/lib/revert.js
 function revert(state, node2) {
   const subtype = node2.referenceType;
   let suffix = "]";
@@ -9918,7 +9918,7 @@ function revert(state, node2) {
   return contents;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/image-reference.js
+// node_modules/mdast-util-to-hast/lib/handlers/image-reference.js
 function imageReference(state, node2) {
   const id = String(node2.identifier).toUpperCase();
   const definition3 = state.definitionById.get(id);
@@ -9934,7 +9934,7 @@ function imageReference(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/image.js
+// node_modules/mdast-util-to-hast/lib/handlers/image.js
 function image(state, node2) {
   const properties = { src: normalizeUri(node2.url) };
   if (node2.alt !== null && node2.alt !== void 0) {
@@ -9948,7 +9948,7 @@ function image(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/inline-code.js
+// node_modules/mdast-util-to-hast/lib/handlers/inline-code.js
 function inlineCode(state, node2) {
   const text8 = { type: "text", value: node2.value.replace(/\r?\n|\r/g, " ") };
   state.patch(node2, text8);
@@ -9962,7 +9962,7 @@ function inlineCode(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/link-reference.js
+// node_modules/mdast-util-to-hast/lib/handlers/link-reference.js
 function linkReference(state, node2) {
   const id = String(node2.identifier).toUpperCase();
   const definition3 = state.definitionById.get(id);
@@ -9983,7 +9983,7 @@ function linkReference(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/link.js
+// node_modules/mdast-util-to-hast/lib/handlers/link.js
 function link(state, node2) {
   const properties = { href: normalizeUri(node2.url) };
   if (node2.title !== null && node2.title !== void 0) {
@@ -9999,7 +9999,7 @@ function link(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/list-item.js
+// node_modules/mdast-util-to-hast/lib/handlers/list-item.js
 function listItem(state, node2, parent) {
   const results = state.all(node2);
   const loose = parent ? listLoose(parent) : listItemLoose(node2);
@@ -10062,7 +10062,7 @@ function listItemLoose(node2) {
   return spread === null || spread === void 0 ? node2.children.length > 1 : spread;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/list.js
+// node_modules/mdast-util-to-hast/lib/handlers/list.js
 function list2(state, node2) {
   const properties = {};
   const results = state.all(node2);
@@ -10087,7 +10087,7 @@ function list2(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/paragraph.js
+// node_modules/mdast-util-to-hast/lib/handlers/paragraph.js
 function paragraph(state, node2) {
   const result = {
     type: "element",
@@ -10099,14 +10099,14 @@ function paragraph(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/root.js
+// node_modules/mdast-util-to-hast/lib/handlers/root.js
 function root2(state, node2) {
   const result = { type: "root", children: state.wrap(state.all(node2)) };
   state.patch(node2, result);
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/strong.js
+// node_modules/mdast-util-to-hast/lib/handlers/strong.js
 function strong(state, node2) {
   const result = {
     type: "element",
@@ -10118,7 +10118,7 @@ function strong(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/table.js
+// node_modules/mdast-util-to-hast/lib/handlers/table.js
 function table(state, node2) {
   const rows = state.all(node2);
   const firstRow = rows.shift();
@@ -10155,7 +10155,7 @@ function table(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/table-row.js
+// node_modules/mdast-util-to-hast/lib/handlers/table-row.js
 function tableRow(state, node2, parent) {
   const siblings = parent ? parent.children : void 0;
   const rowIndex = siblings ? siblings.indexOf(node2) : 1;
@@ -10189,7 +10189,7 @@ function tableRow(state, node2, parent) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/table-cell.js
+// node_modules/mdast-util-to-hast/lib/handlers/table-cell.js
 function tableCell(state, node2) {
   const result = {
     type: "element",
@@ -10202,7 +10202,7 @@ function tableCell(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/trim-lines/index.js
+// node_modules/trim-lines/index.js
 var tab = 9;
 var space = 32;
 function trimLines(value) {
@@ -10242,14 +10242,14 @@ function trimLine(value, start2, end) {
   return endIndex > startIndex ? value.slice(startIndex, endIndex) : "";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/text.js
+// node_modules/mdast-util-to-hast/lib/handlers/text.js
 function text5(state, node2) {
   const result = { type: "text", value: trimLines(String(node2.value)) };
   state.patch(node2, result);
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js
+// node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js
 function thematicBreak2(state, node2) {
   const result = {
     type: "element",
@@ -10261,7 +10261,7 @@ function thematicBreak2(state, node2) {
   return state.applyData(node2, result);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/handlers/index.js
+// node_modules/mdast-util-to-hast/lib/handlers/index.js
 var handlers = {
   blockquote,
   break: hardBreak,
@@ -10296,7 +10296,7 @@ function ignore() {
   return void 0;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/@ungap/structured-clone/esm/types.js
+// node_modules/@ungap/structured-clone/esm/types.js
 var VOID = -1;
 var PRIMITIVE = 0;
 var ARRAY = 1;
@@ -10308,7 +10308,7 @@ var SET = 6;
 var ERROR = 7;
 var BIGINT = 8;
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/@ungap/structured-clone/esm/deserialize.js
+// node_modules/@ungap/structured-clone/esm/deserialize.js
 var { defineProperty } = Object;
 var env = typeof self === "object" ? self : globalThis;
 var guard = (name3, init) => {
@@ -10400,7 +10400,7 @@ var deserializer = ($, _) => {
 };
 var deserialize = (serialized) => deserializer(/* @__PURE__ */ new Map(), serialized)(0);
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/@ungap/structured-clone/esm/serialize.js
+// node_modules/@ungap/structured-clone/esm/serialize.js
 var EMPTY = "";
 var { toString: toString2 } = {};
 var { keys, is } = Object;
@@ -10537,13 +10537,13 @@ var serialize = (value, { json, lossy } = {}) => {
   return serializer(!(json || lossy), !!json, /* @__PURE__ */ new Map(), _)(value), _;
 };
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/@ungap/structured-clone/esm/index.js
+// node_modules/@ungap/structured-clone/esm/index.js
 var esm_default = typeof structuredClone === "function" ? (
   /* c8 ignore start */
   (any, options) => options && ("json" in options || "lossy" in options) ? deserialize(serialize(any, options)) : structuredClone(any)
 ) : (any, options) => deserialize(serialize(any, options));
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/footer.js
+// node_modules/mdast-util-to-hast/lib/footer.js
 function defaultFootnoteBackContent(_, rereferenceIndex) {
   const result = [{ type: "text", value: "\u21A9" }];
   if (rereferenceIndex > 1) {
@@ -10653,7 +10653,7 @@ function footer(state) {
   };
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/unist-util-is/lib/index.js
+// node_modules/unist-util-is/lib/index.js
 var convert = (
   // Note: overloads in JSDoc can’t yet use different `@template`s.
   /**
@@ -10752,12 +10752,12 @@ function looksLikeANode(value) {
   return value !== null && typeof value === "object" && "type" in value;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/unist-util-visit-parents/lib/color.js
+// node_modules/unist-util-visit-parents/lib/color.js
 function color(d) {
   return d;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/unist-util-visit-parents/lib/index.js
+// node_modules/unist-util-visit-parents/lib/index.js
 var empty2 = [];
 var CONTINUE = true;
 var EXIT = false;
@@ -10877,7 +10877,7 @@ function toResult(value) {
   return value === null || value === void 0 ? empty2 : [value];
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/unist-util-visit/lib/index.js
+// node_modules/unist-util-visit/lib/index.js
 function visit(tree, testOrEnterOrVisitors, enterOrVisitorsOrReverse, maybeReverse) {
   let check2;
   let visitors;
@@ -10912,7 +10912,7 @@ function wrap(visitor) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/state.js
+// node_modules/mdast-util-to-hast/lib/state.js
 var own3 = {}.hasOwnProperty;
 var emptyOptions3 = {};
 function createState(tree, options) {
@@ -11054,7 +11054,7 @@ function trimMarkdownSpaceStart(value) {
   return value.slice(index2);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-hast/lib/index.js
+// node_modules/mdast-util-to-hast/lib/index.js
 function toHast(tree, options) {
   const state = createState(tree, options);
   const node2 = state.one(tree, void 0);
@@ -11067,7 +11067,7 @@ function toHast(tree, options) {
   return result;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/remark-rehype/lib/index.js
+// node_modules/remark-rehype/lib/index.js
 function remarkRehype(destination, options) {
   if (destination && "run" in destination) {
     return async function(tree, file) {
@@ -11086,17 +11086,17 @@ function remarkRehype(destination, options) {
   };
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/bail/index.js
+// node_modules/bail/index.js
 function bail(error) {
   if (error) {
     throw error;
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/unified/lib/index.js
+// node_modules/unified/lib/index.js
 var import_extend = __toESM(require_extend(), 1);
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/is-plain-obj/index.js
+// node_modules/is-plain-obj/index.js
 function isPlainObject(value) {
   if (typeof value !== "object" || value === null) {
     return false;
@@ -11105,7 +11105,7 @@ function isPlainObject(value) {
   return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/trough/lib/index.js
+// node_modules/trough/lib/index.js
 function trough() {
   const fns = [];
   const pipeline = { run, use };
@@ -11189,7 +11189,7 @@ function wrap3(middleware, callback) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/vfile/lib/minpath.browser.js
+// node_modules/vfile/lib/minpath.browser.js
 var minpath = { basename, dirname, extname, join, sep: "/" };
 function basename(path2, extname2) {
   if (extname2 !== void 0 && typeof extname2 !== "string") {
@@ -11402,13 +11402,13 @@ function assertPath(path2) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/vfile/lib/minproc.browser.js
+// node_modules/vfile/lib/minproc.browser.js
 var minproc = { cwd };
 function cwd() {
   return "/";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/vfile/lib/minurl.shared.js
+// node_modules/vfile/lib/minurl.shared.js
 function isUrl(fileUrlOrPath) {
   return Boolean(
     fileUrlOrPath !== null && typeof fileUrlOrPath === "object" && "href" in fileUrlOrPath && fileUrlOrPath.href && "protocol" in fileUrlOrPath && fileUrlOrPath.protocol && // @ts-expect-error: indexing is fine.
@@ -11416,7 +11416,7 @@ function isUrl(fileUrlOrPath) {
   );
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/vfile/lib/minurl.browser.js
+// node_modules/vfile/lib/minurl.browser.js
 function urlToPath(path2) {
   if (typeof path2 === "string") {
     path2 = new URL(path2);
@@ -11459,7 +11459,7 @@ function getPathFromURLPosix(url) {
   return decodeURIComponent(pathname);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/vfile/lib/index.js
+// node_modules/vfile/lib/index.js
 var order = (
   /** @type {const} */
   [
@@ -11915,7 +11915,7 @@ function isUint8Array(value) {
   );
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/unified/lib/callable-instance.js
+// node_modules/unified/lib/callable-instance.js
 var CallableInstance = (
   /**
    * @type {new <Parameters extends Array<unknown>, Result>(property: string | symbol) => (...parameters: Parameters) => Result}
@@ -11944,7 +11944,7 @@ var CallableInstance = (
   })
 );
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/unified/lib/index.js
+// node_modules/unified/lib/index.js
 var own4 = {}.hasOwnProperty;
 var Processor = class _Processor extends CallableInstance {
   /**
@@ -12580,7 +12580,7 @@ function isUint8Array2(value) {
   );
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/react-markdown/lib/index.js
+// node_modules/react-markdown/lib/index.js
 var changelog = "https://github.com/remarkjs/react-markdown/blob/main/changelog.md";
 var emptyPlugins = [];
 var emptyRemarkRehypeOptions = { allowDangerousHtml: true };
@@ -12726,7 +12726,7 @@ function defaultUrlTransform(value) {
   return "";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/ccount/index.js
+// node_modules/ccount/index.js
 function ccount(value, character) {
   const source = String(value);
   if (typeof character !== "string") {
@@ -12741,7 +12741,7 @@ function ccount(value, character) {
   return count;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/escape-string-regexp/index.js
+// node_modules/escape-string-regexp/index.js
 function escapeStringRegexp(string3) {
   if (typeof string3 !== "string") {
     throw new TypeError("Expected a string");
@@ -12749,7 +12749,7 @@ function escapeStringRegexp(string3) {
   return string3.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-find-and-replace/lib/index.js
+// node_modules/mdast-util-find-and-replace/lib/index.js
 function findAndReplace(tree, list4, options) {
   const settings = options || {};
   const ignored = convert(settings.ignore || []);
@@ -12850,7 +12850,7 @@ function toFunction(replace2) {
   };
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-gfm-autolink-literal/lib/index.js
+// node_modules/mdast-util-gfm-autolink-literal/lib/index.js
 var inConstruct = "phrasing";
 var notInConstruct = ["autolink", "link", "image", "label"];
 function gfmAutolinkLiteralFromMarkdown() {
@@ -13000,7 +13000,7 @@ function previous2(match, email) {
   (!email || code4 !== 47);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-gfm-footnote/lib/index.js
+// node_modules/mdast-util-gfm-footnote/lib/index.js
 footnoteReference2.peek = footnoteReferencePeek;
 function enterFootnoteCallString() {
   this.buffer();
@@ -13113,7 +13113,7 @@ function mapAll(line, index2, blank) {
   return (blank ? "" : "    ") + line;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-gfm-strikethrough/lib/index.js
+// node_modules/mdast-util-gfm-strikethrough/lib/index.js
 var constructsWithoutStrikethrough = [
   "autolink",
   "destinationLiteral",
@@ -13170,7 +13170,7 @@ function peekDelete() {
   return "~";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/markdown-table/index.js
+// node_modules/markdown-table/index.js
 function defaultStringLength(value) {
   return value.length;
 }
@@ -13311,7 +13311,7 @@ function toAlignment(value) {
   return code4 === 67 || code4 === 99 ? 99 : code4 === 76 || code4 === 108 ? 108 : code4 === 82 || code4 === 114 ? 114 : 0;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-phrasing/lib/index.js
+// node_modules/mdast-util-phrasing/lib/index.js
 var phrasing = (
   /** @type {(node?: unknown) => node is Exclude<PhrasingContent, Html>} */
   convert([
@@ -13339,7 +13339,7 @@ var phrasing = (
   ])
 );
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/blockquote.js
+// node_modules/mdast-util-to-markdown/lib/handle/blockquote.js
 function blockquote2(node2, _, state, info) {
   const exit3 = state.enter("blockquote");
   const tracker = state.createTracker(info);
@@ -13356,7 +13356,7 @@ function map(line, _, blank) {
   return ">" + (blank ? "" : " ") + line;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/pattern-in-scope.js
+// node_modules/mdast-util-to-markdown/lib/util/pattern-in-scope.js
 function patternInScope(stack, pattern) {
   return listInScope(stack, pattern.inConstruct, true) && !listInScope(stack, pattern.notInConstruct, false);
 }
@@ -13376,7 +13376,7 @@ function listInScope(stack, list4, none) {
   return false;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/break.js
+// node_modules/mdast-util-to-markdown/lib/handle/break.js
 function hardBreak2(_, _1, state, info) {
   let index2 = -1;
   while (++index2 < state.unsafe.length) {
@@ -13388,7 +13388,7 @@ function hardBreak2(_, _1, state, info) {
   return "\\\n";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/longest-streak/index.js
+// node_modules/longest-streak/index.js
 function longestStreak(value, substring) {
   const source = String(value);
   let index2 = source.indexOf(substring);
@@ -13412,7 +13412,7 @@ function longestStreak(value, substring) {
   return max;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/format-code-as-indented.js
+// node_modules/mdast-util-to-markdown/lib/util/format-code-as-indented.js
 function formatCodeAsIndented(node2, state) {
   return Boolean(
     state.options.fences === false && node2.value && // If there’s no info…
@@ -13422,7 +13422,7 @@ function formatCodeAsIndented(node2, state) {
   );
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-fence.js
+// node_modules/mdast-util-to-markdown/lib/util/check-fence.js
 function checkFence(state) {
   const marker = state.options.fence || "`";
   if (marker !== "`" && marker !== "~") {
@@ -13433,7 +13433,7 @@ function checkFence(state) {
   return marker;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/code.js
+// node_modules/mdast-util-to-markdown/lib/handle/code.js
 function code2(node2, _, state, info) {
   const marker = checkFence(state);
   const raw = node2.value || "";
@@ -13485,7 +13485,7 @@ function map2(line, _, blank) {
   return (blank ? "" : "    ") + line;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-quote.js
+// node_modules/mdast-util-to-markdown/lib/util/check-quote.js
 function checkQuote(state) {
   const marker = state.options.quote || '"';
   if (marker !== '"' && marker !== "'") {
@@ -13496,7 +13496,7 @@ function checkQuote(state) {
   return marker;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/definition.js
+// node_modules/mdast-util-to-markdown/lib/handle/definition.js
 function definition2(node2, _, state, info) {
   const quote = checkQuote(state);
   const suffix = quote === '"' ? "Quote" : "Apostrophe";
@@ -13552,7 +13552,7 @@ function definition2(node2, _, state, info) {
   return value;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-emphasis.js
+// node_modules/mdast-util-to-markdown/lib/util/check-emphasis.js
 function checkEmphasis(state) {
   const marker = state.options.emphasis || "*";
   if (marker !== "*" && marker !== "_") {
@@ -13563,7 +13563,7 @@ function checkEmphasis(state) {
   return marker;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/character.js
+// node_modules/mdast-util-to-markdown/lib/util/character.js
 function firstCharacter(value) {
   const code4 = value.codePointAt(0);
   return code4 === void 0 ? "" : String.fromCodePoint(code4);
@@ -13573,12 +13573,12 @@ function lastCharacter(value) {
   return code4 !== void 0 && code4 > 65535 ? value.slice(-2) : value.slice(-1);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/encode-character-reference.js
+// node_modules/mdast-util-to-markdown/lib/util/encode-character-reference.js
 function encodeCharacterReference(code4) {
   return "&#x" + code4.toString(16).toUpperCase() + ";";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/encode-info.js
+// node_modules/mdast-util-to-markdown/lib/util/encode-info.js
 function encodeInfo(outside, inside, marker) {
   const outsideKind = classifyCharacter(outside);
   const insideKind = classifyCharacter(inside);
@@ -13620,7 +13620,7 @@ function encodeInfo(outside, inside, marker) {
   );
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/html-kind.js
+// node_modules/mdast-util-to-markdown/lib/util/html-kind.js
 function htmlKind(value) {
   if (value.charCodeAt(0) !== 60) return;
   const next = value.charCodeAt(1);
@@ -13647,7 +13647,7 @@ function htmlKind(value) {
   return htmlBlockNames.includes(name3) ? 6 : 7;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/container-phrasing.js
+// node_modules/mdast-util-to-markdown/lib/util/container-phrasing.js
 var builtins = /* @__PURE__ */ new Map([
   ["*", false],
   ["_", true]
@@ -13991,7 +13991,7 @@ function serialize3(items, before, after) {
   return result;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/emphasis.js
+// node_modules/mdast-util-to-markdown/lib/handle/emphasis.js
 emphasis2.attention = attention2;
 emphasis2.peek = peek;
 function emphasis2(node2, _, state, info) {
@@ -14013,7 +14013,7 @@ function peek(_, _1, state) {
   return state.options.emphasis || "*";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/format-heading-as-setext.js
+// node_modules/mdast-util-to-markdown/lib/util/format-heading-as-setext.js
 function formatHeadingAsSetext(node2, state) {
   let literalWithBreak = false;
   visit(node2, function(node3) {
@@ -14027,7 +14027,7 @@ function formatHeadingAsSetext(node2, state) {
   );
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/heading.js
+// node_modules/mdast-util-to-markdown/lib/handle/heading.js
 function heading2(node2, _, state, info) {
   const rank = Math.max(Math.min(6, node2.depth || 1), 1);
   const tracker = state.createTracker(info);
@@ -14070,7 +14070,7 @@ function heading2(node2, _, state, info) {
   return value;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/html.js
+// node_modules/mdast-util-to-markdown/lib/handle/html.js
 html4.peek = htmlPeek;
 function html4(node2) {
   return node2.value || "";
@@ -14079,7 +14079,7 @@ function htmlPeek() {
   return "<";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/image.js
+// node_modules/mdast-util-to-markdown/lib/handle/image.js
 image2.peek = imagePeek;
 function image2(node2, _, state, info) {
   const quote = checkQuote(state);
@@ -14136,7 +14136,7 @@ function imagePeek() {
   return "!";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/image-reference.js
+// node_modules/mdast-util-to-markdown/lib/handle/image-reference.js
 imageReference2.peek = imageReferencePeek;
 function imageReference2(node2, _, state, info) {
   const type = node2.referenceType;
@@ -14177,7 +14177,7 @@ function imageReferencePeek() {
   return "!";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/inline-code.js
+// node_modules/mdast-util-to-markdown/lib/handle/inline-code.js
 inlineCode2.peek = inlineCodePeek;
 function inlineCode2(node2, _, state) {
   let value = node2.value || "";
@@ -14208,7 +14208,7 @@ function inlineCodePeek() {
   return "`";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/format-link-as-autolink.js
+// node_modules/mdast-util-to-markdown/lib/util/format-link-as-autolink.js
 function formatLinkAsAutolink(node2, state) {
   const raw = toString(node2);
   return Boolean(
@@ -14223,7 +14223,7 @@ function formatLinkAsAutolink(node2, state) {
   );
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/link.js
+// node_modules/mdast-util-to-markdown/lib/handle/link.js
 link2.peek = linkPeek;
 function link2(node2, _, state, info) {
   const quote = checkQuote(state);
@@ -14312,7 +14312,7 @@ function linkPeek(node2, _, state) {
   return formatLinkAsAutolink(node2, state) ? "<" : "[";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/link-reference.js
+// node_modules/mdast-util-to-markdown/lib/handle/link-reference.js
 linkReference2.peek = linkReferencePeek;
 function linkReference2(node2, _, state, info) {
   const type = node2.referenceType;
@@ -14353,7 +14353,7 @@ function linkReferencePeek() {
   return "[";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-bullet.js
+// node_modules/mdast-util-to-markdown/lib/util/check-bullet.js
 function checkBullet(state) {
   const marker = state.options.bullet || "*";
   if (marker !== "*" && marker !== "+" && marker !== "-") {
@@ -14364,7 +14364,7 @@ function checkBullet(state) {
   return marker;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-bullet-other.js
+// node_modules/mdast-util-to-markdown/lib/util/check-bullet-other.js
 function checkBulletOther(state) {
   const bullet = checkBullet(state);
   const bulletOther = state.options.bulletOther;
@@ -14384,7 +14384,7 @@ function checkBulletOther(state) {
   return bulletOther;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-bullet-ordered.js
+// node_modules/mdast-util-to-markdown/lib/util/check-bullet-ordered.js
 function checkBulletOrdered(state) {
   const marker = state.options.bulletOrdered || ".";
   if (marker !== "." && marker !== ")") {
@@ -14395,7 +14395,7 @@ function checkBulletOrdered(state) {
   return marker;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-rule.js
+// node_modules/mdast-util-to-markdown/lib/util/check-rule.js
 function checkRule(state) {
   const marker = state.options.rule || "*";
   if (marker !== "*" && marker !== "-" && marker !== "_") {
@@ -14406,7 +14406,7 @@ function checkRule(state) {
   return marker;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/list.js
+// node_modules/mdast-util-to-markdown/lib/handle/list.js
 function list3(node2, parent, state, info) {
   const exit3 = state.enter("list");
   const bulletCurrent = state.bulletCurrent;
@@ -14446,7 +14446,7 @@ function list3(node2, parent, state, info) {
   return value;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-list-item-indent.js
+// node_modules/mdast-util-to-markdown/lib/util/check-list-item-indent.js
 function checkListItemIndent(state) {
   const style = state.options.listItemIndent || "one";
   if (style !== "tab" && style !== "one" && style !== "mixed") {
@@ -14457,7 +14457,7 @@ function checkListItemIndent(state) {
   return style;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/list-item.js
+// node_modules/mdast-util-to-markdown/lib/handle/list-item.js
 function listItem2(node2, parent, state, info) {
   const listItemIndent = checkListItemIndent(state);
   let bullet = state.bulletCurrent || checkBullet(state);
@@ -14486,7 +14486,7 @@ function listItem2(node2, parent, state, info) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/paragraph.js
+// node_modules/mdast-util-to-markdown/lib/handle/paragraph.js
 function paragraph2(node2, _, state, info) {
   const exit3 = state.enter("paragraph");
   const subexit = state.enter("phrasing");
@@ -14496,7 +14496,7 @@ function paragraph2(node2, _, state, info) {
   return value;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/root.js
+// node_modules/mdast-util-to-markdown/lib/handle/root.js
 function root3(node2, _, state, info) {
   const hasPhrasing = node2.children.some(function(d) {
     return phrasing(d);
@@ -14508,7 +14508,7 @@ function root3(node2, _, state, info) {
   return value;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-strong.js
+// node_modules/mdast-util-to-markdown/lib/util/check-strong.js
 function checkStrong(state) {
   const marker = state.options.strong || "*";
   if (marker !== "*" && marker !== "_") {
@@ -14519,7 +14519,7 @@ function checkStrong(state) {
   return marker;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/strong.js
+// node_modules/mdast-util-to-markdown/lib/handle/strong.js
 strong2.attention = attention3;
 strong2.peek = peek2;
 function strong2(node2, _, state, info) {
@@ -14541,7 +14541,7 @@ function peek2(_, _1, state) {
   return state.options.strong || "*";
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/text.js
+// node_modules/mdast-util-to-markdown/lib/handle/text.js
 function text6(node2, parent, state, info) {
   const siblings = parent ? parent.children : [];
   const index2 = state.indexStack[state.indexStack.length - 1];
@@ -14552,7 +14552,7 @@ function text6(node2, parent, state, info) {
   });
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/util/check-rule-repetition.js
+// node_modules/mdast-util-to-markdown/lib/util/check-rule-repetition.js
 function checkRuleRepetition(state) {
   const repetition = state.options.ruleRepetition || 3;
   if (repetition < 3) {
@@ -14563,13 +14563,13 @@ function checkRuleRepetition(state) {
   return repetition;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/thematic-break.js
+// node_modules/mdast-util-to-markdown/lib/handle/thematic-break.js
 function thematicBreak3(_, _1, state) {
   const value = (checkRule(state) + (state.options.ruleSpaces ? " " : "")).repeat(checkRuleRepetition(state));
   return state.options.ruleSpaces ? value.slice(0, -1) : value;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-to-markdown/lib/handle/index.js
+// node_modules/mdast-util-to-markdown/lib/handle/index.js
 var handle = {
   blockquote: blockquote2,
   break: hardBreak2,
@@ -14593,7 +14593,7 @@ var handle = {
   thematicBreak: thematicBreak3
 };
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-gfm-table/lib/index.js
+// node_modules/mdast-util-gfm-table/lib/index.js
 function gfmTableFromMarkdown() {
   return {
     enter: {
@@ -14746,7 +14746,7 @@ function gfmTableToMarkdown(options) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-gfm-task-list-item/lib/index.js
+// node_modules/mdast-util-gfm-task-list-item/lib/index.js
 function gfmTaskListItemFromMarkdown() {
   return {
     exit: {
@@ -14819,7 +14819,7 @@ function listItemWithTaskListItem(node2, parent, state, info) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/mdast-util-gfm/lib/index.js
+// node_modules/mdast-util-gfm/lib/index.js
 function gfmFromMarkdown() {
   return [
     gfmAutolinkLiteralFromMarkdown(),
@@ -14841,7 +14841,7 @@ function gfmToMarkdown(options) {
   };
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-autolink-literal/lib/syntax.js
+// node_modules/micromark-extension-gfm-autolink-literal/lib/syntax.js
 var wwwPrefix = {
   tokenize: tokenizeWwwPrefix,
   partial: true
@@ -15183,7 +15183,7 @@ function previousUnbalanced(events) {
   return result;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-footnote/lib/syntax.js
+// node_modules/micromark-extension-gfm-footnote/lib/syntax.js
 var indent = {
   tokenize: tokenizeIndent2,
   partial: true
@@ -15458,7 +15458,7 @@ function tokenizeIndent2(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-strikethrough/lib/syntax.js
+// node_modules/micromark-extension-gfm-strikethrough/lib/syntax.js
 function gfmStrikethrough(options) {
   const options_ = options || {};
   let single = options_.singleTilde;
@@ -15552,7 +15552,7 @@ function gfmStrikethrough(options) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-table/lib/edit-map.js
+// node_modules/micromark-extension-gfm-table/lib/edit-map.js
 var EditMap2 = class {
   /**
    * Create a new edit map.
@@ -15638,7 +15638,7 @@ function addImplementation2(editMap, at2, remove, add) {
   editMap.index.set(at2, change);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-table/lib/infer.js
+// node_modules/micromark-extension-gfm-table/lib/infer.js
 function gfmTableAlign(events, index2) {
   let inDelimiterRow = false;
   const align = [];
@@ -15665,7 +15665,7 @@ function gfmTableAlign(events, index2) {
   return align;
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-table/lib/syntax.js
+// node_modules/micromark-extension-gfm-table/lib/syntax.js
 function gfmTable() {
   return {
     flow: {
@@ -16056,7 +16056,7 @@ function getPoint(events, index2) {
   return event[1][side];
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm-task-list-item/lib/syntax.js
+// node_modules/micromark-extension-gfm-task-list-item/lib/syntax.js
 var tasklistCheck = {
   name: "tasklistCheck",
   tokenize: tokenizeTasklistCheck
@@ -16130,7 +16130,7 @@ function spaceThenNonSpace(effects, ok3, nok) {
   }
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/micromark-extension-gfm/index.js
+// node_modules/micromark-extension-gfm/index.js
 function gfm(options) {
   return combineExtensions([
     gfmAutolinkLiteral(),
@@ -16141,7 +16141,7 @@ function gfm(options) {
   ]);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/remark-gfm/lib/index.js
+// node_modules/remark-gfm/lib/index.js
 var emptyOptions4 = {};
 function remarkGfm(options) {
   const self2 = (
@@ -16571,7 +16571,7 @@ function parseDslPreview(source, messageId = "preview") {
   return parseDsl(source, messageId, false, true);
 }
 
-// ../../../../../github/dsh-canvas-workspace/node_modules/acorn/dist/acorn.mjs
+// node_modules/acorn/dist/acorn.mjs
 var astralIdentifierCodes = [509, 0, 227, 0, 150, 4, 294, 9, 1368, 2, 2, 1, 6, 3, 41, 2, 5, 0, 166, 1, 574, 3, 9, 9, 7, 9, 32, 4, 318, 1, 31, 4, 33, 15, 71, 10, 50, 3, 123, 2, 54, 14, 32, 10, 3, 1, 11, 3, 46, 10, 8, 0, 46, 9, 7, 2, 37, 13, 2, 9, 6, 1, 45, 0, 13, 2, 49, 13, 9, 3, 2, 11, 83, 11, 7, 0, 3, 0, 158, 11, 6, 9, 7, 3, 56, 1, 2, 6, 3, 1, 3, 2, 10, 0, 11, 1, 3, 6, 4, 4, 68, 8, 2, 0, 3, 0, 2, 3, 2, 4, 2, 0, 15, 1, 83, 17, 10, 9, 5, 0, 82, 19, 13, 9, 214, 6, 3, 8, 28, 1, 83, 16, 16, 9, 82, 12, 9, 9, 7, 19, 58, 14, 5, 9, 243, 14, 166, 9, 71, 5, 2, 1, 3, 3, 2, 0, 2, 1, 13, 9, 120, 6, 3, 6, 4, 0, 29, 9, 41, 6, 2, 3, 9, 0, 10, 10, 47, 15, 199, 7, 137, 9, 54, 7, 2, 7, 17, 9, 57, 21, 2, 13, 123, 5, 4, 0, 2, 1, 2, 6, 2, 0, 9, 9, 49, 4, 2, 1, 2, 4, 9, 9, 55, 9, 7, 0, 259, 3, 10, 1, 2, 0, 49, 6, 4, 4, 14, 10, 5350, 0, 7, 14, 11465, 27, 2343, 9, 87, 9, 39, 4, 60, 6, 26, 9, 535, 9, 470, 0, 2, 54, 8, 3, 82, 0, 12, 1, 19628, 1, 4178, 9, 519, 45, 3, 22, 481, 1, 61, 4, 4, 5, 9, 7, 3, 6, 31, 3, 149, 2, 12, 2, 9, 1, 3, 0, 33, 1, 1357, 49, 513, 54, 5, 49, 9, 0, 15, 0, 23, 4, 2, 14, 1361, 6, 2, 16, 3, 6, 2, 1, 2, 4, 101, 0, 161, 6, 10, 9, 357, 0, 62, 13, 499, 13, 245, 1, 2, 9, 233, 0, 3, 0, 8, 1, 6, 0, 475, 6, 110, 6, 6, 9, 4759, 9, 787719, 239];
 var astralIdentifierStartCodes = [0, 11, 2, 25, 2, 18, 2, 1, 2, 14, 3, 13, 35, 122, 70, 52, 268, 28, 4, 48, 48, 31, 14, 29, 6, 37, 11, 29, 3, 35, 5, 7, 2, 4, 43, 157, 19, 35, 5, 35, 5, 39, 9, 51, 13, 10, 2, 14, 2, 6, 2, 1, 2, 10, 2, 14, 2, 6, 2, 1, 4, 51, 13, 310, 10, 21, 11, 7, 25, 5, 2, 41, 2, 13, 65, 5, 3, 0, 2, 43, 2, 1, 4, 0, 3, 22, 11, 22, 10, 30, 66, 18, 2, 1, 11, 21, 11, 25, 7, 25, 39, 55, 7, 1, 65, 0, 16, 3, 2, 2, 2, 28, 43, 28, 4, 28, 36, 7, 2, 27, 28, 53, 11, 21, 11, 18, 14, 17, 111, 72, 56, 50, 14, 50, 14, 35, 39, 27, 10, 22, 251, 41, 7, 1, 17, 5, 18, 21, 18, 28, 11, 0, 9, 21, 43, 17, 47, 20, 28, 22, 13, 52, 58, 1, 3, 0, 14, 44, 33, 24, 27, 35, 30, 0, 3, 0, 9, 34, 4, 0, 13, 47, 15, 3, 22, 0, 2, 0, 36, 17, 2, 24, 20, 1, 64, 6, 2, 0, 2, 3, 2, 14, 2, 9, 8, 46, 39, 7, 3, 1, 3, 21, 2, 6, 2, 1, 2, 4, 4, 0, 19, 0, 13, 4, 31, 9, 2, 0, 3, 0, 2, 37, 2, 0, 26, 0, 2, 0, 45, 52, 19, 3, 21, 2, 31, 47, 21, 1, 2, 0, 185, 46, 42, 3, 37, 47, 21, 0, 60, 42, 14, 0, 72, 26, 38, 6, 186, 43, 117, 63, 32, 7, 3, 0, 3, 7, 2, 1, 2, 23, 16, 0, 2, 0, 95, 7, 3, 38, 17, 0, 2, 0, 29, 0, 11, 39, 8, 0, 22, 0, 12, 45, 20, 0, 19, 72, 18, 0, 182, 32, 32, 8, 2, 36, 18, 0, 50, 29, 113, 6, 2, 1, 2, 37, 22, 0, 26, 5, 2, 1, 2, 31, 15, 0, 24, 43, 22, 0, 239, 18, 16, 0, 2, 12, 2, 33, 125, 0, 80, 921, 103, 111, 6, 206, 13, 310, 2314, 96, 16, 1071, 18, 5, 26, 3994, 6, 582, 6842, 29, 1763, 568, 8, 30, 18, 78, 18, 29, 19, 47, 17, 3, 32, 20, 6, 18, 433, 44, 212, 63, 33, 24, 3, 24, 45, 74, 6, 0, 67, 12, 65, 1, 2, 0, 15, 4, 10, 7386, 37, 33, 96, 114, 14, 913, 15, 50, 7710, 3, 2, 6, 2, 1, 2, 296, 10, 0, 30, 2, 3, 0, 15, 4, 8, 395, 2309, 106, 6, 12, 4, 8, 8, 9, 5991, 84, 2, 70, 2, 1, 3, 0, 3, 1, 3, 3, 2, 11, 2, 0, 2, 6, 2, 64, 2, 3, 3, 7, 2, 6, 2, 27, 2, 3, 2, 4, 2, 0, 4, 6, 2, 340, 2, 24, 2, 24, 2, 30, 2, 24, 2, 30, 2, 24, 2, 30, 2, 24, 2, 30, 2, 24, 2, 7, 1845, 129, 15, 6, 55, 50, 49, 61, 147, 44, 11, 6, 17, 0, 322, 29, 19, 43, 485, 27, 229, 29, 3, 0, 208, 30, 2, 2, 2, 1, 2, 6, 3, 4, 10, 1, 225, 6, 2, 3, 2, 1, 2, 14, 2, 196, 60, 67, 8, 0, 1205, 3, 2, 26, 2, 1, 2, 0, 3, 0, 2, 9, 2, 3, 2, 0, 2, 0, 7, 0, 5, 0, 2, 0, 2, 0, 2, 2, 2, 1, 2, 0, 3, 0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 1, 2, 0, 3, 3, 2, 6, 2, 3, 2, 3, 2, 0, 2, 9, 2, 16, 6, 2, 2, 4, 2, 16, 4421, 42719, 33, 4382, 2, 5773, 3, 7472, 16, 621, 2467, 541, 1507, 4938, 6, 8489, 39815, 11327];
 var nonASCIIidentifierChars = "\u200C\u200D\xB7\u0300-\u036F\u0387\u0483-\u0487\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7-\u05C9\u0610-\u061A\u064B-\u0669\u0670\u06D6-\u06DC\u06DF-\u06E4\u06E7\u06E8\u06EA-\u06ED\u06F0-\u06F9\u0711\u0730-\u074A\u07A6-\u07B0\u07C0-\u07C9\u07EB-\u07F3\u07FD\u0816-\u0819\u081B-\u0823\u0825-\u0827\u0829-\u082D\u0859-\u085B\u0897-\u089F\u08CA-\u08E1\u08E3-\u0903\u093A-\u093C\u093E-\u094F\u0951-\u0957\u0962\u0963\u0966-\u096F\u0981-\u0983\u09BC\u09BE-\u09C4\u09C7\u09C8\u09CB-\u09CD\u09D7\u09E2\u09E3\u09E6-\u09EF\u09FE\u0A01-\u0A03\u0A3C\u0A3E-\u0A42\u0A47\u0A48\u0A4B-\u0A4D\u0A51\u0A66-\u0A71\u0A75\u0A81-\u0A83\u0ABC\u0ABE-\u0AC5\u0AC7-\u0AC9\u0ACB-\u0ACD\u0AE2\u0AE3\u0AE6-\u0AEF\u0AFA-\u0AFF\u0B01-\u0B03\u0B3C\u0B3E-\u0B44\u0B47\u0B48\u0B4B-\u0B4D\u0B53-\u0B57\u0B62\u0B63\u0B66-\u0B6F\u0B82\u0BBE-\u0BC2\u0BC6-\u0BC8\u0BCA-\u0BCD\u0BD7\u0BE6-\u0BEF\u0C00-\u0C04\u0C3C\u0C3E-\u0C44\u0C46-\u0C48\u0C4A-\u0C4D\u0C55\u0C56\u0C62\u0C63\u0C66-\u0C6F\u0C81-\u0C83\u0CBC\u0CBE-\u0CC4\u0CC6-\u0CC8\u0CCA-\u0CCD\u0CD5\u0CD6\u0CE2\u0CE3\u0CE6-\u0CEF\u0CF3\u0D00-\u0D03\u0D3B\u0D3C\u0D3E-\u0D44\u0D46-\u0D48\u0D4A-\u0D4D\u0D57\u0D62\u0D63\u0D66-\u0D6F\u0D81-\u0D83\u0DCA\u0DCF-\u0DD4\u0DD6\u0DD8-\u0DDF\u0DE6-\u0DEF\u0DF2\u0DF3\u0E31\u0E34-\u0E3A\u0E47-\u0E4E\u0E50-\u0E59\u0EB1\u0EB4-\u0EBC\u0EC8-\u0ECE\u0ED0-\u0ED9\u0F18\u0F19\u0F20-\u0F29\u0F35\u0F37\u0F39\u0F3E\u0F3F\u0F71-\u0F84\u0F86\u0F87\u0F8D-\u0F97\u0F99-\u0FBC\u0FC6\u102B-\u103E\u1040-\u1049\u1056-\u1059\u105E-\u1060\u1062-\u1064\u1067-\u106D\u1071-\u1074\u1082-\u108D\u108F-\u109D\u135D-\u135F\u1369-\u1371\u1712-\u1715\u1732-\u1734\u1752\u1753\u1772\u1773\u17B4-\u17D3\u17DD\u17E0-\u17E9\u180B-\u180D\u180F-\u1819\u18A9\u1920-\u192B\u1930-\u193B\u1946-\u194F\u19D0-\u19DA\u1A17-\u1A1B\u1A55-\u1A5E\u1A60-\u1A7C\u1A7F-\u1A89\u1A90-\u1A99\u1AB0-\u1ABD\u1ABF-\u1AF0\u1B00-\u1B04\u1B34-\u1B44\u1B50-\u1B59\u1B6B-\u1B73\u1B80-\u1B82\u1BA1-\u1BAD\u1BB0-\u1BB9\u1BE6-\u1BF3\u1C24-\u1C37\u1C40-\u1C49\u1C50-\u1C59\u1CD0-\u1CD2\u1CD4-\u1CE8\u1CED\u1CF4\u1CF7-\u1CF9\u1DC0-\u1DFF\u200C\u200D\u203F\u2040\u2054\u20D0-\u20DC\u20E1\u20E5-\u20F0\u2CEF-\u2CF1\u2D7F\u2DE0-\u2DFF\u302A-\u302F\u3099\u309A\u30FB\uA620-\uA629\uA66F\uA674-\uA67D\uA69E\uA69F\uA6F0\uA6F1\uA802\uA806\uA80B\uA823-\uA827\uA82C\uA880\uA881\uA8B4-\uA8C5\uA8D0-\uA8D9\uA8E0-\uA8F1\uA8FF-\uA909\uA926-\uA92D\uA947-\uA953\uA980-\uA983\uA9B3-\uA9C0\uA9D0-\uA9D9\uA9E5\uA9F0-\uA9F9\uAA29-\uAA36\uAA43\uAA4C\uAA4D\uAA50-\uAA59\uAA7B-\uAA7D\uAAB0\uAAB2-\uAAB4\uAAB7\uAAB8\uAABE\uAABF\uAAC1\uAAEB-\uAAEF\uAAF5\uAAF6\uABE3-\uABEA\uABEC\uABED\uABF0-\uABF9\uFB1E\uFE00-\uFE0F\uFE20-\uFE2F\uFE33\uFE34\uFE4D-\uFE4F\uFF10-\uFF19\uFF3F\uFF65";
