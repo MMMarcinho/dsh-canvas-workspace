@@ -57,6 +57,7 @@
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test tests/*.test.ts tests/*.test.tsx",
     "test:browser": "node tests/browser.mjs",
+    "test:touch": "node tests/touch.browser.mjs",
     "test:rail": "node tests/rail.browser.mjs",
     "test:media": "node tests/media.browser.mjs",
     "preview": "vite preview --host 127.0.0.1",

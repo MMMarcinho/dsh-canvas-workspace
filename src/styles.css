@@ -285,7 +285,7 @@
   flex: 1;
   min-width: 0;
   overflow: hidden;
-  touch-action: none;
+  touch-action: auto;
   background-color: #f5f4ef;
   background-image: radial-gradient(circle, #d3d5cb 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
@@ -445,7 +445,7 @@
   display: flex;
   flex-direction: column;
   transition: box-shadow 0.15s;
-  touch-action: none;
+  touch-action: auto;
 }
 .canvas-app .canvas-node:hover {
   box-shadow:
@@ -2208,7 +2208,7 @@
   position: absolute;
   inset: 0;
   overflow: clip;
-  touch-action: none;
+  touch-action: auto;
   background-color: var(--cw-bg);
   background-image: radial-gradient(
     circle,
@@ -3921,4 +3921,25 @@ html[data-platform="darwin"]
 .canvas-app .chat-pan-handle:disabled {
   cursor: default;
   opacity: 0.3;
+}
+
+/* Native content owns one-finger scrolling/selection. Only empty canvas and
+   explicit drag handles reserve one-finger gestures; the shared touch layer
+   takes over a two-finger camera gesture anywhere on non-interactive content. */
+.canvas-app .canvas-touch-surface {
+  position: absolute;
+  inset: 0;
+  touch-action: none;
+}
+.canvas-app .chat-world,
+.canvas-app .chat-reply-slot {
+  pointer-events: none;
+}
+.canvas-app .chat-reply {
+  pointer-events: auto;
+}
+.canvas-app .chat-pan-handle,
+.canvas-app .node-head,
+.canvas-app .node-resize {
+  touch-action: none;
 }

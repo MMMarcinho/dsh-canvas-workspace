@@ -14,6 +14,7 @@ import {
   serializeWorkspace,
 } from "../core/workspace";
 import { Icon } from "./icons";
+import { useTouchViewport } from "./use-touch-viewport";
 const LABELS = { note: "笔记", task: "任务", agent: "Agent", artifact: "成果" };
 const STORAGE_KEY = "dsh-canvas-workspace:v1";
 const uid = () => crypto.randomUUID();
@@ -108,6 +109,13 @@ export function CanvasWorkspace({
     const next = fn(ws.current);
     ws.current = next;
     if (mounted.current) setWorkspace(next);
+  }, []);
+  const finishDrag = useCallback(() => {
+    const previous = drag.current;
+    drag.current = null;
+    setPanning(false);
+    if (previous && stage.current?.hasPointerCapture(previous.pointerId))
+      stage.current.releasePointerCapture(previous.pointerId);
   }, []);
   const patch = useCallback(
     (id: string, p: Partial<CanvasNode>) =>
@@ -303,6 +311,7 @@ export function CanvasWorkspace({
         setSelected([]);
         setContextEditor(null);
         setHelp(false);
+        finishDrag();
       }
       if (e.key === "Delete" || e.key === "Backspace") {
         e.preventDefault();
@@ -348,8 +357,7 @@ export function CanvasWorkspace({
     const blur = () => {
       spaceRef.current = false;
       setSpace(false);
-      drag.current = null;
-      setPanning(false);
+      finishDrag();
     };
     window.addEventListener("keydown", down);
     window.addEventListener("keyup", up);
@@ -359,10 +367,25 @@ export function CanvasWorkspace({
       window.removeEventListener("keyup", up);
       window.removeEventListener("blur", blur);
     };
-  }, [remove, fit, undo, update, mode]);
+  }, [remove, fit, undo, update, mode, finishDrag]);
+  const touchViewport = useTouchViewport(stage, {
+    viewport: () => ws.current.viewport,
+    change: (viewport) => update((current) => ({ ...current, viewport })),
+    start: () => {
+      finishDrag();
+      setPanning(true);
+    },
+    end: finishDrag,
+  });
   const pan = (e: PE) => {
+    if (touchViewport.isActive() || drag.current) return;
     if (e.button !== 0 && e.button !== 1) return;
-    if (e.target !== stage.current && !spaceRef.current && e.button !== 1)
+    if (
+      e.target !== stage.current &&
+      !(e.target as HTMLElement).matches(".canvas-touch-surface") &&
+      !spaceRef.current &&
+      e.button !== 1
+    )
       return;
     e.preventDefault();
     setSelected([]);
@@ -379,6 +402,7 @@ export function CanvasWorkspace({
     setPanning(true);
   };
   const select = (id: string, e: PE) => {
+    if (touchViewport.isActive()) return;
     if (e.button !== 0 || spaceRef.current) return;
     e.stopPropagation();
     if ((e.target as HTMLElement).closest("button,input,textarea,select"))
@@ -390,6 +414,7 @@ export function CanvasWorkspace({
     else if (!selected.includes(id)) setSelected([id]);
   };
   const startDrag = (n: CanvasNode, e: PE) => {
+    if (touchViewport.isActive() || drag.current) return;
     if (
       e.button !== 0 ||
       spaceRef.current ||
@@ -415,6 +440,7 @@ export function CanvasWorkspace({
     stage.current?.setPointerCapture(e.pointerId);
   };
   const move = (e: PE) => {
+    if (touchViewport.isActive()) return;
     const d = drag.current;
     if (!d || d.pointerId !== e.pointerId) return;
     const dx = e.clientX - d.cx,
@@ -451,12 +477,8 @@ export function CanvasWorkspace({
       }));
   };
   const end = (e: PE) => {
-    if (drag.current?.pointerId === e.pointerId) {
-      drag.current = null;
-      setPanning(false);
-      if (stage.current?.hasPointerCapture(e.pointerId))
-        stage.current.releasePointerCapture(e.pointerId);
-    }
+    if (!touchViewport.isActive() && drag.current?.pointerId === e.pointerId)
+      finishDrag();
   };
   const add = (type: CanvasNode["type"]) => {
     const v = ws.current.viewport,
@@ -890,7 +912,9 @@ export function CanvasWorkspace({
           onPointerMove={move}
           onPointerUp={end}
           onPointerCancel={end}
+          onLostPointerCapture={end}
         >
+          <div className="canvas-touch-surface" aria-hidden="true" />
           {storageError && (
             <div className="storage-alert" role="alert">
               <span>{storageError}</span>
@@ -1448,6 +1472,7 @@ export function CanvasWorkspace({
                     aria-label={`调整${n.title}大小`}
                     title="拖动调整大小"
                     onPointerDown={(e) => {
+                      if (touchViewport.isActive() || drag.current) return;
                       e.preventDefault();
                       e.stopPropagation();
                       drag.current = {
