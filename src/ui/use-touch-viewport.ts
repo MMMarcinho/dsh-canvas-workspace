@@ -69,7 +69,13 @@ export function useTouchViewport(
         (event.type === "touchstart" || event.type === "touchmove") &&
         !event.cancelable
       ) {
-        cancel();
+        // Non-cancelable does not prove that the browser is scrolling:
+        // Chromium also emits it for touch-action:none after the first move.
+        // Only end a camera sequence owned by this multi-touch layer. Calling
+        // end() here for a single finger releases the Pointer Event drag and
+        // makes a continuous drag freeze/restart after a few samples.
+        if (gesture.current.active) cancel();
+        else eligible.clear();
         return;
       }
       const rect = element.getBoundingClientRect();

@@ -2642,3 +2642,69 @@ test("explicit pin locks movement, persists per session and unpin keeps coordina
     false,
   );
 });
+
+test("continuous camera drags do not re-render unchanged historical reply bodies", async () => {
+  if (root) await act(async () => root!.unmount());
+  localStorage.clear();
+  localStorage.setItem(
+    key,
+    JSON.stringify({
+      version: 1,
+      viewport: { x: 64, y: 104, zoom: 1 },
+      replies: Array.from({ length: 12 }, (_, index) => ({
+        id: `history-${index}`,
+        prompt: `Question ${index}`,
+        body: `Historical answer ${index}`,
+        status: "done",
+      })),
+    }),
+  );
+  let renders = 0;
+  const control = deferredAdapter();
+  root = createRoot(element("#root"));
+  await act(async () =>
+    root!.render(
+      <ChatCanvas
+        adapter={control.adapter}
+        mode="mock"
+        renderMarkdown={(text) => {
+          renders++;
+          return <p>{text}</p>;
+        }}
+        resolveImage={async () => ({ ok: false, message: "offline fixture" })}
+      />,
+    ),
+  );
+  const initialRenders = renders;
+  assert.ok(initialRenders >= 12);
+  const stage = element(".chat-stage");
+  await pointer(stage, "pointerdown", 100, 100);
+  for (let step = 1; step <= 60; step++) {
+    await pointer(stage, "pointermove", 100 + step, 100 + step);
+    if (step >= 5)
+      assert.equal(
+        viewportTransform(),
+        `translate(${64 + step}px, ${104 + step}px) scale(1)`,
+      );
+  }
+  await pointer(stage, "pointerup", 160, 160);
+  assert.equal(
+    renders,
+    initialRenders,
+    "camera-only updates must not invoke host Markdown renderers",
+  );
+  await type('[aria-label="向 Agent 输入"]', "new question");
+  await pointer(element(".chat-send"), "pointerdown");
+  await click(".chat-send");
+  await wait(() => control.runs.length === 1);
+  await act(async () => control.runs[0].onText("Fresh streamed answer"));
+  assert.ok(
+    renders > initialRenders,
+    "new content must still render while old content stays cached",
+  );
+  assert.match(
+    element(".chat-world").textContent ?? "",
+    /Fresh streamed answer/,
+  );
+  await act(async () => control.runs[0].resolve());
+});

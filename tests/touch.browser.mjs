@@ -225,14 +225,34 @@ try {
       page
         .locator(world)
         .evaluate((e) => new DOMMatrix(getComputedStyle(e).transform).e);
-    const previous = await position();
-    await input("touchStart", [[5, x, y]]);
-    await input("touchMove", [[5, x - 30, y + 10]]);
-    await input("touchEnd", []);
-    assert.ok(
-      Math.abs((await position()) - previous + 30) < 0.1,
-      "single-finger background pan survives pinch",
-    );
+    // Exercise sustained drags, not only one move: pointer capture must keep
+    // ownership when the finger crosses reply content, without camera rebounds.
+    for (let run = 0; run < 3; run++) {
+      const previous = await position();
+      await input("touchStart", [[5, x, y]]);
+      for (let step = 1; step <= 30; step++) {
+        await input("touchMove", [[5, x - step * 5, y + step / 3]]);
+        // CDP acknowledgement can precede the coalesced PointerEvent/React
+        // paint. Wait for this sample instead of mistaking one-frame latency
+        // for a broken gesture. An ownership loss never reaches the target.
+        await page.waitForFunction(
+          ({ world, expected }) =>
+            Math.abs(
+              new DOMMatrix(
+                getComputedStyle(document.querySelector(world)).transform,
+              ).e - expected,
+            ) < 0.1,
+          { world, expected: previous - step * 5 },
+          { timeout: 1500 },
+        );
+      }
+      await input("touchEnd", []);
+      await page.waitForTimeout(50);
+      assert.ok(
+        Math.abs((await position()) - previous + 150) < 0.1,
+        "single-finger pan neither rebounds nor restarts after release",
+      );
+    }
     await page.close();
   }
   console.log(

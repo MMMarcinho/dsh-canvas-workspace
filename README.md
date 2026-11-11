@@ -44,6 +44,8 @@ npm run build
 
 桌面版的 `npm run test:host` 使用已安装的 macOS DSH、全新隔离 profile 和合成历史，覆盖原生画布页签与侧栏恢复。首次运行可用 `npm install --prefix .research/pnpm --ignore-scripts pnpm@11.28.5` 准备局部测试工具；不会改全局 pnpm 或个人 DSH 配置。
 
+`npm run test:touch` 增加两个画布入口的持续单指拖动回归（每轮 30 个采样、连续 3 轮，并检查松手后无回跳），避免只发送一次 move 漏掉触摸事件可取消性变化。相机移动不再重复渲染未变化的历史 Markdown/IUI 内容；12 条历史回复、60 次移动的 DOM 回归从 720 次正文渲染降为仅初始 12 次。
+
 `npm run test:touch` 使用 Chromium CDP 的真实多触点输入，覆盖横屏、竖屏、198×242 小屏及桌面视口，两个画布入口、双指中心缩放/平移、触点增减与替换、原生滚动/控件边界及取消恢复。浏览器已接管的滚动不会再转换为画布手势。本地自动化不等于 iOS Safari 真机验证；本次未做 iPhone、iPad 或 Apple Watch 真机测试。插件只调整页面内画布，不能修改或隐藏 Safari 的系统地址栏、标签栏与工具栏。
 
 `npm run dev` 启动独立 MOCK 演示。浏览器测试使用本地 Vite 页面，不连接用户当前运行中的 DSH；宿主测试脚本另需隔离的官方 DSH 测试环境。`npm run build` 生成宿主插件 `dist/` 与本地演示 `site/`。仓库包含可直接由现有 DSH 插件链接读取的 `dist/`，`site/` 和测试截图、日志不提交。
