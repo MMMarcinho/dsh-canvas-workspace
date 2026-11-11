@@ -1,5 +1,6 @@
 import { projectSidebar } from "./host/sidebar-projection";
 import { resolveNativeImageResource } from "./host/native-images";
+import { createNativeFileDrag } from "./host/native-file-drag";
 import type { SessionId } from "@deepseek-ai/dsh-session/types";
 import type { WorkspaceId } from "@deepseek-ai/dsh-api-workspace-controller/client";
 import type { MessageImageLoader } from "@deepseek-ai/dsh-client-ui-conversation/client";
@@ -12,6 +13,7 @@ import {
   MenuItemButton,
   Tooltip,
   writeClipboard,
+  type FileDragActions,
 } from "@deepseek-ai/dsh-client-ui-primitives";
 import type { SessionReference } from "@deepseek-ai/dsh-api-session-controller/client";
 import type { Context } from "@deepseek-ai/cordis";
@@ -86,6 +88,7 @@ declare module "@deepseek-ai/dsh-client-ui-slots" {
   }
 }
 interface CanvasFace {
+  fileDrag: FileDragActions;
   adapter: AgentAdapter;
   mode: "mock" | "dsh";
   onExit: () => void;
@@ -233,6 +236,7 @@ function CanvasChat(props: CanvasChatProps) {
           sessionId
             ? hostSessions.find((session) => session.id === sessionId)?.cwd
             : undefined,
+          props.fileDrag,
         )
       }
       renderImagePreview={renderNativeImagePreview}
@@ -303,6 +307,7 @@ export function CanvasConversationView(
 }
 /** Selects a keyed panel and draws the canvas in the supported frame-wide overlay. */
 export function apply(ctx: Context): void {
+  const fileDrag = createNativeFileDrag(ctx);
   const adapter = createDshAdapter(ctx);
   // Explicit opt-in local test mode; it cannot send a host prompt.
   const demo = new URLSearchParams(location.search).get("canvasMock") === "1";
@@ -310,6 +315,7 @@ export function apply(ctx: Context): void {
   const returnToNative = () => ctx.layout.selectPanel(null);
   const accountActions = createNativeAccountActions(returnToNative);
   const canvasFace = (): CanvasFace => ({
+    fileDrag,
     adapter: selected,
     mode: selected.kind,
     onExit: returnToNative,

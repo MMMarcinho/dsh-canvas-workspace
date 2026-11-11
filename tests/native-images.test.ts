@@ -18,7 +18,7 @@ test("native image paths resolve against the owning session on Web and App", () 
       new URL(resolve("./封面%20图.png?size=2#preview")!).searchParams.get(
         "path",
       ),
-      "/Users/example/art/./封面 图.png",
+      "/Users/example/art/封面 图.png",
     );
     assert.equal(
       new URL(resolve("/tmp/graph.png")!).searchParams.get("path"),
