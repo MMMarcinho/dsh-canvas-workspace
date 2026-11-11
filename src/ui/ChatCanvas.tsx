@@ -22,6 +22,7 @@ import {
   type PairTarget,
 } from "./reply-pairing";
 import { Icon } from "./icons";
+import { useTouchViewport } from "./use-touch-viewport";
 import { arrangeReplies, repairReplyGrowth } from "./reply-layout";
 import { Brand } from "./brand";
 import { CanvasSidebar, type SidebarIcons } from "./CanvasSidebar";
@@ -1393,6 +1394,18 @@ export function ChatCanvas({
       drag.captureTarget.releasePointerCapture(drag.pointerId);
     flushReplyResize.current?.();
   }, []);
+  const touchViewport = useTouchViewport(stage, {
+    viewport: () => stateRef.current.viewport,
+    change: (viewport) => update((current) => ({ ...current, viewport })),
+    start: () => {
+      finishPan();
+      stopCamera();
+      suppressPanClick.current = true;
+      stage.current?.setAttribute("data-canvas-dragging", "");
+      setIsPanning(true);
+    },
+    end: finishPan,
+  });
   useEffect(() => {
     const keydown = (event: KeyboardEvent) => {
       suppressPanClick.current = false;
@@ -1433,7 +1446,8 @@ export function ChatCanvas({
     };
     const selectstart = (event: Event) => {
       const drag = dragging.current;
-      if (drag) event.preventDefault();
+      if (drag || stage.current?.hasAttribute("data-canvas-dragging"))
+        event.preventDefault();
     };
     document.addEventListener("keydown", keydown);
     document.addEventListener("keyup", keyup);
@@ -1452,6 +1466,7 @@ export function ChatCanvas({
     };
   }, [finishPan, stopCamera]);
   const panStart = (event: ReactPointerEvent<HTMLElement>) => {
+    if (touchViewport.isActive()) return;
     // A captured drag may not synthesize a click. A fresh press must never
     // inherit its suppression and swallow an image or link activation.
     if (!dragging.current) suppressPanClick.current = false;
@@ -1529,7 +1544,10 @@ export function ChatCanvas({
       target === event.currentTarget &&
       target.classList.contains("chat-user-history");
     const background =
-      blankRail || target.matches(".chat-stage,.chat-world,.chat-reply-slot");
+      blankRail ||
+      target.matches(
+        ".chat-stage,.canvas-touch-surface,.chat-world,.chat-reply-slot",
+      );
     if (!explicit && !background) return;
     // This press is already a canvas gesture, even below the movement threshold.
     // Cancel native selection synchronously, before React commits drag classes.
@@ -1557,6 +1575,7 @@ export function ChatCanvas({
     event.currentTarget.setPointerCapture(event.pointerId);
   };
   const panMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (touchViewport.isActive()) return;
     const drag = dragging.current;
     if (!drag || drag.pointerId !== event.pointerId) return;
     const dx = event.clientX - drag.x;
@@ -1601,6 +1620,7 @@ export function ChatCanvas({
       }));
   };
   const panEnd = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (touchViewport.isActive()) return;
     if (dragging.current?.pointerId === event.pointerId) finishPan();
   };
   const suppressPanActivation = (event: ReactMouseEvent<HTMLDivElement>) => {
@@ -2057,6 +2077,7 @@ export function ChatCanvas({
           } as CSSProperties
         }
       >
+        <div className="canvas-touch-surface" aria-hidden="true" />
         <div
           className="chat-world"
           style={{

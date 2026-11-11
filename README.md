@@ -8,6 +8,7 @@
 
 会话标题下方的原生“对话 / 轨迹”视图栏现可直接选择 **画布**，空间不足时由 DSH 原生“更多会话视图”菜单管理。此入口绑定当前会话并复用原有输入框，切换视图保留草稿、历史和卡片位置，不停止原生会话执行。画布模式隐藏宿主常驻左栏，由左上角小菜单开合浮层侧栏；返回对话后恢复原布局和侧栏宽度偏好。
 
+- 触屏可直接在回复正文或空白画布上双指缩放、平移，以两指中心保持锚点；抬起一指后可继续平移。单指正文选字、链接、按钮、输入框和可滚动内容保持原生操作。若任一触点始于控件、实际可滚动区域或 IUI 自有交互区，该次手势不接管画布。
 - 同一 DSH 会话中的原生发送、停止、图片与文件附件、流式回复和历史恢复。
 - Markdown 与受限 IUI 混排；无效片段保留原文，其余内容继续显示。IUI 图片仅解析明确的 URL 或工作区文件路径。
 - 原生 `ask_user_question` 的选项和自定义回答也会出现在右侧消息列表，与对应 Agent 回复关联；工具错误或未回答的问题不会伪装成用户消息。
@@ -35,12 +36,15 @@ npm test
 npm run format:check
 npm run test:media
 npm run test:rail
+npm run test:touch
 node tests/viewport-layout.browser.mjs
 node tests/layout-stability.browser.mjs
 npm run build
 ```
 
 桌面版的 `npm run test:host` 使用已安装的 macOS DSH、全新隔离 profile 和合成历史，覆盖原生画布页签与侧栏恢复。首次运行可用 `npm install --prefix .research/pnpm --ignore-scripts pnpm@11.28.5` 准备局部测试工具；不会改全局 pnpm 或个人 DSH 配置。
+
+`npm run test:touch` 使用 Chromium CDP 的真实多触点输入，覆盖横屏、竖屏、198×242 小屏及桌面视口，两个画布入口、双指中心缩放/平移、触点增减与替换、原生滚动/控件边界及取消恢复。浏览器已接管的滚动不会再转换为画布手势。本地自动化不等于 iOS Safari 真机验证；本次未做 iPhone、iPad 或 Apple Watch 真机测试。插件只调整页面内画布，不能修改或隐藏 Safari 的系统地址栏、标签栏与工具栏。
 
 `npm run dev` 启动独立 MOCK 演示。浏览器测试使用本地 Vite 页面，不连接用户当前运行中的 DSH；宿主测试脚本另需隔离的官方 DSH 测试环境。`npm run build` 生成宿主插件 `dist/` 与本地演示 `site/`。仓库包含可直接由现有 DSH 插件链接读取的 `dist/`，`site/` 和测试截图、日志不提交。
 
