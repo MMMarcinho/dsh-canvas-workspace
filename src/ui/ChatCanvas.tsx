@@ -402,6 +402,30 @@ export function ChatCanvas({
     if (rail && typeof window.requestAnimationFrame === "function")
       rail.scrollTo({ top: rail.scrollTop, behavior: "instant" });
   };
+  // Fade only the edge that hides more history. At either end, the first/last
+  // message stays fully legible instead of being permanently masked.
+  useLayoutEffect(() => {
+    const rail = userRail.current;
+    if (!rail) return;
+    const updateEdges = () => {
+      rail.dataset.overflowStart = String(rail.scrollTop > 1);
+      rail.dataset.overflowEnd = String(
+        rail.scrollTop + rail.clientHeight < rail.scrollHeight - 1,
+      );
+    };
+    updateEdges();
+    rail.addEventListener("scroll", updateEdges, { passive: true });
+    const observer =
+      typeof ResizeObserver === "undefined"
+        ? null
+        : new ResizeObserver(updateEdges);
+    observer?.observe(rail);
+    for (const child of rail.children) observer?.observe(child);
+    return () => {
+      rail.removeEventListener("scroll", updateEdges);
+      observer?.disconnect();
+    };
+  }, [pairScope, userMessageIds]);
   useLayoutEffect(() => {
     const ids = pairs.userMessages.map((message) => message.id);
     const previous = seenRailMessages.current;

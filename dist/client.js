@@ -24909,6 +24909,25 @@ function ChatCanvas({
       rail.scrollTo({ top: rail.scrollTop, behavior: "instant" });
   };
   (0, import_react15.useLayoutEffect)(() => {
+    const rail = userRail.current;
+    if (!rail) return;
+    const updateEdges = () => {
+      rail.dataset.overflowStart = String(rail.scrollTop > 1);
+      rail.dataset.overflowEnd = String(
+        rail.scrollTop + rail.clientHeight < rail.scrollHeight - 1
+      );
+    };
+    updateEdges();
+    rail.addEventListener("scroll", updateEdges, { passive: true });
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(updateEdges);
+    observer?.observe(rail);
+    for (const child of rail.children) observer?.observe(child);
+    return () => {
+      rail.removeEventListener("scroll", updateEdges);
+      observer?.disconnect();
+    };
+  }, [pairScope, userMessageIds]);
+  (0, import_react15.useLayoutEffect)(() => {
     const ids = pairs.userMessages.map((message) => message.id);
     const previous3 = seenRailMessages.current;
     seenRailMessages.current = {
@@ -30420,29 +30439,34 @@ var styles_default = `.canvas-app {
   border-radius: 20px;
   pointer-events: none;
 }
+/* A soft reading scrim, not a grey rectangular pane over the canvas. */
 .canvas-app .chat-user-history-glass {
   position: absolute;
-  /* Keep blur inside the rounded message-list background, without a top halo. */
   inset: 0;
   z-index: 0;
   border-radius: inherit;
   clip-path: inset(0 round 20px);
-  background: color-mix(in srgb, var(--cw-surface) 18%, transparent);
-  -webkit-backdrop-filter: blur(22px) saturate(0.95);
-  backdrop-filter: blur(22px) saturate(0.95);
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--cw-bg) 42%, transparent) 28%,
+    color-mix(in srgb, var(--cw-bg) 72%, transparent)
+  );
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   -webkit-mask-image:
     linear-gradient(
       to right,
       transparent,
-      #000 8px,
-      #000 calc(100% - 8px),
+      #000 28px,
+      #000 calc(100% - 12px),
       transparent
     ),
     linear-gradient(
       to bottom,
       transparent,
-      #000 8px,
-      #000 calc(100% - 8px),
+      #000 24px,
+      #000 calc(100% - 24px),
       transparent
     );
   -webkit-mask-composite: source-in;
@@ -30450,15 +30474,15 @@ var styles_default = `.canvas-app {
     linear-gradient(
       to right,
       transparent,
-      #000 8px,
-      #000 calc(100% - 8px),
+      #000 28px,
+      #000 calc(100% - 12px),
       transparent
     ),
     linear-gradient(
       to bottom,
       transparent,
-      #000 8px,
-      #000 calc(100% - 8px),
+      #000 24px,
+      #000 calc(100% - 24px),
       transparent
     );
   mask-composite: intersect;
@@ -30486,6 +30510,39 @@ var styles_default = `.canvas-app {
   pointer-events: auto;
   -webkit-user-select: none;
   user-select: none;
+}
+/* Overflow is a scroll affordance, not a hard cut through a blue bubble.
+   Keep fades proportional on tiny watch/landscape rails. */
+.canvas-app .chat-user-history {
+  --rail-fade-start: 0px;
+  --rail-fade-end: 0px;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 var(--rail-fade-start),
+    #000 calc(100% - var(--rail-fade-end)),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 var(--rail-fade-start),
+    #000 calc(100% - var(--rail-fade-end)),
+    transparent
+  );
+}
+.canvas-app .chat-user-history[data-overflow-start="true"] {
+  --rail-fade-start: min(24px, 16%);
+}
+.canvas-app .chat-user-history[data-overflow-end="true"] {
+  --rail-fade-end: min(24px, 16%);
+}
+@media (prefers-reduced-transparency: reduce) {
+  .canvas-app .chat-user-history-glass {
+    background: var(--cw-surface);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 .canvas-app .chat-user-message-group {
   /* Give percentage bubble limits a definite rail width, not shrink-to-fit. */

@@ -235,6 +235,8 @@ try {
     { count: 3, query: "&shortLast=1", width: 1200, height: 780 },
     { count: 3, query: "&mixed=1&shortLast=1", width: 560, height: 480 },
     { count: 7, query: "", width: 1200, height: 780 },
+    { count: 7, query: "", width: 844, height: 390 },
+    { count: 7, query: "&theme=dark", width: 390, height: 844 },
   ]) {
     await page.setViewportSize({ width, height });
     await page.goto(`http://127.0.0.1:5198/?railCount=${count}${query}`);
@@ -243,10 +245,25 @@ try {
       continue;
     }
     const rows = page.locator(".chat-user-message");
+    if (process.env.RAIL_SCREENSHOT)
+      await page.screenshot({
+        path: process.env.RAIL_SCREENSHOT.replace(
+          /\.png$/,
+          `-${width}x${height}.png`,
+        ),
+      });
     await rows.last().waitFor();
     assert.equal(await rows.count(), count);
     await page.locator(".chat-user-history").evaluate((node) => {
       node.scrollTop = 0;
+    });
+    await page.waitForFunction(() => {
+      const rail = document.querySelector(".chat-user-history");
+      return (
+        rail.dataset.overflowStart === "false" &&
+        rail.dataset.overflowEnd ===
+          String(rail.scrollHeight > rail.clientHeight + 1)
+      );
     });
     const layout = await page.evaluate(() => {
       const frame = document.querySelector(".chat-user-history-frame");
@@ -306,6 +323,13 @@ try {
     await page.locator(".chat-user-history").evaluate((node) => {
       node.scrollTop = node.scrollHeight;
     });
+    await page.waitForFunction(() => {
+      const rail = document.querySelector(".chat-user-history");
+      return (
+        rail.dataset.overflowEnd === "false" &&
+        rail.dataset.overflowStart === String(rail.scrollTop > 1)
+      );
+    });
     const bottom = await page.evaluate(() => {
       const rail = document.querySelector(".chat-user-history");
       const last = rail.lastElementChild;
@@ -363,6 +387,8 @@ try {
       await page.screenshot({ path: process.env.RAIL_SCREENSHOT });
     }
   }
+  await page.setViewportSize({ width: 1200, height: 780 });
+  await page.goto("http://127.0.0.1:5198");
   // An actual mock send changes the stable user-message ID. Two quick sends
   // supersede the first smooth destination; stream tokens and manual wheel
   // scrolling never pull the viewer back down.
@@ -378,7 +404,7 @@ try {
   await page.waitForFunction(
     () => document.querySelectorAll(".chat-user-message").length === 8,
   );
-  if (await page.locator(".chat-stop").count())
+  if (await page.locator(".chat-stop").isEnabled())
     await page.locator(".chat-stop").click();
   await page.locator(".chat-composer textarea").fill("second new input");
   await page.locator(".chat-send").click();
@@ -423,7 +449,7 @@ try {
       .evaluate((node) => node.scrollTop)) < 4,
     "assistant streaming and the old smooth scroll do not override manual history browsing",
   );
-  if (await page.locator(".chat-stop").count())
+  if (await page.locator(".chat-stop").isEnabled())
     await page.locator(".chat-stop").click();
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.locator(".chat-composer textarea").fill("long input ".repeat(45));
@@ -436,7 +462,7 @@ try {
     );
   });
   assert.equal(await page.evaluate(() => window.scrollY), 0);
-  if (await page.locator(".chat-stop").count())
+  if (await page.locator(".chat-stop").isEnabled())
     await page.locator(".chat-stop").click();
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("http://127.0.0.1:5198/?railCount=3&steer=1");
