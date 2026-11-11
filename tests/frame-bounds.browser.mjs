@@ -75,7 +75,7 @@ try {
         await page
           .locator("[data-canvas-conversation-view]")
           .evaluate((n) => n.remove());
-          const normal = await page.locator(".center").boundingBox();
+        const normal = await page.locator(".center").boundingBox();
         assert.equal(normal.x, sidebar, "exit restores original sidebar track");
         results.push({ wrapped, sidebar, rightbar, passed: true });
       }
