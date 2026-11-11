@@ -3709,6 +3709,9 @@
 }
 
 /* Match public slot/region markers only while our native View is mounted.
+   DSH 0.2.2 wraps the main slot in MainPanel. Match the frame child containing
+   the slot, not only a direct slot child, so the hidden sidebar leaves no
+   phantom clipping column. Do not remove the real viewport clipping boundary.
    Keep the right track and stored widths intact; exit restores the host layout. */
 :has(> [data-shell-overlay]):has([data-canvas-conversation-view])
   > :has(> [data-slot="sidebar"]),
@@ -3719,7 +3722,7 @@
   display: none;
 }
 :has(> [data-shell-overlay]):has([data-canvas-conversation-view])
-  > :has(> [data-slot="main"]) {
+  > :has([data-slot="main"]) {
   grid-column: 1 / 3;
   grid-row: 1;
   border-left: none;
