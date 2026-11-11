@@ -8,6 +8,7 @@ import {
   MarkdownDelegateProvider,
   ImageLightbox,
   type MarkdownLabels,
+  type FileDragActions,
 } from "@deepseek-ai/dsh-client-ui-primitives";
 
 /** Stable labels preserve the native renderer's memoized parsing state. */
@@ -57,8 +58,9 @@ export function NativeSendIcon() {
 /** DSH's safe Markdown body renderer, with native incremental stream parsing. */
 export function renderNativeMarkdown(
   text: string,
-  streaming = false,
-  cwd?: string,
+  streaming: boolean,
+  cwd: string | undefined,
+  fileDrag: FileDragActions,
 ) {
   const pathImages =
     typeof document === "undefined"
@@ -71,6 +73,9 @@ export function renderNativeMarkdown(
           ? {
               resolve: pathImages.resolve,
               labels: imageLabels,
+              // Before 0.2.2 the renderer ignores this extra property. Current
+              // hosts receive their own transfer service through the adapter.
+              fileDrag,
             }
           : undefined
       }

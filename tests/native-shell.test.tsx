@@ -98,8 +98,22 @@ test("native primitive adapter preserves theme artwork, stable labels and stream
     primitives.IconPanelLeftOutlineRegular,
   );
   assert.equal(ui.NativeSendIcon().type, primitives.IconSendOutlineMedium);
-  const streaming = ui.renderNativeMarkdown("**growing**", true);
-  const settled = ui.renderNativeMarkdown("**complete**", false);
+  const fileDrag = {
+    prepare: async () => ({ start: () => true, release() {} }),
+    reportFailure() {},
+  };
+  const streaming = ui.renderNativeMarkdown(
+    "**growing**",
+    true,
+    undefined,
+    fileDrag,
+  );
+  const settled = ui.renderNativeMarkdown(
+    "**complete**",
+    false,
+    undefined,
+    fileDrag,
+  );
   assert.equal(streaming.type, primitives.MarkdownDelegateProvider);
   const streamingBody = streaming.props.children;
   const settledBody = settled.props.children;
@@ -117,6 +131,7 @@ test("native primitive adapter preserves theme artwork, stable labels and stream
     "![封面](posters/cover.png)",
     false,
     "/art",
+    fileDrag,
   );
   assert.equal(
     new URL(
@@ -131,6 +146,7 @@ test("native primitive adapter preserves theme artwork, stable labels and stream
     "/art/posters/cover.png",
   );
   assert.equal(local.props.fileImages?.labels.open, "查看原图");
+  assert.equal(local.props.fileImages?.fileDrag, fileDrag);
   const close = () => {};
   const preview = ui.renderNativeImagePreview(
     "https://example.com/a.png",
