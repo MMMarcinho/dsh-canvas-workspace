@@ -878,7 +878,8 @@ function useTouchViewport(stage, options) {
     cancelRef.current = cancel;
     const sample = (event) => {
       if ((event.type === "touchstart" || event.type === "touchmove") && !event.cancelable) {
-        cancel();
+        if (gesture.current.active) cancel();
+        else eligible.clear();
         return;
       }
       const rect = element3.getBoundingClientRect();
@@ -24429,7 +24430,7 @@ function ReplyBody({
     ] })
   ] });
 }
-function ReplyContent(props) {
+var ReplyContent = (0, import_react12.memo)(function ReplyContent2(props) {
   return /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(
     ReplyBoundary,
     {
@@ -24438,7 +24439,7 @@ function ReplyContent(props) {
       children: /* @__PURE__ */ (0, import_jsx_runtime60.jsx)(ReplyBody, { ...props }, props.messageId)
     }
   );
-}
+});
 
 // src/ui/UserMessageMedia.tsx
 var import_react13 = require("react");
@@ -26065,6 +26066,16 @@ function ChatCanvas({
     iuiActions.current.set(key, pending);
     return pending;
   };
+  const iuiActionRef = (0, import_react15.useRef)(onIuiAction);
+  iuiActionRef.current = onIuiAction;
+  const handleIuiAction = (0, import_react15.useCallback)(
+    (action) => iuiActionRef.current(action),
+    []
+  );
+  const handleIuiResource = (0, import_react15.useMemo)(
+    () => resolveImage ? (request) => resolveImage(request, state.sessionId) : void 0,
+    [resolveImage, state.sessionId]
+  );
   const stop = async () => {
     const active = running.current;
     if (!active) return;
@@ -26469,8 +26480,8 @@ function ChatCanvas({
                                     iuiEnabled,
                                     renderMarkdown,
                                     renderImagePreview,
-                                    onIuiAction,
-                                    onIuiResource: resolveImage ? (request) => resolveImage(request, state.sessionId) : void 0
+                                    onIuiAction: handleIuiAction,
+                                    onIuiResource: handleIuiResource
                                   }
                                 ),
                                 reply.status === "running" && /* @__PURE__ */ (0, import_jsx_runtime63.jsx)(

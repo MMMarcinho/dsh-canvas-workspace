@@ -1,5 +1,6 @@
 import {
   Component,
+  memo,
   useLayoutEffect,
   useId,
   useMemo,
@@ -539,7 +540,10 @@ function ReplyBody({
 }
 
 /** MIT IUI protocol/runtime/renderer, isolated from the host DOM and script execution. */
-export function ReplyContent(props: ReplyContentProps) {
+// Camera changes must not reparse every historical Markdown/IUI reply.
+export const ReplyContent = memo(function ReplyContent(
+  props: ReplyContentProps,
+) {
   return (
     <ReplyBoundary
       text={props.text}
@@ -548,4 +552,4 @@ export function ReplyContent(props: ReplyContentProps) {
       <ReplyBody key={props.messageId} {...props} />
     </ReplyBoundary>
   );
-}
+});

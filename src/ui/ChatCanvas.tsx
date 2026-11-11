@@ -1801,6 +1801,21 @@ export function ChatCanvas({
     iuiActions.current.set(key, pending);
     return pending;
   };
+  // Reply bodies are independent of the camera. Keep handlers stable while
+  // forwarding actions to the latest session/draft/busy state, not a stale closure.
+  const iuiActionRef = useRef(onIuiAction);
+  iuiActionRef.current = onIuiAction;
+  const handleIuiAction = useCallback<IuiActionHandler>(
+    (action) => iuiActionRef.current(action),
+    [],
+  );
+  const handleIuiResource = useMemo<IuiResourceHandler | undefined>(
+    () =>
+      resolveImage
+        ? (request) => resolveImage(request, state.sessionId)
+        : undefined,
+    [resolveImage, state.sessionId],
+  );
   const stop = async () => {
     const active = running.current;
     if (!active) return;
@@ -2246,13 +2261,8 @@ export function ChatCanvas({
                         iuiEnabled={iuiEnabled}
                         renderMarkdown={renderMarkdown}
                         renderImagePreview={renderImagePreview}
-                        onIuiAction={onIuiAction}
-                        onIuiResource={
-                          resolveImage
-                            ? (request) =>
-                                resolveImage(request, state.sessionId)
-                            : undefined
-                        }
+                        onIuiAction={handleIuiAction}
+                        onIuiResource={handleIuiResource}
                       />
                     )}
                     {reply.status === "running" && (
